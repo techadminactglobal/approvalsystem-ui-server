@@ -1,0 +1,425 @@
+<div class="registration-container mt-0 parentbackgroundcolor">
+
+  <div class="header mt-3">
+  
+      <h1>Payment Details</h1>
+  </div>
+
+  <div class="column right">
+    <form [formGroup]="PaymentForm">
+
+        <div class="m-4">
+            <hr>
+            <mat-card class="mb-5">
+                <mat-card-header>
+                    <mat-card-title class="mb-3">Payment Details</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            <mat-label class="title">Comment</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <input matInput name="comment" formControlName="comment" readonly>
+                            </mat-form-field>
+                        </div>
+    
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                            <mat-label class="title">Total Amount</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <input type="number" matInput name="amount" formControlName="amount" readonly>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+         
+       
+
+            <div *ngIf="comment=='Security Deposite' || comment=='File Security Deposite' 
+            || comment=='Plinth Processing Fee' || comment=='OC Security Deposite'" class="payment-details">
+
+              <div class="container h-100 my-5" >
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                  <div class="col-xl-9">
+      
+                    <div class="row align-items-center py-3">
+
+              <h2 style="text-align: center;"><span style="border-bottom: 4px double rgb(0, 0, 0);">Payment Charges Details</span></h2>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Charges Name</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Plinth Processing Fee:</td>
+                      <td>{{ charge1 }}</td>
+                      <td></td>
+                    </tr>
+                  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+            
+            
+
+                
+             <div *ngIf="comment=='Final Payment' || comment=='File Processing Fee' || comment=='OC Final Payment'" class="payment-details">
+
+              <div class="container h-100 my-5" >
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                  <div class="col-xl-9">
+      
+                    <div class="row align-items-center py-3">
+
+              <h2 style="text-align: center;"><span style="border-bottom: 4px double rgb(0, 0, 0);">Payment Charges Details</span></h2>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Charges Name</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngIf="viewCharge1 && charge1>0">
+                      <td>Charge 1:</td>
+                      <td>{{ charge1 }}</td>
+                      <td> <span>&#10004; Paid</span></td>
+                    </tr>
+                    <tr *ngIf="viewCharge2345 && charge2>0">
+                      <td>Charge 2:</td>
+                      <td>{{ charge2 }}</td>
+                      <td></td>
+                     
+                    </tr>
+                    <tr *ngIf="viewCharge2345 && charge3>0">
+                      <td>Charge 3:</td>
+                      <td>{{ charge3 }}</td>
+                      <td></td>
+                     
+                    </tr>
+                    <tr *ngIf="viewCharge2345 && charge4>0">
+                      <td>Charge 4:</td>
+                      <td>{{ charge4 }}</td>
+                      <td></td>
+                     
+                    </tr>
+                    <tr *ngIf="viewCharge2345 && charge5>0">
+                      <td>Charge 5:</td>
+                      <td>{{ charge5 }}</td>
+                      <td></td>
+                     
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+            
+            
+
+    
+            <div class="text-center" *ngIf="!hidePaymentButton">
+                <button mat-raised-button color="primary" type="submit" class="log" (click)="submitReg()">Make Payment</button>
+                <!-- <button mat-raised-button color="primary" type="submit" class="log" (click)="letter()" *ngIf="comment=='final payment' || comment=='file processing fee' ">Letter</button> -->
+               
+            </div>
+        </div>
+    
+    </form>
+  </div>
+
+
+
+
+<!-- <app-payment-receipt
+  *ngIf="hidePaymentButton"
+  [hidePaymentButton]="hidePaymentButton"
+  [fullName]="fullName"
+    [address]="address"
+    [userName]="userName"
+    [paymentDate]="paymentDate"
+    [transactionNo]="transactionNo"
+    [email]="email"
+    [amount]="amount"
+    [paymentTypeMethod]="paymentTypeMethod"
+    [paymentRespect]="paymentRespect"
+    [ReceptNo]="ReceptNo"
+    [professionlType]="professionlType"
+    [dateofBirth]="dateofBirth"
+    [genderDetails]="genderDetails"
+    [createdDateDetails]="createdDateDetails"
+    [contactNoDetails]="contactNoDetails"
+    
+ 
+></app-payment-receipt> -->
+
+</div>
+
+
+
+
+
+<!-- ---------------------------------------------------------------------------------------------------- -->
+
+
+
+
+<!-- <div class="registration-container mt-0" *ngIf='hidePaymentButton'>
+
+ 
+
+  <div class="column right">
+   
+        <div class="m-4">
+
+      <div class="container h-100 my-5">
+      <nav class="navbar navbar-light bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" class="me-2" height="20"
+              alt="MDB Logo" loading="lazy" />
+            <small style="font-weight: bold;">ACT Global</small>
+          </a>
+        </div>
+      </nav>
+
+    </div>
+
+
+      <div class="row p-2">
+      
+       
+          <div class="col-md-5 yellow">
+           
+          </div>
+          <div class="col-md-4 receipt text-center">
+           Payment Receipt
+          </div>
+          <div class="col-md-3 yellow">
+          
+          </div>
+       
+      </div>
+
+
+      
+
+
+      <div class="container h-100 my-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-xl-9">
+
+            
+
+
+            <div class="row align-items-center py-3">
+              <div class="col-md-3 ps-5">
+      
+                <h6 class="mb-0" style="font-size: large; font-weight: bold;">Transaction Ref No</h6>
+      
+              </div>
+              <div class="col-md-3 pe-5">
+                <p>{{ transactionNo }}</p>
+              
+              </div>
+
+
+              <div class="col-md-3 ps-5">
+
+                <h6 class="mb-0" style="font-size: large; font-weight: bold;">Recept No</h6>
+      
+              </div>
+              <div class="col-md-3 pe-5">
+                <p>{{ ReceptNo }}</p>
+              
+              </div>
+
+            </div>
+
+
+            <div class="row align-items-center py-3">
+              <div class="col-md-3 ps-5">
+      
+                <h6 class="mb-0" style="font-size: large; font-weight: bold;">Payment Respective</h6>
+      
+              </div>
+              <div class="col-md-3 pe-5">
+                <p>{{ paymentRespect }}</p>
+              
+              </div>
+      
+      
+              <div class="col-md-3 ps-5">
+
+                <h6 class="mb-0" style="font-size: large; font-weight: bold;">Payment Success Date</h6>
+      
+              </div>
+              <div class="col-md-3 pe-5">
+                <p>{{ paymentDate }}</p>
+              
+              </div>
+      
+      
+            </div>
+
+
+            <div class="row align-items-center py-3">
+              <div class="col-md-3 ps-5">
+      
+                <h6 class="mb-0" style="font-size: large; font-weight: bold;">Amount</h6>
+      
+              </div>
+              <div class="col-md-3 pe-5">
+                <p>{{ amount }}</p>
+      
+              </div>
+
+              <div class="col-md-3 ps-5">
+
+                <h6 class="mb-0" style="font-size: large; font-weight: bold;">Payment Method</h6>
+      
+              </div>
+              <div class="col-md-3 pe-5">
+                <p>{{ paymentTypeMethod }}</p>
+              
+              </div>
+
+
+
+            </div>
+            <hr>
+      
+            <div class="row align-items-center py-3">
+              <div class="col-md-3 ps-5">
+      
+                <h6 class="mb-0" style="font-size: large; font-weight: bold;">Reference Id</h6>
+      
+              </div>
+              <div class="col-md-4 pe-5">
+      
+                <p>{{ userName }} </p>
+      
+              </div>
+            </div>
+
+
+            <div class="row align-items-center pt-4 pb-3">
+
+              <div class="col-md-3 ps-5">
+      
+                <h6 class="mb-0" style="font-size: large; font-weight: bold;">Full name</h6>
+      
+              </div>
+              <div class="col-md-3 pe-5">
+                <p>{{fullName }}</p>
+              </div>
+
+              <div class="col-md-3 ps-5">
+
+                <h6 class="mb-0" style="font-size: large; font-weight: bold;">DOB</h6>
+      
+              </div>
+              <div class="col-md-3 pe-5">
+                <p>{{ dateofBirth }}</p>
+                
+              </div>
+      
+            </div>
+
+
+            <div class="row align-items-center py-3">
+
+              <div class="col-md-3 ps-5">
+      
+                <h6 class="mb-0" style="font-size: large; font-weight: bold;">Address</h6>
+      
+              </div>
+              <div class="col-md-3 pe-5">
+                <p>{{ address }}</p>
+                
+              </div>
+
+              <div class="col-md-3 ps-5">
+
+                <h6 class="mb-0" style="font-size: large; font-weight: bold;">Email address</h6>
+      
+              </div>
+              <div class="col-md-3 pe-5">
+                <p>{{ email }}</p>
+               
+              </div>
+    
+          </div>
+
+
+
+
+          <div class="row align-items-center py-3">
+           
+            <div class="col-md-3 ps-5">
+    
+              <h6 class="mb-0" style="font-size: large; font-weight: bold;">Contact No</h6>
+    
+            </div>
+            <div class="col-md-3 pe-5">
+              <p>{{ contactNoDetails }}</p>
+              
+            </div>
+
+            <div class="col-md-3 ps-5">
+      
+              <h6 class="mb-0" style="font-size: large; font-weight: bold;">Professional Type</h6>
+    
+            </div>
+            <div class="col-md-3 pe-5">
+              <p>{{ professionlType }}</p>
+              
+            </div>
+
+
+          </div>
+
+          <hr>
+      
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+           
+        </div>
+    
+  </div>
+
+
+
+</div> -->
+
+
+
+
+
+
+
+
+

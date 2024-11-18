@@ -1,0 +1,24 @@
+.even-row {
+    background-color: lightgray; /* Change to your desired color */
+    border-radius: 1px solid black;
+  }
+  
+  .odd-row {
+    background-color: whitesmoke; /* Change to your desired color */
+    border-radius: 1px solid black;
+  }
+  .container {
+    height: 500px; /* Define the height of the container */
+    overflow-y: auto; /* Allows scrolling if necessary */
+  }
+  
+  .item-box {
+    width: 100%; /* Adjust as needed */
+    height: 10%; /* 10% of the parent container's height */
+    box-sizing: border-box; /* Include padding and border in the height calculation */
+    border: 1px solid #ccc; /* Optional: add a border for visibility */
+    display: flex; /* Optional: to center content */
+    align-items: center; /* Optional: vertically center content */
+    justify-content: center; /* Optional: horizontally center content */
+  }
+  

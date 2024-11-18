@@ -1,0 +1,735 @@
+<div class="login-container parentbackgroundcolor">
+  <div class="header align" style="display: flex; align-items: center;">
+    <div class="logo" style="margin-right: 20px;">
+        <img
+            src="../../../assets/Act_logo/Logo-ACTGlobal-removebg-preview.png"
+            alt="Logo"
+        />
+    </div>
+    <div style="color: black; font-weight: 900; margin-right: 10px;">
+        Online Building Plan Approval System
+    </div>
+   <!--  <div>
+      <i class="fa-solid fa-house" style="color: black;"></i>
+  </div> -->
+</div>
+
+  <div class="row mb-2 mt-2">
+    <!-- <div class="col-md-6 col-sm-12 col-xs-12">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Check rejected/debard details. </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="status">
+          <form [formGroup]="searchForm" (submit)="submitSearch()">
+            <div class="form-group">
+              <mat-form-field appearance="fill" class="input-control">
+                <mat-label>Enter addhar number </mat-label>
+                <input
+                  formControlName="addharNo"
+                  matInput
+                  name="Enter Addhar Number"
+                  placeholder="Enter Addhar Number"
+                />
+              </mat-form-field>
+            </div>
+            <div class="text-center">
+              <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                class="log"
+              >
+                Search
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <table mat-table [dataSource]="dataSource" matSort *ngIf="viewTable">
+          <ng-container matColumnDef="serialNo">
+            <th mat-header-cell *matHeaderCellDef>S.No</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.serialNumber }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="debardByDept">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Debard Dept. By
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.debardByDept }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="debardReason">
+            <th mat-header-cell *matHeaderCellDef>Debard Reason</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.debardReason }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="debardDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Debard Date
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.debardDate }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="debardTo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Debard To</th>
+            <td mat-cell *matCellDef="let element">{{ element.debardTo }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="debardDocName">
+            <th mat-header-cell *matHeaderCellDef>Debard doc.</th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              (click)="openPdf(element.debardDocUniqueId)"
+              class="viewDoc"
+            >
+              {{ element.debardDocName }}
+               </td>
+          </ng-container>
+
+          
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <br />
+        <p
+          *ngIf="!viewTable"
+          style="
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman',
+              serif;
+            font-size: larger;
+            text-align: center;
+          "
+        >
+          {{ listNull }}
+        </p>
+      </mat-expansion-panel>
+    </div> -->
+
+    <div class="container">
+      <div class="citizen-corner"> <!-- Added boundary class here -->
+          <h2 class="text-center" style="color: #333;">Citizen Corner 👇</h2>
+          <div class="row no-gutters">
+              <div class="col">
+                  <button class="glow-on-hover w-100" type="button" [routerLink]="['/publicdashboard']">
+                      Application Status 🔎
+                  </button>
+              </div>
+              <div class="col">
+                  <button class="glow-on-hover w-100" type="button" [routerLink]="['/PublicDebardList']">
+                      Debarred List 🔎
+                  </button>
+              </div>
+              <div class="col">
+                  <button class="glow-on-hover w-100" type="button" [routerLink]="['/Publicstaticmis']">
+                      Statistics MIS 🔎
+                  </button>
+              </div>
+              <div class="col">
+                  <button class="glow-on-hover w-100" type="button" [routerLink]="['/CitizenCorner']">
+                      Downloads <i class="fa-solid fa-download"></i>
+                  </button>
+              </div>
+              <div class="col">
+                  <button class="glow-on-hover w-100" type="button" [routerLink]="['/AllProfessionalsDetails']">
+                    All Professionals Details 🔎 
+                  </button>
+              </div>
+          </div>
+      </div>
+    </div>
+    
+    
+    
+  
+  
+    
+
+  <!--  <div class="weather">
+    <div class="weather-body">
+      <div class="row">
+        <div class="col-md-4 p-0">
+          <div id="todayWeather"></div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div class="container">
+    <a href="#" class="button" [routerLink]="['/publicdashboard']"
+      >Track the status of your application in real-time for complete
+      transparency
+      <i class="fa-solid fa-magnifying-glass fa-2x"></i>
+    </a>
+  </div> -->
+
+  <div class="body1">
+    <div class="d-none d-md-block column left">
+      <div class="wrapper">
+        <div class="photobanner">
+          <img
+            class="first"
+            src="../../../assets/img/login/slider/Building-Approval-Permits.jpg"
+            alt=""
+          />
+          <img src="../../../assets/img/login/slider/img@2.png" alt="" />
+          <img src="../../../assets/img/login/slider/img@3.jpg" alt="" />
+          <img src="../../../assets/img/login/slider/img@4.jpg" alt="" />
+          <img src="../../../assets/img/login/slider/img@5.jpg" alt="" />
+          <img src="../../../assets/img/login/slider/img@6.jpg" alt="" />
+          <img src="../../../assets/img/login/slider/img@7.jpg" alt="" />
+          <img src="../../../assets/img/login/slider/img@8.jpg" alt="" />
+          <img src="../../../assets/img/login/slider/img@6.jpg " alt="" />
+          <img src="../../../assets/img/login/slider/img@10.jpg" alt="" />
+        </div>
+      </div>
+      <div class="first">
+        <div class="marquee">
+          <div class="track">
+            <div class="content">
+              The Online Building Permission System (OBPS) streamlines the
+              approval process through a clear and efficient workflow.
+              Applicants start by registering and submitting their applications
+              online, followed by an initial verification by ULB officials.
+              Designs are integrated with GIS and AutoCAD for thorough analysis.
+              The application then undergoes a multi-tier review process,
+              allowing for feedback and adjustments. Once all approvals are
+              secured, applicants receive a digital permit, followed by
+              post-approval monitoring to ensure compliance and support future
+              urban planning.
+            </div>
+          </div>
+        </div>
+        <div class="card1">
+          <section class="services">
+            <div class="service-card">
+              <div class="icon-header">
+                <i class="fa-solid fa-user-plus fa-2x fa-fade"></i>
+              </div>
+              <h2 class="service-title">Registration</h2>
+              <!-- <h3 class="service-subtitle">Subtitle 1</h3> -->
+              <p class="service-description">
+                The first step is to register online to create an account on the
+                OBPS.
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="icon-header">
+                <i class="fa-regular fa-file-lines fa-2x fa-fade"></i>
+              </div>
+              <h2 class="service-title">Application Submission</h2>
+              <!-- <h3 class="service-subtitle">Subtitle 2</h3> -->
+              <p class="service-description">
+                Easily submit building permission applications online, with
+                guided forms to simplify the process.
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="icon-header">
+                <!--  <svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="25" cy="25" r="20" fill="#F44336" />
+                </svg> -->
+                <i class="fa-solid fa-people-arrows fa-2x fa-fade"></i>
+              </div>
+              <h2 class="service-title">Real-Time Application Tracking</h2>
+              <!-- <h3 class="service-subtitle">Subtitle 3</h3> -->
+              <p class="service-description">
+                Monitor the status of your application at any stage, providing
+                transparency and peace of mind.
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="icon-header">
+                <i class="fa-solid fa-house fa-2x fa-fade"></i>
+              </div>
+              <h2 class="service-title">Digital Design Submission</h2>
+              <!--  <h3 class="service-subtitle">Subtitle 4</h3> -->
+              <p class="service-description">
+                Upload architectural designs in formats compatible with GIS and
+                AutoCAD for seamless integration and review.
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="icon-header">
+                <i class="fa-solid fa-user-check fa-2x fa-fade"></i>
+              </div>
+              <h2 class="service-title">Automated Compliance Checks</h2>
+              <!--  <h3 class="service-subtitle">Subtitle 5</h3> -->
+              <p class="service-description">
+                Receive instant feedback on building compliance and safety
+                regulations ensuring adherence before final submission.
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="icon-header">
+                <i class="fa-solid fa-person-chalkboard fa-2x fa-fade"></i>
+              </div>
+              <h2 class="service-title">User-Friendly Dashboard</h2>
+              <p class="service-description">
+                Access a personalized dashboard that provides a clear overview
+                of your applications, notifications, and deadlines.
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="icon-header">
+                <i class="fa-solid fa-chart-line fa-2x fa-fade"></i>
+              </div>
+              <h2 class="service-title">Analytics and Reporting</h2>
+              <p class="service-description">
+                Utilize analytics tools to gain insights into application trends
+                and urban development impacts.
+              </p>
+            </div>
+
+            <div class="service-card">
+              <div class="icon-header">
+                <i class="fa-solid fa-phone fa-2x fa-fade"></i>
+              </div>
+              <h2 class="service-title">Support and Resources</h2>
+              <p class="service-description">
+                Access a comprehensive help center with tutorials, FAQs, and
+                customer support to assist with any inquiries or issues.
+              </p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div class="column right">
+      <form [formGroup]="loginForm" (submit)="submitLogin()" *ngIf="login">
+        <div class="auth-avatar">
+          <img
+            src="https://pluspng.com/img-png/user-png-icon-account-avatar-human-male-man-men-people-person-download-svg-download-png-edit-icon-512.png"
+            alt="user"
+            class="user-image"
+          />
+        </div>
+
+        <h3>Login your Credentials</h3>
+        <hr />
+
+        <div class="radio-group">
+          <mat-radio-group
+            aria-label="Select an option"
+            formControlName="dept"
+            class="d-flex flex-wrap"
+          >
+            <mat-radio-button [value]="'1'" class="m-0">Owner</mat-radio-button>
+            <mat-radio-button [value]="'2'" class="m-0"
+              >Consultant(A/E/S/SE)</mat-radio-button
+            >
+            <mat-radio-button [value]="'3'" class="m-0"
+              >External Dept.</mat-radio-button
+            >
+            <mat-radio-button [value]="'4'" class="m-0"
+              >Internal Dept.</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="input-control">
+            <mat-label>User Name</mat-label>
+            <input
+              formControlName="userName"
+              matInput
+              name="userName"
+              placeholder="User name"
+            />
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="input-control">
+            <mat-label>Password</mat-label>
+            <input
+              formControlName="userPassword"
+              matInput
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
+          </mat-form-field>
+          <div class="text-center">
+            <button mat-raised-button color="primary" type="submit" class="log">
+              Login
+            </button>
+          </div>
+        </div>
+        <br>
+        <div class="text-right forget-pass">
+          <a (click)="Forgot()" class="link">Forget Password?</a>
+          <br />
+          <div class="forget-pass" (mouseenter)="isHovered = true" (mouseleave)="isHovered = false">
+              <span class="forget-pass" style="font-weight: 500; color: #b44408">
+                  New Registration 👉
+              </span>
+              <div class="options" style="display: inline;">
+                  <button (click)="register()" class="option btn-small" style="margin-right: 10px;">Consultant</button>
+                  <button (click)="OwnerRegister()" class="option btn-small">Owner</button>
+              </div>
+          </div>
+          <br />
+      </div>
+        <!-- </form> -->
+        <!-- <div class="text-center sign-up">
+        Don't have an account? <a routerLink="/sign-up">Sign Up</a> here.
+      </div> -->
+      </form>
+
+      <!-- +++++++++++++++++++++++++ -->
+      <form [formGroup]="forgotForm" (submit)="forgotSubmit()" *ngIf="forgot">
+        <div class="auth-avatar">
+          <img
+            src="https://pluspng.com/img-png/user-png-icon-account-avatar-human-male-man-men-people-person-download-svg-download-png-edit-icon-512.png"
+            alt="user"
+            class="user-image"
+          />
+        </div>
+
+        <h3>Enter your credentials to retrive your password</h3>
+        <hr />
+
+        <div class="radio-group">
+          <mat-radio-group
+            aria-label="Select an option"
+            formControlName="dept"
+            class="d-flex flex-wrap"
+          >
+            <mat-radio-button [value]="'1'" class="m-0">Owner</mat-radio-button>
+            <mat-radio-button [value]="'2'" class="m-0"
+              >Consultant(AES)</mat-radio-button
+            >
+            <mat-radio-button [value]="'3'" class="m-0"
+              >External Dept.</mat-radio-button
+            >
+            <mat-radio-button [value]="'4'" class="m-0"
+              >Internal Dept.</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="input-control">
+            <mat-label>Enter your email Id</mat-label>
+            <input
+              formControlName="emailId"
+              matInput
+              name="emailId"
+              placeholder="Enter your email id"
+            />
+          </mat-form-field>
+        </div>
+        <div class="text-right forget-pass">
+          <a (click)="Login()" class="link">Login with your Credentials</a>
+        </div>
+        <br />
+        <div class="text-center">
+          <button mat-raised-button color="primary" type="submit" class="log">
+            Retrive password on mail.
+          </button>
+        </div>
+      </form>
+
+      <hr />
+      <div class="para">
+        <p>
+          &#10026; If you are register please register yourself in New
+          Registration tab.
+        </p>
+        <p>&#10026; Owner : Login with your Email Id.</p>
+        <p>&#10026; Consultant(A/E/S/SE) :</p>
+        <p>&#10026; External Dept. :</p>
+        <p>&#10026; Internal Dept. :</p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="latestUpdate">
+      <p>
+        <i class="fa-regular fa-file fa-2x fa-fade"></i> Total files created:
+        <br />{{ totalFilesCreated }}
+      </p>
+      <p>
+        <i class="fa-solid fa-thumbs-up fa-2x fa-fade"></i> Total files approved
+        <br />{{ totalFilesApproved }}
+      </p>
+      <p>
+        <i class="fa-solid fa-thumbs-up fa-2x fa-fade"></i> Total files reject
+        <br />{{ totalFilesReject }}
+      </p>
+      <p>
+        <i class="fa-solid fa-hourglass-half fa-2x fa-fade"></i> Total files
+        pending for approval:<br />
+        {{ totalFilesPendingApproval }}
+      </p>
+      
+      <p>
+        <i class="fa-regular fa-id-card fa-2x fa-fade"></i> Total registered
+        Consultants(AES): <br />{{ totalRegisteredConsultants }}
+      </p>
+    </div>
+  </div>
+
+  <div class="row mb-2 mt-2">
+    <div class="col-md-12 col-sm-12 col-xs-6">
+      <mat-expansion-panel (expandedChange)="panelOpenState = !panelOpenState">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Latest Updates👉</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div
+          [ngStyle]="{
+            height: panelOpenState ? '30vh' : '10px',
+            overflow: 'hidden', width: '100%'
+            
+          }"
+        >
+          <marquee
+            behavior="scroll"
+            scrollamount="4"
+            loop="infinite"
+            direction="up"
+            style="width: 100%;"
+          >
+            <p>
+              👉 We are pleased to announce the launch of the Online Building
+              Permission System (OBPS), designed to enhance the building
+              permission approval process for Urban Local Bodies (ULBs). This
+              fully online system streamlines.
+            </p>
+            <p>
+              👉 Arrangement of VC on e-Grihanaksha (OBPAS) process for
+              empaneled LBS & Architects of the ULBs on 18th January 2022
+              (Starting from 12:00 noon)
+            </p>
+            <p>
+              👉 Downtime of payment window of SWS-OBPAS from 3pm to 6pm on 14th
+              Dec. 2022
+            </p>
+            <p>
+              👉 Arrangement of VC on e-Grihanaksha (OBPAS) for VC with
+              Commissioners/Jt. Commissioners/Executive Officers/Financial
+              Officers/IT Coordinators/Engineers of ULBs on 13th April 2022
+              (Starting from 11:30am)
+            </p>
+            <p>
+              👉 Arrangement of VC on e-Grihanaksha (OBPAS) process for
+              empaneled LBS & Architects of the ULBs on 18th January 2022
+              (Starting from 12:00 noon)
+            </p>
+            <p>
+              👉 Downtime of payment window of SWS-OBPAS from 3pm to 6pm on 14th
+              Dec. 2022
+            </p>
+            <p>
+              👉 Arrangement of VC on e-Grihanaksha (OBPAS) for VC with
+              Commissioners/Jt. Commissioners/Executive Officers/Financial
+              Officers/IT Coordinators/Engineers of ULBs on 13th April 2022
+              (Starting from 11:30am)
+            </p>
+            <p>
+              👉 Arrangement of VC on e-Grihanaksha (OBPAS) process for
+              empaneled LBS & Architects of the ULBs on 18th January 2022
+              (Starting from 12:00 noon)
+            </p>
+            <p>
+              👉 Downtime of payment window of SWS-OBPAS from 3pm to 6pm on 14th
+              Dec. 2022
+            </p>
+            <p>
+              👉 Arrangement of VC on e-Grihanaksha (OBPAS) for VC with
+              Commissioners/Jt. Commissioners/Executive Officers/Financial
+              Officers/IT Coordinators/Engineers of ULBs on 13th April 2022
+              (Starting from 11:30am)
+            </p>
+          </marquee>
+        </div>
+      </mat-expansion-panel>
+    </div>
+
+<!--     <div class="col-md-6 col-sm-12 col-xs-12">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Citizen Corner &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⏬
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="one">
+          <p>Filing instructions : &nbsp;</p>
+          <button
+            type="button"
+            class="but"
+            (click)="viewPdf('assets/download/Filing_Instructions.pdf')"
+          >
+            Download.
+          </button>
+        </div>
+
+        <div class="one">
+          <p>General guidelines : &nbsp;</p>
+          <button
+            type="button"
+            class="but"
+            (click)="viewPdf('assets/download/General_Guidelines.pdf')"
+          >
+            Download.
+          </button>
+        </div>
+
+        <div class="one">
+          <p>CheckList : &nbsp;</p>
+          <button
+            type="button"
+            class="but"
+            (click)="viewPdf('assets/download/CheckList.pdf')"
+          >
+            Download.
+          </button>
+        </div>
+
+        <div class="one">
+          <p>User Manual : &nbsp;</p>
+          <button
+            type="button"
+            class="but"
+            (click)="viewPdf('assets/download/CheckList.pdf')"
+          >
+            Download.
+          </button>
+        </div>
+
+        <div class="one">
+          <p>Circular : &nbsp;</p>
+          <button
+            type="button"
+            class="but"
+            (click)="viewPdf('assets/download/CheckList.pdf')"
+          >
+            Download.
+          </button>
+        </div>
+
+        <div class="one">
+          <p>Fee Claculator : &nbsp;</p>
+          <button
+            type="button"
+            class="but"
+            (click)="viewPdf('assets/download/CheckList.pdf')"
+          >
+            Download.
+          </button>
+        </div>
+
+        <div class="one">
+          <p>FAQ : &nbsp;</p>
+          <button
+            type="button"
+            class="but"
+            (click)="viewPdf('assets/download/CheckList.pdf')"
+          >
+            Download.
+          </button>
+        </div>
+
+        <div class="one">
+          <p>Building ByLaws : &nbsp;</p>
+          <button
+            type="button"
+            class="but"
+            (click)="viewPdf('assets/download/CheckList.pdf')"
+          >
+            Download.
+          </button>
+        </div>
+
+        <div class="one">
+          <p>Debarred List : &nbsp;</p>
+          <button
+            type="button"
+            class="but"
+            (click)="viewPdf('assets/download/DebaredList.xlsx')"
+          >
+            Download.
+          </button>
+        </div>
+      </mat-expansion-panel>
+    </div>
+ -->
+    <!-- <div class="col-md-6 col-sm-12 col-xs-6">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> New Registration 👇 </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <p (click)="register()">
+          Consultant(AES) registration 👉 &nbsp;&nbsp;<button type="button" class="but">
+            Consultant Registration
+          </button>
+        </p>
+
+        <p (click)="OwnerRegister()">
+          Owner registration 👉 &nbsp;&nbsp;<button type="button" class="but">
+            Owner Registration
+          </button>
+        </p>
+      </mat-expansion-panel>
+    </div> -->
+  </div>
+</div>
+
+<!-- Code :) -->
+
+<div class="chatbot-container" *ngIf="isOpen">
+  <div class="chat-header" style="align-items: center">
+    <i class="fa-brands fa-bots fa-4x fa-fade"></i>
+    <button (click)="closeChat()" class="close-button">✖</button>
+  </div>
+  <div class="chat-body">
+    <div class="message" *ngFor="let message of messages">
+      <div class="user-message" *ngIf="message.user">
+        <span class="user"
+          ><i class="fa-solid fa-user"></i> {{ message.user }}</span
+        >
+      </div>
+      <div class="bot-message" *ngIf="message.bot">
+        <span class="bot"
+          ><i class="fa-solid fa-robot"></i> {{ message.bot }}</span
+        >
+      </div>
+    </div>
+    <!-- Typing indicator with icons -->
+    <div *ngIf="isBotTyping" class="typing-indicator">
+      <i class="fa-solid fa-pen-to-square"></i>
+      <i class="fa-solid fa-pen-to-square"></i>
+      <i class="fa-solid fa-pen-to-square"></i>
+    </div>
+  </div>
+  <div class="chat-input">
+    <input
+      [(ngModel)]="userInput"
+      placeholder="Type your message..."
+      (keydown.enter)="sendMessage()"
+    />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</div>
+<button (click)="openChat()" class="chat-button">
+  <i class="fa-brands fa-bots fa-4x fa-fade"></i>
+</button>
+
+<div class="foot">
+  <app-footer></app-footer>
+</div>

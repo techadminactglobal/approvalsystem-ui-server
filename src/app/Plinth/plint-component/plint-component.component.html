@@ -1,0 +1,152 @@
+<div class="main-container">
+  <div class="splitMain leftMain">
+    <div class="centeredMain">
+      <app-side-bar></app-side-bar>
+    </div>
+  </div>
+  <div class="splitMain rightMain">
+    <div class="expansion">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header style="text-align: center">
+          <mat-panel-title>
+            <b><i>Click to view previous Details filled👇 </i></b></mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-view-noc-page></app-view-noc-page>
+      </mat-expansion-panel>
+    </div>
+
+    <form class="container mt-3 parentbackgroundcolor" [formGroup]="plinthForm" (ngSubmit)="plinthFormSubmit()">
+      <div class="header mt-3">
+        <h1>Plinth Application details</h1>
+      </div>
+
+      <mat-card class="mb-5 details-color">
+        <mat-card-header>
+          <mat-card-title class="mb-3">Documents details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <mat-label class="title">Lease deed</mat-label>
+              <mat-form-field appearance="fill" class="input-control">
+                <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                  <mat-icon>attach_file</mat-icon>
+                </button>
+                <input type="text" readonly matInput placeholder="{{ leaseDeedName }}" />
+                <input readonly type="file" hidden #f_input (change)="uploadDoc($event, 'leaseDeedCertificateName')"
+                  formControlName="leaseDeedCertificateName" />
+                <mat-hint><strong>File type must in a .pdf or jpeg format and file size
+                    should NOT be more than 10 MB.
+                  </strong></mat-hint>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="update">
+                <mat-label class="title">Lease deed Remark</mat-label>
+                <div class="remarktext">
+                  <textarea name="" id="" cols="50" rows="2" placeholder="Remarks"
+                    formControlName="leaseRemarks"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <mat-label class="title">Sale deed</mat-label>
+              <mat-form-field appearance="fill" class="input-control">
+                <button mat-icon-button matPrefix type="button" (click)="f_input1.click()">
+                  <mat-icon>attach_file</mat-icon>
+                </button>
+                <input type="text" readonly matInput placeholder="{{ SaleDeedName }}" />
+                <input readonly type="file" hidden #f_input1 (change)="uploadDoc($event, 'SaleDeedCertificatename')"
+                  formControlName="SaleDeedCertificatename" />
+                <mat-hint><strong>File type must in a .pdf or jpeg format and file size
+                    should NOT be more than 10 MB.
+                  </strong></mat-hint>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="update">
+                <mat-label class="title">Sale deed Remark</mat-label>
+                <div class="remarktext">
+                  <textarea name="" id="" cols="50" rows="2" placeholder="Remarks"
+                    formControlName="saleRemark"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <mat-label class="title">Site photograph</mat-label>
+              <mat-form-field appearance="fill" class="input-control">
+                <button mat-icon-button matPrefix type="button" (click)="f_input2.click()">
+                  <mat-icon>attach_file</mat-icon>
+                </button>
+                <input type="text" readonly matInput placeholder="{{ sitePhotographName }}" />
+                <input readonly type="file" hidden #f_input2
+                  (change)="uploadDoc($event, 'sitePhotographCertificatename')"
+                  formControlName="sitePhotographCertificatename" />
+                <mat-hint><strong>File type must in a .pdf or jpeg format and file size
+                    should NOT be more than 10 MB.
+                  </strong></mat-hint>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="update">
+                <mat-label class="title">Site photograph Remark</mat-label>
+                <div class="remarktext">
+                  <textarea name="" id="" cols="50" rows="2" placeholder="Remarks"
+                    formControlName="siteRemark"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <mat-label class="title">Mutition form</mat-label>
+              <mat-form-field appearance="fill" class="input-control">
+                <button mat-icon-button matPrefix type="button" (click)="f_input3.click()">
+                  <mat-icon>attach_file</mat-icon>
+                </button>
+                <input type="text" readonly matInput placeholder="{{ mutitionFormName }}" />
+                <input readonly type="file" hidden #f_input3 (change)="uploadDoc($event, 'mutitionFormCertificatename')"
+                  formControlName="mutitionFormCertificatename" />
+                <mat-hint><strong>File type must in a .pdf or jpeg format and file size
+                    should NOT be more than 10 MB.
+                  </strong></mat-hint>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="update">
+                <mat-label class="title">Mutition form Remark</mat-label>
+                <div class="remarktext">
+                  <textarea name="" id="" cols="50" rows="2" placeholder="Remarks"
+                    formControlName="mutitionRemark"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 col-xs-12 m-5" style="text-align: center">
+            <div class="update">
+              <mat-label class="title">Updates regarding request</mat-label>
+              <div class="remarktext">
+                <textarea name="" id="" cols="50" rows="2" placeholder="Remarks" formControlName="remark"></textarea>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <div class="d-flex justify-content-center me-2 mt-5 mb-5" *ngIf="!hideSubmit">
+        <div class="button-container col-md-12 mt-1">
+          <button type="submit" class="log">Submit</button>
+          <button mat-raised-button color="primary" type="submit" class="log" (click)="back()">
+            Back
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

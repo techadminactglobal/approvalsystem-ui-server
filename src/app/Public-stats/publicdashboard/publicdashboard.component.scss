@@ -1,0 +1,264 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+
+:root,
+.header {
+  color: #000000;
+  height: 14%;
+  overflow: hidden;
+  background: cadetblue;
+  margin-top: -3vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1%;
+}
+
+.header div {
+  background: 50% 100% / 50% 50% no-repeat
+    radial-gradient(ellipse at bottom, #000000, transparent, transparent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 2.5vw;
+  font-family: "Source Sans Pro", sans-serif;
+  animation: reveal 3000ms ease-in-out forwards 200ms,
+    glow 2500ms linear infinite 2000ms;
+
+  @keyframes reveal {
+    80% {
+      letter-spacing: 8px;
+    }
+    100% {
+      background-size: 300% 300%;
+    }
+  }
+  @keyframes glow {
+    40% {
+      text-shadow: 0 0 8px #000000;
+    }
+  }
+}
+
+.parentbackgroundcolor {
+  background-color: #051b33;
+}
+
+@media (max-width: 768px) {
+  .header div {
+    font-size: 2.2vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .header div {
+    font-size: 1.8vw;
+  }
+}
+///////deatils
+.sidenav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px; /* adjust the width to your liking */
+  height: 100vh;
+  background-color: whitesmoke;
+  padding: 20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: bold;
+  text-align: center;
+  color: rgb(47, 44, 90);
+  /*   animation: pulse 3s infinite; */
+}
+
+.sidenav .latestUpdate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 35px;
+}
+
+.sidenav .latestUpdate p {
+  margin: 10px;
+  text-decoration: none;
+}
+
+.sidenav .latestUpdate i {
+  margin-right: 10px;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: greenyellow;
+  }
+  100% {
+    background-color: #ff4136;
+  }
+}
+
+.sidenav .latestUpdate p {
+  margin: 12%;
+  height: 100%;
+  width: 100%;
+
+  text-decoration: none;
+}
+
+////chart
+/* .chart2 {
+  margin-top: -23%;
+}
+ */
+/* Responsive design */
+@media (max-width: 1200px) {
+  .sidenav {
+    width: 200px;
+  }
+}
+
+@media (max-width: 992px) {
+  .sidenav {
+    width: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidenav {
+    width: 150px;
+  }
+  .latestUpdate {
+    padding: 10px;
+  }
+  .latestUpdate p {
+    font-size: 14px;
+  }
+  .chart2 {
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidenav {
+    width: 100px;
+  }
+  .latestUpdate {
+    padding: 5px;
+  }
+  .latestUpdate p {
+    font-size: 12px;
+  }
+  .chart2 {
+    height: 100px;
+  }
+}
+
+////searchbox
+
+/* .search {
+  border: 2px solid #cf5c3f;
+  overflow: auto;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.search input[type="text"] {
+  border: 0px;
+  width: 67%;
+  padding: 10px 10px;
+}
+
+.search input[type="text"]:focus {
+  outline: 0;
+}
+
+.search input[type="submit"] {
+  border: 0px;
+  background: none;
+  background-color: #cf5c3f;
+  color: #fff;
+  float: right;
+  padding: 10px;
+  border-top-right-radius: 5px;
+  -moz-border-radius-top-right: 5px;
+  -webkit-border-radius-top-right: 5px;
+  border-bottom-right-radius: 5px;
+  -moz-border-radius-bottom-right: 5px;
+  -webkit-border-radius-bottom-right: 5px;
+  cursor: pointer;
+}
+
+/* ===========================
+   ====== Medua Query for Search Box ====== 
+   =========================== */
+
+/* @media only screen and (min-width: 150px) and (max-width: 780px) {
+}
+.search {
+  width: 95%;
+  margin: 0 auto;
+}
+  */
+
+.button-container {
+  display: flex;
+  justify-content: center; 
+  margin-top: 20px; 
+}
+
+.latestUpdate {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  border-style: groove;
+  border-left: #ffffff;
+  border-right: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  color: rgb(47, 44, 90);
+  background-color: rgb(138 162 213);
+  /* animation: pulse 3s infinite; */
+}
+
+@keyframes pulse {
+  0% {
+    background-color: greenyellow;
+  }
+  100% {
+    background-color: #ff4136;
+  }
+}
+
+.latestUpdate p {
+  margin: 3%;
+  /*  border-bottom: 1px solid #ccc; */
+  text-decoration: none;
+}
+
+.latestTemp {
+  color: rgb(14, 124, 124);
+  text-align: center;
+  align-items: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: bold;
+}
+
+.latestTemp p {
+  margin: 3%;
+}
+.container {
+  width: 100%; /* Ensure the container takes full width */
+}
+
+.search {
+  margin-top: 20px;
+}
+
+.requestbtn {
+  width: 100%; /* Ensures the input field takes maximum width */
+}

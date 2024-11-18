@@ -1,0 +1,29 @@
+@import './src/app/app.component.scss';
+
+.some-element {
+  @extend .parentbackgroundcolor;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    text-decoration: wavy;
+    padding: 20px;
+    border-radius: 25px;
+}
+.col{
+    font-weight: bolder;
+}
+.title{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: x-large;
+  }
+
+  .text{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: large;
+    margin-right: 2%;
+    margin-top: 2%;
+  }

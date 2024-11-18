@@ -1,0 +1,50 @@
+@import './src/app/app.component.scss';
+
+.some-element {
+  @extend .parentbackgroundcolor;
+}
+
+.expansion{
+    margin: 0.5rem;
+    border: 0.1rem;
+    border-style: ridge;
+    border-color: black;
+}
+.remarktext textarea {
+    width: 90%; 
+    font-size: medium;
+}
+.title{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: large;
+    font-weight: bold;
+  }
+  #changingText{
+    font-size: x-large;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(113, 5, 237);
+    display: flex;
+    justify-content: center; 
+  }
+
+  .custom-dialog {
+    // border-style: outset;
+    max-width: 80%; 
+    margin: 1.75rem auto;
+  }
+
+  .custom-modal-content{
+    background-color: rgb(216, 250, 237)
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.button-container button {
+    margin: 0 0.5rem;
+}
+
+  

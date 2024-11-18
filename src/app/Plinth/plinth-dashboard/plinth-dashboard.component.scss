@@ -1,0 +1,114 @@
+/* Add these styles to your CSS file */
+@import "./src/app/app.component.scss";
+
+.some-element {
+  @extend .parentbackgroundcolor;
+}
+
+.dashboardTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.header th {
+  background-color: #3498db;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.dashboardTable th,
+.dashboardTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.dashboardTable tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.dashboardTable tbody tr:hover {
+  background-color: #e0e0e0;
+}
+
+/* Add background colors for odd and even rows */
+.odd-row {
+  background-color: #f8f9fa; /* Customize as needed */
+}
+
+.even-row {
+  background-color: #e9ecef; /* Customize as needed */
+}
+
+.loading {
+  background-color: #e9ecef;
+  width: 250px;
+  height: 6px;
+  margin: 2%;
+  margin-left: 42%;
+}
+
+img {
+  width: 70px;
+  height: 80px;
+  margin-top: 8%;
+  margin-block-end: -30%;
+}
+
+.text-muted {
+  text-align: center;
+}
+
+.dashboard-box-icon {
+  display: flex;
+  justify-content: space-evenly;
+  width: 25%;
+}
+
+img {
+  margin-top: 0;
+  width: 6%;
+  height: 10%;
+}
+.one {
+  cursor: pointer;
+  margin: 4%;
+  border-style: outset;
+  border-radius: 5%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.split {
+  border-style: double;
+  border-radius: 2%;
+  width: 100%;
+  z-index: 1;
+  top: 0;
+}
+
+.left {
+  background-color: #abb4b6;
+}
+
+.right {
+  right: 0;
+  background-color: #abb4b6;
+}
+
+.detail {
+  font-family: "Courier New", Courier, monospace;
+  font-size: smaller;
+  font-style: italic;
+}
+.detail:hover {
+  cursor: pointer;
+  color: rgb(67, 121, 13);
+}
+::ng-deep .mat-mdc-paginator-page-size-select {
+  width: 60px !important;
+  height: 14px;
+}

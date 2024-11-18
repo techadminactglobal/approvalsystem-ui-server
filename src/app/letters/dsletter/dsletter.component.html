@@ -1,0 +1,360 @@
+<div class="ds-letter">
+  
+  <section class="" style="background-color: #eee;" *ngIf="paymentType === 'OC' && letterType === 'OCAccept'">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-lg-12 col-xl-11 my-5">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5" id="pdfTable" #pdfTable>
+
+                <nav class="navbar navbar-light bg-body-tertiary">
+                    <div class="container-fluid">
+                      <a class="navbar-brand" href="#">
+                        <img src="assets/Act_logo/Logo-ACTGlobal.jpg" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgb(0, 0, 0);" class="me-2" height="40" alt="MDB Logo" loading="lazy" />
+                    </a>
+                    
+                    </div>
+                  </nav>
+
+                  <p class="text-center h4 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                    <span style="border-bottom: 4px double rgb(0, 0, 0); font-size: large;">Occupancy certificate Approval Letter</span></p>
+  
+                    <form class="mx-1 mx-md-4">
+                      <div class="appointment-letter">
+                        <div class="date-section" style="float:right;width:20%; margin-bottom: 10px;">
+                          <p>Date: <span style="color: rgb(15, 128, 241);">{{ currentDate | date:'yyyy-MM-dd' }}</span> </p>
+                        </div><br>
+
+                        <div class="to-section" style="margin-bottom: 10px;">
+                          <p>To,</p>
+                          <br>
+                          <div class="dsDetail">
+                          <p>Full Name: <span style="color: rgb(15, 128, 241);">{{fullName}}</span></p>
+                          <p>Address: <span style="color: rgb(15, 128, 241);">{{address}}</span> </p>
+                          <!-- <p>File Number: <span style="color: rgb(15, 128, 241);">{{FileNo}}</span></p> -->
+                          <p>File Request Id: <span style="color: rgb(15, 128, 241);">{{FrId}}</span></p>
+                          <p>File Created Date: <span style="color: rgb(15, 128, 241);">{{FileCreatedDate | date : "dd/MM/yyyy" }}</span></p>
+                        </div>
+                          <br>
+                          <p>With the completion of the review process, your project has been approved by <span style="color: rgb(15, 128, 241);">{{approveName}}</span> on <span style="color: rgb(15, 128, 241);">{{workDate | date : "dd/MM/yyyy" }}</span> which is situated at <span style="color: rgb(15, 128, 241);">{{siteAddress}}</span> and applied through Consultant License number <span style="color: rgb(15, 128, 241);">{{fileCreatedBy}}</span>.</p>
+                         <br>
+                          <p>All the State rules and regulations shall be followed during construction. It's essential to ensure that every aspect of the construction process aligns with the applicable laws and regulations to avoid any complications and legal consequences.</p>
+                        </div>
+                          <br><br>
+                        <div class="my-5 letter-footer" style="float:right;width:20%;">
+                          <p>Your Faithfully,</p>
+                          <p><span style="color: rgb(15, 128, 241);">{{approveName}}</span></p>
+                          <p>[$Designation]</p>
+                        </div>
+
+                      </div>
+                    </form>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="" style="background-color: #eee;" *ngIf="paymentType === 'plinthNew' && letterType === 'plinthAccept'">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-lg-12 col-xl-11 my-5">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5" id="pdfTable" #pdfTable>
+
+                <nav class="navbar navbar-light bg-body-tertiary">
+                    <div class="container-fluid">
+                      <a class="navbar-brand" href="#">
+                        <img src="assets/Act_logo/Logo-ACTGlobal.jpg" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgb(0, 0, 0);" class="me-2" height="40" alt="MDB Logo" loading="lazy" />
+                    </a>
+                    
+                    </div>
+                  </nav>
+
+                  <p class="text-center h4 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                    <span style="border-bottom: 4px double rgb(0, 0, 0); font-size: large;">Plinth Approval Letter</span></p>
+  
+                    <form class="mx-1 mx-md-4">
+                      <div class="appointment-letter">
+                        <div class="date-section" style="float:right;width:20%; margin-bottom: 10px;">
+                          <p>Date: <span style="color: rgb(15, 128, 241);">{{ currentDate |date:'dd-MM-yyyy' }}</span> </p>
+                        </div><br>
+
+                        <div class="to-section" style="margin-bottom: 10px;">
+                          <p>To,</p>
+                          <br>
+                          <div class="dsDetail">
+                          <p>Full Name: <span style="color: rgb(15, 128, 241);">{{fullName}}</span></p>
+                          <p>Address: <span style="color: rgb(15, 128, 241);">{{address}}</span> </p>
+                          <!-- <p>File Number: <span style="color: rgb(15, 128, 241);">{{FileNo}}</span></p> -->
+                          <p>File Request Id: <span style="color: rgb(15, 128, 241);">{{FrId}}</span></p>
+
+                          <p>File Created Date: <span style="color: rgb(15, 128, 241);">{{FileCreatedDate|date:'dd-MM-yyyy'}}</span></p>
+
+                        </div>
+                          <br>
+                          <p>With the completion of the review process, your project has been approved by <span style="color: rgb(15, 128, 241);">{{approveName}}</span> on <span style="color: rgb(15, 128, 241);">{{workDate | date : "dd/MM/yyyy" }}</span> which is situated at <span style="color: rgb(15, 128, 241);">{{siteAddress}}</span> and applied through Consultant License number <span style="color: rgb(15, 128, 241);">{{fileCreatedBy}}</span>.</p>
+                         <br>
+                          <p>All the State rules and regulations shall be followed during construction. It's essential to ensure that every aspect of the construction process aligns with the applicable laws and regulations to avoid any complications and legal consequences.</p>
+                        </div>
+                          <br><br>
+                        <div class="my-5 letter-footer" style="float:right;width:20%;">
+                          <p>Your Faithfully,</p>
+                          <p><span style="color: rgb(15, 128, 241);">{{approveName}}</span></p>
+                          <p>[$Designation]</p>
+                        </div>
+
+                      </div>
+                    </form>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+    <section class="" style="background-color: #eee;" *ngIf="paymentType === 'fileNew' && letterType === 'Accepted && Closed'">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-lg-12 col-xl-11 my-5">
+            <div class="card text-black" style="border-radius: 25px;">
+              <div class="card-body p-md-5" id="pdfTable" #pdfTable>
+  
+                  <nav class="navbar navbar-light bg-body-tertiary">
+                      <div class="container-fluid">
+                        <a class="navbar-brand" href="#">
+                          <img src="assets/Act_logo/Logo-ACTGlobal.jpg" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgb(0, 0, 0);" class="me-2" height="40" alt="MDB Logo" loading="lazy" />
+                      </a>
+                      
+                      </div>
+                    </nav>
+  
+                    <p class="text-center h4 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                      <span style="border-bottom: 4px double rgb(0, 0, 0); font-size: large;">File Approval Letter</span></p>
+    
+                      <form class="mx-1 mx-md-4">
+                        <div class="appointment-letter">
+                          <div class="date-section" style="float:right;width:20%; margin-bottom: 10px;">
+                            <p>Date: <span style="color: rgb(15, 128, 241);">{{ currentDate | date:'yyyy-MM-dd' }}</span> </p>
+                          </div><br>
+  
+                          <div class="to-section" style="margin-bottom: 10px;">
+                            <p>To,</p>
+                            <br>
+                            <div class="dsDetail">
+                            <p>Full Name: <span style="color: rgb(15, 128, 241);">{{fullName}}</span></p>
+                            <p>Address: <span style="color: rgb(15, 128, 241);">{{address}}</span> </p>
+                            <!-- <p>File Number: <span style="color: rgb(15, 128, 241);">{{FileNo}}</span></p> -->
+                            <p>File Request Id: <span style="color: rgb(15, 128, 241);">{{FrId}}</span></p>
+                            <p>File Created Date: <span style="color: rgb(15, 128, 241);">{{FileCreatedDate |date:'dd-MM-yyyy'}}</span></p>
+
+                          </div>
+                            <br>
+                            <p>With the completion of the review process, your project has been approved by <span style="color: rgb(15, 128, 241);">{{approveName}}</span> on <span style="color: rgb(15, 128, 241);">{{workDate | date : "dd/MM/yyyy" }}</span> which is situated at <span style="color: rgb(15, 128, 241);">{{siteAddress}}</span> and applied through Consultant License number <span style="color: rgb(15, 128, 241);">{{fileCreatedBy}}</span>.</p>
+                           <br>
+                            <p>All the State rules and regulations shall be followed during construction. It's essential to ensure that every aspect of the construction process aligns with the applicable laws and regulations to avoid any complications and legal consequences.</p>
+                          </div>
+                            <br><br>
+                          <div class="my-5 letter-footer" style="float:right;width:20%;">
+                            <p>Your Faithfully,</p>
+                            <p><span style="color: rgb(15, 128, 241);">{{approveName}}</span></p>
+                            <p>[$Designation]</p>
+                          </div>
+  
+                        </div>
+                      </form>
+    
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+  
+  
+  
+    <section class="" style="background-color: #eee;" *ngIf="paymentType === 'fileNew' && letterType === 'Rejected && Closed'">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-lg-12 col-xl-11 my-5">
+            <div class="card text-black" style="border-radius: 25px;">
+              <div class="card-body p-md-5" id="pdfTable" #pdfTable>
+                  <nav class="navbar navbar-light bg-body-tertiary">
+                      <div class="container-fluid">
+                        <a class="navbar-brand" href="#">
+                          <img src="assets/Act_logo/Logo-ACTGlobal.jpg" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgb(0, 0, 0);" class="me-2" height="40" alt="MDB Logo" loading="lazy" />
+                      </a>
+                      
+                      </div>
+                    </nav>
+  
+                    <p class="text-center h4 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                      <span style="border-bottom: 4px double rgb(0, 0, 0); font-size: large;">File Rejection Letter</span></p>
+    
+                      <form class="mx-1 mx-md-4">
+                        <div class="appointment-letter">
+                          <div class="date-section" style="float:right;width:20%; margin-bottom: 10px;">
+                           
+                            <p>Date: <span style="color: rgb(15, 128, 241);">{{ currentDate |date:'dd-MM-yyyy' }}</span> </p>
+                          </div><br>
+  
+                          <div class="to-section" style="margin-bottom: 10px;">
+                            <p>To,</p><br>
+                            <div class="dsDetail">
+                            <p>Full Name: <span style="color: rgb(15, 128, 241);">{{fullName}}</span></p>
+                            <p>Address: <span style="color: rgb(15, 128, 241);">{{address}}</span> </p>
+                            <!-- <p>File Number: <span style="color: rgb(15, 128, 241);">{{FileNo}}</span></p> -->
+                            <p>File Created Date: <span style="color: rgb(15, 128, 241);">{{FileNo}}</span></p>
+                            <p>File Request Id: <span style="color: rgb(15, 128, 241);">{{FileNo}}</span></p>
+                            </div>
+                            <br>
+                            <p>With the completion of the review process, your project has been Rejected by  <span style="color: rgb(15, 128, 241);">{{approveName}}</span> on <span style="color: rgb(15, 128, 241);">{{workDate | date : "dd/MM/yyyy" }}</span> which is situated at <span style="color: rgb(15, 128, 241);">{{siteAddress}}</span> and applied through Consultant License number <span style="color: rgb(15, 128, 241);">{{fileCreatedBy}}</span>.</p>
+                            <br>
+                            <p >Rejection Reason : <span style="color: rgb(15, 128, 241);">{{HierachyRemark}}.</span> </p>
+                          </div>
+                          <br><br>
+                          <div class="my-5 letter-footer" style="float:right;width:20%;">
+                            <p>Your Faithfully,</p>
+                            <p><span>{{approveName}}</span></p>
+                            <p>[$Designation]</p>
+                          </div>
+  
+                        </div>
+                      </form>
+    
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+  
+  
+     
+  
+  
+  <section class="" style="background-color: #eee;" *ngIf="paymentType === 'regNew' && letterType === 'Accepted && Closed'">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-lg-12 col-xl-11 my-5">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5" id="pdfTable" #pdfTable>
+                <nav class="navbar navbar-light bg-body-tertiary">
+                    <div class="container-fluid">
+                      <a class="navbar-brand" href="#">
+                        <img src="assets/Act_logo/Logo-ACTGlobal.jpg" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgb(0, 0, 0);" class="me-2" height="40" alt="MDB Logo" loading="lazy" />
+                    </a>
+                    
+                    </div>
+                  </nav>
+  
+                  <p class="text-center h4 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                    <span style="border-bottom: 4px double rgb(0, 0, 0); font-size: large;">Registration Approval Letter</span></p>
+  
+                    <form class="mx-1 mx-md-4">
+                      <div class="appointment-letter">
+                        <div class="date-section" style="float:right;width:20%; margin-bottom: 10px;">
+                      
+                          <p>Date: <span style="color: rgb(15, 128, 241);">{{ currentDate | date:'yyyy-MM-dd' }}</span> </p>
+                        </div><br>
+  
+                        <div class="to-section" style="margin-bottom: 10px;">
+                          <p>To,</p><br>
+                          <div class="dsDetail">
+                          <p>Full Name: <span style="color: rgb(15, 128, 241);">{{fullName}}</span></p>
+                          <p>Address: <span style="color: rgb(15, 128, 241);">{{address}}</span> </p>
+                          <p>User Name: <span style="color: rgb(15, 128, 241);">{{userName}}</span></p>
+                          <p>Registration Initiated Date: <span style="color: rgb(15, 128, 241);">{{initiatedDate | date : "dd/MM/yyyy" }}</span></p>
+                          </div>
+                          <br>
+                          <p>With the completion of the review process, your Registration Request has been Approved by <span style="color: rgb(15, 128, 241);">{{RegistrationApproveName}}</span> on <span style="color: rgb(15, 128, 241);">{{RegistrationWorkDate | date : "dd/MM/yyyy" }}</span> and applied through Consultant License number <span style="color: rgb(15, 128, 241);">{{licenseNum}}</span> </p>.
+                          
+                          <br><p>All the State rules and regulations shall be followed during Request raised by you. It's essential to ensure that every aspect of the process aligns with the applicable laws and regulations to avoid any complications and legal consequences.</p>
+                        </div><br><br>
+  
+                        <div class="my-5 letter-footer" style="float:right;width:20%;">
+                          <p>Your Faithfully,</p>
+                          <p><span style="color: rgb(15, 128, 241);">{{RegistrationApproveName}}</span></p>
+                          <p>[$Designation]</p>
+                        </div>
+  
+                      </div>
+                    </form>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+  
+  
+  <section class="" style="background-color: #eee;" *ngIf="paymentType === 'regNew' && letterType === 'Rejected && Closed'">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-lg-12 col-xl-11 my-5">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5" id="pdfTable" #pdfTable>
+                <nav class="navbar navbar-light bg-body-tertiary">
+                    <div class="container-fluid">
+                      <a class="navbar-brand" href="#">
+                        <img src="assets/Act_logo/Logo-ACTGlobal.jpg" style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); border-bottom: 1px solid rgb(0, 0, 0);" class="me-2" height="40" alt="MDB Logo" loading="lazy" />
+                    </a>
+                    
+                    </div>
+                  </nav>
+  
+                  <p class="text-center h4 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                    <span style="border-bottom: 4px double rgb(0, 0, 0); font-size: large;">Registration Rejection Letter</span></p>
+  
+                    <form class="mx-1 mx-md-4">
+                      <div class="appointment-letter">
+                        <div class="date-section" style="float:right;width:20%; margin-bottom: 10px;">
+                      
+                          <p>Date: <span style="color: rgb(15, 128, 241);">{{ currentDate | date:'yyyy-MM-dd' }}</span> </p>
+                        </div><br>
+  
+                        <div class="to-section" style="margin-bottom: 10px;">
+                          <p>To,</p><br>
+                          <div class="dsDetail">
+                          <p>Full Name: <span style="color: rgb(15, 128, 241);">{{fullName}}</span></p>
+                          <p>Address: <span style="color: rgb(15, 128, 241);">{{address}}</span> </p>
+                          <p>User Name: <span style="color: rgb(15, 128, 241);">{{userName}}</span></p>
+                          <p>Registration Initiated Date: <span style="color: rgb(15, 128, 241);">{{initiatedDate | date : "dd/MM/yyyy" }}</span></p>
+                          </div>
+                         <br> <p>With the completion of the review process, your Registration Request has been Rejected by  <span style="color: rgb(15, 128, 241);">{{RegistrationApproveName}}</span> on <span style="color: rgb(15, 128, 241);">{{RegistrationWorkDate | date : "dd/MM/yyyy" }}</span>and applied through Consultant License number <span style="color: rgb(15, 128, 241);">{{licenseNum}}</span>.</p>
+                          <br><p>Rejection Reason : <span style="color: rgb(15, 128, 241);">{{RegistrationHierachyRemark}}</span> 	</p>
+                        </div><br><br>
+  
+                        <div class="my-5 letter-footer" style="float:right;width:20%;">
+                          <p>Your Faithfully,</p>
+                          <p><span style="color: rgb(15, 128, 241);">{{RegistrationApproveName}}</span></p>
+                          <p>[$Designation]</p>
+                        </div>
+  
+                      </div>
+                    </form>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  </div>
+  

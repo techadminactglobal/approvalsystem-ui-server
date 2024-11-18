@@ -1,0 +1,233 @@
+<div class="status mt-3">
+  <h1>Your Form Status</h1>
+</div>
+
+<!-- Debard -->
+<div class="header" *ngIf="senddata.debard">
+  <div class="success-container">
+    <div class="icon-container">
+      <div class="success-icon">&#10004;</div>
+      <p class="success-text">Success!</p>
+    </div>
+  </div>
+
+  <div class="message-container">
+    <p> You have successfully Debarerded the consultant.</p>
+  </div>
+
+  <div class="col button">
+    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="internalDashboard()">
+      Dashboard
+    </button>
+</div>
+</div>
+
+<!-- Owner registration -->
+<div class="header" *ngIf="senddata.ownerSave">
+  <div class="success-container">
+    <div class="icon-container">
+      <div class="success-icon">&#10004;</div>
+      <p class="success-text">Success!</p>
+    </div>
+  </div>
+
+  <div class="message-container">
+    <p> You have Successfully Registered, <br>Please Login with your credentials.</p>
+  </div>
+
+  <div class="col button">
+    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="login()">
+      Login
+    </button>
+</div>
+</div>
+
+<div class="header" *ngIf="senddata.ownerApplicant">
+  <div class="success-container">
+    <div class="icon-container">
+      <div class="success-icon">&#10004;</div>
+      <p class="success-text">Success!</p>
+    </div>
+  </div>
+
+  <div class="message-container">
+    <p> You have Successfully Assigned to architect for request.</p>
+  </div>
+
+  <div class="col button">
+    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="OwnerDashboard()">
+      Dashboard
+    </button>
+</div>
+</div>
+
+<!-- Drawing file reupload -->
+<div class="header" *ngIf="senddata.dwgReupload">
+  <div class="success-container">
+    <div class="icon-container">
+      <div class="success-icon">&#10004;</div>
+      <p class="success-text">Success!</p>
+    </div>
+  </div>
+
+  <div class="message-container">
+    <p> Drwaing file re-upload.</p>
+  </div>
+
+  <div class="col button">
+    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="DashboardReuplad()">
+      Dashboard
+    </button>
+</div>
+</div>
+
+<!-- Registration Form -->
+<div class="header" *ngIf="senddata.regForm">
+  <div class="success-container">
+    <div class="icon-container">
+      <div class="success-icon">&#10004;</div>
+      <p class="success-text">Success!</p>
+    </div>
+  </div>
+
+  <div class="message-container">
+    <p>Your Registration form is submitted</p>
+    <p>Please note Username : <span class="file-id">{{senddata.requestid}}</span> for future reference.</p>
+  </div>
+
+  <div class="col button">
+    <button type="button" class="btn btn-secondary float-left" data-bs-dismiss="modal"
+      [routerLink]="['/login']">Login</button>
+    <button type="button" class="btn btn-secondary mx-auto" data-bs-dismiss="modal" (click)="ViewData()">View
+      Data</button>
+    <button type="button" class="btn btn-secondary float-right" data-bs-dismiss="modal"
+      (click)="payment()">Payment</button>
+  </div>
+</div>
+
+<!-- form one -->
+<div class="header" *ngIf="senddata.formOne">
+  <div class="success-container">
+    <div class="icon-container">
+      <div class="success-icon">&#10004;</div>
+      <p class="success-text">Success!</p>
+    </div>
+  </div>
+
+  <div class="message-container">
+    <p>Your Sanction form is submitted</p>
+    <p>Your File Req. Id: <span class="file-id">{{senddata.frid}}</span></p>
+  </div>
+
+  <div class="col button">
+    <button type="button" class="btn btn-secondary float-left" data-bs-dismiss="modal" (click)="Detail()">View
+      Detail</button>
+    <button type="button" class="btn btn-secondary float-right" data-bs-dismiss="modal"
+      (click)="Dashboard()">Dashboard</button>
+  </div>
+</div>
+
+<!-- Document form -->
+<div class="header" *ngIf="senddata.docDetails">
+  <div class="success-container">
+    <div class="icon-container">
+      <div class="success-icon">&#10004;</div>
+      <p class="success-text">Success!</p>
+    </div>
+  </div>
+
+  <div class="message-container">
+    <p>Your document is Submitted</p>
+    <p>Your File Req. Id: <span class="file-id">{{senddata.frid}}</span></p>
+  </div>
+
+  <div class="col button">
+    <button type="button" class="btn btn-secondary float-left" data-bs-dismiss="modal" (click)="viewDocument()">View
+      Documents</button>
+    <button type="button" class="btn btn-secondary float-right" data-bs-dismiss="modal"
+      (click)="SecondForm()">Next</button>
+  </div>
+</div>
+
+<!-- Second form -->
+<div class="header" *ngIf="senddata.formTwo">
+  <div class="success-container">
+    <div class="icon-container">
+      <div class="success-icon">&#10004;</div>
+      <p class="success-text">Success!</p>
+    </div>
+  </div>
+
+  <div class="message-container">
+    <p>Your Sanction form 2 is submitted</p>
+    <p>Your File Req. Id: <span class="file-id">{{senddata.frid}}</span></p>
+  </div>
+
+  <div class="col button">
+    <button type="button" class="btn btn-secondary float-left" data-bs-dismiss="modal" (click)="viewData()">View
+      Data</button>
+   <!--  <button type="button" class="btn btn-secondary float-right" data-bs-dismiss="modal" (click)="NocForm()">Fill Noc
+      Form</button> -->
+  </div>
+</div>
+
+
+<!-- Fire Noc form -->
+<div class="header" *ngIf="senddata.fireNocForm">
+  <div class="success-container">
+    <div class="icon-container">
+      <div class="success-icon">&#10004;</div>
+      <p class="success-text">Success!</p>
+    </div>
+  </div>
+
+  <div class="message-container">
+    <p>Your Fire Noc-form is submitted</p>
+    <p>Your File Req. Id: <span class="file-id">{{senddata.frid}}</span></p>
+  </div>
+
+  <div class="col button">
+    <button type="button" class="btn btn-secondary float-left" data-bs-dismiss="modal" (click)="Ok()">Ok</button>
+  </div>
+</div>
+
+<!-- Plinth Form -->
+<div class="header" *ngIf="senddata.plinthForm">
+  <div class="success-container">
+    <div class="icon-container">
+      <div class="success-icon">&#10004;</div>
+      <p class="success-text">Success!</p>
+    </div>
+  </div>
+
+  <div class="message-container">
+    <p>Your plinth application is Submitted</p>
+  </div>
+
+  <div class="col button">
+    <button type="button" class="btn btn-secondary float-left" data-bs-dismiss="modal" (click)="viewDetails()">View
+      Details</button>
+    <button type="button" class="btn btn-secondary float-right" data-bs-dismiss="modal" (click)="pay()">Pay
+      Now</button>
+  </div>
+</div>
+
+<!-- OC Form -->
+<div class="header" *ngIf="senddata.OCForm">
+  <div class="success-container">
+    <div class="icon-container">
+      <div class="success-icon">&#10004;</div>
+      <p class="success-text">Success!</p>
+    </div>
+  </div>
+
+  <div class="message-container">
+    <p>Your Occupancy application is Submitted</p>
+  </div>
+
+  <div class="col button">
+    <button type="button" class="btn btn-secondary float-left" data-bs-dismiss="modal" (click)="viewOcDetails()">View
+      Details</button>
+    <button type="button" class="btn btn-secondary float-right" data-bs-dismiss="modal" (click)="NocFill()">Fill Noc</button>
+  </div>
+</div>

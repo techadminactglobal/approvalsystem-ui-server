@@ -1,0 +1,6 @@
+@import './src/app/app.component.scss';
+
+.some-element {
+  @extend .parentbackgroundcolor;
+}
+

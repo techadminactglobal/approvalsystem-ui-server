@@ -1,0 +1,46 @@
+@import './src/app/app.component.scss';
+
+.some-element {
+  @extend .parentbackgroundcolor;
+}
+
+
+.res{
+  // font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: larger;
+  font-weight: 2px;
+  font-style: oblique;
+  color: cornflowerblue;
+}
+
+.custom-dialog {
+  // border-style: outset;
+  max-width: 80%; 
+  margin: 1.75rem auto;
+}
+
+.referencehierarchy{
+  display: flex;
+  justify-content: space-between;
+  // font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bolder;
+  margin-left: 2%;
+  margin-right: 4%;
+  
+}
+.buttonHierachy{
+  border-style: ridge;
+  border-radius: 4px;
+}
+
+.viewDoc:hover{
+  color: rgb(230, 77, 35);
+  cursor: pointer;
+}
+
+.viewDoc{
+  color: rgb(14, 124, 124);
+}
+.button-spacing {
+  margin-right: 10px; /* Adjust the space between buttons as needed */
+}

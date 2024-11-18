@@ -1,0 +1,30 @@
+@import './src/app/app.component.scss';
+
+.some-element {
+  @extend .parentbackgroundcolor;
+}
+
+.registration-container {
+    padding: 20px;
+  }
+  
+  .header {
+    text-align: center;
+  }
+  
+  .input-control {
+    width: 100%;
+  }
+  
+  .w-100 {
+    width: 100%;
+  }
+  .detail {
+    font-family: "Courier New", Courier, monospace;
+    font-size: smaller;
+    font-style: italic;
+  }
+  .detail:hover {
+    cursor: pointer;
+    color: rgb(67, 121, 13);
+  }

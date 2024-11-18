@@ -1,0 +1,56 @@
+<div class="logo">
+  <img src="../../../assets/Act_logo/Logo-ACTGlobal-removebg-preview.png" />
+</div>
+
+<div class="sidebar-wrapper" style="margin-top: 10%; margin-left: 2%">
+  <ul class="nav">
+    <li
+      routerLinkActive="active"
+      *ngFor="let menuItem of menuItems"
+      class="{{ menuItem.class }} nav-item"
+    >
+      <b
+        ><i>
+          <a class="nav-link" [routerLink]="[menuItem.path]">
+            <i class="material-icons">{{ menuItem.icon }}</i>
+            &nbsp;&nbsp;&nbsp;
+            <p>{{ menuItem.title }}</p>
+          </a>
+        </i>
+      </b>
+    </li>
+  </ul>
+</div>
+
+<div class="loca" *ngIf="latLogMap">
+  <br />
+  <mat-label
+    ><b
+      ><i
+        ><span
+          style="
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+          "
+        >
+          Current Location :</span
+        ></i
+      >
+      <br /><br />
+      <span style="font-family: 'Times New Roman', Times, serif">
+        latitude:
+      </span></b
+    >{{ latitude }} ,
+    <span style="font-family: 'Times New Roman', Times, serif"
+      ><b>longitude:</b></span
+    >
+    {{ longitude }}</mat-label
+  >
+  <br /><br />
+  <p (click)="showMap()">
+    <b>View on Google Map</b>
+  </p>
+  <br />
+</div>
+
+<button class="btn btn-outline-success mt-5" (click)="logout()">Logout</button>

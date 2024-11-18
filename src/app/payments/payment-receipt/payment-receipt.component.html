@@ -1,0 +1,294 @@
+   <div class="receipt-content parentbackgroundcolor">
+  
+    
+  
+    <section class="" style="background-color: #eee;">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-lg-12 col-xl-11 my-5">
+            <div class="card text-black" style="border-radius: 25px;">
+              <div class="card-body p-md-4" id="pdfTable" #pdfTable>
+
+                <nav class="navbar navbar-light bg-body-tertiary">
+                  <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                      <img src="assets/Act_logo/Logo-ACTGlobal.jpg" class="me-2" height="20"
+                        alt="MDB Logo" loading="lazy" />
+                      <small style="font-weight: bold;">ACT Global</small>
+                    </a>
+                    <div class="receipt"> Payment Receipt </div>
+                    <button class="btnn" (click)="downloadAsPDF()"><i class="fa fa-download"></i> Download Receipt</button>
+                  </div>
+                </nav>
+                <hr>
+                <!-- <div class="row p-2">
+         -->
+         
+                  <!-- <div class="col-md-5 yellow">
+                   
+                  </div> -->
+                  <!-- <div class="receipt">
+                   Payment Receipt
+                  </div>
+                  <br><hr> -->
+                  <!-- <div class="col-md-3 yellow">
+                  
+                  </div> -->
+               
+              <!-- </div> -->
+      
+              <div class="container h-100 my-5" >
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                  <div class="col-xl-9">
+      
+                    <div class="row align-items-center py-3">
+                      <div class="col-md-3 ps-5">
+              
+                        <h6 class="mb-0" style="font-size: medium; font-weight: bold;">Transaction Ref No</h6>
+              
+                      </div>
+                      <div class="col-md-3 pe-5">
+                        <p>{{ transactionNo }}</p>
+                      
+                      </div>
+        
+        
+                      <div class="col-md-3 ps-5">
+        
+                        <h6 class="mb-0" style="font-size: medium; font-weight: bold;">Recept No</h6>
+              
+                      </div>
+                      <div class="col-md-3 pe-5">
+                        <p>{{ ReceptNo }}</p>
+                      
+                      </div>
+        
+                    </div>
+        
+        
+                    <div class="row align-items-center py-3">
+                      <div class="col-md-3 ps-5">
+              
+                        <h6 class="mb-0" style="font-size: medium; font-weight: bold;">Payment Respective</h6>
+              
+                      </div>
+                      <div class="col-md-3 pe-5">
+                        <p>{{ paymentRespect }}</p>
+                      
+                      </div>
+              
+              
+                      <div class="col-md-3 ps-5">
+        
+                        <h6 class="mb-0" style="font-size: medium; font-weight: bold;">Payment Success Date</h6>
+              
+                      </div>
+                      <div class="col-md-3 pe-5">
+                        <p>{{ paymentDate|date:'dd-MM-yyyy' }}</p>
+                      
+                      </div>
+              
+              
+                    </div>
+        
+        
+                    <div class="row align-items-center py-3">
+                      <div class="col-md-3 ps-5">
+              
+                        <h6 class="mb-0" style="font-size: medium; font-weight: bold;">Amount</h6>
+              
+                      </div>
+                      <div class="col-md-3 pe-5">
+                        <p>{{ amount }}</p>
+              
+                      </div>
+        
+                      <div class="col-md-3 ps-5">
+        
+                        <h6 class="mb-0" style="font-size: medium; font-weight: bold;">Payment Method</h6>
+              
+                      </div>
+                      <div class="col-md-3 pe-5">
+                        <p>{{ paymentTypeMethod }}</p>
+                      
+                      </div>
+        
+        
+        
+                    </div>
+                    <hr>
+              
+                    <div class="row align-items-center py-3">
+                      <div class="col-md-3 ps-5">
+              
+                        <h6 class="mb-0" *ngIf="this.senddata.paymentType == 'regNew'" style="font-size: medium; font-weight: bold;">UserName</h6>
+                        <h6 class="mb-0" *ngIf="viewBuild" style="font-size: medium; font-weight: bold;">File Request Id</h6>
+              
+                      </div>
+                      <div class="col-md-4 pe-5">
+              
+                        <p>{{ userName }} </p>
+              
+                      </div>
+                    </div>
+        
+        
+                    <div class="row align-items-center pt-4 pb-3">
+        
+                      <div class="col-md-3 ps-5">
+              
+                        <h6 class="mb-0" style="font-size: medium; font-weight: bold;">Full name</h6>
+              
+                      </div>
+                      <div class="col-md-3 pe-5">
+                        <p>{{fullName }}</p>
+                      </div>
+        
+                      <!-- <div class="col-md-3 ps-5">
+        
+                        <h6 class="mb-0" style="font-size: medium; font-weight: bold;">DOB</h6>
+              
+                      </div>
+                      <div class="col-md-3 pe-5">
+                        <p>{{ dateofBirth |date:'dd-MM-yyyy'}}</p>
+                        
+                      </div> -->
+              
+        
+        
+                    
+        
+                      <div class="col-md-3 ps-5">
+              
+                        <h6 class="mb-0" style="font-size: medium; font-weight: bold;">Address</h6>
+              
+                      </div>
+                      <div class="col-md-3 pe-5">
+                        <p>{{ address }}</p>
+                        
+                      </div>
+
+                      
+                    </div>
+
+                      <div class="row align-items-center py-3">
+        
+                      <div class="col-md-3 ps-5">
+        
+                        <h6 class="mb-0" style="font-size: medium; font-weight: bold;">Email address</h6>
+              
+                      </div>
+                      <div class="col-md-3 pe-5">
+                        <p>{{ email }}</p>
+                      </div>
+            
+                  </div>
+        
+        
+        
+        
+                  <div class="row align-items-center py-3">
+                   
+                    <div class="col-md-3 ps-5">
+            
+                      <h6 class="mb-0" style="font-size: medium; font-weight: bold;">Contact No</h6>
+            
+                    </div>
+                    <div class="col-md-3 pe-5">
+                      <p>{{ contactNoDetails }}</p>
+                      
+                    </div>
+        
+                    <div class="col-md-3 ps-5">
+              
+                      <h6 class="mb-0" style="font-size: medium; font-weight: bold;">Professional Type</h6>
+            
+                    </div>
+                    <div class="col-md-3 pe-5">
+                      <p>{{ professionlType }}</p>
+                      
+                    </div>
+        
+        
+                  </div>
+
+                  <hr>
+
+            
+                          <div class="row align-items-center py-3">
+      
+                    <h2 style="text-align: center;"><span style="border-bottom: 4px double rgb(0, 0, 0);">Payment Charges Details</span></h2>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Charges Name</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngIf="viewCharge1 && charge1>0">
+                            <td>Charge 1:</td>
+                            <td>{{ charge1 }}</td>
+                            <td> <span>&#10004; Paid</span></td>
+                          </tr>
+                          <tr  *ngIf="viewCharge2345 && charge2>0">
+                            <td>Charge 2:</td>
+                            <td>{{ charge2 }}</td>
+                            <td> <span>&#10004; Paid</span></td>
+                          </tr>
+                          <tr *ngIf="viewCharge2345 && charge3>0">
+                            <td>Charge 3:</td>
+                            <td>{{ charge3 }}</td>
+                            <td> <span>&#10004; Paid</span></td>
+                          </tr>
+                          <tr *ngIf="viewCharge2345 && charge4>0">
+                            <td>Charge 4:</td>
+                            <td>{{ charge4 }}</td>
+                            <td> <span>&#10004; Paid</span></td>
+                          </tr>
+                          <tr *ngIf="viewCharge2345 && charge5>0">
+                            <td>Charge 5:</td>
+                            <td>{{ charge5 }}</td>
+                            <td> <span>&#10004; Paid</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                        <!-- </div>
+                      </div>
+                    </div> -->
+                   <!-- </div> -->
+
+
+
+
+
+              
+        
+        
+        
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="button">
+      <button mat-raised-button color="primary" type="submit" class="log" (click)="RegistrationView()" *ngIf="paymentUserFor == 'regNew'">View Detail</button>
+      <button mat-raised-button color="primary" type="submit" class="log" (click)="ViewDashboard()" *ngIf="paymentUserFor == 'fileNew'">Dashboard</button>
+      <button mat-raised-button color="primary" type="submit" class="log" (click)="ViewPlinthDashboard()" *ngIf="paymentUserFor == 'plinthNew'">Dashboard</button>
+      <button mat-raised-button color="primary" type="submit" class="log" (click)="ViewOCDashboard()" *ngIf="paymentUserFor == 'OC'">Dashboard</button>
+    </div>
+  </div>
+
+  <div *ngIf="dsLetter">
+    <app-dsletter></app-dsletter>
+  </div>
+  

@@ -1,0 +1,579 @@
+<div class="registration-container parentbackgroundcolor">
+
+  <div class="header mt-3">
+    <h1>Overview of File</h1>
+  </div>
+  <br><br>
+
+  <div class="col-md-4 col-sm-12 col-xs-12">
+    <mat-label class="title">File Request Id :- </mat-label>
+    <p class="fid">{{ frId }}</p>
+  </div>
+
+  <!-- <div class="col-md-4 col-sm-12 col-xs-12">
+        <mat-label class="title">File No :- </mat-label>
+        <p class="fid">{{fileNo}}</p>
+    </div> -->
+  <hr />
+
+  
+  <mat-expansion-panel class="mt-4">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Owners Sections 👇</mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-owner-applicant-detials></app-owner-applicant-detials>
+  </mat-expansion-panel>
+
+  <div class="m-4">
+    <div class="row mb-2 mt-2 d-flex justify-content-between">
+
+      <mat-card class="display-6 mb-5">
+        <mat-card-header>
+          <mat-card-title class="mb-3">Project overview</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Nature of project: </span>
+                  <span class="natureOfProject-value">&nbsp; {{ natureOfProject }}</span>
+                </div>
+                <input matInput name="natureOfProject" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Project type: </span>
+                  <span class="natureOfProject-value">&nbsp; {{ bCategory }}</span>
+                </div>
+                <input matInput name="natureOfProject" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Project Sub type: </span>
+                  <span class="natureOfProject-value">&nbsp; {{ bSubCategory }}</span>
+                </div>
+                <input matInput name="natureOfProject" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">File current status: </span>
+                  <span class="natureOfProject-value">&nbsp; {{ currentStatus }}</span>
+                </div>
+                <input matInput name="natureOfProject" readonly />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="display-6 mb-5">
+        <mat-card-header>
+          <mat-card-title class="mb-3">Site location details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Site address: </span>
+                  <span class="site-value">&nbsp; {{ address }}</span>
+                </div>
+                <input matInput name="address" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Block number : </span>
+                  <span class="blockNumber-value">&nbsp; {{ blockNumber }}</span>
+                </div>
+                <input matInput name="blockNumber" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">District: </span>
+                  <span class="district-value">&nbsp; {{ district }}</span>
+                </div>
+                <input matInput name="district" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">State: </span>
+                  <span class="state-value">&nbsp; {{ state }}</span>
+                </div>
+                <input matInput name="state" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Pincode : </span>
+                  <span class="pinCode-value">&nbsp; {{ pinCode }}</span>
+                </div>
+                <input matInput name="pinCode" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Nearest landmark : </span>
+                  <span class="landMark-value">&nbsp; {{ landMark }}</span>
+                </div>
+                <input matInput name="landMark" readonly />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- <mat-card class="display-6 mb-5">
+        <mat-card-header>
+          <mat-card-title class="mb-3">Applicant particulars/applicant specifics</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row" *ngFor="let applicantData of ApplicantParticulars; let i = index">
+            <mat-card-title class="mb-3">Applicant {{ i + 1 }}</mat-card-title>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">AadharNum: </span>
+                  <span class="aadharNum-value">&nbsp; {{ applicantData.aadharNum }}</span>
+                </div>
+                <input matInput name="aadharNum" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Name : </span>
+                  <span class="name-value">&nbsp; {{ applicantData.name }}</span>
+                </div>
+                <input matInput name="name" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Phone number : </span>
+                  <span class="contactNumber-value">&nbsp; {{ applicantData.contactNumber }}</span>
+                </div>
+                <input matInput name="contactNumber" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Email : </span>
+                  <span class="email-value">&nbsp; {{ applicantData.email }}</span>
+                </div>
+                <input matInput name="email" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Date of birth </span>
+                  <span class="dob-value">&nbsp; {{ applicantData.dob | date : "dd/MM/yyyy" }}</span>
+                </div>
+                <input matInput name="dob" readonly />
+              </mat-form-field>
+            </div>
+            <mat-card-subtitle> Permanent address </mat-card-subtitle>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Address : </span>
+                  <span class="address-value">&nbsp; {{ applicantData.primaryAddress.address }}</span>
+                </div>
+                <input matInput name="address" readonly />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">BLock number : </span>
+                  <span class="blockNumber-value">&nbsp; {{ applicantData.primaryAddress.blockNumber }}</span>
+                </div>
+                <input matInput name="blockNumber" readonly />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">District : </span>
+                  <span class="district-value">&nbsp; {{ applicantData.primaryAddress.district }}</span>
+                </div>
+                <input matInput name="district" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">State/provience : </span>
+                  <span class="state-value">&nbsp; {{ applicantData.primaryAddress.state }}</span>
+                </div>
+                <input matInput name="state" readonly />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Pincode : </span>
+                  <span class="pinCode-value">&nbsp; {{ applicantData.primaryAddress.pinCode }}</span>
+                </div>
+                <input matInput name="pinCode" readonly />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Landmark : </span>
+                  <span class="landMark-value">&nbsp; {{ applicantData.primaryAddress.landMark }}</span>
+                </div>
+                <input matInput name="landMark" readonly />
+              </mat-form-field>
+            </div>
+            <mat-card-subtitle> Communication address </mat-card-subtitle>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Address : </span>
+                  <span class="address-value">&nbsp; {{ applicantData.secondaryAddress.address }}</span>
+                </div>
+                <input matInput name="address" readonly />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">BLock number : </span>
+                  <span class="blockNumber-value">&nbsp;
+                    {{ applicantData.secondaryAddress.blockNumber }}</span>
+                </div>
+                <input matInput name="blockNumber" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">District : </span>
+                  <span class="district-value">&nbsp; {{ applicantData.secondaryAddress.district }}</span>
+                </div>
+                <input matInput name="district" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">State/provience : </span>
+                  <span class="state-value">&nbsp; {{ applicantData.secondaryAddress.state }}</span>
+                </div>
+                <input matInput name="state" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Pincode : </span>
+                  <span class="pinCode-value">&nbsp; {{ applicantData.secondaryAddress.pinCode }}</span>
+                </div>
+                <input matInput name="pinCode" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Landmark : </span>
+                  <span class="landMark-value">&nbsp; {{ applicantData.secondaryAddress.landMark }}</span>
+                </div>
+                <input matInput name="landMark" readonly />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card> -->
+
+      <mat-card class="display-6 mb-5">
+        <mat-card-header>
+          <mat-card-title class="mb-3">Site plan specifics/design particulars</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Plot area: </span>
+                  <span class="pArea-value">&nbsp; {{ pArea }}</span>
+                </div>
+                <input matInput name="pArea" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Total covered area : </span>
+                  <span class="cArea-value">&nbsp; {{ cArea }}</span>
+                </div>
+                <input matInput name="cArea" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Total covered area by FAR :
+                  </span>
+                  <span class="cAreaFar-value">&nbsp; {{ cAreaFar }}</span>
+                </div>
+                <input matInput name="cAreaFar" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Building height : </span>
+                  <span class="bHeight-value">&nbsp; {{ bHeight }}</span>
+                </div>
+                <input matInput name="bHeight" readonly />
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Front width : </span>
+                  <span class="frontWidth-value">&nbsp; {{ frontWidth }}</span>
+                </div>
+                <input matInput name="frontWidth" readonly />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Area affected under road widening :
+                  </span>
+                  <span class="areaAffectedInRoadWidening-value">&nbsp; {{ areaAffectedInRoadWidening }}</span>
+                </div>
+                <input matInput name="areaAffectedInRoadWidening" readonly />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Weather the plot is corner plot? :
+                  </span>
+                  <span class="cPlot-value">&nbsp; {{ cPlot }}</span>
+                </div>
+                <input matInput name="cPlot" readonly />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Mechanical ventilation :
+                  </span>
+                  <span class="mVentilation-value">&nbsp; {{ mVentilation }}</span>
+                </div>
+                <input matInput name="mVentilation" readonly />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Do you want to take the benefit of lower category
+                    setback:</span>
+                  <span class="lcSetback-value">&nbsp; {{ lcSetback }}</span>
+                </div>
+                <input matInput name="lcSetback" readonly />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Benefit from lower category FAR :
+                  </span>
+                  <span class="lcFar-value">&nbsp; {{ lcFar }}</span>
+                </div>
+                <input matInput name="lcFar" readonly />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="display-6 mb-5">
+        <mat-card-header>
+          <mat-card-title class="mb-3">Building layout document/structural drawing file</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <h3 class="md-display-2">Building plan</h3>
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Building plan blueprint:
+                  </span>
+                  <span class="frName-value">&nbsp; {{ frName }}</span>
+                </div>
+                <input matInput name="frName" readonly />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="row m-1">
+    <div class="col-md-6 col-sm-12 col-xs-6">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Uploaded DWG Files 👇 </mat-panel-title>
+        </mat-expansion-panel-header>
+        <table>
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Uploaded Date</th>
+              <th>FR ID_File Name</th>
+              <th>FR ID_Version</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let file of FileDetails  let i = index">
+              <td>{{i+1}}</td>
+              <td>{{ file.fcreatedDate | date: 'short'}}</td>
+              <td  (click)="downloadDwg(file.frUniqueNo,file.frName)" class="viewDoc">{{ file.frName }}</td>
+              <td>{{ file.frIdVer }}</td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </mat-expansion-panel>
+    </div>
+
+    <div class="col-md-6 col-sm-12 col-xs-6">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Processed File Reports 👇 </mat-panel-title>
+        </mat-expansion-panel-header>
+        <table>
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Processed Date</th>
+              <th>Report Name</th>
+              <th>File Version</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="message">
+              <tr *ngFor="let file of ProcessedFileDetails  let i = index">
+                <td>{{i+1}}</td>
+                <td>{{ file.createdDate | date: 'short'}}</td>
+                <td  (click)="openPaymentPdf(file.uuId)" class="viewDoc">{{ file.reportName }}</td>
+                <td>{{ file.frIdVersion }}</td>
+              </tr>
+            </ng-container>
+            
+            <tr *ngIf="!message">
+              <mat-label style="color: rgb(246, 5, 5); margin: 10%; size: 14px">{{ ProcessedFileMessage }}</mat-label>
+            </tr>
+          </tbody>
+        </table>
+      </mat-expansion-panel>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center text-center" *ngIf="nextButt">
+    <div class="col-md-12 mt-1">
+      <button mat-raised-button color="primary" (click)="next()">Next</button>
+      <button mat-raised-button color="primary" type="submit" class="log" (click)="back()" *ngIf="currentStatus == 'File Processed'" style="margin-left: 2%;">
+        Back
+      </button>
+    </div>
+  </div>
+  
+ 
+
+  <div class="document-upload" [formGroup]="supportForm" *ngIf="fileReupload">
+    <div class="m-4">
+      <div class="row mb-2 mt-2 d-flex justify-content-between">
+        <mat-card class="display-6 mb-5">
+          <mat-card-header>
+            <mat-card-title class="mb-3">Building layout document/structural drawing file re-upload on
+              error</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="proff">
+                <mat-label class="title">Upload new drawing document</mat-label>
+                <mat-form-field appearance="fill" class="input-control">
+                  <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                    <mat-icon>attach_file</mat-icon>
+                  </button>
+                  <input type="text" readonly matInput placeholder="{{ drawingFileName }}" />
+                  <input readonly type="file" hidden #f_input (change)="
+                      uploadDoc($event, 'DrawingFileCertificateName', [
+                        'dwg',
+                        'dfx'
+                      ])
+                    " formControlName="DrawingFileCertificateName" />
+                  <mat-hint><strong>File type must be .dwg or .dfx and file size should NOT
+                      be more than 50 MB.</strong></mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- <button mat-raised-button color="primary" (click)="submit()">Submit Drawing File </button> -->
+
+    <div class="d-flex justify-content-center me-2 mt-5 mb-5 text-center">
+      <div class="col-md-12 mt-1">
+        <button mat-raised-button color="primary" type="submit"
+          class="log" (click)="submit()">
+          Submit Drawing File
+        </button>
+        <button mat-raised-button color="primary" type="submit" class="log" (click)="back()" *ngIf="currentStatus == 'File Processed'" style="margin-left: 2%;">
+          Back
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>

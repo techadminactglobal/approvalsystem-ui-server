@@ -1,0 +1,188 @@
+<app-new-secondform-view></app-new-secondform-view>
+<div class="SecondForm-container mt-0 parentbackgroundcolor">
+
+    <div class="column right">
+        <div class="m-4">
+
+            <mat-card class="mb-5">
+                <mat-card-header>
+                    <mat-card-title class="mb-3">Noc Section</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <button type="button" class="btn btn-primary" (click)="ViewNocFire()" [disabled]="fireForm">View
+                        Fire Noc</button>
+                </mat-card-content>
+
+            </mat-card>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- <div class="buttonHierachy" *ngIf="viewHistoryButton" >
+
+    <button mat-raised-button color="primary"  data-bs-toggle="modal" data-bs-target="#displayModele" class="m-3"  (click)="viewHierachyHistory()">View Hierachy History</button>
+    <button mat-raised-button color="primary"  class="m-3" data-bs-toggle="modal" data-bs-target="#displayModelee" class="m-3"  (click)="viewPaymentHistory()">View Payment History</button>
+</div> -->
+
+<div class="text-center" *ngIf="viewLetter">
+    <button mat-raised-button color="primary" type="submit" class="button-spacing" (click)="ViewDS()">View
+        {{letterName}}</button>
+    <button mat-raised-button color="primary" type="submit" class="button-spacing" (click)="fileRelease()">File
+        Release</button>
+</div>
+
+
+
+<div class="buttonHierachy" *ngIf="viewHistoryButton">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title> Hierarchy History </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="page_head">
+                    <div class="referencehierarchy" style="color: black;">
+                        <div class="d-flex justify-content-start">
+                            <p>Module:&nbsp;</p>
+                            <p style="font-family: Georgia, 'Times New Roman', Times, serif; color: rgb(25, 129, 133);">
+                                {{hierarchyModule}}</p>
+                        </div>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Worked By</th>
+                            <th>Assign To</th>
+                            <th>Work Date</th>
+                            <th>Assign Date</th>
+                            <th>Day Taken(hrs:mins)</th>
+                            <th>Flow Process</th>
+                            <th>Remark</th>
+                            <th>Status</th>
+                            <th>Reference Doc</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let historyItem of hierarchyHistoryData">
+                            <td>{{ historyItem.assignTo}}</td>
+                            <td>{{ historyItem.assignTo}}</td>
+                            <td>{{ historyItem.workDate }}</td>
+                            <td>{{ historyItem.assignDate }}</td>
+                            <td>{{ calculateTimeDifference(historyItem.workDate, historyItem.assignDate) }}</td>
+                            <td>{{ historyItem.hierachyFlowProcess }}</td>
+                            <td>{{ historyItem.hierachyRemark }}</td>
+                            <td>{{ historyItem.workHierachyStatus }}</td>
+                            <td *ngIf="historyItem.docUniqueId" (click)="openPdf(historyItem.docUniqueId)"
+                                class="viewDoc">{{ historyItem.docType }}</td>
+                            <td *ngIf="!historyItem.docUniqueId"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+    <br>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title> Noc History </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="page_head">
+                    <div class="referencehierarchy" style="color: black;">
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Worked By</th>
+                            <th>NOC Type</th>
+                            <th>Work Date</th>
+                            <th>Assign Date</th>
+                            <th>Day Taken(hrs:mins)</th>
+                            <th>Remark</th>
+                            <th>Status</th>
+                            <th>Reference Doc</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let historyItem of nocHistoryData">
+                            <td>{{ historyItem.nocDeptRole }}</td>
+                            <td>{{ historyItem.nocDeptType}}</td>
+                            <td>{{ historyItem.workDate }}</td>
+                            <td>{{ historyItem.assignDate }}</td>
+                            <td>{{ calculateTimeDifference(historyItem.workDate, historyItem.assignDate) }}</td>
+                            <td>{{ historyItem.nocRemark }}</td>
+                            <td>{{ historyItem.nocWorkStatus }}</td>
+                            <td *ngIf="historyItem.docUniqueId" (click)="openPdf(historyItem.docUniqueId)"
+                                class="viewDoc">{{ historyItem.docType }}</td>
+                            <td *ngIf="!historyItem.docUniqueId"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+    <br>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title> Payment History </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="page_head">
+
+                    <div class="referencehierarchy" style="color: black;"> </div>
+
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Transaction No.</th>
+                            <th>Payment Date</th>
+                            <th>Amount</th>
+                            <th>Payment Type</th>
+                            <th>Charge-1</th>
+                            <th>Charge-2</th>
+                            <th>Charge-3</th>
+                            <th>Charge-4</th>
+                            <th>Charge-5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let paymentHistoryItem of paymentHistoryData">
+                            <td>{{ paymentHistoryItem.transactionRefNo }}</td>
+                            <td>{{ paymentHistoryItem.paymentSuccessDate }}</td>
+                            <td>{{paymentHistoryItem.amount}}</td>
+                            <td *ngIf="paymentHistoryItem.docUniqueId"
+                                (click)="openPaymentPdf(paymentHistoryItem.docUniqueId)" class="viewDoc">{{
+                                paymentHistoryItem.docName }} </td>
+                            <td *ngIf="!paymentHistoryItem.docUniqueId"></td>
+                            <td>{{ paymentHistoryItem.charge1 }}</td>
+                            <td>{{ paymentHistoryItem.charge2 }}</td>
+                            <td>{{ paymentHistoryItem.charge3 }}</td>
+                            <td>{{ paymentHistoryItem.charge4 }}</td>
+                            <td>{{ paymentHistoryItem.charge5 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </mat-expansion-panel>
+</div>
+
+
+<div class="text-center" *ngIf="viewPaymentButton">
+    <button mat-raised-button color="primary" type="submit" (click)="payment()"   style="margin: 1px auto; display: block;">Pay Now</button>
+</div>
+<button mat-raised-button color="primary" type="submit" class="text-center" (click)="back()"
+style="margin: 2px auto; display: block;">
+    Back
+</button>

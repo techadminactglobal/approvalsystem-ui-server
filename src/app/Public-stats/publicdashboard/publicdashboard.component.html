@@ -1,0 +1,335 @@
+<div class="login-container parentbackgroundcolor"></div>
+<div class="header">
+  <div>
+    Public Dashboard <i class="fa-solid fa-clipboard-check fa-1x"></i>
+  </div>
+</div>
+<div>
+  <div class="latestUpdate">
+    <p>
+      <i class="fa-regular fa-file fa-2x fa-fade"></i> Total files created:
+      <br />{{ totalFilesCreated }}
+    </p>
+    <p>
+      <i class="fa-solid fa-thumbs-up fa-2x fa-fade"></i> Total files approved
+      <br />{{ totalFilesApproved }}
+    </p>
+    <p>
+      <i class="fa-solid fa-thumbs-up fa-2x fa-fade"></i> Total files reject
+      <br />{{ totalFilesReject }}
+    </p>
+    <p>
+      <i class="fa-solid fa-hourglass-half fa-2x fa-fade"></i> Total files
+      pending for approval:<br />
+      {{ totalFilesPendingApproval }}
+    </p>
+    <p>
+      <i class="fa-regular fa-id-card fa-2x fa-fade"></i> Total registered
+      consultants: <br />{{ totalRegisteredConsultants }}
+    </p>
+  </div>
+</div>
+<h2 style="text-align: center;
+color: black;
+font-weight: bold;
+">Application Details 👇</h2>
+<div class="main11">
+  <div class="container">
+    <div class="search" style="display: flex; align-items: center;">
+      <form class="search-form" [formGroup]="searchForm" (ngSubmit)="searchFarId()" style="flex-grow: 1; display: flex; align-items: center; width: 100%;">
+        <div formGroupName="FarId" style="flex-grow: 1; margin-right: 10px;">
+          <mat-form-field appearance="fill" class="requestbtn" style="width: 100%;">
+            <mat-label>Enter File Request Id</mat-label>
+            <input matInput formControlName="frId" placeholder="Enter Far Id." />
+          </mat-form-field>
+        </div>
+        <button mat-raised-button color="primary" type="submit" style="margin-left: 10px;">
+          Submit
+        </button>
+        <button mat-raised-button color="primary" (click)="back()" style="margin-left: 10px;">
+          Back
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="m-2" *ngIf="dataOut">
+  <h2>Basic Information</h2>
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <mat-form-field appearance="fill">
+        <mat-label>Plot Area</mat-label>
+        <input matInput [value]="basicDeatils.pArea" readonly />
+      </mat-form-field>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <mat-form-field appearance="fill">
+        <mat-label>Building Height</mat-label>
+        <input matInput [value]="basicDeatils.bHeight" readonly />
+      </mat-form-field>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <mat-form-field appearance="fill">
+        <mat-label>File Created By</mat-label>
+        <input matInput [value]="basicDeatils.fileCreatedBy" readonly />
+      </mat-form-field>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <mat-form-field appearance="fill">
+        <mat-label>Current Status</mat-label>
+        <input matInput [value]="basicDeatils.status" readonly />
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-4 col-sm-12">
+      <mat-form-field appearance="fill">
+        <mat-label>Builder Name</mat-label>
+        <input matInput [value]="basicDeatils.builderName" readonly />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <h2>Site Location Details</h2>
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <mat-form-field appearance="fill">
+        <mat-label>Address</mat-label>
+        <input matInput [value]="
+              siteLocationDetails.landMark +
+              siteLocationDetails.blockNumber +
+              siteLocationDetails.address
+            " readonly />
+      </mat-form-field>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <mat-form-field appearance="fill">
+        <mat-label>District</mat-label>
+        <input matInput [value]="siteLocationDetails.district" readonly />
+      </mat-form-field>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <mat-form-field appearance="fill">
+        <mat-label>Pin Code</mat-label>
+        <input matInput [value]="siteLocationDetails.pinCode" readonly />
+      </mat-form-field>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <mat-form-field appearance="fill">
+        <mat-label>State</mat-label>
+        <input matInput [value]="siteLocationDetails.state" readonly />
+      </mat-form-field>
+    </div>
+  </div>
+
+<br>
+  <div *ngFor="let applicant of applicantDetails" class="row">
+    <div class="col-md-4 col-sm-12">
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [value]="applicant.name" readonly />
+      </mat-form-field>
+    </div>
+    <!-- <div class="col-md-4 col-sm-12">
+        <mat-form-field appearance="fill">
+          <mat-label>Contact Number</mat-label>
+          <input matInput [value]="applicant.contactNumber" readonly />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput [value]="applicant.email" readonly />
+        </mat-form-field>
+      </div> -->
+
+    <!-- <h2>Primary Address Details</h2>
+    <div class="row">
+      <div class="col-md-4 col-sm-12">
+        <mat-form-field appearance="fill">
+          <mat-label>Address</mat-label>
+          <input
+            matInput
+            [value]="
+              applicant.primaryAddress.landMark +
+              ', ' +
+              applicant.primaryAddress.blockNumber +
+              ', ' +
+              applicant.primaryAddress.address
+            "
+            readonly
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <mat-form-field appearance="fill">
+          <mat-label>District</mat-label>
+          <input
+            matInput
+            [value]="applicant.primaryAddress.district"
+            readonly
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <mat-form-field appearance="fill">
+          <mat-label>Pin Code</mat-label>
+          <input
+            matInput
+            [value]="applicant.primaryAddress.pinCode"
+            readonly
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <mat-form-field appearance="fill">
+          <mat-label>State</mat-label>
+          <input
+            matInput
+            [value]="applicant.primaryAddress.state"
+            readonly
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <h2>Secondary Address Details</h2>
+    <div class="row">
+      <div class="col-md-4 col-sm-12">
+        <mat-form-field appearance="fill">
+          <mat-label>Address</mat-label>
+          <input
+            matInput
+            [value]="
+              applicant.secondaryAddress.landMark +
+              ', ' +
+              applicant.secondaryAddress.blockNumber +
+              ', ' +
+              applicant.secondaryAddress.address
+            "
+            readonly
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <mat-form-field appearance="fill">
+          <mat-label>District</mat-label>
+          <input
+            matInput
+            [value]="applicant.secondaryAddress.district"
+            readonly
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <mat-form-field appearance="fill">
+          <mat-label>Pin Code</mat-label>
+          <input
+            matInput
+            [value]="applicant.secondaryAddress.pinCode"
+            readonly
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <mat-form-field appearance="fill">
+          <mat-label>State</mat-label>
+          <input
+            matInput
+            [value]="applicant.secondaryAddress.state"
+            readonly
+          />
+        </mat-form-field>
+      </div>
+    </div> -->
+  </div>
+
+  <h2>Approval Dept Details</h2>
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [value]="
+              lastDeptTypeEntry.firstName +
+              (lastDeptTypeEntry.middleName
+                ? ' ' + lastDeptTypeEntry.middleName
+                : '') +
+              (lastDeptTypeEntry.lastName
+                ? ' ' + lastDeptTypeEntry.lastName
+                : '')
+            " readonly />
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-4 col-sm-12">
+      <mat-form-field appearance="fill">
+        <mat-label>Dept Type</mat-label>
+        <input matInput [value]="lastDeptTypeEntry.deptType" readonly />
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-4 col-sm-12 col-xs-12" *ngIf="viewLetter">
+      <mat-form-field appearance="fill" class="input-control">
+        <mat-label>Letter Type</mat-label>
+        <div class="placeholder-wrapper">
+          <span class="placeholder-text">Approved letter</span>
+        </div>
+        
+        <input matInput name="licensedNo" readonly />
+        <mat-icon matSuffix (click)="openLicensePdf($event)" matTooltip="Approve letter PDF">remove_red_eye</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!-- <div class="col-md-4 col-sm-12">
+        <mat-form-field appearance="fill">
+          <mat-label></mat-label>
+          <input matInput [value]="letter" readonly />
+        </mat-form-field>
+      </div> -->
+  </div>
+
+  <!-- <table *ngIf="dataOut">
+    <tr>
+      <th>File No.</th>
+      <th>Building Height</th>
+      <th>Plot Area</th>
+      <th>File Created By</th>
+      <th>Status</th>
+      <th>Current Status</th>
+    </tr>
+    <tr>
+      <td>{{ farId.basicInfo.fileNo }}</td>
+      <td>{{ farId.basicInfo.bHeight }}</td>
+      <td>{{ farId.basicInfo.pArea }}</td>
+      <td>{{ farId.basicInfo.fileCreatedBy }}</td>
+      <td>{{ farId.basicinfo.status }}</td>
+      <td>{{ farId.basicinfo.workHierarchyTrace }}</td>
+    </tr>
+  </table> -->
+</div>
+<!-- <div class="sidenav">
+    <div class="latestUpdate">
+      <p>
+        <i class="fa-regular fa-file fa-2x fa-fade"></i> Total files created:
+        <br />{{ totalFilesCreated }}
+      </p>
+      <p>
+        <i class="fa-solid fa-thumbs-up fa-2x fa-fade"></i> Total files approved
+        <br />{{ totalFilesApproved }}
+      </p>
+      <p>
+        <i class="fa-solid fa-hourglass-half fa-2x fa-fade"></i> Total files
+        pending for approval:<br />
+        {{ totalFilesPendingApproval }}
+      </p>
+      <p style="margin-left: -15px">
+        <i class="fa-regular fa-id-card fa-2x fa-fade"></i> Total registered
+        consultants: <br />{{ totalRegisteredConsultants }}
+      </p>
+      <div class="chart2">
+        <canvas id="pieChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div> -->

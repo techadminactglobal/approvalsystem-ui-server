@@ -1,0 +1,409 @@
+<div class="main-container">
+  <div class="splitMain leftMain">
+    <div class="centeredMain">
+      <app-side-bar></app-side-bar>
+    </div>
+  </div>
+  <div class="splitMain rightMain">
+    <div
+      [formGroup]="myGroup"
+      class="registration-container mt-0 parentbackgroundcolor"
+    >
+      <div class="header mt-3">
+        <h1>Owner Dashboard</h1>
+      </div>
+      <br />
+      <hr />
+      <br />
+
+      <mat-expansion-panel
+        class="registration-container mt-0 parentbackgroundcolor"
+      >
+        <mat-expansion-panel-header style="height: 104px;">
+          <mat-panel-title
+             style="font-size: larger; font-weight: 800;">Initiate for a New Building Plan Sanction Request 👇</mat-panel-title
+         >
+        </mat-expansion-panel-header>
+        <div class="column right">
+          <div class="m-4">
+            <div class="row mb-2 mt-2 d-flex justify-content-between">
+              <div class="col-md-4 col-sm-12 col-xs-12 box-type">
+                <h3><b>First Owner Details</b></h3>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                <mat-form-field appearance="fill" class="input-control">
+                  <div class="placeholder-wrapper">
+                    <span class="placeholder-text">Name: </span>
+                    <span class="name-value"
+                      >&nbsp; {{ ownerDetail.data.salutation }}
+                      {{ ownerDetail.data.firstName }}
+                      {{ ownerDetail.data.middleName }}
+                      {{ ownerDetail.data.lastName }}</span
+                    >
+                  </div>
+                  <input matInput readonly />
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                <mat-form-field appearance="fill" class="input-control">
+                  <div class="placeholder-wrapper">
+                    <span class="placeholder-text">Email: </span>
+                    <span class="email-value"
+                      >&nbsp; {{ ownerDetail.data.email }}</span
+                    >
+                  </div>
+                  <input matInput readonly />
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                <mat-form-field appearance="fill" class="input-control">
+                  <div class="placeholder-wrapper">
+                    <span class="placeholder-text">Phone: </span>
+                    <span class="phone-value"
+                      >&nbsp; {{ ownerDetail.data.phone }}</span
+                    >
+                  </div>
+                  <input matInput readonly />
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                <mat-form-field appearance="fill" class="input-control">
+                  <div class="placeholder-wrapper">
+                    <span class="placeholder-text">DOB: </span>
+                    <span class="dob-value"
+                      >&nbsp; {{ ownerDetail.data.dob | date }}</span
+                    >
+                  </div>
+                  <input matInput readonly />
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                <mat-form-field appearance="fill" class="input-control">
+                  <div class="placeholder-wrapper">
+                    <span class="placeholder-text">Aadhaar No: </span>
+                    <span class="aadhaar-value"
+                      >&nbsp; {{ ownerDetail.data.addharNo }}</span
+                    >
+                  </div>
+                  <input matInput readonly />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- ++++++++++++++++++++++++++++++++++++ -->
+
+            <!-- <div class="row mb-3" formGroupName="applicantInfo">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="justify-content d-flex">
+                            <mat-form-field appearance="fill" style="width: 100%;">
+                                <mat-label>Search Architect</mat-label>
+                                <input matInput [matAutocomplete]="auto" formControlName="architectNum"
+                                    (keyup)="onKeyup(architectInput.value)" #architectInput />
+                                <button mat-button matSuffix (click)="resetArchitect()">Clear</button>
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let architect of filteredArchitects" [value]="architect.consultantId"
+                                        (onSelectionChange)="selectArchitect(architect)">
+                                        {{ architect.consultantId }}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div> -->
+
+            <div formGroupName="applicantInfo">
+              <div class="row mb-3">
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <mat-label class="title">Search Architect</mat-label>
+                  <mat-form-field appearance="fill">
+                    <input
+                      type="text"
+                      matInput
+                      (keyup)="onKeyup(architectInput.value)"
+                      #architectInput
+                      placeholder="Type to search..."
+                      formControlName="architectNum"
+                    />
+                    <button mat-button matSuffix (click)="resetArchitect()">
+                      Clear
+                    </button>
+                    <mat-hint
+                      ><strong>
+                        <span style="color: rgb(246, 5, 5)">**</span>(Please
+                        type min 3 character like CA/***/***).
+                      </strong></mat-hint
+                    >
+                  </mat-form-field>
+                </div>
+
+                <div
+                  class="col-md-6 col-sm-12 col-xs-12"
+                  *ngIf="!viewArchitect"
+                >
+                  <mat-label
+                    style="color: rgb(246, 5, 5); margin-left: 10%; size: 14px"
+                    >{{ architectMessage }}</mat-label
+                  >
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="viewArchitect">
+                  <mat-label class="title">Select Architect</mat-label>
+                  <mat-form-field appearance="fill">
+                    <mat-select
+                      placeholder="Select Architect"
+                      formControlName="consultantId"
+                    >
+                      <mat-option
+                        *ngFor="let architect of filteredArchitects"
+                        [value]="architect.consultantId"
+                        (click)="selectArchitectId(architect.consultantId)"
+                      >
+                        {{ architect.consultantId }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12" *ngIf="viewName">
+                  <mat-label class="title">Full name of Architect </mat-label>
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="dob-value"
+                        >&nbsp;
+                        {{
+                          selectedArchitect.firstName +
+                            " " +
+                            selectedArchitect.middleName +
+                            " " +
+                            selectedArchitect.lastName
+                        }}</span
+                      >
+                    </div>
+                    <input matInput readonly />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="row"
+              *ngFor="let owner of applicantDetails.controls; let i = index"
+            >
+              <div *ngIf="addintionalOwner">
+                <div class="row mb-2 mt-2 d-flex justify-content-between">
+                  <div class="col-md-4 col-sm-12 col-xs-12 box-type">
+                    <h3>Additional Owner Details - {{ i + 1 }}</h3>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <mat-label>Name</mat-label>
+                      <input
+                        matInput
+                        readonly
+                        [value]="owner.get('name')!.value"
+                      />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <mat-label>Email</mat-label>
+                      <input
+                        matInput
+                        readonly
+                        [value]="owner.get('email')!.value"
+                      />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <mat-label>Phone</mat-label>
+                      <input
+                        matInput
+                        readonly
+                        [value]="owner.get('contactNumber')!.value"
+                      />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <mat-label>DOB</mat-label>
+                      <input
+                        matInput
+                        readonly
+                        [value]="owner.get('dob')!.value | date : 'shortDate'"
+                      />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <mat-label>Aadhaar No</mat-label>
+                      <input
+                        matInput
+                        readonly
+                        [value]="owner.get('addhar')!.value"
+                      />
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <button
+                      mat-button
+                      color="primary"
+                      matSuffix
+                      (click)="removeOwner(i)"
+                    >
+                      Remove Owner Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="justify-content d-flex">
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Email Id</mat-label>
+                  <input matInput #aadharInput formControlName="addharNum" />
+
+                  <!-- Buttons inside the input field -->
+                  <button
+                    mat-button
+                    matSuffix
+                    (click)="searchUser(aadharInput.value)"
+                  >
+                    Search
+                  </button>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-12">
+                <span
+                  *ngIf="isTrue"
+                  style="color: rgb(246, 5, 5); margin-left: 10%; size: 14px"
+                  >{{ message }}</span
+                >
+
+                <span
+                  *ngIf="!isTrue"
+                  style="color: rgb(2, 85, 25); margin-left: 10%; size: 14px"
+                  >{{ message }}</span
+                >
+              </div>
+              <div class="col-xl-4 col-lg-6 col-12">
+                <button
+                  mat-button
+                  color="primary"
+                  matSuffix
+                  (click)="AddDetails()"
+                >
+                  Add Owner Details
+                </button>
+              </div>
+            </div>
+
+            <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+            <div class="justify-content d-flex">
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-checkbox (click)="resetForm()">
+                  I agree to provide my company details
+                </mat-checkbox>
+              </div>
+            </div>
+
+            <div *ngIf="isChecked" class="company-details">
+              <h3>Enter Company Details</h3>
+              <div formGroupName="companyDetails">
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Company Name</mat-label>
+                  <input matInput formControlName="companyName" required />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Email ID</mat-label>
+                  <input matInput formControlName="email" required email />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Phone Number</mat-label>
+                  <input matInput formControlName="phoneNo" required />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>GST Number</mat-label>
+                  <input matInput formControlName="gstNo" required />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <button mat-raised-button color="primary" (click)="submitForm()">
+              Submit
+            </button>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </div>
+
+    <div class="table-responsive parentbackgroundcolor">
+      <table class="table table-striped dashboardTable">
+        <thead class="header">
+          <tr>
+            <th scope="col">#</th>
+            <!-- <th scope="col">File No</th> -->
+            <th scope="col">File Name</th>
+            <th scope="col">Created Time</th>
+            <th scope="col">Architect User Name</th>
+            <!-- <th scope="col">Pull Back Count</th> -->
+            <th scope="col">Eamil Id</th>
+            <th scope="col">Last Update Date</th>
+            <th scope="col">Current Status</th>
+
+            <th scope="col">Details</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let element of dashboardDetails; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ element.frId }}</td>
+            <td>{{ element.createdDate | date : "dd/MM/yyyy" }}</td>
+            <td>{{ element.architectUserName }}</td>
+            <!-- <td>{{ element.pullBackCount }}</td> -->
+            <td>{{ element.ownerEmailId }}</td>
+            <td>{{ element.updateDate | date : "dd/MM/yyyy" }}</td>
+            <td>{{ element.status }}</td>
+            <td
+              (click)="viewDetail(element.status, element.frId)"
+              class="detail"
+            style="color: blue;">
+              View Details
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!--   
+    <mat-paginator
+      #paginator
+      [length]="collectionSize"
+      [pageSize]="paginator.pageSize"
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="onPageChange($event)"
+    >
+    </mat-paginator> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<!-- <div class="modal fade" data-bs-backdrop="static" id="displayModel" tabindex="-1" aria-labelledby="displayModalLabel" aria-hidden="true" #myModal>
+    <div class="modal-dialog custom-dialog">
+      <div class="modal-content custom-modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Registration data</h5>
+
+        </div>
+        <div class="modal-body">
+            <div class="row mb-2 mt-2 ml-25" *ngIf="waiting">
+                <div class="col-md-12 col-sm-12 col-xs-15">
+                    <h2 mat-dialog-title>Your registration form is submiting</h2>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-15">
+                    <mat-progress-bar mode="indeterminate" class="loading"></mat-progress-bar>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-15 text-center process">
+                    <mat-card-title>Processing your details...</mat-card-title>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-15">
+                    <p style="color: red; text-align: center;"><i>Please wait.... don't closed this page.</i></p>
+                </div>
+            </div>
+
+            <div class="row mb-2 mt-2 ml-25" *ngIf="datasave">
+                <div class="col-md-12 col-sm-12 col-xs-15">
+                    <h2 id="changingText"> Your registration form is submitted</h2>
+                </div>
+               
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h2 id="changingText">Please note username - {{userName}} for future reference</h2>
+                </div>
+
+            </div>
+
+            <div class="row mb-2 mt-2 ml-25" *ngIf="dataNotSave">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h2 id="changingText">Your registration form is not submitted</h2>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h2 id="changingText">Details are not saved please fill again.</h2>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <button mat-raised-button color="primary" type="submit" class="log" (click)="reFill()">Re-Fill
+                        the details</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary float-left" data-bs-dismiss="modal"
+                [routerLink]="['/login']">Login</button>
+            <button type="button" class="btn btn-primary mx-auto" data-bs-dismiss="modal" (click)="ViewData()">View Data</button>
+            <button type="button" class="btn btn-primary float-right" data-bs-dismiss="modal" (click)="payment()">Payment</button>
+        </div>
+      </div>
+      
+    </div>
+  </div> -->

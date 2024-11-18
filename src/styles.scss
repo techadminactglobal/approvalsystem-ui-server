@@ -1,0 +1,817 @@
+/* You can add global styles to this file, and also import other style files */
+// @import url(../src/assets/css/responsive.scss);
+@import "./themes.scss";
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "../node_modules/bootstrap/scss/bootstrap";
+$largeLaptopScreen: 1694px;
+$laptopScreen: 1366px;
+$miniLaptopScreen: 1280px;
+$miniLaptopScreen2: 1150px;
+$iPadPro: 1020px;
+$iPad: 767px;
+$mobile: 600px;
+
+$errorColor: #BE3144;
+$radioAndUploadColor: #39A7FF;
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: $radioAndUploadColor; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: $radioAndUploadColor; 
+}
+.mat-mdc-table {
+    width: 100%;
+    max-height: 500px;
+    overflow: auto;
+  }
+  
+html,
+body {
+
+    
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-mdc-checkbox label {
+    margin: 0;
+}
+
+.mat-checkbox-ripple .mat-ripple-element,
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: #f3f3ff !important;
+}
+
+// .custom-checkbox {
+//     ::ng-deep .mat-checkbox-ripple .mat-ripple-element {
+//         background-color: black !important;
+//     }
+
+//     ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+//         background-color: black !important;
+//     }
+
+//     ::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+//         border-radius: 5px !important;
+//         background-color: black !important;
+//     }
+// }
+
+.custom-table {
+    background-color: #f3f3ff;
+    // overflow: auto;
+    // max-height: 500px;
+
+    thead {
+        background-color: $radioAndUploadColor !important;
+        width: 100% !important;
+
+        tr {
+            th {
+                color: #fff;
+                font-size: 16px;
+                white-space: nowrap;
+                padding: 1rem 0.5rem;
+            }
+        }
+    }
+
+}
+
+
+.success-green-icon {
+    color: green !important;
+}
+
+#wrapper #content-wrapper,
+.card,
+.card.ng-star-inserted {
+
+    /* IE6-9 */
+    width: 100%; height: 100%;
+}
+
+.card-body {
+    padding: 0 20px;
+}
+
+
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.table-body-scroll {
+    overflow-y: auto;
+    height: 500px;
+    border-collapse: collapse;
+    width: 100%;
+
+    th {
+        position: sticky;
+        top: 0;
+    }
+
+    th,
+    td {
+        padding: 8px 16px;
+        border: 1px solid #ccc;
+    }
+
+    th {
+        background: #eee;
+    }
+}
+
+.submit-btn-color {
+    background-color: green !important;
+    color: white !important;
+    text-transform: capitalize;
+}
+
+
+.text-error {
+    color: red;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number],
+textarea {
+    -moz-appearance: textfield;
+}
+
+.width-100px {
+    width: 100px;
+}
+
+.customLabelFont {
+    font-size: 15px;
+}
+
+.user-custom-tabs {
+    .custom-main-tabs {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+
+        .mat-mdc-tab-body-content{
+            overflow: hidden !important;
+        }
+    }
+    //     .mat-mdc-tab-header {
+    //         .mat-mdc-tab-label-container {
+    //             // background-color: red !important;
+    //             border: 1px solid $radioAndUploadColor;
+    //             background: #ececff;
+    //             position: relative;
+
+    //             &::after {
+    //                 content: '';
+    //                 left: 0;
+    //                 top: 0;
+    //                 height: 100%;
+    //                 width: 100%;
+    //                 position: absolute;
+    //                 background-color: transparent;
+    //             }
+
+    //             .mat-mdc-tab-labels {
+    //                 flex-direction: column;
+    //                 width: 315px;
+    //                 position: relative;
+
+    //                 .mat-mdc-tab {
+
+    //                     .mdc-tab__content,
+    //                     .mdc-tab__text-label {
+    //                         width: 100%;
+    //                         justify-content: flex-start;
+    //                     }
+
+    //                     .mdc-tab__text-label {
+    //                         justify-content: space-between;
+    //                         white-space: pre-wrap;
+    //                         text-align: left;
+
+    //                         span:last-child {
+    //                             position: absolute;
+    //                             right: -20px;
+    //                             width: 26px;
+    //                             height: 26px;
+    //                             border-radius: 50%;
+    //                             display: flex;
+    //                             align-items: center;
+    //                             justify-content: center;
+    //                             background-color: white;
+    //                         }
+    //                     }
+    //                 }
+
+    //                 .mat-mdc-focus-indicator.mdc-tab--active.ng-star-inserted.mdc-tab-indicator--active,
+    //                 .ng-star-inserted {
+    //                     background-color: $radioAndUploadColor;
+
+    //                     .mdc-tab__text-label {
+    //                         color: #fff;
+    //                     }
+    //                 }
+
+    //                 .mat-mdc-tab-disabled.ng-star-inserted {
+    //                     background-color: transparent;
+
+    //                     .mdc-tab__text-label {
+    //                         color: #000;
+    //                     }
+    //                 }
+
+    //                 .mdc-tab {
+    //                     justify-content: start;
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     .mat-mdc-tab-body-wrapper {
+    //         width: 100%;
+    //     }
+    // }
+}
+
+.springLoader {
+    top: 0;
+    left: 0;
+}
+
+.custom-form {
+
+    // .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    //     background-color: white;
+    // }
+
+    .mdc-radio__outer-circle,
+    .mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:checked+.mdc-radio__background .mdc-radio__outer-circle,
+    .mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled+.mdc-radio__background .mdc-radio__inner-circle,
+    .mdc-radio__outer-circle,
+    .mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:checked+.mdc-radio__background .mdc-radio__outer-circle,
+    .mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled+.mdc-radio__background .mdc-radio__inner-circle,
+    .mdc-radio:hover {
+        border-color: $radioAndUploadColor !important;
+    }
+
+    // .download {
+    //     .material-icons {
+    //         color: white !important;
+    //     }
+    // }
+
+    .mdc-text-field--disabled {
+        background-color: $radioAndUploadColor !important;
+
+        select.mat-mdc-form-field-input-control,
+        .mat-mdc-form-field-type-mat-native-select .mat-mdc-form-field-infix::after,
+        .mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input,
+        .mdc-floating-label.mat-mdc-floating-label {
+            color: #e0e0e0 !important;
+        }
+    }
+
+    .mat-mdc-select-min-line,
+    .mat-mdc-select-value-text,
+    .mdc-floating-label.mat-mdc-floating-label,
+    .mat-mdc-select-arrow,
+    .mat-mdc-select-placeholder,
+    .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input,
+    .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input::placeholder .mat-datepicker-toggle,
+    .mat-mdc-select-value,
+    .mdc-text-field--disabled .mdc-floating-label {
+        color: rgb(0 0 0) !important;
+        font-weight: 500;
+    }
+
+    .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label,
+    .mat-mdc-select-placeholder {
+        color: rgb(0 0 0);
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+    }
+
+
+    .custom-form .mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color .success-green-icon {
+        color: green !important;
+    }
+
+    .darkIcon.mat-icon.notranslate.material-icons.mat-ligature-font.mat-icon-no-color {
+        color: $radioAndUploadColor;
+        background-color: white;
+        box-shadow: 1px 0px 5px #a9a9a9;
+    }
+
+    .mdc-text-field--invalid,
+    .mdc-text-field--invalid:not(.mdc-text-field--disabled):hover .mdc-line-ripple::before,
+    .mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+    }
+
+    .mdc-text-field--disabled {
+        background-color: rgba(185, 185, 185, 0.61) !important;
+
+        select.mat-mdc-form-field-input-control,
+        .mdc-text-field__input,
+        .mat-mdc-form-field-type-mat-native-select .mat-mdc-form-field-infix::after,
+        .mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-text-field__input {
+            color: #000 !important;
+            font-weight: 500;
+        }
+
+        .mdc-floating-label.mat-mdc-floating-label {
+            color: #000 !important;
+        }
+    }
+
+    .mat-form-field-invalid {
+        .mdc-text-field--invalid {
+
+            svg {
+                color: black;
+            }
+        }
+    }
+
+    .mdc-line-ripple::before {
+        border-bottom-width: 3px;
+    }
+
+    .custom-upload-file-button {
+        label {
+            color: white;
+            background: $radioAndUploadColor;
+            border: 1px solid $radioAndUploadColor;
+        }
+
+        &:hover label[_ngcontent-ulv-c361] {
+            background-color: $radioAndUploadColor;
+            cursor: pointer;
+        }
+
+        &:hover label {
+            color: white;
+            background: $radioAndUploadColor;
+            border: 1px solid $radioAndUploadColor;
+
+        }
+
+        input {
+            border: 1px solid $radioAndUploadColor;
+        }
+    }
+
+  
+
+}
+
+.custom-table2 {
+    &.table {
+        width: 100%;
+        border: 1px solid #EEEEEE;
+        padding: 0;
+
+        .table-header {
+            display: flex;
+            width: 100%;
+            padding: 12px;
+            background: $radioAndUploadColor;
+            color: #fff;
+        }
+
+   
+
+        .table-row {
+            display: flex;
+            width: 100%;
+            padding: 0 12px;
+
+            &:nth-of-type(odd) {
+                background: #ececff;
+            }
+        }
+
+        .table-data,
+        .header__item {
+            flex: 1 1 20%;
+            text-align: left;
+        }
+
+    }
+
+    thead,
+    .table-header {
+        background-color: $radioAndUploadColor;
+        color: #fff;
+        white-space: nowrap;
+    }
+
+}
+
+.input-group>.form-control:focus,
+.input-group>.form-floating:focus-within,
+.input-group>.form-select:focus {
+    z-index: 0;
+}
+
+.custom-table3 {
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    td {
+        border: 1px solid black;
+    }
+
+    /* try removing the "hack" below to see how the table overflows the .body */
+    .hack1 {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    .hack2 {
+        display: table-cell;
+        overflow-x: auto;
+        width: 100%;
+    }
+
+}
+
+.custom-table4 {
+    $table-row-width: 200px;
+
+    .table-header,
+    .table-content {
+
+        .header__item:first-child,
+        .header__item:last-child {
+            max-width: $table-row-width;
+        }
+
+        .table-row {
+
+            .table-data:first-child,
+            .table-data:last-child {
+                max-width: $table-row-width;
+            }
+
+            .table-data:last-child {
+                text-align: center;
+            }
+        }
+    }
+}
+
+.custom-textArea {
+    height: auto !important;
+
+    .mat-mdc-form-field-infix {
+        width: 100%;
+        padding: 0;
+        max-width: 100%;
+        min-width: 100%;
+    }
+}
+
+.cursors-pointer {
+    cursor: pointer;
+}
+
+.backbtn {
+    background-color: transparent;
+
+    .p-button:enabled:hover,
+    .p-button {
+        background-color: transparent;
+        color: black;
+        border: 1px solid black;
+        text-transform: capitalize;
+    }
+}
+
+@media(max-width: $largeLaptopScreen) {
+    .custom-table thead tr th {
+        font-size: 14px;
+
+    }
+}
+
+@media(max-width: $laptopScreen) {
+    .custom-table thead tr th {
+        font-size: 14px;
+    }
+}
+
+@media(max-width: $miniLaptopScreen) {
+    .sidebar {
+        width: 234px !important;
+        overflow: hidden;
+
+        .nav-item .nav-link {
+            width: 12rem;
+            overflow: hidden;
+        }
+
+
+    }
+
+    // login
+    .loginBackground {
+
+        .loginBox {
+            height: 430px !important;
+            margin-top: 20px;
+
+            .mat-form-field,
+            .mat-mdc-form-field {
+                height: 50px !important;
+
+            }
+
+            .mat-mdc-form-field-subscript-wrapper {
+                display: none;
+            }
+        }
+    }
+
+    .custom-form {
+        .custom-main-tabs .mat-mdc-tab-header .mat-mdc-tab-label-container .mat-mdc-tab-labels {
+            width: 200px;
+
+            .mdc-tab__content {
+                .mdc-tab__text-label {
+                    margin-right: 30px;
+
+                    .mat-mdc-tab .mdc-tab__text-label span:last-child,
+                    .ng-star-inserted {
+                        right: 0 !important;
+                    }
+                }
+            }
+        }
+
+        .mdc-tab {
+            padding-left: 5px;
+            padding-right: 5px;
+            font-size: 12px;
+
+            &__text-label {
+                white-space: pre-wrap;
+                text-align: left;
+            }
+        }
+    }
+}
+
+@media(max-width: 1150px) {
+    .custom-form {
+        .mat-mdc-tab-body {
+            .row {
+                .w-75 {
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+
+    .saral-part-1-view {
+        .row {
+            .mat-mdc-text-field-wrapper {
+                padding: 0 5px;
+            }
+        }
+    }
+}
+
+@media(max-width: $iPadPro) {
+    .saral-part-1-view {
+        .row {
+            .mat-mdc-text-field-wrapper {
+                padding: 0 5px;
+            }
+        }
+    }
+
+    header {
+        .navbar.navbar-expand-lg {
+            flex-direction: column !important;
+        }
+    }
+
+}
+
+@media(max-width: $iPad) {
+    .sidebar .nav-item .collapse {
+        position: initial;
+    }
+}
+
+@media(max-width: $mobile) {
+
+    .custom-form {
+        .custom-main-tabs {
+            flex-direction: column;
+
+            .mat-mdc-tab-header .mat-mdc-tab-label-container .mat-mdc-tab-labels {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+@media(min-width: 415px) {
+    .dropdownWidth {
+        min-width: 350px !important;
+    }
+}
+
+.long-text-break {
+    word-break: break-all;
+}
+
+
+.noc-dashboard .mat-mdc-tab-header .mat-mdc-tab-label-container:after {
+    position: unset!important;
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+
+.myInput {
+    height: 40px !important;
+    padding: 10px !important;
+}
+
+mat-form-field {
+    width: 100% !important;
+    height: 78px;
+}
+
+:host {
+    .mat-tab-group {
+        flex-direction: row;
+    }
+
+    .mat-tab-header {
+        background-color: blue;
+    }
+
+    .mat-tab-labels {
+        flex-direction: column;
+        background-color: blue;
+    }
+}
+
+.card-header {
+    font-size: 16px;
+    font-weight: 500;
+    background-color: $radioAndUploadColor;
+    color: #fff;
+}
+
+.heading-title {
+    background-color: $radioAndUploadColor;
+    color: #ffff;
+    font-size: 20px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.custom-upload-file-button {
+    height: 50px;
+
+    input[type="file"] {
+        height: inherit;
+        padding-top: 10px;
+        margin-left: -2px !important;
+
+        &::-webkit-file-upload-button {
+            display: none;
+        }
+
+        &::file-selector-button {
+            display: none;
+        }
+    }
+
+    &:hover {
+        label {
+            cursor: pointer;
+        }
+    }
+}
+
+.add-row-icon {
+    right: 10px;
+    top: 13px;
+    cursor: pointer;
+    background-color: white;
+    box-shadow: 1px 0px 5px #a9a9a9;
+    padding: 0;
+    line-height: 0;
+    
+}
+
+.document-add-icon {
+    right: 10px;
+    top: 12px;
+
+}
+
+table {
+    width: 100%;
+}
+
+.example-container {
+    height: 500px;
+    max-width: 100%;
+    overflow: auto;
+}
+
+.springLoader {
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bold {
+    font-weight: bold;
+    text-align: center;
+    font-size: large;
+}
+
+.text-danger {
+    color: red;
+}
+
+.material-icons.color_white {
+    color: #FFFFFF;
+}
+
+
+
+::ng-deep .mat-vertical-stepper-content {
+    visibility: visible !important;
+    height: 100% !important;
+    background-color: #E4F5FC;
+}
+
+.mat-stepper-horizontal {
+    visibility: visible !important;
+    height: 100% !important;
+    background-color: #E4F5FC;
+}
+
+.mat-stepper-vertical {
+    margin-top: 8px;
+    background-color: #E4F5FC;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 25px;
+  }
+  

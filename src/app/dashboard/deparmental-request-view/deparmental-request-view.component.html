@@ -1,0 +1,235 @@
+<div class="main-container">
+  <div class="splitMain leftMain">
+    <div class="centeredMain">
+      <app-side-bar></app-side-bar>
+    </div>
+  </div>
+  <div class="splitMain rightMain">
+    <div class="body parentbackgroundcolor">
+      <div class="m-5" *ngIf="viewPart == 'regNew'">
+        <app-registration-view></app-registration-view>
+      </div>
+
+      <div class="m-5" *ngIf="viewPart == 'fileNew'">
+        <app-view-noc-page></app-view-noc-page>
+      </div>
+      <div class="m-5" *ngIf="viewPart == 'plinthNew'">
+        <app-plinth-component-view></app-plinth-component-view>
+      </div>
+      <div class="m-5" *ngIf="viewPart == 'OCNew'">
+        <app-occupancy-component-view></app-occupancy-component-view>
+      </div>
+
+      <div *ngIf="viewWork">
+        <form [formGroup]="deptForm">
+          <div class="update">
+            <mat-label class="title">Updates regarding request</mat-label>
+            <div class="remarktext">
+              <textarea
+                name=""
+                id=""
+                cols="50"
+                rows="10"
+                placeholder="Remarks"
+                formControlName="hierachyRemark"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 col-xs-12 optional" *ngIf="!proff">
+            <div class="align">
+              <mat-label class="title mt-2">Reference document</mat-label>
+              <mat-form-field appearance="fill" class="input-control">
+                <button
+                  mat-icon-button
+                  matPrefix
+                  type="button"
+                  (click)="f_input.click()"
+                >
+                  <mat-icon>attach_file</mat-icon>
+                </button>
+                <input
+                  type="text"
+                  readonly
+                  matInput
+                  placeholder="{{ referenceDocuments }}"
+                />
+                <input
+                  readonly
+                  type="file"
+                  hidden
+                  #f_input
+                  (change)="uploadDoc($event, 'referenceDocuments')"
+                  formControlName="referenceDocuments"
+                />
+              </mat-form-field>
+            </div>
+            <mat-hint
+              ><strong
+                >File type must in a .pdf or jpeg format and file size should
+                NOT be more than 10MB.
+              </strong></mat-hint
+            ><br />
+            <mat-hint style="color: rgb(255, 0, 0)"
+              >*Add all the releated file in one pdf, then upload here.
+            </mat-hint>
+          </div>
+
+          <div class="m-5 d-flex justify-content-between">
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              class="log"
+              (click)="AcceptData()"
+              *ngIf="accept"
+            >
+              Approval
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              class="log"
+              *ngIf="recheck"
+            >
+              <mat-label>Refer Back To </mat-label>
+              <mat-select>
+                <mat-option
+                  *ngFor="let category of referBackArr"
+                  [value]="category.value"
+                >
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    type="submit"
+                    class="log"
+                    (click)="RecheckData(category.value)"
+                  >
+                    {{ category.viewValue }}
+                  </button>
+                </mat-option>
+              </mat-select>
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              class="log"
+              (click)="ReviseData()"
+              *ngIf="revise"
+            >
+              Revise
+            </button>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              class="log"
+              (click)="RejectData()"
+              *ngIf="reject"
+            >
+              Rejection
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div *ngIf="viewDsWork">
+        <div class="document-upload" [formGroup]="supportForm">
+          <mat-card class="display-6 mb-5">
+            <mat-card-header>
+              <mat-card-title class="mb-3">Upload DS Letter</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="row">
+                <p style="color: red; font-weight: bold; font-size: medium">
+                  please upload the ds applied letter in Pdf formate
+                </p>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                  <!-- <mat-label class="title">Builder Phone Number</mat-label> -->
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="letterName-value"
+                        >&nbsp;{{ letterName }}</span
+                      >
+                      <i
+                        class="fa fa-download text-primary"
+                        (click)="openCertificatePdf($event)"
+                        matTooltip="Download certificate PDF"
+                      ></i>
+                    </div>
+                    <input matInput name="builderPhone" readonly />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="input-control">
+                    <button
+                      mat-icon-button
+                      matPrefix
+                      type="button"
+                      (click)="f_input.click()"
+                    >
+                      <mat-icon>attach_file</mat-icon>
+                    </button>
+                    <input
+                      type="text"
+                      readonly
+                      matInput
+                      placeholder="{{ pdfFileName }}"
+                    />
+                    <!-- <input readonly type="file" hidden #f_input (change)="uploadPDF()" formControlName="pdfFile" accept=".pdf" /> -->
+                    <input
+                      readonly
+                      type="file"
+                      hidden
+                      #f_input
+                      (change)="uploadPDF($event, 'pdfFile')"
+                      formControlName="pdfFile"
+                    />
+                    <mat-hint
+                      ><strong
+                        >File type must be .pdf and file size should NOT be more
+                        than 10 MB.</strong
+                      ></mat-hint
+                    >
+                  </mat-form-field>
+                </div>
+
+                <!-- <div class="col-md-6 col-sm-12 col-xs-12">
+                        <mat-label class="title">Lease Deed</mat-label>
+                        <mat-form-field appearance="fill" class="input-control">
+                            <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                                <mat-icon>attach_file</mat-icon>
+                            </button>
+                            <input type="text" readonly matInput placeholder="{{pdfFileName}}" />
+                            <input readonly type="file" hidden #f_input (change)="uploadPDF($event, 'pdfFile')" formControlName="pdfFile" />
+                            <mat-hint><strong>File type must be .pdf and file size should NOT be more than 10 MB.</strong></mat-hint>
+                        </mat-form-field>
+                    </div> -->
+              </div>
+
+              <div
+                class="d-flex justify-content-center me-2 mt-5 mb-5 text-center"
+              >
+                <div class="col-md-12 mt-1">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    type="submit"
+                    class="log"
+                    (click)="submit()"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

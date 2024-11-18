@@ -1,0 +1,112 @@
+<nav class="side-nav">
+  <div class="logo">
+    <img src="../../../assets/Act_logo/Logo-ACTGlobal-removebg-preview.png" alt="Logo" />
+  </div>
+  <ul>
+    <li *ngIf="!debard && !noc && !owner" >
+      <a routerLink="/dashboard" class="nav-link">
+        <i class="material-icons">dashboard</i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li *ngIf="noc">
+      <a routerLink="/nocDashboard" class="nav-link">
+        <i class="material-icons">dashboard</i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li *ngIf="owner">
+      <a routerLink="/OwnerDashboard" class="nav-link">
+        <i class="material-icons">dashboard</i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    
+
+    <li *ngIf="debard">
+      <a routerLink="/departmentDashboard" class="nav-link">
+        <i class="material-icons">unarchive</i>
+        <span>Dept. Dashboard</span>
+      </a>
+    </li>
+    <li *ngIf="debard">
+      <a routerLink="/debarred" class="nav-link">
+        <i class="material-icons">unarchive</i>
+        <span>Debard(A/E/S/SE)</span>
+      </a>
+    </li>
+    <li *ngIf="form">
+      <a routerLink="/plinthDashboard" class="nav-link">
+        <i class="material-icons">unarchive</i>
+        <span>Plinth</span>
+      </a>
+    </li>
+    <li *ngIf="form">
+      <a routerLink="/OccupancyDashborad" class="nav-link">
+        <i class="material-icons">unarchive</i>
+        <span> Occupancy Cert</span>
+      </a>
+    </li>
+    <li *ngIf="form">
+      <a routerLink="/SanctionRevise" class="nav-link">
+        <i class="material-icons">unarchive</i>
+        <span>Sanction Revise</span>
+      </a>
+    </li>
+    <li *ngIf="form">
+      <a routerLink="/Addition&Alteration" class="nav-link">
+        <i class="material-icons">unarchive</i>
+        <span>Addn. & Altn.</span>
+      </a>
+    </li>
+    <li *ngIf="form">
+      <a routerLink="/Revalidation" class="nav-link">
+        <i class="material-icons">unarchive</i>
+        <span>Revalidation</span>
+      </a>
+    </li>
+  <!--   <li>
+      <a routerLink="/profile" class="nav-link">
+        <i class="material-icons">person</i>
+        <span>Profile</span>
+      </a>
+    </li> -->
+    <li>
+      <a routerLink="/staticalDashboard" class="nav-link">
+        <i class="material-icons">pie_chart</i>
+        <span>Statistical MIS</span>
+      </a>
+    </li>
+   <!--  <li>
+      <a routerLink="/maps" class="nav-link">
+        <i class="material-icons">location_on</i>
+        <span>Location</span>
+      </a>
+    </li> -->
+  </ul>
+
+<!--   <div class="loca" *ngIf="latLogMap">
+    <br />
+    <mat-label>
+      <b>
+        <span style="text-align: center; font-family: 'Times New Roman', Times, serif;">
+          Current Location👇
+        </span>
+        <br /><br />
+        <span style="font-family: 'Times New Roman', Times, serif">latitude:</span>
+        {{ latitude }},
+        <span style="font-family: 'Times New Roman', Times, serif"><b>longitude:</b></span>
+        {{ longitude }}
+      </b>
+    </mat-label>
+    <br /><br />
+    <p (click)="showMap()">
+      <b>View on Google Map</b>
+    </p>
+    <br />
+  </div> -->
+
+  <button class="logout-button btn-outline-success" (click)="logout()">
+    Logout
+  </button>
+</nav>

@@ -1,0 +1,17 @@
+@import './src/app/app.component.scss';
+
+.some-element {
+  @extend .parentbackgroundcolor;
+}
+
+.button {
+    display: flex;
+    // align-items: center;  
+    justify-content: center;
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+    margin-left: auto;  
+    margin-right: auto; 
+    // padding: 10px 20px; 
+    // width: 35%; 
+  }

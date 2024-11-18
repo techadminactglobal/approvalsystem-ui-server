@@ -1,0 +1,46 @@
+<div class="SecondForm-container mt-0 parentbackgroundcolor">
+    <div class="header mt-3">
+        <h1>Noc Department</h1>
+    </div>
+
+    <div class="column right">
+        <form [formGroup]="NocPageForm">
+            <div class="m-4">
+
+                <mat-card class="mb-5">
+                    <mat-card-header>
+                        <mat-card-title class="mb-3">Fill Noc</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div formGroupName="NocPageDetails">
+                            <div class="row justify-content-center">
+                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                    <div class="d-flex flex-wrap justify-content-center">
+                                        <mat-label class="text"><b><i>Fire Noc</i></b></mat-label>
+                                        <div class="radio-group">
+                                            <mat-radio-group aria-label="Select an option" formControlName="fireType"
+                                                class="d-flex flex-wrap">
+                                                <mat-radio-button [value]="'1'" class="m-0">Yes</mat-radio-button>
+                                                <mat-radio-button [value]="'2'" class="m-0">No</mat-radio-button>
+                                            </mat-radio-group>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                    <button type="button" class="btn btn-primary" (click)="NocFire()" [disabled]="NocPageForm.get('NocPageDetails.fireType')?.value !== '1' || fireForm">Fire Dept</button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                    
+                </mat-card>
+
+            </div>
+            <div class="text-center" >
+            <button type="button" class="btn btn-primary" (click)="submit()">Preview</button>
+            <button type="button" class="btn btn-primary" (click)="back()" style="margin-left: 2%;">Back</button>
+        </div>
+        </form>
+
+    </div>
+</div>

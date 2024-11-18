@@ -1,0 +1,427 @@
+<div class="registration-container parentbackgroundcolor">
+
+    <div class="header mt-3">
+        <h1> Register Details of {{userName}}</h1>
+    </div>
+    <div class="view" (click)="viewFlow()" *ngIf="acceptFlowIsHigher">
+        <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper" class="parentbackgroundcolor">
+            <mat-step [stepControl]="firstFormGroup">
+              <form [formGroup]="firstFormGroup"></form>
+            </mat-step>
+            <mat-step [stepControl]="secondFormGroup">
+              <form [formGroup]="secondFormGroup"></form>
+            </mat-step>
+            <mat-step [stepControl]="thirdFormGroup">
+                <form [formGroup]="thirdFormGroup"></form>
+              </mat-step>
+              <mat-step [stepControl]="fourthFormGroup">
+                <form [formGroup]="fourthFormGroup"></form>
+              </mat-step>
+              <mat-step [stepControl]="fifthFormGroup">
+                <form [formGroup]="fifthFormGroup"></form>
+              </mat-step>
+              <mat-step [stepControl]="sixthFormGroup">
+                <form [formGroup]="sixthFormGroup"></form>
+              </mat-step>
+    
+        </mat-horizontal-stepper>
+    </div>
+    
+
+
+    <div class="column right">
+
+        <div class="m-4">
+
+
+            <div class="row mb-2 mt-2 d-flex justify-content-between">
+
+                <div class="col-md-4 col-sm-12 col-xs-12 box-type">
+                    <mat-label class="title">Current Status :- </mat-label>
+                    <p class="res">{{status}}</p>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12 box-type">
+                    <mat-label class="title">Username :- </mat-label>
+                    <p class="res">{{userName}}</p>
+                </div>
+                <hr>
+              
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Salutation: </span>
+                            <span class="salutation-value">&nbsp; {{salutation}}</span>
+                        </div>
+                        <input matInput name="Salutation" readonly>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">First Name : </span>
+                            <span class="firstName-value">&nbsp; {{firstName}}</span>
+                        </div>
+                        <input matInput name="firstName" readonly>
+                    </mat-form-field>
+                </div>
+                
+                
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Middle Name :  </span>
+                            <span class="middle-value">&nbsp; {{middleName}}</span>
+                        </div>
+                        <input  matInput name="middleName" readonly>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Last Name : </span>
+                            <span class="lastName-value">&nbsp; {{lastName}}</span>
+                        </div>
+                        <input matInput name="lastName" readonly>
+                    </mat-form-field>
+                </div>
+
+                <!-- <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Date of Birth : </span>
+                            <span class="dob-value">&nbsp; {{dob}}</span>
+                        </div>
+                        <input  matInput name="dob" readonly>
+                    </mat-form-field>
+                </div> -->
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <div class="placeholder-wrapper">
+                        <span class="placeholder-text">Date of Birth : </span>
+                        <span class="dob-value">&nbsp; {{ dob }}</span>
+                      </div>
+                      <input matInput name="dob" readonly />
+                    </mat-form-field>
+                  </div>
+
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Gender : </span>
+                            <span class="gender-value">&nbsp; {{gender}}</span>
+                        </div>
+                        <input  matInput name="gender" readonly>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Professional category : </span>
+                            <span class="professional-value">&nbsp; {{professionalCategory}}</span>
+                        </div>
+                        <input  matInput name="professional" readonly>
+                    </mat-form-field>
+                </div>
+
+                
+                <div class="col-md-4 col-sm-12 col-xs-12" *ngIf="proff">
+                    <mat-form-field appearance="fill" class="input-control">
+                       
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Licensed Number:</span>
+                            <span class="licensedNo-value">&nbsp; {{licensedNum}}</span>
+                        </div>
+                        <input matInput name="licensedNo" readonly>
+                        <mat-icon matSuffix (click)="openLicensePdf($event)" matTooltip="View License PDF">remove_red_eye</mat-icon>
+                    </mat-form-field>
+                </div>
+                
+                
+
+                <div class="col-md-4 col-sm-12 col-xs-12"  *ngIf="proff">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Valid From : </span>
+                            <span class="validform-value">&nbsp; {{validFrom}}</span>
+                        </div>
+                        <input  matInput name="validform" readonly>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="col-md-4 col-sm-12 col-xs-12"  *ngIf="proff">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Valid To :</span>
+                            <span class="validTo-value">&nbsp; {{validTo}}</span>
+                        </div>
+                        <input  matInput name="validTo" readonly>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Addhar Number :</span>
+                            <span class="addhar-value">&nbsp; {{addharNo}}</span>
+                        </div>
+                        <input  matInput name="addharNo" readonly>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Email ID :</span>
+                            <span class="emailId-value">&nbsp;{{emailId}}</span>
+                        </div>
+                        <input  matInput name="emailId" readonly>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Contact Number :</span>
+                            <span class="contact-value">&nbsp;{{contactNo}}</span>
+                        </div>
+                        <input  matInput name="contactNo" readonly>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">UserName :-</span>
+                            <span class="userName-value">&nbsp;{{userName}}</span>
+                        </div>
+                        <input  matInput name="userName" readonly>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12" *ngIf="!proff">
+                    <mat-form-field appearance="fill" class="input-control">
+                       
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Latest Educational Cert. No.:</span>
+                            <span class="certificateNo-value">&nbsp;{{certificateNo}}</span>
+                        </div>
+                        <input matInput name="certificateNo" readonly>
+                        <mat-icon matSuffix (click)="openCertificatePdf($event)" matTooltip="View certificate PDF"  style="padding-bottom: 50px;">remove_red_eye</mat-icon>
+                    </mat-form-field>
+                </div>
+                
+
+                <div class="col-md-4 col-sm-12 col-xs-12 box-type">
+                    <mat-form-field appearance="fill" class="input-control">
+                       
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">PhotoGraph :</span>
+                            <span class="licensedNo-value">{{photoGraphName}}</span>
+                        </div>
+                        <input matInput name="PhotoGraph" readonly>
+                        <mat-icon matSuffix (click)="openPhotographPdf($event)" matTooltip="View PhotoGraph jpg/jpeg" style="padding-bottom: 50px;">remove_red_eye</mat-icon>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">State :</span>
+                            <span class="State-value">&nbsp;{{state}}</span>
+                        </div>
+                        <input  matInput name="State" readonly>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">District :</span>
+                            <span class="district-value">&nbsp;{{district}}</span>
+                        </div>
+                        <input  matInput name="district" readonly>
+                    </mat-form-field>
+                </div>
+
+                
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Pin Code :</span>
+                            <span class="pinCode-value">&nbsp;{{pinCode}}</span>
+                        </div>
+                        <input  matInput name="pinCode" readonly>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Zone Working on :</span>
+                            <span class="zoneDetails-value">&nbsp;{{zone}}</span>
+                        </div>
+                        <input  matInput name="zoneDetails" readonly>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <div class="placeholder-wrapper">
+                        <span class="placeholder-text">Project type: </span>
+                        <span class="natureOfProject-value">&nbsp; {{ buildingTypeDetails }}</span>
+                      </div>
+                      <input matInput name="natureOfProject" readonly />
+                    </mat-form-field>
+                  </div>
+
+
+
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Address :</span>
+                            <span class="address-value">&nbsp;{{address}}</span>
+                        </div>
+                        <input  matInput name="address" readonly>
+                    </mat-form-field>
+                </div>
+                
+               
+            </div>
+
+        <div class="text-center" *ngIf="paymentDone">
+            <button mat-raised-button color="primary" type="submit" (click)="payment()">Pay Now</button>
+            
+        </div>
+        
+        <div class="text-center" *ngIf="viewLetter">
+            <button mat-raised-button color="primary" type="submit" class="button-spacing" (click)="ViewDS()">View {{letterName}}</button>
+            <button mat-raised-button color="primary" type="submit" class="button-spacing" (click)="fileRelease()">File Release</button>
+        </div>
+        
+
+
+        </div>
+
+</div>
+
+
+    <div class="buttonHierachy" *ngIf="!viewHistory">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Hierarchy History </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="page_head">
+                    <div class="referencehierarchy" style="color: black;">
+                        <div class="d-flex justify-content-start">
+                            <p>Module:&nbsp;</p>
+                            <p style="font-family: Georgia, 'Times New Roman', Times, serif; color: rgb(25, 129, 133);">{{hierarchyModule}}</p>
+                        </div> 
+                        <div class="d-flex justify-content-start">
+                            <p>Reference ID:&nbsp;</p>
+                            <p style="font-family: Georgia, 'Times New Roman', Times, serif; color: rgb(25, 129, 133);">{{referenceId}}</p>
+                        </div>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Worked By</th>
+                            <th>Assign To</th>
+                            <th>Work Date</th>
+                            <th>Assign Date</th>
+                            <th>Day Taken(hrs:mins)</th>
+                            <th>Flow Process</th>
+                            <th>Remark</th>
+                            <th>Status</th>
+                            <th>Reference Doc</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let historyItem of hierarchyHistoryData">
+                            <td>{{ historyItem.hierachyUserName }}</td>
+                            <td>{{ historyItem.assignTo}}</td>
+                            <td>{{ historyItem.workDate | date : "dd/MM/yyyy"}}</td>
+                            <td>{{ historyItem.assignDate | date : "dd/MM/yyyy"}}</td>
+                            <td>{{ calculateTimeDifference(historyItem.workDate, historyItem.assignDate) }}</td>
+                            <td>{{ historyItem.hierachyFlowProcess }}</td>
+                            <td>{{ historyItem.hierachyRemark }}</td>
+                            <td>{{ historyItem.workHierachyStatus }}</td>
+                            <td *ngIf="historyItem.docUniqueId" (click)="openPdf(historyItem.docUniqueId)" class="viewDoc" >{{ historyItem.docType }}</td>
+                            <td *ngIf="!historyItem.docUniqueId"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </mat-expansion-panel>
+
+      <br>
+      
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Payment History </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="page_head">
+                  
+                    <div class="referencehierarchy" style="color: black;">
+                       
+                    <div class="d-flex justify-content-start">
+                        <p>Reference Id:&nbsp;</p>
+                        <p style="font-family: Georgia, 'Times New Roman', Times, serif; color: rgb(25, 129, 133);">{{userName}}</p>
+                    </div>
+                    </div>
+                     
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Transaction No.</th>
+                            <th>Payment Date</th>
+                            <th>Amount</th>
+                            <th>Payment Type</th>
+                            <th>Charge-1</th>
+                            <th>Charge-2</th>
+                            <th>Charge-3</th>
+                            <th>Charge-4</th>
+                            <th>Charge-5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let paymentHistoryItem of paymentHistoryData">
+                            <td>{{ paymentHistoryItem.transactionRefNo }}</td>
+                            <td>{{ paymentHistoryItem.paymentSuccessDate }}</td>
+                            <td>{{paymentHistoryItem.amount}}</td>
+                            <td *ngIf="paymentHistoryItem.docUniqueId" (click)="openPaymentPdf(paymentHistoryItem.docUniqueId)" class="viewDoc" >{{ paymentHistoryItem.docName }} </td>
+                            <td *ngIf="!paymentHistoryItem.docUniqueId"></td>
+                            <td>{{ paymentHistoryItem.charge1 }}</td>
+                            <td>{{ paymentHistoryItem.charge2 }}</td>
+                            <td>{{ paymentHistoryItem.charge3 }}</td>
+                            <td>{{ paymentHistoryItem.charge4 }}</td>
+                            <td>{{ paymentHistoryItem.charge5 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </mat-expansion-panel>
+    </div>

@@ -1,0 +1,25 @@
+p {
+  text-decoration: wavy;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  text-align: center;
+  font-size: large;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+a {
+  display: flex;
+  justify-content: start;
+}
+
+p:hover {
+  color: crimson;
+  text-decoration: underline;
+}
+
+.loca {
+  display: grid;
+  border-style: ridge;
+  border-radius: 2%;
+  margin-left: 5%;
+}

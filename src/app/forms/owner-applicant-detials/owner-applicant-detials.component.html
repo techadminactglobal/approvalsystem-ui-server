@@ -1,0 +1,373 @@
+<div class="registration-container mt-0 parentbackgroundcolor">
+
+    <div class="header mt-3">
+        <!-- <h1>{{registration}} Registration Form </h1> -->
+        <h1> Owners Sections </h1>
+    </div>
+
+    <div class="column right">
+
+        <div class="m-4 row">
+            <div class="row mb-2 mt-2 d-flex justify-content-between">
+                <div class="col-md-4 col-sm-12 col-xs-12 box-type">
+                    <h3>File Details</h3>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                        <span class="placeholder-text">File Request ID:</span>
+                        <span class="fr-id-value">&nbsp; {{ fileDetails.frId }}</span>
+                    </div>
+                    <input matInput readonly />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                        <span class="placeholder-text">Assigned Architect:</span>
+                        <span class="assigned-architect-value">&nbsp; {{ fileDetails.assignedArchitect }}</span>
+                    </div>
+                    <input matInput readonly />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                        <span class="placeholder-text">Status:</span>
+                        <span class="status-value">&nbsp; {{ fileDetails.status }}</span>
+                    </div>
+                    <input matInput readonly />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                        <span class="placeholder-text">Created Time:</span>
+                        <span class="created-time-value">&nbsp; {{ fileDetails.fcreatedTime }}</span>
+                    </div>
+                    <input matInput readonly />
+                </mat-form-field>
+            </div>
+
+            <!-- <div class="col-md-4 col-sm-12 col-xs-12">
+                <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                        <span class="placeholder-text">Pull Back Count:</span>
+                        <span class="pull-back-count-value">&nbsp; {{ fileDetails.fileTotalCycle }}</span>
+                    </div>
+                    <input matInput readonly />
+                </mat-form-field>
+            </div> -->
+
+
+            <div class="row mb-2 mt-2 d-flex justify-content-between">
+                <div class="col-md-4 col-sm-12 col-xs-12 box-type">
+                    <h3>First Owner Details</h3>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <!-- Initial Owner Details -->
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Name:</span>
+                            <span class="name-value">&nbsp; {{ initailOwnerDetails.salutation }} {{
+                                initailOwnerDetails.firstName }} {{ initailOwnerDetails.middleName }} {{
+                                initailOwnerDetails.lastName }}</span>
+                        </div>
+                        <input matInput readonly />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Email:</span>
+                            <span class="email-value">&nbsp; {{ initailOwnerDetails.email }}</span>
+                        </div>
+                        <input matInput readonly />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Phone:</span>
+                            <span class="phone-value">&nbsp; {{ initailOwnerDetails.phone }}</span>
+                        </div>
+                        <input matInput readonly />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Aadhar No:</span>
+                            <span class="aadhar-value">&nbsp; {{ initailOwnerDetails.addharNo }}</span>
+                        </div>
+                        <input matInput readonly />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Date of Birth:</span>
+                            <span class="dob-value">&nbsp; {{ initailOwnerDetails.dob | date:'longDate' }}</span>
+                        </div>
+                        <input matInput readonly />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Gender:</span>
+                            <span class="gender-value">&nbsp; {{ initailOwnerDetails.gender === 'M' ? 'Male' : 'Female'
+                                }}</span>
+                        </div>
+                        <input matInput readonly />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Communication Address:</span>
+                            <span class="address-value">&nbsp; {{ initailOwnerCommunicationAddress.address }}, {{
+                                initailOwnerCommunicationAddress.block }}, {{ initailOwnerCommunicationAddress.district
+                                }}, {{ initailOwnerCommunicationAddress.state }} - {{
+                                initailOwnerCommunicationAddress.pincode }}</span>
+                        </div>
+                        <input matInput readonly />
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Permanent Address:</span>
+                            <span class="address-value">&nbsp; {{ initailOwnerPermanentAddress.address }}, {{
+                                initailOwnerPermanentAddress.block }}, {{ initailOwnerPermanentAddress.district }}, {{
+                                initailOwnerPermanentAddress.state }} - {{ initailOwnerPermanentAddress.pincode
+                                }}</span>
+                        </div>
+                        <input matInput readonly />
+                    </mat-form-field>
+                </div>
+
+
+
+                <!-- Additional Owner Details -->
+                <div *ngFor="let owner of additionalOwnerDetails; let i = index" class="row">
+                    <div class="row mb-2 mt-2 d-flex justify-content-between">
+                        <div class="col-md-4 col-sm-12 col-xs-12 box-type">
+                            <h3>Additional Owner Details {{i+1}}</h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Full Name:</span>
+                                <span class="name-value">&nbsp; {{ owner.salutation }} {{ owner.firstName }} {{
+                                    owner.middleName }} {{ owner.lastName }}</span>
+                            </div>
+                            <input matInput readonly />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Email:</span>
+                                <span class="email-value">&nbsp; {{ owner.email }}</span>
+                            </div>
+                            <input matInput readonly />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Phone:</span>
+                                <span class="phone-value">&nbsp; {{ owner.phone }}</span>
+                            </div>
+                            <input matInput readonly />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Aadhaar No:</span>
+                                <span class="aadhaar-value">&nbsp; {{ owner.addharNo }}</span>
+                            </div>
+                            <input matInput readonly />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Date of Birth:</span>
+                                <span class="dob-value">&nbsp; {{ owner.dob | date }}</span>
+                            </div>
+                            <input matInput readonly />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Gender:</span>
+                                <span class="gender-value">&nbsp; {{ owner.gender }}</span>
+                            </div>
+                            <input matInput readonly />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Permanent Address:</span>
+                                <span class="address-value">&nbsp; {{ owner.permanentAddress.address }}, {{
+                                    owner.permanentAddress.block }}, {{ owner.permanentAddress.district }}, {{
+                                    owner.permanentAddress.state }} - {{ owner.permanentAddress.pincode }}</span>
+                            </div>
+                            <input matInput readonly />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Communication Address:</span>
+                                <span class="address-value">&nbsp; {{ owner.communicationAddress.address }}, {{
+                                    owner.communicationAddress.block }}, {{ owner.communicationAddress.district }}, {{
+                                    owner.communicationAddress.state }} - {{ owner.communicationAddress.pincode
+                                    }}</span>
+                            </div>
+                            <input matInput readonly />
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+
+                <!-- Company Details -->
+                <div class="row" *ngIf="company">
+                    <div class="row mb-2 mt-2 d-flex justify-content-between">
+                        <div class="col-md-4 col-sm-12 col-xs-12 box-type">
+                            <h3>Company Details</h3>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Company Name:</span>
+                                <span class="company-name-value">&nbsp; {{ companyDetails.companyName }}</span>
+                            </div>
+                            <input matInput readonly />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Company Email:</span>
+                                <span class="company-email-value">&nbsp; {{ companyDetails.companyEmail }}</span>
+                            </div>
+                            <input matInput readonly />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Company Phone:</span>
+                                <span class="company-phone-value">&nbsp; {{ companyDetails.companyPhone }}</span>
+                            </div>
+                            <input matInput readonly />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">GST Number:</span>
+                                <span class="company-gst-value">&nbsp; {{ companyDetails.gstNo }}</span>
+                            </div>
+                            <input matInput readonly />
+                        </mat-form-field>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+    <div class="col button" *ngIf="senddata.architectView && acceptArchitect">
+        <button mat-raised-button color="primary" type="submit" class="log" (click)="accept()">Accept</button>
+        <button mat-raised-button color="primary" type="submit" class="log" (click)="reject()">Reject</button>
+    </div>
+
+    <div class="col button" *ngIf="!senddata.architectView && pullBacks">
+        <button mat-raised-button color="primary" type="submit" class="log" (click)="pullBack()">Pull Back</button>
+        <button mat-raised-button color="primary" (click)="back()" style="margin-left:1%">
+            Back
+          </button>
+  
+    </div>
+
+    <div class="m-4"  *ngIf="resignToArchitect">
+
+        <div [formGroup]="applicantInfoForm">
+            <div class="row mb-3" formGroupName="applicantInfo">
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <mat-label class="title">Search Architect</mat-label>
+                    <mat-form-field appearance="fill">
+                        <input type="text" matInput (keyup)="onKeyup(architectInput.value)" #architectInput
+                            placeholder="Type to search..." formControlName="architectNum">
+                        <button mat-button matSuffix (click)="resetArchitect()">Clear</button>
+                        <mat-hint><strong> Please type min 3 character like CA/***/***.
+                            </strong></mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="viewArchitect">
+                    <mat-label class="title">Select Architect</mat-label>
+                    <mat-form-field appearance="fill">
+                        <mat-select placeholder="Select Architect" formControlName="consultantId">
+                            <mat-option *ngFor="let architect of filteredArchitects" [value]="architect.consultantId">
+                                {{ architect.consultantId }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="!viewArchitect">
+                    <mat-label
+                        style="color: rgb(246, 5, 5);margin-left: 10%; size: 14px;">{{architectMessage}}</mat-label>
+                </div>
+            </div>
+            <button class="col button log" mat-raised-button color="primary" type="submit" (click)="SubmitRequest()">Assign To
+                Architect</button>
+        </div>
+    </div>
+
+
+</div>

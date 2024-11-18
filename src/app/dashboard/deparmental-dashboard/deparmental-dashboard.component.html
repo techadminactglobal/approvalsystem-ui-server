@@ -1,0 +1,174 @@
+<div class="main-container">
+  <div class="splitMain leftMain">
+    <div class="centeredMain">
+      <app-side-bar></app-side-bar>
+    </div>
+  </div>
+
+  <div class="splitMain rightMain">
+    <div class="row mb-2 mt-2 parentbackgroundcolor">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="split left" style="height: 100%">
+          <div class="m-4">
+            <app-stat-dashboard></app-stat-dashboard>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="split right" style="height: 100%">
+          <div class="one" (click)="totalPending()">
+            <img src="assets/icons/reque.png" alt="request" />
+            <h2>Total Pending Requests</h2>
+            <h2>{{ pendingSize }}</h2>
+          </div>
+
+          <div class="one" (click)="totalApprove()">
+            <img src="assets/icons/approve.png" alt="approve" />
+            <h2>Total Approved Requests</h2>
+            <h2>{{ approvedSize }}</h2>
+          </div>
+
+          <div class="one" (click)="totalReject()">
+            <img src="assets/icons/pending.png" alt="pending" />
+            <h2>Total Rejected Requests</h2>
+            <h2>{{ rejectedSize }}</h2>
+          </div>
+
+          <div class="one">
+            <h2>Total Requests</h2>
+            <h2>👉</h2>
+            <h2>{{ totalSize }}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++ -->
+
+    <div class="page_head parentbackgroundcolor">
+      <h2
+        class="mb-0 mt-2"
+        style="
+          text-align: center;
+          font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        "
+      >
+        <b>Departmental Dashboard</b>
+      </h2>
+    </div>
+
+    <hr class="mt-1 mb-2" />
+
+    <div class="table-responsive mat-elevation-z8 parentbackgroundcolor">
+      <table
+        class="table table-striped dashboardTable"
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+      >
+        <ng-container matColumnDef="serialNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>S.No</th>
+          <td mat-cell *matCellDef="let element">{{ element.serialNumber }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Reference Id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Reference Id
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.consultantName }}
+            <!-- {{ element.fileNo }}-->
+            {{ element.frId }}
+          </td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="addharNo">
+          <th mat-header-cell *matHeaderCellDef> Addhar Number </th>
+          <td mat-cell *matCellDef="let element"> {{ element.addharNo }} </td>
+        </ng-container> -->
+
+        <ng-container matColumnDef="Request type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Request type
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.consultantType }} {{ element.frId }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Created By">
+          <th mat-header-cell *matHeaderCellDef>Created By</th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngIf="isNameEmpty(element)">
+              {{ element.fileCreatedBy }}
+            </ng-container>
+            <ng-container *ngIf="!isNameEmpty(element)">
+              {{
+                element.salutation +
+                  element.firstName +
+                  element.middleName +
+                  element.lastName
+              }}
+            </ng-container>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="statusId">
+          <th mat-header-cell *matHeaderCellDef>Request Current Status</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.status }} {{ element.currentStatus }}
+          </td>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="statusId"> 
+          <th mat-header-cell *matHeaderCellDef> Request Current Statuss </th>
+          <td mat-cell *matCellDef="let element"> {{ element.currentStatus }} </td>
+        </ng-container> -->
+
+        <ng-container matColumnDef="createdDate">
+          <th mat-header-cell *matHeaderCellDef>Request Created Date</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.createdDate | date : "dd/MM/yyyy" }}
+            {{ element.fcreatedTime | date : "dd/MM/yyyy" }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="hierachyId">
+          <th mat-header-cell *matHeaderCellDef>Request For</th>
+          <td mat-cell *matCellDef="let element">{{ element.hierachyId }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="details">
+          <th mat-header-cell *matHeaderCellDef>Details</th>
+          <td
+            mat-cell
+            *matCellDef="let element"
+            class="detail"
+            (click)="
+              viewDetail(
+                element.consultantName,
+                element.fileNo,
+                element.hierachyId,
+                element.frId
+              )
+            " style="color: blue;"
+          >
+            View Details
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <mat-paginator
+        [pageSizeOptions]="[10, 25, 50]"
+        [pageSize]="10"
+        showFirstLastButtons
+        (page)="onPageChange($event)"
+        #paginatorRef
+      ></mat-paginator>
+
+      <!-- <mat-paginator [pageSizeOptions]="[10, 25, 50]" [pageSize]="10" showFirstLastButtons (page)="viewDashboard()" #paginatorRef></mat-paginator> -->
+    </div>
+  </div>
+</div>

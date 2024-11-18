@@ -1,0 +1,277 @@
+<app-support-file-view></app-support-file-view>
+
+<div class="registration-container parentbackgroundcolor">
+
+
+    <div class="m-4">
+    <div class="row mb-2 mt-2 d-flex justify-content-between">
+       
+ 
+        <hr>
+   
+    
+    <mat-card class="mb-5">
+        <mat-card-header>
+            <mat-card-title class="mb-3">Builder floor details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+         
+            <div class="row">
+
+                <div class="container-fluid">
+                    <div class="row mb-2 mt-2">
+                    <div class="col-20 col">SNO</div>
+                    <div class="col-20 col">Floor</div>
+                    <div class="col-20 col">Proposed Built-up Area</div>
+                    <div class="col-20 col">Area free from FAR</div>
+                    <div class="col-20 col">Net FAR Area</div>
+                    
+                </div>
+                </div>
+
+                <div class="container-fluid" *ngFor="let building of buildingDetails let i = index" >
+                    <div class="row mb-2 mt-2">
+    
+                      <div class="col-20 col">{{ i + 1 }}</div>
+                     
+                      <div class="col-20 col">
+                        <h3  style="font-weight: bold;">{{building.floor}}</h3>
+                       
+                      </div>
+                     
+  
+                      <div class="col-20 col">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="buitUpArea-value">&nbsp; {{building.buitUpArea}}</span>
+                            </div>
+                            <input matInput name="buitUpArea" readonly></mat-form-field>
+                      </div>
+    
+                      <div class="col-20 col">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="freeFrom-value">&nbsp; {{building.freeFromFar}}</span>
+                            </div>
+                            <input matInput name="freeFrom" readonly></mat-form-field>
+                      </div>
+  
+                      <div class="col-20 col">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="netFar-value">&nbsp; {{building.netFar}}</span>
+                            </div>
+                            <input matInput name="netFar" readonly></mat-form-field>
+                      </div>
+                    
+               
+                    </div>
+                   
+                  </div>
+
+
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+
+
+    
+
+
+    <mat-card class="display-6 mb-5">
+        <mat-card-header>
+            <mat-card-title class="mb-3">Engineers details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+         
+            <div class="row">
+                
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-label class="title">Engineer username</mat-label>
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="engineerDetails-value">&nbsp; {{data.engineerDetails}}</span>
+                            </div>
+                            <input matInput name="engineerDetails" readonly>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-label class="title">Superintendent username</mat-label>
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="superintendentDetails-value">&nbsp; {{data.superintendentDetails}}</span>
+                            </div>
+                            <input matInput name="superintendentDetails" readonly>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-label class="title">Civil username</mat-label>
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="civilDetails-value">&nbsp; {{data.civilDetails}}</span>
+                            </div>
+                            <input matInput name="civilDetails" readonly>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-label class="title">Construction start date</mat-label>
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="constructionStartDate-value">&nbsp; {{data.constructionStartDate}}</span>
+                            </div>
+                            <input matInput name="constructionStartDate" readonly>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-label class="title">Construction end date</mat-label>
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="constructionEndDate-value">&nbsp; {{data.constructionEndDate}}</span>
+                            </div>
+                            <input matInput name="constructionEndDate" readonly>
+                        </mat-form-field>
+                    </div>
+    
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+
+
+
+
+
+
+
+    <mat-card class="display-6 mb-5">
+        <mat-card-header>
+            <mat-card-title class="mb-3">Builders details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+         
+            <div class="row">
+                
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-label class="title">Builder name</mat-label>
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="builderName-value">&nbsp; {{data.builderName}}</span>
+                            </div>
+                            <input matInput name="builderName" readonly>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-label class="title">Builder phone number</mat-label>
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="builderPhone-value">&nbsp; {{data.builderPhone}}</span>
+                            </div>
+                            <input matInput name="builderPhone" readonly>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-label class="title">Builder email id</mat-label>
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="builderEmailt-value">&nbsp; {{data.builderEmail}}</span>
+                            </div>
+                            <input matInput name="builderEmail" readonly>
+                        </mat-form-field>
+                    </div>
+    
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+  
+
+
+
+    <mat-card class="mb-5">
+        <mat-card-header>
+            <mat-card-title class="mb-3">Geo Coordinates</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+         
+            <div class="row">
+                <div class="container-fluid">
+                    <div class="row mb-2 mt-2">
+                    <div class="col-md-3 col">SNO</div>
+                    <div class="col-md-3 col">Latitude</div>
+                    <div class="col-md-3 col">Longitude</div>
+                    
+                    
+                </div>
+                </div>
+
+                <div class="container-fluid" *ngFor="let geoData of geoDetails let i = index" >
+                    <div class="row mb-2 mt-2">
+    
+                        <div class="col-md-3 col">{{ i + 1 }}</div>
+                     
+                    
+                      <div class="col-md-3 col">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="latitude-value">&nbsp; {{geoData.latitude}}</span>
+                            </div>
+                            <input matInput name="latitude" readonly></mat-form-field>
+                      </div>
+
+                      <div class="col-md-3 col">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="longitude-value">&nbsp; {{geoData.longitude}}</span>
+                            </div>
+                            <input matInput name="longitude" readonly></mat-form-field>
+                      </div>
+    
+  
+  
+                    </div>
+                   
+                  </div>
+
+
+    
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+
+
+    </div>
+
+    
+</div>
+
+<!-- <div class="d-flex justify-content-center text-center" *ngIf="!viewPaymentButton">
+    <div class="col-md-12  mb-1">
+        <button mat-raised-button color="primary" (click)="payment()">Payment </button>
+    </div>
+</div> -->
+
+
+
+<div class="text-center" *ngIf="noc">
+    <!-- <button mat-raised-button color="primary" type="submit" (click)="payment()">Pay Now</button> -->
+    <button mat-raised-button color="primary" type="submit" (click)="NocForm()">Fill Noc Form</button>
+    
+    <button mat-raised-button color="primary" type="submit" class="log" (click)="back()" *ngIf="senddata.status =='Final Form Submit'" style="margin-left: 2%;">
+        Back
+      </button>
+    
+</div>
+
+<!-- <div class="text-center" *ngIf="viewLetter">
+    <button mat-raised-button color="primary" type="submit" (click)="ViewDS()">View {{letterName}}</button>
+    <button mat-raised-button color="primary" type="submit" (click)="fileRelease()">File Release</button>
+</div> -->
+</div>

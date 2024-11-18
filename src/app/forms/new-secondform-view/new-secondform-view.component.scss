@@ -1,0 +1,77 @@
+@import './src/app/app.component.scss';
+
+.some-element {
+  @extend .parentbackgroundcolor;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    text-decoration: wavy;
+    padding: 20px;
+    border-radius: 25px;
+}
+.col{
+    font-weight: bolder;
+}
+.title{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: x-large;
+  }
+  #changingText{
+    font-size: x-large;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(113, 5, 237);
+    display: flex;
+    justify-content: center; 
+  }
+  .buitUpArea-value,.freeFrom-value,.netFar-value,.engineerDetails-value,.superintendentDetails-value,.civilDetails-value,.constructionStartDate-value,
+  .constructionEndDate-value,.builderName-value,.builderPhone-value,.builderEmailt-value,.latitude-value,.longitude-value{
+    color: rgb(0, 0, 0);
+}
+
+
+
+.res{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: larger;
+  font-weight: 2px;
+  font-style: oblique;
+  color: cornflowerblue;
+}
+
+.custom-dialog {
+  border-style: outset;
+  max-width: 80%; 
+  margin: 1.75rem auto;
+}
+
+.referencehierarchy{
+  display: flex;
+  justify-content: space-between;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bolder;
+  margin-left: 2%;
+  margin-right: 4%;
+  
+}
+.buttonHierachy{
+  display: flex;
+  justify-content: space-between;
+  border-style: ridge;
+  border-radius: 4px;
+}
+
+.viewDoc:hover{
+  color: rgb(230, 77, 35);
+  cursor: pointer;
+}
+
+.viewDoc{
+  color: rgb(14, 124, 124);
+}
+.button-spacing {
+  margin-right: 10px; /* Adjust the space between buttons as needed */
+}

@@ -1,0 +1,65 @@
+// @media screen and (min-width: 532px) {
+
+// html, body {
+//   height: 100%;
+//   margin: 0;
+// }
+
+.main-container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  min-height: calc(100vh - 50px);
+}
+
+.splitMain {
+  border-style: double;
+  // border-radius: 2%;
+  height: 100%;
+  width: 16%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+}
+
+.leftMain {
+  background-color: #c3cecb;
+}
+
+.rightMain {
+  right: 0;
+  width: 84%;
+  border-style: 1px solid blue;
+}
+
+.centeredMain {
+  margin: 10%;
+  margin-top: -2%;
+  margin-left: -1%;
+  text-align: center;
+}
+
+.foot {
+  background-color: #f8f9fa;
+  /* Light grey background or adjust as needed */
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  // position: fixed;
+  padding: 10px; /* Add some padding if necessary */
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.parentbackgroundcolor {
+  // background-color: #ffffff !important;
+  background-color: #d9e0e2 !important;
+  // background-color: rgb(186, 219, 255) !important;
+  // background-color:  #d7f4ff !important;
+}
+
+.parentformbackgroundcolor {
+  background-color: rgb(197, 243, 199) !important;
+}
+
+// }

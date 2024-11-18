@@ -1,0 +1,417 @@
+<div class="SecondForm-container mt-0 parentbackgroundcolor">
+  <div class="header mt-3">
+    <h1>New Second Form</h1>
+  </div>
+
+  <div class="column right">
+    <form [formGroup]="SecondForm">
+      <div class="m-4">
+        <mat-card class="mb-5">
+          <mat-card-header>
+            <mat-card-title class="mb-3">Builder floor details</mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div formArrayName="building">
+              <div class="container-fluid">
+                <div class="row mb-2 mt-2">
+                  <div class="col-20 col">SNO</div>
+                  <div class="col-20 col">Floor</div>
+                  <div class="col-20 col">Proposed Built-up Area</div>
+                  <div class="col-20 col">Area free from FAR</div>
+                  <div class="col-20 col">Net FAR Area</div>
+                  <div class="col-20 col">More</div>
+                </div>
+              </div>
+
+              <div class="container-fluid" *ngFor="let floor of basementFloor.controls; let i = index"
+                [formGroupName]="i" (ngOnInit)="subscribeToChanges(i)">
+                <div class="row mb-2 mt-2">
+                  <div class="col-20 col">{{ i + 1 }}</div>
+
+                  <div class="col-20 col">
+                    <h3 style="font-weight: bold">Basement {{ i + 1 }}</h3>
+                  </div>
+
+                  <div class="col-20 col">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <div class="placeholder-wrapper">
+                        <input matInput type="number" min="0" placeholder="Proposed Built-up Area"
+                          formControlName="buitUpArea" (input)="calculateNetFar(i)" />
+                      </div>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-20 col">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <div class="placeholder-wrapper">
+                        <input matInput type="number" min="0" placeholder="Area free from FAR"
+                          formControlName="freeFromFar" (input)="calculateNetFar(i)" />
+                      </div>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-20 col">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <div class="placeholder-wrapper">
+                        <input matInput type="number" min="0" placeholder="Net FAR Area" formControlName="netFar"
+                          [disabled]="true" readonly />
+                      </div>
+                      <mat-error *ngIf="floor.get('netFar')?.hasError('required')">
+                        Net FAR Area is required
+                      </mat-error>
+                      <mat-error *ngIf="floor.get('netFar')?.value < 0">
+                        Net FAR Area cannot be negative
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-20 col" *ngIf="i == 0">
+                    <button mat-raised-button color="primary" type="button" (click)="addFloor()">
+                      +
+                    </button>
+                  </div>
+
+                  <div class="col-20 col" *ngIf="i > 0">
+                    <button mat-raised-button color="warn" type="button" (click)="removeFloor(i)">
+                      -
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+             <div formArrayName="parkingFloor">
+                <div class="container-fluid" *ngFor="let display of parkingDisplay.controls; let i = index" [formGroupName]="i" (ngOnInit)="subscribeToChangesParking(i)">
+                  <div class="row mb-2 mt-2">
+  
+                    <div class="col-20 col">{{ basementFloor.length + i + 1 }}</div>
+                    <div class="col-20 col">
+                      <h3 style="font-weight: bold;" >Parking {{ i + 1 }}</h3>
+                    </div>
+  
+                    <div class="col-20 col">
+                      <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                          <input matInput type="number" min="0" placeholder="Proposed Built-up Area" formControlName="buitUpArea" (input)="calculateNetFARE(i)">
+                        </div>
+                      </mat-form-field>
+                    </div>
+  
+                    <div class="col-20 col">
+                      <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                          <input matInput type="number" min="0" placeholder="Area free from FAR" formControlName="freeFromFar" (input)="calculateNetFARE(i)">
+                        </div>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-20 col">
+                      <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                          <input matInput type="number" placeholder="Net FAR Area" formControlName="netFar" [disabled]="true" readonly>
+                        </div>
+                        <mat-error *ngIf="display.get('netFar')?.hasError('negative')">
+                          Net FAR Area cannot be negative
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                   
+                      <div class="col-20 col"  *ngIf="i==0">
+                        <button mat-raised-button color="primary" type="button" (click)="addParking()">+</button>
+                      </div>
+
+                      <div class="col-20 col" *ngIf="i > 0">
+                        <button mat-raised-button color="warn" type="button" (click)="removeParking(i)">-</button>
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+
+            <div formArrayName="StiltDetail" (ngModelChange)="calculateNetStilt()">
+              <div class="container-fluid">
+                <div class="row mb-2 mt-2">
+                  <div class="col-20 col">
+                    {{ basementFloor.length + parkingDisplay.length + 1 }}
+                  </div>
+                  <div class="col-md-20 col">
+                    <h3 style="font-weight: bold">Stilt</h3>
+                  </div>
+                  <div class="col-md-20 col">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <div class="placeholder-wrapper">
+                        <input matInput type="number" placeholder="Proposed Built-up Area" formControlName="buitUpArea"
+                          (input)="calculateNetStilt()" />
+                      </div>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-20 col">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <div class="placeholder-wrapper">
+                        <input matInput type="number" placeholder="Area free from FAR" formControlName="freeFromFar"
+                          (input)="calculateNetStilt()" />
+                      </div>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-20 col">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <div class="placeholder-wrapper">
+                        <input matInput type="number" placeholder="Net FAR Area" formControlName="netFar"
+                          [disabled]="true" readonly />
+                      </div>
+                      <mat-error *ngIf="
+                          SecondForm.get('StiltDetail')
+                            ?.get('netFar')
+                            ?.hasError('negative')
+                        ">
+                        Net FAR Area cannot be negative
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-20 col">
+                    <button mat-raised-button color="primary" disabled>
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ++++++++++++++++++++++++++++++ -->
+            <div formArrayName="groundFloor">
+              <div class="container-fluid" *ngFor="let detail of groundDetail.controls; let i = index"
+                [formGroupName]="i" (ngOnInit)="subscribeToChangesGround(i)">
+                <div class="row mb-2 mt-2">
+                  <div class="col-20 col">
+                    {{ basementFloor.length + parkingDisplay.length + 2 + i }}
+                  </div>
+                  <div class="col-20 col">
+                    <h3 style="font-weight: bold">{{ i === 0 ? 'Ground' : 'Floor' }} {{ i - 1 + 1 }}</h3>
+                  </div>
+
+                  <div class="col-20 col">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <div class="placeholder-wrapper">
+                        <input matInput type="number" min="0" placeholder="Proposed Built-up Area"
+                          formControlName="buitUpArea" (input)="calculateNetGROUND(i)" />
+                      </div>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-20 col">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <div class="placeholder-wrapper">
+                        <input matInput type="number" min="0" placeholder="Area free from FAR"
+                          formControlName="freeFromFar" (input)="calculateNetGROUND(i)" />
+                      </div>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-20 col">
+                    <mat-form-field appearance="fill" class="input-control">
+                      <div class="placeholder-wrapper">
+                        <input matInput type="number" placeholder="Net FAR Area" formControlName="netFar"
+                          [disabled]="true" readonly />
+                      </div>
+                      <mat-error *ngIf="detail.get('netFar')?.hasError('negative')">
+                        Net FAR Area cannot be negative
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-20 col" *ngIf="i == 0">
+                    <button mat-raised-button color="primary" (click)="addGround()">
+                      +
+                    </button>
+                  </div>
+
+                  <div class="col-20 col" *ngIf="i > 0">
+                    <button mat-raised-button color="warn" type="button" (click)="removeGround(i)">
+                      -
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+             <!-- ++++++++++++++++++++++++++++++ -->
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="mb-5">
+          <mat-card-header>
+            <mat-card-title class="mb-3">Engineers details</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                <mat-label class="title">Licensed engineers</mat-label>
+                <mat-form-field>
+                  <mat-label>Select a licensed engineers</mat-label>
+                  <mat-select placeholder="Choose licensed  engineer's name" formControlName="engineerDetails">
+                    <mat-option *ngFor="let option of Licensed" [value]="option">
+                      {{ option }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                <mat-label class="title">Superintendent engineers</mat-label>
+                <mat-form-field>
+                  <mat-label>Select a superintendent engineers</mat-label>
+                  <mat-select placeholder="Choose superintendent engineer's name"
+                    formControlName="superintendentDetails">
+                    <mat-option *ngFor="let option of Superintendent" [value]="option">
+                      {{ option }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                <mat-label class="title">Civil engineers</mat-label>
+                <mat-form-field>
+                  <mat-label>Select a civil engineer</mat-label>
+                  <mat-select placeholder="Choose civil engineer's name" formControlName="civilDetails">
+                    <mat-option *ngFor="let option of civil" [value]="option">
+                      {{ option }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                <mat-label class="title">Construction start date</mat-label>
+                <mat-form-field>
+                  <mat-label>Start date</mat-label>
+                  <input matInput [matDatepicker]="picker" formControlName="constructionStartDate"
+                    placeholder="MM/DD/YYYY" />
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4 col-sm-12 col-xs-12">
+                <mat-label class="title">Construction end date</mat-label>
+                <mat-form-field>
+                  <mat-label>End date</mat-label>
+                  <input matInput [matDatepicker]="pickers" formControlName="constructionEndDate"
+                    placeholder="MM/DD/YYYY" />
+                  <mat-datepicker-toggle matIconSuffix [for]="pickers"></mat-datepicker-toggle>
+                  <mat-datepicker #pickers></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="mb-5">
+          <mat-card-header>
+            <mat-card-title class="mb-3">Builders details</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div formGroupName="builderDetail">
+              <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                  <mat-label class="title">Name</mat-label>
+                  <mat-form-field appearance="fill" class="input-control">
+                    <mat-label>Builder name</mat-label>
+                    <input formControlName="builderName" matInput name="builderName" placeholder="Builder name" />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                  <mat-label class="title">Phone number</mat-label>
+                  <mat-form-field appearance="fill" class="input-control">
+                    <mat-label>Phone number</mat-label>
+                    <input matInput type="number" formControlName="builderPhone" matInput name="contactNumber"
+                      placeholder="Contact number" />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                  <mat-label class="title">Email</mat-label>
+                  <mat-form-field appearance="fill" class="input-control">
+                    <mat-label>Email</mat-label>
+                    <input formControlName="builderEmail" matInput name="builderEmail" placeholder="Builder email" />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- <mat-card class="mb-5">
+          <mat-card-header>
+            <mat-card-title class="mb-3">Geo coordinates</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div formArrayName="geoCoordinateDetails">
+              <div class="row">
+                <div class="container-fluid">
+                  <div class="row mb-2 mt-2">
+                    <div class="col-md-3 col">SNO</div>
+                    <div class="col-md-3 col">Latitude</div>
+                    <div class="col-md-3 col">Longitude</div>
+                    <div class="col-md-3 col">Add</div>
+                  </div>
+                </div>
+                <div class="container-fluid" *ngFor="
+                    let coordinate of geoCoordinateDetails.controls;
+                    let i = index
+                  " [formGroupName]="i">
+                  <div class="row mb-2 mt-2">
+                    <div class="col-md-3 col">{{ i + 1 }}</div>
+                    <div class="col-md-3 col">
+                      <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                          <input matInput type="number" placeholder="eg.- 00.000000" formControlName="latitude" />
+                        </div>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3 col">
+                      <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                          <input matInput type="number" placeholder="eg.- 00.000000" formControlName="longitude" />
+                        </div>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3 col" *ngIf="i == 0">
+                      <button mat-raised-button color="primary" type="button" (click)="addGeoCoordinate()">
+                        +
+                      </button>
+                    </div>
+
+                    <div class="col-md-3 col" *ngIf="i > 5">
+                      <button mat-raised-button color="warn" type="button" (click)="removeLati(i)">
+                        -
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card> -->
+
+        <!-- <div class="text-center" *ngIf="!hideSubmit">
+    <button mat-raised-button color="primary" type="submit" data-bs-toggle="modal"
+         class="log" (click)="submitReg()">Submit
+        Details</button>
+  </div> -->
+
+        <div class="text-center" *ngIf="!hideSubmit">
+          <div class="button-container col-md-12 mt-1">
+            <button mat-raised-button color="primary" type="submit" class="log" (click)="submitReg()">
+              Submit
+            </button>
+            <button mat-raised-button color="primary" type="submit" class="log" (click)="back()" style="margin-left: 2%;">
+              Back
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

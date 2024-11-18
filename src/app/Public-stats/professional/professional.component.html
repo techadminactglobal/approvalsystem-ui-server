@@ -1,0 +1,121 @@
+<div class="login-container parentbackgroundcolor"></div>
+<div class="header">
+  <div>
+    All Professionals Details <i class="fa-sharp-duotone fa-solid fa-user-tie"></i>
+  </div>
+</div>
+
+<div class="main11">
+  <div class="container">
+    <!-- Search Form Section -->
+    <div class="search">
+      <form [formGroup]="searchForm" (ngSubmit)="filterProfessionals(searchForm.value.searchQuery)">
+        <mat-form-field appearance="fill" class="requestbtn" style="width: 100%; margin-right: 10px;">
+          <mat-label>Search By : Name/UserID/Zone Working On / Building Type</mat-label>
+          <input matInput formControlName="searchQuery" placeholder="" aria-label="Search for a professional" #searchInput>
+        </mat-form-field>
+
+        <!-- Submit and Reset Buttons -->
+        <div class="button-group">
+          <button mat-raised-button color="primary" type="submit" class="submit-btn">Search</button>
+          <button mat-raised-button color="warn" (click)="resetSearch()" type="button" class="reset-btn">Reset</button>
+          <button mat-raised-button color="primary" (click)="returnhome()" type="button" class="reset-btn">Back</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div *ngIf="loading" class="loading-spinner">Loading...</div>
+
+    <!-- Filtered Professionals List (only show if no professional is selected) -->
+    <div *ngIf="filteredProfessionals.length > 0 && !selectedProfessional" class="professional-list">
+      <ul>
+        <li *ngFor="let professional of filteredProfessionals" (click)="showDetails(professional)">
+          <strong>{{ professional.consultantName }}</strong> - {{ professional.firstName }} {{ professional.lastName }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Professional Details Section -->
+    <div *ngIf="selectedProfessional" class="professional-details">
+      <mat-card class="professional-card" [@fadeIn] #detailsCard>
+        <mat-card-header>
+          <mat-card-title class="professional-name">
+            <span class="consultant-name">
+              {{ selectedProfessional.salutation }} {{ selectedProfessional.firstName }}
+              {{ selectedProfessional.middleName }} {{ selectedProfessional.lastName }}
+            </span>
+          </mat-card-title>
+          <mat-card-subtitle class="professional-id">
+            ID: <strong>{{ selectedProfessional.consultantName }}</strong>
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <!-- Display details in rows -->
+          <div class="detail-row">
+            <mat-icon class="detail-icon">email</mat-icon>
+            <div class="detail-text">{{ selectedProfessional.email }}</div>
+          </div>
+          <div class="detail-row">
+            <mat-icon class="detail-icon">phone</mat-icon>
+            <div class="detail-text">{{ selectedProfessional.contactNo }}</div>
+          </div>
+          <div class="detail-row">
+            <mat-icon class="detail-icon">location_on</mat-icon>
+            <div class="detail-text">{{ selectedProfessional.zone }}</div>
+          </div>
+          <div class="detail-row">
+            <mat-icon class="detail-icon">apartment</mat-icon>
+            <div class="detail-text">{{ selectedProfessional.buildingType }}</div>
+          </div>
+        </mat-card-content>
+
+        <mat-card-footer class="professional-footer">
+          <button mat-raised-button color="primary" (click)="resetSearch()">Back</button>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+
+    <div *ngIf="!isLoading && consultants.length > 0" class="consultants-container">
+      <h1 class="page-title">All Professionals Details</h1>
+      <table class="consultant-table">
+        <thead>
+          <tr>
+            <th>Serial No.</th>
+            <th>Consultant ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Contact Number</th>
+            <th>Zone Working On</th>
+            <th>Building Type</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let consultant of paginatedConsultants; let i = index" class="consultant-row">
+            <td>{{ i + 1 + (currentPage - 1) * pageSize }}</td>
+            <td>{{ consultant.consultantName }}</td>
+            <td>{{ consultant.salutation }} {{ consultant.firstName }} {{ consultant.middleName }} {{ consultant.lastName }}</td>
+            <td>{{ consultant.email }}</td>
+            <td>{{ consultant.contactNo }}</td>
+            <td>{{ consultant.zone }}</td>
+            <td>{{ consultant.buildingType }}</td>
+            <td>
+              <button class="btn-view-details" (click)="showDetails(consultant)">
+                View Details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination Controls -->
+      <div class="pagination">
+        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+      </div>
+    </div>
+  </div>
+</div>

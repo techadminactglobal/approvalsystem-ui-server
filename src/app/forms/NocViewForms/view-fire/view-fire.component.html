@@ -1,0 +1,622 @@
+<div class="container parentbackgroundcolor">
+
+        <div class="header mt-2">
+            <!-- <h1> Fire Service Details of File NO: {{fireNocs.fileNo}}</h1> -->
+            <h1> Fire Service Details of File Request Id: {{fireNocs.frId}}</h1>
+
+        </div>
+    
+        <div class="m-4">
+        <div class="row mb-2 mt-2 d-flex justify-content-between">
+           
+        <mat-card class="display-6 mb-5">
+            <mat-card-header>
+                <mat-card-title class="mb-3">Site plan specifics/design particulars</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+             
+                <div class="row" *ngIf="fireNocs">
+
+                    
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Plot area : </span>
+                                <span class="pArea-value">&nbsp; {{fireNocs.pArea}}</span>
+                            </div>
+                            <input matInput name="pArea" readonly>
+                        </mat-form-field>
+                    </div>
+
+                    
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Total covered area : </span>
+                                    <span class="cArea-value">&nbsp; {{fireNocs.cArea}}</span>
+                                </div>
+                                <input matInput name="cArea" readonly>
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Total covered area by FAR : </span>
+                                    <span class="cAreaFar-value">&nbsp; {{fireNocs.cAreaFar}}</span>
+                                </div>
+                                <input matInput name="cAreaFar" readonly>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Building height : </span>
+                                    <span class="bHeight-value">&nbsp; {{fireNocs.bHeight}}</span>
+                                </div>
+                                <input matInput name="bHeight" readonly>
+                            </mat-form-field>
+                        </div>
+
+
+
+
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Front width : </span>
+                                    <span class="frontWidth-value">&nbsp; {{fireNocs.frontWidth}}</span>
+                                </div>
+                                <input matInput name="frontWidth" readonly>
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Area affected under road widening  :</span>
+                                    <span class="areaAffectedInRoadWidening-value">&nbsp; {{fireNocs.areaAffectedInRoadWidening}}</span>
+                                </div>
+                                <input matInput name="areaAffectedInRoadWidening" readonly>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Weather the plot is corner plot?:</span>
+                                    <span class="cPlot-value">&nbsp; {{fireNocs.cPlot}}</span>
+                                </div>
+                                <input matInput name="cPlot" readonly>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Mechanical ventilation :</span>
+                                    <span class="mVentilation-value">&nbsp; {{fireNocs.mVentilation}}</span>
+                                </div>
+                                <input matInput name="mVentilation" readonly>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Do you want to take the benefit of lower category
+                                        setback :</span>
+                                    <span class="lcSetback-value">&nbsp; {{fireNocs.lcSetback}}</span>
+                                </div>
+                                <input matInput name="lcSetback" readonly>
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Benefit from lower category FAR :</span>
+                                    <span class="lcFar-value">&nbsp; {{fireNocs.lcFar}}</span>
+                                </div>
+                                <input matInput name="lcFar" readonly>
+                            </mat-form-field>
+                        </div>
+                        
+
+                          
+               
+                       
+                        
+        
+                     
+    
+                   
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+
+
+        <mat-card class="mb-5">
+            <mat-card-header>
+                <mat-card-title class="mb-3">Builder floor details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+    
+                <div class="row">
+    
+                    <div class="container-fluid">
+                        <div class="row mb-2 mt-2">
+                            <div class="col-20 col">SNO</div>
+                            <div class="col-20 col">Floor</div>
+                            <div class="col-20 col">Proposed Built-up Area</div>
+                            <div class="col-20 col">Area free from FAR</div>
+                            <div class="col-20 col">Net FAR Area</div>
+    
+                        </div>
+                    </div>
+    
+                    <div class="container-fluid" *ngFor="let building of buildingDetails let i = index">
+                        <div class="row mb-2 mt-2">
+    
+                            <div class="col-20 col">{{ i + 1 }}</div>
+    
+                            <div class="col-20 col">
+                                <h3 style="font-weight: bold;">{{building.floor}}</h3>
+    
+                            </div>
+
+                            <div class="col-md-3 col-sm-12 col-xs-12">
+                                <mat-form-field appearance="fill" class="input-control">
+                                    <div class="placeholder-wrapper">
+                                        <span class="buitUpArea-value">&nbsp; {{building.buitUpArea}}</span>
+                                    </div>
+                                    <input matInput name="buitUpArea" readonly>
+                                </mat-form-field>
+                            </div>
+    
+                           <div class="col-md-3 col-sm-12 col-xs-12">
+                                <mat-form-field appearance="fill" class="input-control">
+                                    <div class="placeholder-wrapper">
+                                        <span class="freeFrom-value">&nbsp; {{building.freeFromFar}}</span>
+                                    </div>
+                                    <input matInput name="freeFrom" readonly>
+                                </mat-form-field>
+                            </div>
+    
+                            <div class="col-md-3 col-sm-12 col-xs-12">
+                                <mat-form-field appearance="fill" class="input-control">
+                                    <div class="placeholder-wrapper">
+                                        <span class="netFar-value">&nbsp; {{building.netFar}}</span>
+                                    </div>
+                                    <input matInput name="netFar" readonly>
+                                </mat-form-field>
+                            </div>
+    
+    
+    
+                        </div>
+    
+                    </div>
+    
+    
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+
+        <mat-card class="mb-5">
+            <mat-card-header>
+                <mat-card-title class="mb-3">Geo Coordinates</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+    
+                <div class="row">
+                    <div class="container-fluid">
+                        <div class="row mb-2 mt-2">
+                            <div class="col-md-3 col">SNO</div>
+                            <div class="col-md-3 col">Latitude</div>
+                            <div class="col-md-3 col">Longitude</div>
+    
+    
+                        </div>
+                    </div>
+    
+                    <div class="container-fluid" *ngFor="let geoData of geoDetails let i = index">
+                        <div class="row mb-2 mt-2">
+    
+                            <div class="col-md-3 col">{{ i + 1 }}</div>
+
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                <mat-form-field appearance="fill" class="input-control">
+                                    <div class="placeholder-wrapper">
+                                        <span class="latitude-value">&nbsp; {{geoData.latitude}}</span>
+                                    </div>
+                                    <input matInput name="latitude" readonly>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                <mat-form-field appearance="fill" class="input-control">
+                                    <div class="placeholder-wrapper">
+                                        <span class="longitude-value">&nbsp;  {{geoData.longitude}}</span>
+                                    </div>
+                                    <input matInput name="longitude" readonly>
+                                </mat-form-field>
+                            </div>
+    
+                          
+    
+    
+                        </div>
+    
+                    </div>
+    
+    
+    
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+
+        <mat-card class="display-6 mb-5">
+            <mat-card-header>
+                <mat-card-title class="mb-3">Building access details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+    
+                <div class="row" *ngIf="fireNocs">
+
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Road width (In meter) : </span>
+                                <span class="roadWidth-value">&nbsp; {{fireNocs.roadWidth}}</span>
+                            </div>
+                            <input matInput name="roadWidth" readonly>
+                        </mat-form-field>
+                    </div>
+    
+                   
+    
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Gate width (In meter) : </span>
+                                <span class="gateWidth-value">&nbsp; {{fireNocs.gateWidth}}</span>
+                            </div>
+                            <input matInput name="gateWidth" readonly>
+                        </mat-form-field>
+                    </div>
+                    
+    
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Width of Internal Road (In meter) : </span>
+                                <span class="internalRoad-value">&nbsp; {{fireNocs.internalRoad}}</span>
+                            </div>
+                            <input matInput name="internalRoad" readonly>
+                        </mat-form-field>
+                    </div>
+                    
+    
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Distance of the internal road from building line (In meter) :</span>
+                                <span class="distInteranlRoad-value">&nbsp; {{fireNocs.distInteranlRoad}}</span>
+                            </div>
+                            <input matInput name="distInteranlRoad" readonly>
+                        </mat-form-field>
+                    </div>
+                    
+    
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Dead end travel distance (In meter) :</span>
+                                <span class="deadEnd-value">&nbsp; {{fireNocs.deadEnd}}</span>
+                            </div>
+                            <input matInput name="deadEnd" readonly>
+                        </mat-form-field>
+                    </div>
+                    
+    
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Travel distance (In meter) :</span>
+                                <span class="travelDistance-value">&nbsp; {{fireNocs.travelDistance}}</span>
+                            </div>
+                            <input matInput name="travelDistance" readonly>
+                        </mat-form-field>
+                    </div>
+                    
+    
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="placeholder-text">Remarks :</span>
+                                <span class="buildingAccessRemarks-value">&nbsp; {{fireNocs.buildingAccessRemarks}}</span>
+                            </div>
+                            <input matInput name="buildingAccessRemarks" readonly>
+                        </mat-form-field>
+                    </div>
+                    
+                    
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+
+
+        <mat-card class=" display-6 mb-5">
+            <mat-card-header>
+                <mat-card-title class="mb-3">Stair Case Details </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <!-- <div formGroupName="stairCaseDetails"> -->
+                    <div class="row" *ngIf="fireNocs">
+    
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">No. of Staircases Upper Floors :</span>
+                                    <span class="upperFloorStairs-value">&nbsp; {{fireNocs.upperFloorStairs}}</span>
+                                </div>
+                                <input matInput name="upperFloorStairs" readonly>
+                            </mat-form-field>
+                        </div>
+                        
+    
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">No. of Staircases Basements :</span>
+                                    <span class="basementsStairs-value">&nbsp; {{fireNocs.basementsStairs}}</span>
+                                </div>
+                                <input matInput name="basementsStairs" readonly>
+                            </mat-form-field>
+                        </div>
+                        
+    
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Width of staircase Upper Floors :</span>
+                                    <span class="widthStairUpperFloor-value">&nbsp; {{fireNocs.widthStairUpperFloor}}</span>
+                                </div>
+                                <input matInput name="widthStairUpperFloor" readonly>
+                            </mat-form-field>
+                        </div>
+                        
+    
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Width of staircase Basements :</span>
+                                    <span class="widthStairBasements-value">&nbsp; {{fireNocs.widthStairBasements}}</span>
+                                </div>
+                                <input matInput name="widthStairBasements" readonly>
+                            </mat-form-field>
+                        </div>
+                        
+    
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Provision of Staircase (As per clause 7.11 of UBBL 2016) :</span>
+                                    <span class="staircaseProvision-value">&nbsp; {{fireNocs.staircaseProvision}}</span>
+                                </div>
+                                <input matInput name="staircaseProvision" readonly>
+                            </mat-form-field>
+                        </div>
+                        
+    
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Remarks :</span>
+                                    <span class="staircaseRemarks-value">&nbsp; {{fireNocs.staircaseRemarks}}</span>
+                                </div>
+                                <input matInput name="staircaseRemarks" readonly>
+                            </mat-form-field>
+                        </div>
+                        
+    
+                    </div>
+                <!-- </div> -->
+            </mat-card-content>
+        </mat-card>
+
+
+
+
+        <mat-card class=" display-6 mb-5">
+            <mat-card-header>
+                <mat-card-title class="mb-3">Smoke Management </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <!-- <div formGroupName="smokeManagementDetails"> -->
+                    <div class="row">
+    
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Mechanical / Natural :</span>
+                                    <span class="functionalitySmokeManger-value">&nbsp; {{fireNocs.functionalitySmokeManger}}</span>
+                                </div>
+                                <input matInput name="functionalitySmokeManger" readonly>
+                            </mat-form-field>
+                        </div>
+                        
+    
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Fire Extinguishers Total numbers on each floor :</span>
+                                    <span class="fireExtinguisherNo-value">&nbsp; {{fireNocs.fireExtinguisherNo}}</span>
+                                </div>
+                                <input matInput name="fireExtinguisherNo" readonly>
+                            </mat-form-field>
+                        </div>
+                        
+    
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Basement air changes (12 ACPH) :</span>
+                                    <span class="basementAirChanges-value">&nbsp; {{fireNocs.basementAirChanges}}</span>
+                                </div>
+                                <input matInput name="basementAirChanges" readonly>
+                            </mat-form-field>
+                        </div>
+                        
+    
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Upper floors air changes (12 ACPH) :</span>
+                                    <span class="upperFloorAirChange-value">&nbsp; {{fireNocs.upperFloorAirChange}}</span>
+                                </div>
+                                <input matInput name="upperFloorAirChange" readonly>
+                            </mat-form-field>
+                        </div>
+                        
+    
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Fresh air supply at bottom level :</span>
+                                    <span class="freshAirSupply-value">&nbsp; {{fireNocs.freshAirSupply}}</span>
+                                </div>
+                                <input matInput name="freshAirSupply" readonly>
+                            </mat-form-field>
+                        </div>
+                        
+    
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Exhaust air discharge at ceiling level :</span>
+                                    <span class="exhaustAirDischarge">&nbsp; {{fireNocs.exhaustAirDischarge}}</span>
+                                </div>
+                                <input matInput name="exhaustAirDischarge" readonly>
+                            </mat-form-field>
+                        </div>
+                        
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">Remarks :</span>
+                                    <span class="smokeManagementRemarks-value">&nbsp; {{fireNocs.smokeManagementRemarks}}</span>
+                                </div>
+                                <input matInput name="smokeManagementRemarks" readonly>
+                            </mat-form-field>
+                        </div>
+                        
+                    <!-- </div> -->
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+
+
+        <mat-card class=" display-6 mb-5" *ngIf="viewDoc">
+            <mat-card-header>
+                <mat-card-title class="mb-3">Supportive file for Fire Service</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+    
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Fire Service Document :</span>
+                            <span class="fileType-value">&nbsp;{{fireNocs.fileType}}</span>
+                        </div>
+                        <input matInput name="fileType" readonly>
+                        <mat-icon matSuffix (click)="openFireServicePdf()" matTooltip="View certificate PDF">remove_red_eye</mat-icon>
+                    </mat-form-field>
+                </div>
+                
+    
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control">
+                        <div class="placeholder-wrapper">
+                            <span class="placeholder-text">Remarks :</span>
+                            <span class="remark-value">&nbsp; {{fireNocs.fileRemarks}}</span>
+                        </div>
+                        <input matInput name="remark" readonly>
+                    </mat-form-field>
+                </div>
+                
+    
+            </mat-card-content>
+        </mat-card>
+    
+
+
+
+    
+
+    
+        </div>
+        
+        <div class="d-flex flex-wrap justify-content-center" *ngIf="!NocDept">
+            <!-- <button type="button" class="btn btn-primary" (click)="Back()" *ngIf="NocDeptDashboard">Back</button> -->
+            <button type="button" class="btn btn-primary" (click)="Back()" *ngIf="NocDeptDashboard && !viewback">Back</button>
+            <button type="button" class="btn btn-primary" (click)="BacktoNocdeptdasbhoard()" *ngIf="viewback">Back</button>
+        </div>
+
+        <div *ngIf="NocDept">
+            <form [formGroup]="deptForm">
+                <div class="update">
+                    <mat-label class="title">Updates regarding request</mat-label>
+                   <div class="remarktext">
+                        <textarea name="" id="" cols="50" rows="10" placeholder="Remarks" formControlName="hierachyRemark"></textarea>
+                    </div>
+                </div>
+    
+                <div class="col-md-6 col-sm-12 col-xs-12 optional" >
+                    <div class="align">
+                    <mat-label class="title mt-2">Reference document</mat-label>
+                    <mat-form-field appearance="fill" class="input-control">
+                        <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                            <mat-icon>attach_file</mat-icon>
+                        </button>
+                        <input type="text" readonly matInput placeholder="{{referenceDocuments}}" />
+                        <input readonly type="file"  hidden #f_input 
+                            (change)="uploadDoc($event, 'referenceDocuments')"
+                            formControlName="referenceDocuments" />
+                        </mat-form-field>
+                        </div>
+                        <mat-hint><strong>File type must in a .pdf or jpeg format and file size
+                                should NOT be more than 10MB.
+                            </strong></mat-hint>
+                   
+                </div>
+    
+               
+               
+                <div class="m-5 d-flex justify-content-between">
+                    <button mat-raised-button color="primary" type="submit" class="log" (click)="AcceptData()">Approve</button>
+                    <button type="button" class="btn btn-primary" (click)="BacktoNocdeptdasbhoard()" *ngIf="viewback">Back</button>
+                      
+                    <button mat-raised-button color="primary" type="submit" class="log" (click)="RejectData()" style="margin-left: 2%;">Reject</button>
+                  </div>
+            </form>
+        </div>
+       
+    </div>
+    
+    
+    </div>
+    
+    
+    

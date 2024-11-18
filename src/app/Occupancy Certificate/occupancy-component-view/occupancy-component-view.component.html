@@ -1,0 +1,521 @@
+<!-- <div class="expansion">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header style="text-align: center;">
+            <mat-panel-title> <b><i>Click to view previous Details filled👇 </i></b></mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-view-noc-page></app-view-noc-page>
+    </mat-expansion-panel>
+</div> -->
+
+<!-- <div class="main-container">
+  <div class="splitMain leftMain">
+    <div class="centeredMain">
+      <app-side-bar></app-side-bar>
+    </div>
+  </div>
+  <div class="splitMain rightMain"> -->
+    <div class="registration-container parentbackgroundcolor">
+      <div class="m-4">
+        <div class="row mb-2 mt-2 d-flex justify-content-between">
+          <hr />
+
+          <mat-card class="display-6 mb-5">
+            <mat-card-header>
+              <mat-card-title class="mb-3">Basic details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="row">
+                <!-- <div class="col-md-4 col-sm-12 col-xs-12">
+                            <mat-form-field appearance="fill" class="input-control">
+                                <div class="placeholder-wrapper">
+                                    <span class="placeholder-text">File number </span> -->
+                <!-- <span class="natureOfProject-value">&nbsp; {{plinthDetails.fileNo}}</span> -->
+                <!-- <span class="natureOfProject-value">&nbsp; {{plinthDetails.frId}}</span> -->
+                <!-- </div>
+                                <input matInput name="natureOfProject" readonly>
+                            </mat-form-field>
+                        </div> -->
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="placeholder-text">File request id</span>
+                      <span class="natureOfProject-value"
+                        >&nbsp; {{ plinthDetails.frId }}</span
+                      >
+                    </div>
+                    <input matInput name="natureOfProject" readonly />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="placeholder-text"
+                        >Plinth applied Date:
+                      </span>
+                      <span class="bHeight-value"
+                        >&nbsp; {{ plinthDetails.fcreatedTime }}</span
+                      >
+                    </div>
+                    <input matInput name="bHeight" readonly />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="placeholder-text"
+                        >Plinth current status:
+                      </span>
+                      <span class="natureOfProject-value"
+                        >&nbsp; {{ plinthDetails.status }}</span
+                      >
+                    </div>
+                    <input matInput name="natureOfProject" readonly />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="placeholder-text">Plot area: </span>
+                      <span class="pArea-value"
+                        >&nbsp; {{ plinthDetails.pArea }}</span
+                      >
+                    </div>
+                    <input matInput name="pArea" readonly />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="placeholder-text">Building height : </span>
+                      <span class="bHeight-value"
+                        >&nbsp; {{ plinthDetails.bHeight }}</span
+                      >
+                    </div>
+                    <input matInput name="bHeight" readonly />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="placeholder-text"
+                        >Updates regarding request :
+                      </span>
+                      <span class="leaseRemarks-value"
+                        >&nbsp; {{ plinthDetails.remark }}</span
+                      >
+                    </div>
+                    <input matInput name="leaseRemarks" readonly />
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="display-6 mb-5">
+            <mat-card-header>
+              <mat-card-title class="mb-3">Document details</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="placeholder-text">Lease deed :</span>
+                      <span class="leaseDeedCertificateName-value"
+                        >&nbsp;{{ leaseDoctype }}</span
+                      >
+                    </div>
+                    <input matInput name="leaseDeedCertificateName" readonly />
+                    <mat-icon
+                      matSuffix
+                      (click)="openCertificatePdf()"
+                      matTooltip="View certificate PDF"
+                      >remove_red_eye</mat-icon
+                    >
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="placeholder-text">Lease deed Remark : </span>
+                      <span class="leaseRemarks-value"
+                        >&nbsp; {{ leaseRemarks }}</span
+                      >
+                    </div>
+                    <input matInput name="leaseRemarks" readonly />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="placeholder-text">Sale deed :</span>
+                      <span class="SaleDeedCertificatename-value"
+                        >&nbsp;{{ SaleDeedDoctype }}</span
+                      >
+                    </div>
+                    <input matInput name="SaleDeedCertificatename" readonly />
+                    <mat-icon
+                      matSuffix
+                      (click)="openSaleDeedCertificatePdf()"
+                      matTooltip="View certificate PDF"
+                      >remove_red_eye</mat-icon
+                    >
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="placeholder-text">Sale deed Remark : </span>
+                      <span class="saleRemark-value"
+                        >&nbsp; {{ saleRemark }}</span
+                      >
+                    </div>
+                    <input matInput name="saleRemark" readonly />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="placeholder-text">Site photograph :</span>
+                      <span class="sitePhotographCertificatename-value"
+                        >&nbsp;{{ siteDocttype }}</span
+                      >
+                    </div>
+                    <input
+                      matInput
+                      name="sitePhotographCertificatename"
+                      readonly
+                    />
+                    <mat-icon
+                      matSuffix
+                      (click)="opensitePhotographCertificatePdf()"
+                      matTooltip="View certificate PDF"
+                      >remove_red_eye</mat-icon
+                    >
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="placeholder-text"
+                        >Site photograph Remark :
+                      </span>
+                      <span class="siteRemark-value"
+                        >&nbsp; {{ siteRemark }}</span
+                      >
+                    </div>
+                    <input matInput name="siteRemark" readonly />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="placeholder-text">Mutition form :</span>
+                      <span class="mutitionFormCertificatename-value"
+                        >&nbsp;{{ mutitionDoctype }}</span
+                      >
+                    </div>
+                    <input
+                      matInput
+                      name="mutitionFormCertificatename"
+                      readonly
+                    />
+                    <mat-icon
+                      matSuffix
+                      (click)="openmutitionFormCertificatePdf()"
+                      matTooltip="View certificate PDF"
+                      >remove_red_eye</mat-icon
+                    >
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <mat-form-field appearance="fill" class="input-control">
+                    <div class="placeholder-wrapper">
+                      <span class="placeholder-text"
+                        >Mutition form Remark :
+                      </span>
+                      <span class="mutitionRemark-value"
+                        >&nbsp; {{ mutitionRemark }}</span
+                      >
+                    </div>
+                    <input matInput name="mutitionRemark" readonly />
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+
+      <div class="main" *ngIf="Inspection">
+        <h1>
+          Inspection Details :
+          <div class="roller">
+            <span id="rolltext"
+              ><br />
+              Authority : - {{ InspectionDetails.authority }}<br />
+              On : - {{ InspectionDetails.inspectionDate | date : "dd/MM/yyyy"
+              }}<br />
+            </span>
+          </div>
+        </h1>
+      </div>
+
+      <div *ngIf="work2onwardhierarchy">
+        <p>document upload by 2nd onwards hierarchy</p>
+      </div>
+
+      <div class="SecondForm-container mt-0 parentbackgroundcolor">
+        <div class="column right">
+          <div class="m-4">
+            <mat-card class="mb-5">
+              <mat-card-header>
+                <mat-card-title class="mb-3"
+                  >Your all filled Noc Form</mat-card-title
+                >
+              </mat-card-header>
+              <mat-card-content>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="ViewNocFire()"
+                  [disabled]="fireForm"
+                >
+                  View Fire Noc
+                </button>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center" *ngIf="plinthReleased">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="button-spacing"
+          (click)="ViewDS()"
+        >
+          View {{ letterName }}
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="button-spacing"
+          (click)="fileRelease()"
+        >
+          File Release
+        </button>
+      </div>
+
+      <div class="buttonHierachy" *ngIf="viewHistoryButton">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Hierarchy History </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="page_head">
+                <div class="referencehierarchy" style="color: black">
+                  <div class="d-flex justify-content-start">
+                    <p>Module:&nbsp;</p>
+                    <p
+                      style="
+                        font-family: Georgia, 'Times New Roman', Times, serif;
+                        color: rgb(25, 129, 133);
+                      "
+                    >
+                      {{ hierarchyModule }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Worked By</th>
+                    <th>Assign To</th>
+                    <th>Work Date</th>
+                    <th>Assign Date</th>
+                    <th>Day Taken(hrs:mins)</th>
+                    <th>Flow Process</th>
+                    <th>Remark</th>
+                    <th>Status</th>
+                    <th>Reference Doc</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let historyItem of hierarchyHistoryData">
+                    <td>{{ historyItem.hierachyUserName }}</td>
+                    <td>{{ historyItem.assignTo }}</td>
+                    <td>{{ historyItem.workDate }}</td>
+                    <td>{{ historyItem.assignDate }}</td>
+                    <td>
+                      {{
+                        calculateTimeDifference(
+                          historyItem.workDate,
+                          historyItem.assignDate
+                        )
+                      }}
+                    </td>
+                    <td>{{ historyItem.hierachyFlowProcess }}</td>
+                    <td>{{ historyItem.hierachyRemark }}</td>
+                    <td>{{ historyItem.workHierachyStatus }}</td>
+                    <td
+                      *ngIf="historyItem.docUniqueId"
+                      (click)="openPdf(historyItem.docUniqueId)"
+                      class="viewDoc"
+                    >
+                      {{ historyItem.docType }}
+                    </td>
+                    <td *ngIf="!historyItem.docUniqueId"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </mat-expansion-panel>
+
+        <br />
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Noc History </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="page_head">
+                <div class="referencehierarchy" style="color: black"></div>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Worked By</th>
+                    <th>NOC Type</th>
+                    <th>Work Date</th>
+                    <th>Assign Date</th>
+                    <th>Day Taken(hrs:mins)</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let historyItem of nocHistoryData">
+                    <td>{{ historyItem.nocDeptRole }}</td>
+                    <td>{{ historyItem.nocDeptType }}</td>
+                    <td>{{ historyItem.workDate }}</td>
+                    <td>{{ historyItem.assignDate }}</td>
+                    <td>
+                      {{
+                        calculateTimeDifference(
+                          historyItem.workDate,
+                          historyItem.assignDate
+                        )
+                      }}
+                    </td>
+                    <td>{{ historyItem.nocWorkStatus }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </mat-expansion-panel>
+
+        <br />
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Payment History </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="page_head">
+                <div class="referencehierarchy" style="color: black"></div>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Transaction No.</th>
+                    <th>Payment Date</th>
+                    <th>Amount</th>
+                    <th>Payment Type</th>
+                    <th>Charge-1</th>
+                    <th>Charge-2</th>
+                    <th>Charge-3</th>
+                    <th>Charge-4</th>
+                    <th>Charge-5</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let paymentHistoryItem of paymentHistoryData">
+                    <td>{{ paymentHistoryItem.transactionRefNo }}</td>
+                    <td>{{ paymentHistoryItem.paymentSuccessDate }}</td>
+                    <td>{{ paymentHistoryItem.amount }}</td>
+                    <td
+                      *ngIf="paymentHistoryItem.docUniqueId"
+                      (click)="openPaymentPdf(paymentHistoryItem.docUniqueId)"
+                      class="viewDoc"
+                    >
+                      {{ paymentHistoryItem.docName }}
+                    </td>
+                    <td *ngIf="!paymentHistoryItem.docUniqueId"></td>
+                    <td>{{ paymentHistoryItem.charge1 }}</td>
+                    <td>{{ paymentHistoryItem.charge2 }}</td>
+                    <td>{{ paymentHistoryItem.charge3 }}</td>
+                    <td>{{ paymentHistoryItem.charge4 }}</td>
+                    <td>{{ paymentHistoryItem.charge5 }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center text-center mb-3">
+      <div class="button-container col-md-12 mt-1">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="log spaced-button"
+          (click)="back()"
+        >
+          Back
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          class="spaced-button"
+          *ngIf="noc"
+          (click)="NocFill()"
+        >
+          Fill Noc
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          class="spaced-button"
+          *ngIf="pay"
+          (click)="payment()"
+        >
+          Pay Now
+        </button>
+      </div>
+    </div>
+  <!-- </div>
+</div> -->

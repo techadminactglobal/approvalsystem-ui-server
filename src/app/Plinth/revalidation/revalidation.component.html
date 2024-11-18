@@ -1,0 +1,214 @@
+<div class="main-container">
+  <div class="splitMain leftMain">
+    <div class="centeredMain">
+      <app-side-bar></app-side-bar>
+    </div>
+  </div>
+  <div class="splitMain rightMain">
+    <div class="row mb-2 mt-2 parentbackgroundcolor">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="split left" style="height: 100%">
+          <div class="m-4">
+            <app-stat-dashboard></app-stat-dashboard>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="split right" style="height: 100%">
+          <div class="one" (click)="totalPending()">
+            <img src="assets/icons/reque.png" alt="request" />
+            <h2>Total Pending Requests</h2>
+            <h2>{{ totalPendingSize }}</h2>
+          </div>
+
+          <div class="one" (click)="totalApprove()">
+            <img src="assets/icons/approve.png" alt="approve" />
+            <h2>Total Approved Requests</h2>
+            <h2>{{ approvedSize }}</h2>
+          </div>
+
+          <div class="one" (click)="totalReject()">
+            <img src="assets/icons/pending.png" alt="pending" />
+            <h2>Total Rejected Requests</h2>
+            <h2>{{ rejectedSize }}</h2>
+          </div>
+
+          <div class="one">
+            <h2>Total Requests</h2>
+            <h2>👉</h2>
+            <h2>{{ totalSize }}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page_head parentbackgroundcolor">
+      <h2
+        class="mb-0 mt-2"
+        style="
+          text-align: center;
+          font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        "
+      >
+        <b>Revalidation Dashboard</b>
+      </h2>
+    </div>
+
+    <hr class="mt-1 mb-2" />
+
+    <div class="table-responsive parentbackgroundcolor">
+      <table class="table table-striped dashboardTable">
+        <thead class="header" *ngIf="reject">
+          <tr>
+            <th scope="col">#</th>
+            <!-- <th scope="col">File No</th> -->
+            <th scope="col">File Name</th>
+            <th scope="col">Created Time</th>
+            <th scope="col">Building Category</th>
+            <th scope="col">Building Sub Category</th>
+            <th scope="col">Current Status</th>
+            <th scope="col">File Rejected By</th>
+            <th scope="col">File Rejection Date</th>
+
+            <th scope="col">Details</th>
+          </tr>
+        </thead>
+        <thead class="header" *ngIf="pending">
+          <tr>
+            <th scope="col">#</th>
+            <!-- <th scope="col">File No</th> -->
+            <th scope="col">File Name</th>
+            <th scope="col">Created Time</th>
+            <th scope="col">Nature of Project</th>
+            <th scope="col">Plot Area</th>
+            <th scope="col">Assigned Auth Role</th>
+            <th scope="col">Current Status</th>
+            <th scope="col">Building Category</th>
+            <th scope="col">Building Sub Category</th>
+          <!--   <th scope="col">Details</th> -->
+          </tr>
+        </thead>
+        <thead class="header" *ngIf="approve">
+          <tr>
+            <th scope="col">#</th>
+            <!-- <th scope="col">File No</th> -->
+            <th scope="col">File Name</th>
+            <th scope="col">Created Time</th>
+            <th scope="col">Nature of Project</th>
+            <th scope="col">Plot Area</th>
+            <th scope="col">Assigned Auth Role</th>
+            <th scope="col">Current Status</th>
+            <th scope="col">Building Category</th>
+            <th scope="col">Building Sub Category</th>
+       <!--      <th scope="col">Details</th> -->
+          </tr>
+        </thead>
+
+        <tbody *ngIf="pending">
+          <tr *ngFor="let element of totalPendingArray; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <!-- <td>{{element.fileNo}}</td> -->
+            <td>{{ element.frId }}</td>
+            <td>{{ element.fcreatedTime | date : "dd/MM/yyyy" }}</td>
+            <td>{{ element.natureOfProject }}</td>
+            <td>{{ element.pArea }}</td>
+            <td>{{ element.assignedAuthRole }}</td>
+            <td>{{ element.status }}</td>
+            <td>{{ element.bCategory }}</td>
+            <td>{{ element.bSubCategory }}</td>
+           <!--  <td
+              (click)="viewDetail(element.fileNo, element.status, element.frId)"
+              class="detail"
+              style="color: blue;" >
+              View Details
+            </td> -->
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="pending">
+          <tr *ngFor="let element of pendingArray[0]; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <!-- <td>{{element.fileNo}}</td> -->
+            <td>{{ element.frId }}</td>
+            <td>{{ element.fcreatedTime | date : "dd/MM/yyyy" }}</td>
+            <td>{{ element.natureOfProject }}</td>
+            <td>{{ element.pArea }}</td>
+            <td>{{ element.assignedAuthRole }}</td>
+            <td>{{ element.status }}</td>
+            <td>{{ element.bCategory }}</td>
+            <td>{{ element.bSubCategory }}</td>
+            <!--  <td
+              (click)="viewDetail(element.fileNo, element.status, element.frId)"
+              class="detail"
+              style="color: blue;">
+              View Details
+            </td> -->
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="approve">
+          <tr *ngFor="let element of approveArray[0]; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <!-- <td>{{element.fileNo}}</td> -->
+            <td>{{ element.frId }}</td>
+            <td>{{ element.fcreatedTime | date : "dd/MM/yyyy" }}</td>
+            <td>{{ element.natureOfProject }}</td>
+            <td>{{ element.pArea }}</td>
+            <td>{{ element.assignedAuthRole }}</td>
+            <td>{{ element.status }}</td>
+            <td>{{ element.bCategory }}</td>
+            <td>{{ element.bSubCategory }}</td>
+           <!--  <td
+              (click)="viewDetail(element.fileNo, element.status, element.frId)"
+              class="detail"
+              style="color: blue;" >
+              View Details
+            </td> -->
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="reject">
+          <tr *ngFor="let element of rejectArray[0]; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ element.fileNo }}</td>
+            <td>{{ element.frId }}</td>
+            <td>{{ element.fcreatedTime | date : "dd/MM/yyyy" }}</td>
+            <td>{{ element.bCategory }}</td>
+            <td>{{ element.bSubCategory }}</td>
+            <td>{{ element.status }}</td>
+            <td>{{ element.fileRejectedBy }}</td>
+            <td>{{ element.fileRejectionDate | date : "dd/MM/yyyy" }}</td>
+
+           <!--  <td
+              (click)="viewDetail(element.fileNo, element.status, element.frId)"
+              class="detail"
+              style="color: blue;">
+              View Details
+            </td> -->
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- <mat-paginator #paginator
+   [length]="collectionSize"
+  [pageSize]="paginator.pageSize"
+  [pageSizeOptions]="[5, 10, 20]"
+  (page)="onPageChange($event)">
+  </mat-paginator> -->
+    </div>
+
+    <!-- <div class="d-flex justify-content-center mt-3 pb-5 parentbackgroundcolor" *ngIf = "loading > 0">
+    <button mat-raised-button color="primary" (click)="exportToExcel()" *ngIf="!reject">Export to Excel</button>
+    <button mat-raised-button color="primary" (click)="exportToExcelReject()" *ngIf="reject">Export to Excel</button>
+  </div>
+  
+  <div *ngIf="loading < 0" class="loader parentbackgroundcolor">
+    <mat-progress-bar mode="indeterminate" class="loading"></mat-progress-bar>
+    <mat-card-title style="margin-top: 15px;margin-left: 47%;">Fetching Data...</mat-card-title>
+  </div>
+  
+  <div *ngIf="loading === 0" class="loader parentbackgroundcolor">
+    <mat-card-title style="margin-top: 15px;text-align: center;">Please create a Request For Viewing Dashboard...</mat-card-title>
+  </div> -->
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="page_head parentbackgroundcolor">
+    <h2
+      class="mb-0 mt-2"
+      style="
+        text-align: center;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      "
+    >
+      <b>Statistics MIS</b>
+    </h2>
+  </div>
+  <form class="search-form" [formGroup]="searchForm">
+  
+  <div class="container" formGroupName="date">
+      <div class="input-wrapper">
+        <div class="input-part">
+          <mat-form-field appearance="fill">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="startPicker" formControlName="startDateControl" placeholder="Select start date" />
+            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+    
+        <div class="input-part">
+          <mat-form-field appearance="fill">
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="endPicker" formControlName="endDateControl" placeholder="Select end date" />
+            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+    
+        <div class="input-part">
+          <button mat-raised-button color="primary" (click)="onSearch()">Search</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+  <!-- app.component.html -->
+
+<!-- First row with "Building Plan Sanction Report" and "Occupancy Certificate Status Report" -->
+<mat-grid-list cols="2" rowHeight="400px" class="chart-grid">
+  <mat-grid-tile *ngFor="let chart of charts; let i = index" 
+                  [ngClass]="{'first-row-chart': chart.data.labels.includes('Building Plan Sanction Report') || chart.data.labels.includes('Occupancy Certificate Status Report')}">
+    <mat-card class="chart-card">
+      <mat-card-header>
+        <mat-card-title>
+          {{
+            chart.data.labels.includes('') ? 'Building Plan Sanction Report' :
+            chart.data.labels.includes(' ') ? 'Occupancy Certificate Status Report' :
+            chart.data.labels.includes('Forest', 'Metro', 'Fire', 'Water') ? 'NOC Status Report' :
+            chart.data.labels.includes(' Architect', 'Supervisior', 'Engineer', ' Structural Engineer') ? 'Consultant/Professionals (A/E/S/SE) Reports' :
+            (chart.type | titlecase) + ' Chart'
+          }}
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <canvas [id]="'chart-' + i"></canvas>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<!-- Remaining charts, each in its own row -->
+
+
+    <button mat-raised-button color="primary" type="submit" (click)="back()" class="button" style="margin: 0 auto; display: block;">
+      Back
+    </button>
+    
+  
+    
+    
+    
+    
+    
+    
+    

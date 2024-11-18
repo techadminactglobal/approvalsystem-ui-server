@@ -1,0 +1,130 @@
+@import './src/app/app.component.scss';
+
+.some-element {
+  @extend .parentbackgroundcolor;
+}
+
+.header {
+    color: white;
+    // text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    text-decoration: wavy;
+    padding: 20px;
+    border-radius: 25px;
+    background-color: #333;
+}
+.title{
+    // font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: x-large;
+   
+  }
+
+
+
+// .box-type {
+//     border: 1px solid #43a50b;
+//     padding: 10px;
+//     border-radius: 6px;
+//     margin-bottom: 20px;
+   
+//     display: flex;
+//     gap: 20px;
+   
+   
+// }
+.input-control{
+  padding-top: 11px;
+  padding-bottom: 1px;
+}
+
+.col-md-4 .box-type {
+    display: inline-block;
+}
+
+  h3{
+    text-align: center;
+  }
+
+  .one{
+    display: flex;
+    justify-content: space-between;
+  }    
+
+  .res{
+    font-family: Sans-serif, 'Times New Roman', Times, serif;
+    font-size: larger;
+    font-weight: 2px;
+    font-style: oblique;
+    color: rgb(0, 0, 0);
+  }
+
+  .custom-dialog {
+    max-width: 80%; 
+    margin: 1.75rem auto;
+  }
+  
+  .referencehierarchy{
+    display: flex;
+    justify-content: space-between;
+    // font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    margin-left: 2%;
+    margin-right: 4%;
+    
+  }
+  .buttonHierachy{
+    border-style: ridge;
+    border-radius: 4px;
+  }
+
+
+
+  ::ng-deep  .mat-step-icon {
+    width: 80px !important; 
+    height: 70px !important;
+    border-radius: 50%; 
+  }
+  ::ng-deep .mat-step-icon-content {
+  font-size: 24px; 
+}
+
+
+.placeholder-wrapper {
+  position: relative;
+}
+
+.placeholder-text {
+  color: black;
+}
+
+.res, .salutation-value, .firstName-value, .middle-value, .lastName-value,
+.licensedNo-value, .dob-value, .gender-value, .professional-value,
+.validform-value, .validTo-value, .addhar-value, .emailId-value,
+.contact-value, .certificateNo-value, .userName-value, .State-value,
+.district-value, .pinCode-value, .address-value {
+    color: rgb(0, 0, 0);
+    // position: absolute;
+}
+
+
+.viewDoc:hover{
+  color: rgb(230, 77, 35);
+  cursor: pointer;
+}
+
+.viewDoc{
+  color: rgb(14, 124, 124);
+}
+
+.view{
+  margin-top: 1%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+
+
+
+
+
+

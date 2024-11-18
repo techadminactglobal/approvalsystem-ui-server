@@ -1,0 +1,87 @@
+@import "./src/app/app.component.scss";
+
+.some-element {
+  @extend .parentbackgroundcolor;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+  }
+  
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Full width of the container */
+  }
+  
+  .input-part {
+    flex: 1; /* Each part takes equal space */
+    margin: 0 4px; /* Small margin for spacing */
+    min-width: 0; /* Prevent overflow */
+  }
+  
+  .mat-form-field {
+    width: 100%; /* Full width within each part */
+  }
+  .grid-list {
+    margin: 20px;
+  }
+  
+  .chart-grid {
+    margin: 20px;
+    width: 100%; /* Ensure the grid takes full width */
+    display: grid;
+    gap: 20px;
+  }
+  
+
+.chart-card {
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  margin: 10px 0;
+  padding: 20px;
+}
+
+.chart-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+mat-card-header {
+  padding-bottom: 10px;
+}
+
+mat-card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+canvas {
+  display: block;
+  width: 100% !important;
+  height: 300px !important;
+  margin: 0 auto;
+}
+
+/* New CSS for left-aligned charts */
+.left-aligned-chart {
+  max-width: 800px; /* Set a maximum width for the first two charts */
+  margin-left: 50vh; /* Align to the left */
+  margin-right: auto; /* Ensure it's not stretched to the right */
+  justify-self: flex-start; /* Aligns the grid item to the left */
+}
+
+  

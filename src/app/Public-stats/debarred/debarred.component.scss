@@ -1,0 +1,37 @@
+@import './src/app/app.component.scss';
+
+.some-element {
+  @extend .parentbackgroundcolor;
+}
+
+.update{
+    margin: 3%;
+    border-style: outset;
+  }
+  .title{
+   margin-left: 5%;
+   font-size: large;
+   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+   font-weight: bold;
+  }
+  .optional{
+    margin: 1%;
+    border-style: outset;
+    
+  }
+  .remarktext textarea {
+    width: 100%; 
+  }
+  .align{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .viewDoc:hover{
+    color: rgb(230, 77, 35);
+    cursor: pointer;
+  }
+  
+  .viewDoc{
+    color: rgb(14, 124, 124);
+  }

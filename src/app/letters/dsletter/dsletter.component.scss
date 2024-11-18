@@ -1,0 +1,31 @@
+.header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    text-decoration: wavy;
+    padding: 20px;
+    border-radius: 25px;
+  }
+  .title{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: x-large;
+  }
+
+p{
+    font-weight:500;
+    font-size: large;
+
+    
+}
+.letter-header {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+.letter-footer {
+  margin-top: 20px;
+}
+.ds-letter{
+    // display: none;
+}

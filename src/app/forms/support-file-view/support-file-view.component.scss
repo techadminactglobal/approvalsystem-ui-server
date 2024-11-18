@@ -1,0 +1,44 @@
+@import './src/app/app.component.scss';
+
+.some-element {
+  @extend .parentbackgroundcolor;
+}
+
+.header {
+    color: white;
+    text-align: center;
+    // font-family: 'Courier New', Courier, monospace;
+    text-decoration: wavy;
+    padding: 20px;
+    border-radius: 25px;
+    background-color: #333;
+}
+.title{
+    // font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: x-large;
+   
+}
+
+// .fid{
+//     font-family: Georgia, 'Times New Roman', Times, serif;
+//     font-size: 20px;
+//     font-weight: 2px;
+//     font-style: oblique;
+//     color: cornflowerblue;
+//     display: inline; 
+//     margin: 0; 
+//   }
+
+
+.placeholder-wrapper {
+    position: relative;
+}
+  
+.placeholder-text {
+    color: black;
+}
+.leaseRemarks-value,.saleRemark-value,.sitePhotographCertificatename-value,.SaleDeedCertificatename-value,.leaseDeedCertificateName-value
+,.siteRemark-value,.mutitionFormCertificatename-value,.mutitionRemark-value,.photograpFormCertificatename-value,.photographRemark-value,
+.photoIdCertificatename-value,.photoIdRemark-value,.companyIdCertificatename-value,.companyIdRemark-value,.docname1,.docReamrk{
+    color: rgb(0, 0, 0);
+}

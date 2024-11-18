@@ -1,0 +1,103 @@
+@import './src/app/app.component.scss';
+
+.some-element {
+  @extend .parentbackgroundcolor;
+}
+
+.header {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  text-decoration: wavy;
+  padding: 20px;
+  border-radius: 25px;
+}
+
+.col {
+  font-weight: bolder;
+}
+
+.title {
+  // font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: large;
+}
+
+#changingText {
+  font-size: x-large;
+  // font-family: 'Courier New', Courier, monospace;
+  color: rgb(113, 5, 237);
+  display: flex;
+  justify-content: center;
+}
+
+.placeholder-wrapper {
+  position: relative;
+}
+
+.placeholder-text {
+  color: black;
+}
+
+.pArea-value,
+.cArea-value,
+.cAreaFar-value,
+.bHeight-value,
+.frontWidth-value,
+.areaAffectedInRoadWidening-value,
+.cPlot-value,
+.mVentilation-value,
+.lcSetback-value,
+.lcFar-value,
+.buitUpArea-value,
+.freeFrom-value,
+.netFar-value,
+.latitude-value,
+.longitude-value,
+.roadWidth-value,
+.gateWidth-value,
+.internalRoad-value,
+.distInteranlRoad-value,
+.deadEnd-value,
+.travelDistance-value,
+.buildingAccessRemarks-value,
+.upperFloorStairs-value,
+.basementsStairs-value,
+.widthStairUpperFloor-value,
+.widthStairBasements-value,
+.staircaseProvision-value,
+.staircaseRemarks-value,
+.functionalitySmokeManger-value,
+.fireExtinguisherNo-value,
+.basementAirChanges-value,
+.upperFloorAirChange-value,
+.freshAirSupply-value,
+.exhaustAirDischarge,
+.smokeManagementRemarks-value,
+.fileType-value,
+.remark-value {
+  color: rgb(0, 0, 0);
+}
+
+.update{
+  margin: 3%;
+  border-style: outset;
+}
+.title{
+ margin-left: 5%;
+ font-size: large;
+ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ font-weight: bold;
+}
+.optional{
+  margin: 3%;
+  border-style: outset;
+  
+}
+.remarktext textarea {
+  width: 100%; 
+}
+.align{
+  display: flex;
+  justify-content: space-between;
+}

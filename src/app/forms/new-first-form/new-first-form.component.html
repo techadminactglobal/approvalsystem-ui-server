@@ -1,0 +1,432 @@
+<!-- <div class="container header mt-5">
+    <h1>File Validation Form</h1>
+</div> -->
+
+<div class="registration-container mt-0 parentbackgroundcolor">
+  <mat-expansion-panel class="mt-4">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Owners Sections 👇</mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-owner-applicant-detials></app-owner-applicant-detials>
+  </mat-expansion-panel>
+
+  <form class="container mt-5 parentbackgroundcolor" [formGroup]="newForm">
+    <mat-card class="display-6 mb-5">
+      <mat-card-header>
+        <mat-card-title class="mb-3">Site location details</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div formGroupName="siteLocationDetails">
+          <div class="row">
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Site address</mat-label>
+                <input matInput placeholder="Site address" formControlName="address" />
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Block</mat-label>
+                <input matInput placeholder="Block" formControlName="blockNumber" />
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Choose state</mat-label>
+                <mat-select placeholder="Choose State" (selectionChange)="onStateChange($event)" formControlName="state">
+                  <mat-option value="">Select state</mat-option>
+                  <mat-option value="AN">Andaman and Nicobar Islands</mat-option>
+                  <mat-option value="AP">Andhra Pradesh</mat-option>
+                  <mat-option value="AR">Arunachal Pradesh</mat-option>
+                  <mat-option value="AS">Assam</mat-option>
+                  <mat-option value="BR">Bihar</mat-option>
+                  <mat-option value="CH">Chandigarh</mat-option>
+                  <mat-option value="CT">Chhattisgarh</mat-option>
+                  <mat-option value="DN">Dadra and Nagar Haveli</mat-option>
+                  <mat-option value="DD">Daman and Diu</mat-option>
+                  <mat-option value="DL">Delhi</mat-option>
+                  <mat-option value="GA">Goa</mat-option>
+                  <mat-option value="GJ">Gujarat</mat-option>
+                  <mat-option value="HR">Haryana</mat-option>
+                  <mat-option value="HP">Himachal Pradesh</mat-option>
+                  <mat-option value="JK">Jammu and Kashmir</mat-option>
+                  <mat-option value="JH">Jharkhand</mat-option>
+                  <mat-option value="KA">Karnataka</mat-option>
+                  <mat-option value="KL">Kerala</mat-option>
+                  <mat-option value="LA">Ladakh</mat-option>
+                  <mat-option value="LD">Lakshadweep</mat-option>
+                  <mat-option value="MP">Madhya Pradesh</mat-option>
+                  <mat-option value="MH">Maharashtra</mat-option>
+                  <mat-option value="MN">Manipur</mat-option>
+                  <mat-option value="ML">Meghalaya</mat-option>
+                  <mat-option value="MZ">Mizoram</mat-option>
+                  <mat-option value="NL">Nagaland</mat-option>
+                  <mat-option value="OR">Odisha</mat-option>
+                  <mat-option value="PY">Puducherry</mat-option>
+                  <mat-option value="PB">Punjab</mat-option>
+                  <mat-option value="RJ">Rajasthan</mat-option>
+                  <mat-option value="SK">Sikkim</mat-option>
+                  <mat-option value="TN">Tamil Nadu</mat-option>
+                  <mat-option value="TG">Telangana</mat-option>
+                  <mat-option value="TR">Tripura</mat-option>
+                  <mat-option value="UP">Uttar Pradesh</mat-option>
+                  <mat-option value="UT">Uttarakhand</mat-option>
+                  <mat-option value="WB">West Bengal</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Choose district</mat-label>
+                <mat-select placeholder="Choose District" formControlName="district">
+                  <mat-option *ngFor="let option of optionsList" [value]="option">
+                    {{ option }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Pincode</mat-label>
+                <input matInput placeholder="Pincode" formControlName="pinCode" />
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Nearest landmark</mat-label>
+                <input matInput placeholder="Nearest landmark" formControlName="landMark" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    
+    
+    <mat-card class="display-6 mb-5">
+      <mat-card-header>
+        <mat-card-title class="mb-3">Project overview</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div formGroupName="basicInfo">
+          <div class="row">
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Nature of project</mat-label>
+                <mat-select placeholder="Nature of project" formControlName="natureOfProject">
+                  <mat-option [value]="">-- Select --</mat-option>
+                  <mat-option [value]="bt.typeId" *ngFor="let bt of natureType">{{ bt.typeName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Project type</mat-label>
+                <mat-select placeholder="Project type" formControlName="bCategory">
+                  <mat-option [value]="">-- Select --</mat-option>
+                  <mat-option [value]="bt.buildingTypeId" *ngFor="let bt of buildingType" (click)="findBuildingSubType(bt.buildingTypeId)">{{ bt.buildingTypeName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Project sub type</mat-label>
+                <mat-select placeholder="Project sub type" formControlName="bSubCategory">
+                  <mat-option [value]="">-- Select --</mat-option>
+                  <mat-option [value]="bt.subTypeId" *ngFor="let bt of buildingSubType">{{ bt.subTypeName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- <mat-card class="display-6 mb-5">
+      <mat-card-header>
+        <mat-card-title class="mb-3">Applicant particulars/applicant specifics</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div formGroupName="applicantInfo">
+          <div class="row mb-3">
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Owner type</mat-label>
+                <mat-select placeholder="Owner type" formControlName="oType">
+                  <mat-option [value]="">-- Select --</mat-option>
+                  <mat-option [value]="bt.type" *ngFor="let bt of ownerType">{{ bt.lable }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Number of owners</mat-label>
+                <input readonly="true" matInput type="number" placeholder="Number of owners"
+                  formControlName="noOfOwners" min="1" [ngModel]="owners" />
+                <button type="button" (click)="incrementOwner()" mat-icon-button matSuffix>
+                  <mat-icon matSuffix>keyboard_arrow_up</mat-icon>
+                </button>
+                <button type="button" (click)="decrementOwner()" mat-icon-button matSuffix>
+                  <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div formArrayName="applicantDetails" *ngFor="let owners of owner_list.controls; index as i">
+          <h3>
+            Owner number - {{ i + 1 }}
+            <span *ngIf="i > 0">
+              <button mat-raised-button color="warn" type="button" (click)="deleteOwner(i)">
+                Remove owner
+              </button>
+            </span>
+          </h3>
+          <div [formGroupName]="i" class="row mb-3">
+            <div class="col-xl-4 col-lg-6 col-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Aadhar number</mat-label>
+                <input matInput placeholder="AadharNum" formControlName="aadharNum" />
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Applicant's name" formControlName="name" />
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Phone number</mat-label>
+                <input type="number" matInput placeholder="Phone number" formControlName="contactNumber" />
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="email" formControlName="email" />
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-12">
+              <mat-form-field>
+                <mat-label>Date of birth</mat-label>
+                <input matInput [matDatepicker]="picker1" formControlName="dob" placeholder="MM/DD/YYYY" />
+                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <mat-card-subtitle> Permanent address </mat-card-subtitle>
+            <div formGroupName="primaryAddress" class="row mb-3">
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Address</mat-label>
+                  <input matInput placeholder="Address" formControlName="address" />
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Block</mat-label>
+                  <input matInput placeholder="Block number" formControlName="blockNumber" />
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>District</mat-label>
+                  <input matInput placeholder="District" formControlName="district" />
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>State/province</mat-label>
+                  <input matInput placeholder="State/province" formControlName="state" />
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Pincode</mat-label>
+                  <input matInput placeholder="Pincode" formControlName="pinCode" />
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Landmark</mat-label>
+                  <input matInput placeholder="Landmark" formControlName="landMark" />
+                </mat-form-field>
+              </div>
+            </div>
+            
+          <mat-checkbox [(ngModel)]="isSameAddress" (change)="copyAddress()">
+            Communication address same as permanent address
+          </mat-checkbox>
+
+            <mat-card-subtitle> Communication address </mat-card-subtitle>
+            <div formGroupName="secondaryAddress" class="row mb-3">
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Address</mat-label>
+                  <input matInput placeholder="Address" formControlName="address" />
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Block</mat-label>
+                  <input matInput placeholder="Block number" formControlName="blockNumber" />
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>District</mat-label>
+                  <input matInput placeholder="District" formControlName="district" />
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>State/province</mat-label>
+                  <input matInput placeholder="State/province" formControlName="state" />
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Pincode</mat-label>
+                  <input matInput placeholder="Pincode" formControlName="pinCode" />
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Landmark</mat-label>
+                  <input matInput placeholder="Landmark" formControlName="landMark" />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card> -->
+
+    <mat-card class="display-6 mb-5">
+      <mat-card-header>
+        <mat-card-title class="mb-3">Site plan specifics/design particulars</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div formGroupName="plotDetails">
+          <div class="row mb-3">
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Plot area (In meter) </mat-label>
+                <input matInput placeholder="Plot area" formControlName="pArea" type="number" />
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-4 col-lg-6 col-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Total covered area (In meter) </mat-label>
+                <input matInput type="number" placeholder="Total covered area" formControlName="cArea" />
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Total covered area by far (In meter) </mat-label>
+                <input matInput type="number" placeholder="Total covered area by far" formControlName="cAreaFar" />
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-4 col-lg-6 col-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Building height (In meter) </mat-label>
+                <input matInput type="number" formControlName="bHeight" />
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-4 col-lg-6 col-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Front width (In meter) </mat-label>
+                <input matInput type="number" placeholder="Front width" formControlName="frontWidth" />
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Area affected under road widening (In meter)
+                </mat-label>
+                <input matInput type="number" placeholder="Area affected under road widening"
+                  formControlName="areaAffectedInRoadWidening" type="number" />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <p>
+                <mat-checkbox formControlName="cPlot">Weather the plot is corner plot?</mat-checkbox>
+              </p>
+            </div>
+
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <p>
+                <mat-checkbox formControlName="mVentilation">Mechanical ventilation</mat-checkbox>
+              </p>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-12">
+              <p>
+                <mat-checkbox formControlName="lcSetback">Do you want to take the benefit of lower category
+                  setback</mat-checkbox>
+              </p>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-12">
+              <p>
+                <mat-checkbox formControlName="lcFar">Benefit from lower category far</mat-checkbox>
+              </p>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="display-6 mb-5">
+      <mat-card-header>
+        <mat-card-title class="mb-3">Building layout document/structural drawing file</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div formArrayName="fileDocDetails" *ngFor="let buildingPlanDocument of file_record.controls; index as i">
+          <div [formGroupName]="i" class="">
+            <div class="row mb-3" style="display: flex; align-items: baseline">
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <h3 class="md-display-2">Building plan</h3>
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <mat-form-field appearance="outline">
+                  <mat-label>Building plan blueprint</mat-label>
+                  <button mat-icon-button matPrefix (click)="f_input.click()">
+                    <mat-icon>attach_file</mat-icon>
+                  </button>
+                  <input type="text" readonly matInput formControlName="frName" placeholder="*File name will come here*"
+                    (click)="f_input.click()" />
+                  <input readonly type="file" multiple hidden #f_input id="buildlingPlanFile{{ i }}"
+                    (change)="uploadAttechedFileDwg($event, 'fileDocDetails', i)" />
+                  <mat-hint><strong>File type must in a .dwg or .dfx format and file size
+                      should NOT be more than 15 MB.
+                    </strong></mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="d-flex justify-content-center me-2 mt-5 mb-5">
+      <div class="col-md-12 mt-1">
+        <!-- <button mat-raised-button color="primary" type="submit"  data-bs-toggle="modal"
+            data-bs-target="#displayModel" class="log" (click)="newFormSubmit()">Validate file</button> -->
+        <button mat-raised-button color="primary" type="submit" class="log" (click)="newFormSubmit()">
+          Validate file
+        </button>
+        <button mat-raised-button color="primary" type="submit" class="log" (click)="back()" style="margin-left: 2%;">
+          Back
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

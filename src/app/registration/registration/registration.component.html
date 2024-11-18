@@ -1,0 +1,512 @@
+<div class="registration-container mt-0 parentbackgroundcolor">
+
+    <div class="header mt-3">
+        <!-- <h1>{{registration}} Registration Form </h1> -->
+        <h1> New Consultant Registration Form</h1>
+    </div>
+
+    <div class="column right">
+        <form [formGroup]="registrationForm">
+            <div class="auth-avatar mt-3">
+                <img src="https://icon-library.com/images/registration-icon-png/registration-icon-png-6.jpg"
+                    alt="registration" class="registration-image">
+            </div>
+
+            <div class="m-4">
+                <h3>Register your-self with your credentials</h3>
+                <hr>
+
+                <div formGroupName="consultantDetailModel">
+                    <div class="row mb-2 mt-2">
+
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">Choose salutation in name</mat-label>
+                            <mat-form-field>
+                                <mat-label>Choose salutation</mat-label>
+                                <mat-select placeholder="Choose professional category" formControlName="salutation">
+                                    <mat-option *ngFor="let salutation of salutation" [value]="salutation.value">
+                                        {{ salutation.viewValue }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">First name</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <mat-label>First name</mat-label>
+                                <input formControlName="firstName" matInput name="firstName" placeholder="First name">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">Middle name</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <mat-label>Middle name</mat-label>
+                                <input formControlName="middleName" matInput name="middleName"
+                                    placeholder="Middle name">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">Last name</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <mat-label>Last name</mat-label>
+                                <input formControlName="lastName" matInput name="lastName" placeholder="Last name">
+                            </mat-form-field>
+                        </div>
+
+
+                        <!-- <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">Choose date of birth</mat-label>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Choose a date</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="dob" placeholder="MM/DD/YYYY">
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div> -->
+
+
+                        
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">Choose date of birth</mat-label>
+                            <mat-form-field appearance="fill">
+                              <mat-label>Choose a date</mat-label>
+                              <input
+                                matInput
+                                [matDatepicker]="picker"
+                                formControlName="dob"
+                                placeholder="MM/DD/YYYY"
+                              />
+                              <mat-datepicker-toggle
+                                matIconSuffix
+                                [for]="picker"
+                              ></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
+                              <mat-error
+                                *ngIf="
+                                  registrationForm
+                                    .get('consultantDetailModel.dob')
+                                    ?.hasError('minAge')
+                                "
+                              >
+                                "Oops, you're not quite there yet! You must be at least 20
+                                years old to register."
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">Choose gender</mat-label>
+                            <mat-radio-group aria-label="Select an option" formControlName="gender"
+                                class="d-flex flex-wrap">
+                                <mat-radio-button [value]="'M'" class="m-0">Male</mat-radio-button>
+                                <mat-radio-button [value]="'F'" class="m-0">Female</mat-radio-button>
+                                <!-- <mat-radio-button [value]="'UN'" class="m-0">pref</mat-radio-button> -->
+                            </mat-radio-group>
+                        </div>
+
+
+
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">Adhaar number</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <mat-label>Adhaar number</mat-label>
+                                <input formControlName="addharNo" matInput name="Addhar" placeholder="Addhar number">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">Email</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <mat-label>Email</mat-label>
+                                <input formControlName="email" matInput name="emailId" placeholder="Email">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">Contact number</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <mat-label>Contact number</mat-label>
+                                <input formControlName="contactNo" matInput name="contactNumber"
+                                    placeholder="Contact number">
+                            </mat-form-field>
+                        </div>
+
+                    
+                        
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title"> Choose professional category</mat-label>
+                            <mat-form-field>
+                                <mat-label>Choose professional category</mat-label>
+                                <mat-select placeholder="Choose professional category"
+                                    formControlName="professionalType">
+                                    <mat-option *ngFor="let prof of ProfessionalCategory" [value]="prof.value"
+                                        (click)="onProfChange(prof.value)">
+                                        {{ prof.viewValue }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                                <!--new zone add NEW-->
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                      <mat-label class="title">Zone Working on</mat-label>
+                                      <mat-form-field>
+                                        <mat-label>Choose preferred Zones</mat-label>
+                                        <!-- 'multiple' allows for multiple selections -->
+                                        <mat-select placeholder="Choose Zones" formControlName="zoneDetails" multiple [(ngModel)]="selectedZones">
+                                            <!-- 'All' Option, toggle select/deselect -->
+                                            <mat-option (click)="selectAllZones()" [disabled]="isAllSelectedZones() && selectedZones.length > 0">
+                                              {{ isAllSelectedZones() ? 'Deselect All' : 'Select All' }}
+                                            </mat-option>
+                                  
+                                          <!-- Dynamic zone options -->
+                                          <mat-option *ngFor="let zone of zones" [value]="zone.zoneName">
+                                            {{ zone.zoneName }}
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                    </div>
+                                
+                                  
+                                  
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <mat-label class="title">Choose Building Type</mat-label>
+                                        <mat-form-field appearance="outline">
+                                          <mat-label>Building type</mat-label>
+                                          <mat-select placeholder="Project type" formControlName="buildingType" [(ngModel)]="selectedBuildingTypes" multiple>
+                                            <!-- "Select All" Option -->
+                                            <mat-option (click)="selectAll()" [value]="null" *ngIf="!isAllSelected()">
+                                              Select All
+                                            </mat-option>
+                                            <mat-option (click)="deselectAll()" [value]="null" *ngIf="isAllSelected()">
+                                              Deselect All
+                                            </mat-option>
+                                      
+                                            <!-- Building Type Options -->
+                                            <mat-option *ngFor="let bt of buildingType" [value]="bt.buildingTypeName">
+                                              {{ bt.buildingTypeName }}
+                                            </mat-option>
+                                          </mat-select>
+                                        </mat-form-field>
+                                      </div>
+                                </div>
+
+                                
+                                  
+                                  
+                                
+
+
+                        <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="proff">
+                            <mat-label class="title">licensed number</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <mat-label>licensed number</mat-label>
+                                <input formControlName="licensedNo" matInput name="licensedNo"
+                                    placeholder="licensed number">
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="proff">
+                            <mat-label class="title">Valid from</mat-label>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Valid from</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="validFrom"
+                                    placeholder="MM/DD/YYYY">
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="proff">
+                            <mat-label class="title">Valid to</mat-label>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Valid to</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="validTo"
+                                    placeholder="MM/DD/YYYY">
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="!proff">
+                            <mat-label class="title">Latest educational certificate number</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <mat-label>Latest educational certificate number</mat-label>
+                                <input formControlName="certificateNo" matInput name="CertificateNo"
+                                    placeholder="Certificate number">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+                <div formGroupName="supportiveDoc">
+                    <div class="row mb-2 mt-2">
+
+                        <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="proff">
+                            <mat-label class="title">licensed certificate</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                                    <mat-icon>attach_file</mat-icon>
+                                </button>
+                                <input type="text" readonly matInput placeholder="{{licensedName}}" />
+                                <input readonly type="file" hidden #f_input
+                                    (change)="uploadDoc($event, 'licensedCertificatename')"
+                                    formControlName="licensedCertificatename" />
+                                <mat-hint><strong>File type must in a .pdf or jpeg format and file size
+                                        should NOT be more than 10 MB.
+                                    </strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="!proff">
+                            <mat-label class="title">Latest Educational Certificate</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                              <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                                <mat-icon>attach_file</mat-icon>
+                              </button>
+                              <input type="text" readonly matInput placeholder="{{ educationalName }}" />
+                              <input readonly type="file" hidden #f_input
+                                     (change)="uploadDoc($event, 'educationalCertificatename')"
+                                     formControlName="educationalCertificatename" />
+                          
+                              <!-- Eye Icon for Preview (will show only if a file is selected) -->
+                              
+                              <button mat-icon-button matSuffix type="button" *ngIf="educationalPreview" (click)="toggleEducationalPreview()">
+                                <mat-icon>visibility</mat-icon>
+                              </button>
+                              <button mat-icon-button class="delete-btn" (click)="deleteEducationalCertificate()">
+                                <i class="fa-solid fa-minus"></i>
+                              </button>
+                             
+                          
+                              <!-- Hint for file type and size -->
+                              <mat-hint>
+                                <strong>File type must be in a .pdf or .jpeg format and file size should NOT be more than 10 MB.</strong>
+                              </mat-hint>
+                            </mat-form-field>
+                          </div>
+                          
+                          <!-- Modal for Viewing the Educational Certificate in Larger Format -->
+                          <div *ngIf="isEducationalPreviewModalOpen" class="preview-modal-overlay">
+                            <div class="preview-modal-content">
+                              <!-- Preview PDF or Image (Based on the File Type) -->
+                              <iframe *ngIf="educationalFileType === 'pdf'" [src]="educationalPreview" frameborder="0" class="modal-image"></iframe>
+                              <img *ngIf="educationalFileType !== 'pdf'" [src]="educationalPreview" alt="Educational Certificate" class="modal-image" />
+                          
+                              <!-- Buttons to delete and close -->
+                              <div class="modal-btn-container">
+                                <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificate()">
+                                  <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+                                </button>
+                                <button mat-icon-button class="close-btn" (click)="closeEducationalPreviewModal()">
+                                  <mat-icon>close</mat-icon>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          
+                        
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">PhotoGraph</mat-label>
+                         <!-- File upload input -->
+                            <mat-form-field appearance="fill" class="input-control">
+                              <!-- Attach file button (visible to trigger file input) -->
+                              <button mat-icon-button matPrefix type="button" (click)="fileInput.click()">
+                                <mat-icon>attach_file</mat-icon>
+                              </button>
+                              
+                              <!-- Display the file name -->
+                              <input type="text" readonly matInput placeholder="{{PhotoName}}" />
+                              
+                              <!-- File input (hidden) -->
+                              <input type="file" hidden #fileInput (change)="uploadDoc($event, 'photoName')" formControlName="photoName" />
+                          
+                              <!-- Eye icon for preview -->
+                              <button mat-icon-button matSuffix type="button" *ngIf="photoPreview" (click)="togglePreview()">
+                                <mat-icon>visibility</mat-icon>
+                              </button>
+                              <button mat-icon-button class="delete-btn" (click)="deletePhoto()">
+                                <i class="fa-solid fa-minus"></i>
+                              </button>
+                          
+                          
+                              <!-- Hint for file type and size -->
+                              <mat-hint>
+                                <strong>File type must be .jpg or .jpeg format and file size should NOT be more than 2 MB.</strong>
+                              </mat-hint>
+                            </mat-form-field>
+                          
+                          </div>
+                          
+ <!-- Modal for viewing the image in a larger format -->
+<div *ngIf="isPreviewModalOpen" class="preview-modal-overlay">
+    <div class="preview-modal-content">
+      <!-- Image preview -->
+      <img [src]="photoPreview" alt="Full View Photo" class="modal-image" />
+  
+      <!-- Buttons container -->
+      <div class="modal-btn-container">
+        <!-- Delete button inside the modal -->
+        <button mat-icon-button class="delete-btns" (click)="deletePhoto()">
+          <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+        </button>
+    
+        <!-- Close button for the modal -->
+        <button mat-icon-button class="close-btn" (click)="closePreviewModal()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+     </div>
+    </div>
+
+             
+
+
+                <div formGroupName="address">
+                    <div class="row mb-2 mt-2">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">Choose state</mat-label>
+                            <mat-form-field>
+                                <mat-label>Choose state</mat-label>
+                                <mat-select placeholder="Choose State" (selectionChange)="onStateChange($event)"
+                                    formControlName="state">
+                                    <mat-option value="">Select state</mat-option>
+                                    <mat-option value="AN">Andaman and Nicobar Islands</mat-option>
+                                    <mat-option value="AP">Andhra Pradesh</mat-option>
+                                    <mat-option value="AR">Arunachal Pradesh</mat-option>
+                                    <mat-option value="AS">Assam</mat-option>
+                                    <mat-option value="BR">Bihar</mat-option>
+                                    <mat-option value="CH">Chandigarh</mat-option>
+                                    <mat-option value="CT">Chhattisgarh</mat-option>
+                                    <mat-option value="DN">Dadra and Nagar Haveli</mat-option>
+                                    <mat-option value="DD">Daman and Diu</mat-option>
+                                    <mat-option value="DL">Delhi</mat-option>
+                                    <mat-option value="GA">Goa</mat-option>
+                                    <mat-option value="GJ">Gujarat</mat-option>
+                                    <mat-option value="HR">Haryana</mat-option>
+                                    <mat-option value="HP">Himachal Pradesh</mat-option>
+                                    <mat-option value="JK">Jammu and Kashmir</mat-option>
+                                    <mat-option value="JH">Jharkhand</mat-option>
+                                    <mat-option value="KA">Karnataka</mat-option>
+                                    <mat-option value="KL">Kerala</mat-option>
+                                    <mat-option value="LA">Ladakh</mat-option>
+                                    <mat-option value="LD">Lakshadweep</mat-option>
+                                    <mat-option value="MP">Madhya Pradesh</mat-option>
+                                    <mat-option value="MH">Maharashtra</mat-option>
+                                    <mat-option value="MN">Manipur</mat-option>
+                                    <mat-option value="ML">Meghalaya</mat-option>
+                                    <mat-option value="MZ">Mizoram</mat-option>
+                                    <mat-option value="NL">Nagaland</mat-option>
+                                    <mat-option value="OR">Odisha</mat-option>
+                                    <mat-option value="PY">Puducherry</mat-option>
+                                    <mat-option value="PB">Punjab</mat-option>
+                                    <mat-option value="RJ">Rajasthan</mat-option>
+                                    <mat-option value="SK">Sikkim</mat-option>
+                                    <mat-option value="TN">Tamil Nadu</mat-option>
+                                    <mat-option value="TG">Telangana</mat-option>
+                                    <mat-option value="TR">Tripura</mat-option>
+                                    <mat-option value="UP">Uttar Pradesh</mat-option>
+                                    <mat-option value="UT">Uttarakhand</mat-option>
+                                    <mat-option value="WB">West Bengal</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">Choose district</mat-label>
+                            <mat-form-field>
+                                <mat-label>Choose district</mat-label>
+                                <mat-select placeholder="Choose District" formControlName="district">
+                                    <mat-option *ngFor="let option of optionsList" [value]="option">
+                                        {{ option }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">Enter pin code</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <mat-label>Pin code</mat-label>
+                                <input formControlName="pinCode" matInput name="pinCode" placeholder="Enter Pin Code">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">Your address</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <mat-label>Your address</mat-label>
+                                <input formControlName="addres" matInput name="address" placeholder="Your Address">
+                            </mat-form-field>
+                        </div>
+
+
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <mat-label class="title">Password</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <mat-label>Password</mat-label>
+                              
+                                <input formControlName="authPwd" matInput name="Password"
+                                    [type]="hidePassword ? 'password' : 'text'">
+                                <button mat-icon-button matSuffix (click)="passwordVisibility()">
+                                    <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                                </button>
+                                <mat-hint><strong> Password shall be combination of min one uppercase, lowercase, numbers & special character .
+                                </strong></mat-hint>
+                            </mat-form-field>
+                          
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+
+                            <mat-label class="title">Confirm password</mat-label>
+                            <span *ngIf="isTrue"
+                                style="color: rgb(2, 85, 25);margin-left: 10%; size: 10px;">{{isPassword}}</span>
+                            <span *ngIf="!isTrue"
+                                style="color: rgb(246, 5, 5);margin-left: 10%; size: 10px;">{{isPassword}}</span>
+
+                            <mat-form-field appearance="fill" class="input-control">
+                                <mat-label>Confirm password</mat-label>
+                                <input formControlName="confirmPassword" matInput name="confirmPassword"
+                                    placeholder="Confirm password" (keyup)="validatePass($event)">
+                             
+                            </mat-form-field>
+                        </div>
+
+
+                    </div>
+                </div>
+
+      
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <mat-label class="title">Enter the captcha</mat-label>
+                    <br>
+                    <mat-label class="captcha disable-copy">{{ captchaString }}</mat-label>
+                    <mat-icon (click)="generateCaptcha()">refresh</mat-icon>
+                    <mat-form-field appearance="fill" class="input-control">
+                        <input formControlName="captcha" matInput name="captcha" placeholder="Enter the captcha">
+                    </mat-form-field>
+                </div>
+
+              
+
+                <div class="text-center" *ngIf="!hideSubmit">
+                    <button mat-raised-button color="primary" type="button" class="log" (click)="submitReg()">Submit Details</button>
+
+                </div>
+
+              
+            </div>
+        </form>
+    </div>
+
