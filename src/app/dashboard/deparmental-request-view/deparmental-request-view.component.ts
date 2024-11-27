@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Data, Router } from '@angular/router';
 import { LockChanges } from '@ngrx/store-devtools/src/actions';
 import { LogarithmicScale } from 'chart.js';
@@ -25,7 +26,7 @@ export class DeparmentalRequestViewComponent {
 
 
   constructor(private service: commonService, public senddata: SendData,
-    private router: Router, private fb: FormBuilder) {
+    private router: Router, private fb: FormBuilder,private sanitizer: DomSanitizer) {
     this.supportForm = this.fb.group({
       pdfFile: ['', Validators.required],
 
@@ -357,6 +358,13 @@ export class DeparmentalRequestViewComponent {
 
 
   referenceDocuments: any = 'File name will come here';
+  refrencePreview: SafeResourceUrl | null = null; // Using SafeResourceUrl for PDF
+  isrefrencePreviewModalOpen: boolean = false;
+  refrenceFileType: string | null = null;
+  approvereferenceDocuments: any = 'File name will come here';
+  approverefrencePreview: SafeResourceUrl | null = null; // Using SafeResourceUrl for PDF
+  isapproveisrefrencePreviewModalOpen: boolean = false;
+  approverefrenceFileType: string | null = null;
   proff: boolean = false;
   docUUID: any;
   docName: any;
@@ -389,6 +397,20 @@ export class DeparmentalRequestViewComponent {
 
     reader.onload = (event: any) => {
       const inputValue = event.target.result;
+      if (arrayName === 'referenceDocuments') {
+        this.refrenceFileType = fileExtension; // Set the file type
+
+        // For PDFs, create a Blob URL
+        if (fileExtension === 'pdf') {
+          this.refrencePreview =
+            this.sanitizer.bypassSecurityTrustResourceUrl(
+              URL.createObjectURL(fileData)
+            ); // Safe URL for PDF
+        } else {
+          this.refrencePreview = inputValue; // Base64 for images
+        }
+      }
+     
 
       const json = {
         "docFileName": fileData.name.split(".")[0],
@@ -428,75 +450,24 @@ export class DeparmentalRequestViewComponent {
     return true;
   }
 
+  togglerefrencePreview() {
+    this.isrefrencePreviewModalOpen = !this.isrefrencePreviewModalOpen;
+  }
 
+  // Close the educational certificate preview modal
+  closerefrencePreviewModal() {
+    this.isrefrencePreviewModalOpen = false;
+  }
 
+  // Delete the educational certificate and reset the preview
+  deleterefrenceCertificate() {
+    this.refrencePreview = null;
+    this.referenceDocuments = 'File name will come here';
+    // Reset form control and close modal
+    this.isrefrencePreviewModalOpen = false;
+  }
 
-  // dsFormName:any = 'File name will come here';
-  // uploadDocs(event: any, arrayName: string) {
-  //   const fileData = event.target.files[0];
-  //   const allowedExtensions = ['pdf', 'jpeg'];
-  //   const maxSize = 10485760;
-
-  //   const fileExtension = fileData.name.split('.').pop()?.toLowerCase();
-  //   if (!allowedExtensions.includes(fileExtension)) {
-  //     alert('Please upload a file with PDF or JPEG extension.');
-  //     event.target.value = '';
-  //     return;
-  //   }
-
-  //   console.log("File size:", fileData.size);
-  //   if (fileData.size > maxSize) {
-  //     event.target.value = '';
-  //     alert('Please upload a file under ' + (maxSize / (1024 * 1024)) + ' MB.');
-  //     return;
-  //   }
-
-  //   this.dsFormName = fileData.name;
-
-  //   const file = event.target.files[0];
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(file);
-
-  //   reader.onload = (event: any) => {
-  //     const inputValue = event.target.result;
-
-  //     const json = {
-  //       "docFileName": fileData.name.split(".")[0],
-  //       "docType": fileData.name.split(".")[1],
-  //       "docByteStream": inputValue.split(",")[1],
-  //       "docName": fileData.name.split(".")[0]
-  //     };
-
-  //     this.service.postService(this.apiConstant.downloadUUID, json).subscribe((res: any) => {
-  //       console.log("data =================> ", res);
-  //       this.docName = arrayName,
-  //         this.docType = fileData.name.split(".")[0] + "." + fileData.name.split(".")[1],
-  //         this.docUUID = res.docUUID
-
-  //       if (!res.docUUID) {
-  //         return;
-  //       }
-  //     });
-  //   };
-  // }
-
-
-  // checkFileTypee(event: any, extensions = ['jpg', 'jpeg', 'pdf']) {
-  //   var fileData = event.target.files[0];
-  //   if (!fileData) return false;
-  //   var ext = fileData.name.split('.').slice(-1)[0];
-  //   console.log(ext);
-
-  //   if (!extensions.includes(ext)) {
-  //     alert('File type is incorrect.');
-  //     return false;
-  //   }
-  //   if (fileData.size > 10485760) {
-  //     alert('File Size must be below 10MB.');
-  //     return false;
-  //   }
-  //   return true;
-  // }
+  
 
   buildForm() {
     this.supportForm = new FormGroup({
@@ -537,6 +508,19 @@ export class DeparmentalRequestViewComponent {
 
     reader.onload = (event: any) => {
       const inputValue = event.target.result;
+      if(arrayName === 'pdfFile'){
+        this.approverefrenceFileType = fileExtension; // Set the file type
+
+        // For PDFs, create a Blob URL
+        if (fileExtension === 'pdf') {
+          this.approverefrencePreview =
+            this.sanitizer.bypassSecurityTrustResourceUrl(
+              URL.createObjectURL(fileData)
+            ); // Safe URL for PDF
+        } else {
+          this.approverefrencePreview = inputValue; // Base64 for images
+        }
+      }
 
       const json = {
         "docFileName": fileData.name.split(".")[0],
@@ -574,6 +558,24 @@ export class DeparmentalRequestViewComponent {
       });
     };
   }
+  //ds letter
+  togglerefrenceapprovePreview() {
+    this.isapproveisrefrencePreviewModalOpen = !this.isapproveisrefrencePreviewModalOpen;
+  }
+
+  // Close the educational certificate preview modal
+  closerefrenceapprovePreviewModal() {
+    this.isapproveisrefrencePreviewModalOpen = false;
+  }
+
+  // Delete the educational certificate and reset the preview
+  deleterefrenceapproveCertificate() {
+    this.approverefrencePreview = null;
+    this.pdfFileName = 'File name will come here';
+    // Reset form control and close modal
+    this.isapproveisrefrencePreviewModalOpen = false;
+  }
+
 
 
 

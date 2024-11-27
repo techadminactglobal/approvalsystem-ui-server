@@ -106,15 +106,17 @@
 
                         <div class="col-md-4 col-sm-12 col-xs-12">
                             <mat-form-field appearance="fill" class="input-control">
-                                <div class="placeholder-wrapper">
-                                    <span class="placeholder-text">Do you want to take the benefit of lower category
-                                        setback :</span>
-                                    <span class="lcSetback-value">&nbsp; {{fireNocs.lcSetback}}</span>
+                                <div class="placeholder-wrapper" style="display: flex; align-items: center; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 100%;">
+                                    <span class="placeholder-text" matTooltip="{{ fireNocs.lcSetback }}" 
+                                          style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; max-width: 100%;">
+                                        Do you want to take the benefit of lower category setback:
+                                        <span class="lcSetback-value">&nbsp;{{ fireNocs.lcSetback }}</span>
+                                    </span>
                                 </div>
                                 <input matInput name="lcSetback" readonly>
                             </mat-form-field>
                         </div>
-
+                        
 
                         <div class="col-md-4 col-sm-12 col-xs-12">
                             <mat-form-field appearance="fill" class="input-control">
@@ -308,9 +310,12 @@
     
                     <div class="col-md-4 col-sm-12 col-xs-12">
                         <mat-form-field appearance="fill" class="input-control">
-                            <div class="placeholder-wrapper">
-                                <span class="placeholder-text">Distance of the internal road from building line (In meter) :</span>
-                                <span class="distInteranlRoad-value">&nbsp; {{fireNocs.distInteranlRoad}}</span>
+                            <div class="placeholder-wrapper" style="display: flex; align-items: center; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 100%;">
+                                <span class="placeholder-text" matTooltip="{{ fireNocs.distInteranlRoad }}" 
+                                      style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; max-width: 100%;">
+                                    Distance of the internal road from building line (In meter):
+                                    <span class="distInteranlRoad-value">&nbsp;{{ fireNocs.distInteranlRoad }}</span>
+                                </span>
                             </div>
                             <input matInput name="distInteranlRoad" readonly>
                         </mat-form-field>
@@ -340,14 +345,22 @@
                     
     
                     <div class="col-md-4 col-sm-12 col-xs-12">
-                        <mat-form-field appearance="fill" class="input-control">
-                            <div class="placeholder-wrapper">
-                                <span class="placeholder-text">Remarks :</span>
-                                <span class="buildingAccessRemarks-value">&nbsp; {{fireNocs.buildingAccessRemarks}}</span>
-                            </div>
-                            <input matInput name="buildingAccessRemarks" readonly>
+                        <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                          <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                            <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
+                              Remarks :
+                            </span>
+                            <!-- Apply inline CSS for ellipsis effect and hover functionality -->
+                            <span class="buildingAccessRemarks-value" 
+                                  style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; position: relative; cursor: pointer;" 
+                                  title="{{ fireNocs.buildingAccessRemarks }}">
+                              {{ fireNocs.buildingAccessRemarks }}
+                            </span>
+                          </div>
+                          <input matInput name="buildingAccessRemarks" readonly style="width: 100%;" />
                         </mat-form-field>
-                    </div>
+                      </div>
+                      
                     
                     
                 </div>
@@ -410,25 +423,34 @@
     
                         <div class="col-md-4 col-sm-12 col-xs-12">
                             <mat-form-field appearance="fill" class="input-control">
-                                <div class="placeholder-wrapper">
-                                    <span class="placeholder-text">Provision of Staircase (As per clause 7.11 of UBBL 2016) :</span>
-                                    <span class="staircaseProvision-value">&nbsp; {{fireNocs.staircaseProvision}}</span>
+                                <div class="placeholder-wrapper" style="display: flex; align-items: center; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 100%;">
+                                    <span class="placeholder-text" matTooltip="{{ fireNocs.staircaseProvision }}" 
+                                          style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; max-width: 100%;">
+                                        Provision of Staircase (As per clause 7.11 of UBBL 2016):
+                                        <span class="staircaseProvision-value">&nbsp;{{ fireNocs.staircaseProvision }}</span>
+                                    </span>
                                 </div>
                                 <input matInput name="staircaseProvision" readonly>
                             </mat-form-field>
                         </div>
                         
-    
                         <div class="col-md-4 col-sm-12 col-xs-12">
-                            <mat-form-field appearance="fill" class="input-control">
-                                <div class="placeholder-wrapper">
-                                    <span class="placeholder-text">Remarks :</span>
-                                    <span class="staircaseRemarks-value">&nbsp; {{fireNocs.staircaseRemarks}}</span>
-                                </div>
-                                <input matInput name="staircaseRemarks" readonly>
+                            <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                              <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                                <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
+                                  Remarks :
+                                </span>
+                                <!-- Apply inline CSS for ellipsis effect and hover functionality -->
+                                <span class="staircaseRemarks-value" 
+                                      style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; position: relative; cursor: pointer;" 
+                                      title="{{ fireNocs.staircaseRemarks }}">
+                                  {{ fireNocs.staircaseRemarks }}
+                                </span>
+                              </div>
+                              <input matInput name="staircaseRemarks" readonly style="width: 100%;" />
                             </mat-form-field>
-                        </div>
-                        
+                          </div>
+                          
     
                     </div>
                 <!-- </div> -->
@@ -459,13 +481,17 @@
     
                         <div class="col-md-4 col-sm-12 col-xs-12">
                             <mat-form-field appearance="fill" class="input-control">
-                                <div class="placeholder-wrapper">
-                                    <span class="placeholder-text">Fire Extinguishers Total numbers on each floor :</span>
-                                    <span class="fireExtinguisherNo-value">&nbsp; {{fireNocs.fireExtinguisherNo}}</span>
+                                <div class="placeholder-wrapper" style="display: flex; align-items: center; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 100%;">
+                                    <span class="placeholder-text" matTooltip="{{ fireNocs.fireExtinguisherNo }}" 
+                                          style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; max-width: 100%;">
+                                        Fire Extinguishers Total numbers on each floor:
+                                        <span class="fireExtinguisherNo-value">&nbsp;{{ fireNocs.fireExtinguisherNo }}</span>
+                                    </span>
                                 </div>
                                 <input matInput name="fireExtinguisherNo" readonly>
                             </mat-form-field>
                         </div>
+                        
                         
     
                         <div class="col-md-4 col-sm-12 col-xs-12">
@@ -512,14 +538,22 @@
                         </div>
                         
                         <div class="col-md-4 col-sm-12 col-xs-12">
-                            <mat-form-field appearance="fill" class="input-control">
-                                <div class="placeholder-wrapper">
-                                    <span class="placeholder-text">Remarks :</span>
-                                    <span class="smokeManagementRemarks-value">&nbsp; {{fireNocs.smokeManagementRemarks}}</span>
-                                </div>
-                                <input matInput name="smokeManagementRemarks" readonly>
+                            <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                              <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                                <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
+                                  Remarks :
+                                </span>
+                                <!-- Apply inline CSS for ellipsis effect and hover functionality -->
+                                <span class="smokeManagementRemarks-value" 
+                                      style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; position: relative; cursor: pointer;" 
+                                      title="{{ fireNocs.smokeManagementRemarks }}">
+                                  {{ fireNocs.smokeManagementRemarks }}
+                                </span>
+                              </div>
+                              <input matInput name="smokeManagementRemarks" readonly style="width: 100%;" />
                             </mat-form-field>
-                        </div>
+                          </div>
+                          
                         
                     <!-- </div> -->
                 </div>
@@ -547,15 +581,22 @@
                 
     
                 <div class="col-md-4 col-sm-12 col-xs-12">
-                    <mat-form-field appearance="fill" class="input-control">
-                        <div class="placeholder-wrapper">
-                            <span class="placeholder-text">Remarks :</span>
-                            <span class="remark-value">&nbsp; {{fireNocs.fileRemarks}}</span>
-                        </div>
-                        <input matInput name="remark" readonly>
+                    <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                      <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                        <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
+                          Remarks :
+                        </span>
+                        <!-- Apply inline CSS for ellipsis effect and hover functionality -->
+                        <span class="remark-value" 
+                              style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; position: relative; cursor: pointer;" 
+                              title="{{ fireNocs.fileRemarks }}">
+                          {{ fireNocs.fileRemarks }}
+                        </span>
+                      </div>
+                      <input matInput name="remark" readonly style="width: 100%;" />
                     </mat-form-field>
-                </div>
-                
+                  </div>
+                  
     
             </mat-card-content>
         </mat-card>
@@ -594,6 +635,12 @@
                         <input readonly type="file"  hidden #f_input 
                             (change)="uploadDoc($event, 'referenceDocuments')"
                             formControlName="referenceDocuments" />
+                            <button mat-icon-button matSuffix type="button" *ngIf="refrencePreview" (click)="togglerefrencePreview()">
+                                <mat-icon>visibility</mat-icon>
+                              </button>
+                              <button mat-icon-button class="delete-btn" (click)="deleterefrenceCertificate()">
+                                <mat-icon>delete</mat-icon>
+                              </button>
                         </mat-form-field>
                         </div>
                         <mat-hint><strong>File type must in a .pdf or jpeg format and file size
@@ -601,12 +648,30 @@
                             </strong></mat-hint>
                    
                 </div>
+                 <!-- Modal for Viewing the Educational Certificate in Larger Format -->
+             <div *ngIf="isrefrencePreviewModalOpen" class="preview-modal-overlay">
+                <div class="preview-modal-content">
+                  <!-- Preview PDF or Image (Based on the File Type) -->
+                  <iframe *ngIf="refrenceFileType === 'pdf'" [src]="refrencePreview" frameborder="0" class="modal-image"></iframe>
+                  <img *ngIf="refrenceFileType !== 'pdf'" [src]="refrencePreview" alt="Educational Certificate" class="modal-image" />
+              
+                  <!-- Buttons to delete and close -->
+                  <div class="modal-btn-container">
+                   <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificatesitemutationotherid()">
+                        <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+                    </button> -->
+                    <button mat-icon-button class="close-btn" (click)="closerefrencePreviewModal()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
     
                
                
                 <div class="m-5 d-flex justify-content-between">
                     <button mat-raised-button color="primary" type="submit" class="log" (click)="AcceptData()">Approve</button>
-                    <button type="button" class="btn btn-primary" (click)="BacktoNocdeptdasbhoard()" *ngIf="viewback">Back</button>
+                    <button mat-raised-button color="primary" type="button" class="btn btn-primary" (click)="BacktoNocdeptdasbhoard()" *ngIf="viewback">Back</button>
                       
                     <button mat-raised-button color="primary" type="submit" class="log" (click)="RejectData()" style="margin-left: 2%;">Reject</button>
                   </div>

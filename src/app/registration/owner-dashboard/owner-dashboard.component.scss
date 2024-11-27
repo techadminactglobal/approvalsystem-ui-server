@@ -19,12 +19,57 @@
   .w-100 {
     width: 100%;
   }
-  .detail {
-    font-family: "Courier New", Courier, monospace;
-    font-size: smaller;
-    font-style: italic;
+ /* Overall styling for table */
+.table-responsive {
+  overflow-x: auto;
+  margin-bottom: 20px;
+  background-color: #f9f9f9; /* Light background for contrast */
+}
+
+.dashboardTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+/* Header styling */
+.table th {
+  text-align: left;
+  padding: 12px;
+  background-color: #007bff; /* Blue background for header */
+  color: white;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Body styling */
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  vertical-align: middle;
+}
+
+/* Row hover effect */
+.table tbody tr:hover {
+  background-color: #f1f1f1; /* Light grey background on hover */
+}
+
+/* Table cell alignment */
+.table td, .table th {
+  text-align: left; /* Ensures text is left-aligned */
+  vertical-align: middle;
+}
+
+/* Styling for "View Details" cell */
+.detail {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+
+/* Add responsive adjustments */
+@media (max-width: 768px) {
+  .table th, .table td {
+    padding: 8px;
   }
-  .detail:hover {
-    cursor: pointer;
-    color: rgb(67, 121, 13);
-  }
+}

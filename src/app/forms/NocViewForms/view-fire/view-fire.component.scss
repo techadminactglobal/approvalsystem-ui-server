@@ -101,3 +101,154 @@
   display: flex;
   justify-content: space-between;
 }
+
+/*Style for the upload field */
+.upload-container {
+  margin: 20px 0;
+}
+
+.input-control {
+  width: 100%;
+}
+
+.preview-container {
+  margin-top: 10px;
+  position: relative;
+}
+
+.image-frame {
+  display: inline-block;
+  position: relative;
+}
+
+.preview-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.delete-btn,
+.view-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  right: 30px;
+}
+
+.view-btn {
+  right: 10px;
+}
+
+//* Overlay to cover the screen */
+.preview-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* If you want to ensure your modal content stays centered and responsive */
+.preview-modal-content {
+  position: relative;
+  width: 100%;  /* Ensure modal content uses the full width */
+  height: 90vh; /* Use 90% of the viewport height for the modal */
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Make the iframe in the modal take up more space */
+/* Ensure the iframe takes a larger, responsive space but keeps the content visible */
+.preview-modal-content iframe {
+  width: 100%;    /* Make iframe take up full width of the modal */
+  height: 90vh;   /* Set iframe height to 90% of the viewport height */
+  border: none;   /* Remove any borders */
+  object-fit: contain;  /* Ensure the content is scaled correctly without being distorted */
+  max-width: 100%;  /* Prevent iframe from exceeding the modal width */
+  max-height: 90vh;  /* Prevent iframe from exceeding the modal height */
+}/* Image preview styling */
+.modal-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-height: 70vh;
+  margin-bottom: 20px;
+}
+
+/* Container for the buttons to position them correctly */
+.modal-btn-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+}
+
+/* Delete button styling */
+.delete-btn {
+  background-color: #fff;;
+  color: #d32f2f; /* Red color for the delete icon */
+  font-size: 18px; /* Smaller icon size */
+  padding: 4px; /* Less padding to make it more compact */
+  transition: color 0.3s ease; /* Smooth color change when hovered */
+}
+
+
+.delete-btn:focus {
+  outline: none; /* Remove focus outline for a cleaner look */
+}
+
+.delete-btns {
+  color: white;
+  font-size: 50px; /* Increase font size for better visibility */
+  border-radius: 50%;
+  padding: 15px;   /* Increase padding to make the button larger */
+  transition: background-color 0.3s;
+  width: 49px;    /* Set width for the button */
+  height: 46px;   /* Set height for the button */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/* Close button styling */
+.close-btn {
+  background-color: white;
+  color: black;
+  font-size: 24px;
+  border-radius: 50%;
+  padding: 10px;
+  transition: background-color 0.3s;
+  margin-right: 2%;
+}
+
+.iframe{
+  height: 50%;
+  width: 30%;
+}

@@ -262,6 +262,7 @@ export class LoginComponent {
             this.senddata.hierarchyUserName = res.userName;
             this.router.navigate(['/departmentDashboard']);
           } else if (res.roleId == '002') {
+            this.senddata.hierarchyId = 0;
             this.senddata.requestid = res.userName;
             this.router.navigate(['/registrationView']);
           } else if (res.roleId == 'f-101') {

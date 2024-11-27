@@ -26,12 +26,6 @@
     <button mat-raised-button color="primary"  class="m-3" data-bs-toggle="modal" data-bs-target="#displayModelee" class="m-3"  (click)="viewPaymentHistory()">View Payment History</button>
 </div> -->
 
-<div class="text-center" *ngIf="viewLetter">
-    <button mat-raised-button color="primary" type="submit" class="button-spacing" (click)="ViewDS()">View
-        {{letterName}}</button>
-    <button mat-raised-button color="primary" type="submit" class="button-spacing" (click)="fileRelease()">File
-        Release</button>
-</div>
 
 
 
@@ -177,12 +171,18 @@
         </div>
     </mat-expansion-panel>
 </div>
+<div class="text-center" *ngIf="viewLetter" style="margin-top: 5vh;">
+    <button mat-raised-button color="primary" type="submit" class="button-spacing" (click)="ViewDS()">View
+        {{letterName}}</button>
+    <button mat-raised-button color="primary" type="submit" class="button-spacing" (click)="fileRelease()">File
+        Release</button>
+        <button mat-raised-button color="primary" type="submit" class="text-center" (click)="back()">
+    Back
+</button>
+</div>
+
 
 
 <div class="text-center" *ngIf="viewPaymentButton">
     <button mat-raised-button color="primary" type="submit" (click)="payment()"   style="margin: 1px auto; display: block;">Pay Now</button>
 </div>
-<button mat-raised-button color="primary" type="submit" class="text-center" (click)="back()"
-style="margin: 2px auto; display: block;">
-    Back
-</button>

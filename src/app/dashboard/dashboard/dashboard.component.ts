@@ -111,6 +111,9 @@ export class DashboardComponent implements OnInit {
       } else if (rejectStatus.includes(item.status)) {
         this.rejectedSize++;
         this.rejectArray.push(item);
+      // }else {
+      //   this.approvedSize++;
+      //   this.approveArray.push(item);
       }
     });
 
@@ -199,7 +202,16 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['/OwnerApplicantDetials']);
     } else if(status == COMMONCONSTANTS.Status_AcceptByArchitect){
       this.router.navigate(['/form/new-first-component']);
-    }else{
+    }else if (status == 'Request Released') {
+      this.router.navigate(['/plinthComponent']);
+    } else if (status == 'Plinth Applied' || status == 'Plinth Payment Completed & Inspection Schedule' || status == 'Plinth Approval Hierachy - 2nd' || status == 'Plinth Rejection Hierachy - 2nd' || status == 'Plinth Ds Pending' || status == 'Plinth Ds Applied - Plinth Approved' || status == 'Plinth Released' || status == 'Plinth Initial Deposite' || status == 'Plinth Rejected') {
+      this.router.navigate(['/plintComponentView']);
+    } else if (status == "Plinth Released") {
+      this.router.navigate(['/OccupancyComponent']);
+    } else if (status == 'Occupancy Applied' || status == 'Occupancy Noc Submit' || status == 'Occupancy Payment Completed & Assigned to Noc Dept' || status == 'Occupany Initial Deposite' || status == 'Occupancy Payment Completed & Inspection Schedule' || status == 'Occupancy Approval Hierachy - 2nd' || status == 'Occupancy Approval Hierachy - 3nd' || status == 'Occupancy Rejection Hierachy - 2nd' || status == 'Occupancy Rejection Hierachy - 3nd' || 
+      status == 'Occupancy Pending For payment' || status == 'Occupancy Payment Completed' || status == 'Occupancy Ds Pending' || status == 'Occupancy Ds Applied - Occupancy Approved' || status == 'Occupancy Released' || status == 'Occupancy Rejected') {
+      this.router.navigate(['/OccupancyComponentView']);
+    } else{
       this.router.navigate(['/NewFormView']);
     }
   }

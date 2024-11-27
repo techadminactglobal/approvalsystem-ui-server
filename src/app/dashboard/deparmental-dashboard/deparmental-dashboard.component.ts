@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { commonService } from 'src/app/services/common.service';
 // import { MatPaginator } from '@angular/material/paginator';
-import { MatPaginator, PageEvent } from '@angular/material/paginator'; 
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { API_PATH } from 'src/environments/api-constant';
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class DeparmentalDashboardComponent implements AfterViewInit {
   dataSource!: MatTableDataSource<any>;
 
-  displayedColumns: string[] = ['serialNumber','Reference Id', 'Request type', 'Created By', 'statusId', 'createdDate', 'hierachyId', 'details'];
+  displayedColumns: string[] = ['serialNumber', 'Reference Id', 'Request type', 'Created By', 'statusId', 'createdDate', 'hierachyId', 'details'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -32,10 +32,10 @@ export class DeparmentalDashboardComponent implements AfterViewInit {
       if (res.data != null) {
         this.approvedSize = res.data.length;
         this.senddata.approveSize = res.data.length;
-        
+
         this.approveData = res.data;
         console.log(this.approveData);
-        
+
       }
     })
 
@@ -47,25 +47,44 @@ export class DeparmentalDashboardComponent implements AfterViewInit {
         console.log(this.rejectedSize);
         this.rejectData = res.data;
         console.log(this.rejectData);
-        
+
       }
     })
 
     setTimeout(() => {
-      this.totalSize = this.approvedSize + this.pendingSize +this.rejectedSize;
+
+      // Initialize the totalData array
+      this.totalData = [];
+
+      // Combine all the data into one array
+      const combinedData = [
+        ...this.approveData != null ? this.approveData : [],
+        ...this.dataArray != null ? this.dataArray : [],
+        ...this.rejectData != null ? this.rejectData : []
+      ].filter(item => item && Object.keys(item).length > 0); // Removes empty arrays or falsy items  
+
+      // Push the combined data into the 0th index of totalData
+      this.totalData.push(combinedData);
+
+      console.log(this.totalData, "total data visible");
+
+      this.totalArray();
+
+      this.totalSize = this.approvedSize + this.pendingSize + this.rejectedSize;
       this.senddata.totalSize = this.totalSize;
     }, 1000);
 
     let data: any = localStorage.getItem('userData');
     data = JSON.parse(data);
-    
+
   }
 
-  totalSize:any;
-  approveData:any;
-  rejectData:any;
+  totalSize: any;
+  approveData: any = null;
+  rejectData: any = null;
+  totalData: any[] = [];
   apiConstant = API_PATH;
-  dataArray: any;
+  dataArray: any = null;
 
   // viewDashboard() {
   //   // let request: any = { "hierarchyRole": this.senddata.roleId }
@@ -91,9 +110,9 @@ export class DeparmentalDashboardComponent implements AfterViewInit {
         });
         this.dataSource = new MatTableDataSource(this.dataArray);
         this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort; 
+        this.dataSource.sort = this.sort;
         console.log(this.dataArray);
-      
+
       }
     })
   }
@@ -103,26 +122,26 @@ export class DeparmentalDashboardComponent implements AfterViewInit {
   }
 
 
-  viewDetail(consultantName: string , fileNo: any , hierarchyId:string , frId:string) {
-    if(hierarchyId == "regNew"){
-    console.log(consultantName);
-    this.senddata.paymentFor = hierarchyId;
-    this.senddata.requestid = consultantName;
-    this.router.navigate(['/deptRequestView']);
-    }else if(hierarchyId =="fileNew"){
+  viewDetail(consultantName: string, fileNo: any, hierarchyId: string, frId: string) {
+    if (hierarchyId == "regNew") {
+      console.log(consultantName);
+      this.senddata.paymentFor = hierarchyId;
+      this.senddata.requestid = consultantName;
+      this.router.navigate(['/deptRequestView']);
+    } else if (hierarchyId == "fileNew") {
       console.log(fileNo);
       this.senddata.paymentFor = hierarchyId;
       this.senddata.requestid = fileNo;
       this.senddata.frid = frId;
       this.router.navigate(['/deptRequestView'])
-    }else if (hierarchyId =="plinthNew"){
+    } else if (hierarchyId == "plinthNew") {
       console.log(fileNo);
       this.senddata.paymentFor = hierarchyId;
       this.senddata.requestid = fileNo;
       this.senddata.frid = frId;
-      this.senddata.callFrom ="Dept",
-      this.router.navigate(['/deptRequestView']);
-    }else if (hierarchyId =="OCNew"){
+      this.senddata.callFrom = "Dept",
+        this.router.navigate(['/deptRequestView']);
+    } else if (hierarchyId == "OCNew") {
       console.log(fileNo);
       this.senddata.paymentFor = hierarchyId;
       this.senddata.requestid = fileNo;
@@ -178,12 +197,12 @@ export class DeparmentalDashboardComponent implements AfterViewInit {
     console.log('New data for page:', newData);
     this.dataSource = new MatTableDataSource<any>(newData);
   }
-  
-  
-  pendingSize:any = 0;
-  approvedSize:any = 0;
-  rejectedSize:any = 0;
-  totalPending(){
+
+
+  pendingSize: any = 0;
+  approvedSize: any = 0;
+  rejectedSize: any = 0;
+  totalPending() {
     this.service.getDeptDashboard(this.apiConstant.GET_DEPT_DASHBOARD + "?hierarchyRole=", this.senddata.hierarchyId).subscribe((res: any) => {
       console.log(res);
       if (res.data != null) {
@@ -193,43 +212,58 @@ export class DeparmentalDashboardComponent implements AfterViewInit {
         // console.log(this.dataArray);
         // this.dataArray.push(res.data);
 
-       
-          this.pendingSize = res.data.length;
-          this.dataArray = res.data.map((item: any, index: number) => {
-            return { ...item, serialNumber: index + 1 };
-          });
-          this.dataSource = new MatTableDataSource(this.dataArray);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort; 
-          console.log(this.dataArray);
 
-          
+        this.pendingSize = res.data.length;
+        this.dataArray = res.data.map((item: any, index: number) => {
+          return { ...item, serialNumber: index + 1 };
+        });
+        this.dataSource = new MatTableDataSource(this.dataArray);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        console.log(this.dataArray);
+
+
       }
     })
   }
 
-  totalApprove(){
+  totalApprove() {
     this.dataArray = [];
     this.dataArray = this.approveData.map((item: any, index: number) => {
-        return { 
-          ...item, serialNumber: index + 1 
-        };
+      return {
+        ...item, serialNumber: index + 1
+      };
     });
 
     this.dataSource = new MatTableDataSource(this.dataArray);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    
+
   }
 
-  totalReject(){
+  totalReject() {
     this.dataArray = [];
     console.log(this.dataArray)
-    
+
     this.dataArray = this.rejectData.map((item: any, index: number) => {
-        return { 
-          ...item, serialNumber: index + 1 
-        };
+      return {
+        ...item, serialNumber: index + 1
+      };
+    });
+
+    this.dataSource = new MatTableDataSource(this.dataArray);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  totalArray() {
+    this.dataArray = [];
+    console.log(this.dataArray)
+
+    this.dataArray = this.totalData[0].map((item: any, index: number) => {
+      return {
+        ...item, serialNumber: index + 1
+      };
     });
 
     this.dataSource = new MatTableDataSource(this.dataArray);

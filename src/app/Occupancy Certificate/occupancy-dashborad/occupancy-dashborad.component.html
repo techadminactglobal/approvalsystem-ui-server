@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="splitMain rightMain">
-    <div class="row mb-2 mt-2 parentbackgroundcolor">
+    <!-- <div class="row mb-2 mt-2 parentbackgroundcolor">
       <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="split left" style="height: 100%">
           <div class="m-4">
@@ -33,13 +33,19 @@
             <h2>{{ rejectedSize }}</h2>
           </div>
 
-          <div class="one">
+          <div class="one" (click)="totalReqeust()">
             <h2>Total Requests</h2>
             <h2>👉</h2>
             <h2>{{ totalSize }}</h2>
           </div>
         </div>
       </div>
+    </div> -->
+
+    <div class="one" (click)="totalPending()">
+      <img src="assets/icons/reque.png" alt="request" />
+      <h2>Total Pending Requests</h2>
+      <h2>{{ pendingSize }}</h2>
     </div>
 
     <div class="page_head parentbackgroundcolor">
@@ -58,10 +64,9 @@
 
     <div class="table-responsive parentbackgroundcolor">
       <table class="table table-striped dashboardTable">
-        <thead class="header" *ngIf="reject">
+        <!-- <thead class="header" *ngIf="reject">
           <tr>
             <th scope="col">#</th>
-            <!-- <th scope="col">File No</th> -->
             <th scope="col">File Name</th>
             <th scope="col">Created Time</th>
             <th scope="col">Building Category</th>
@@ -72,11 +77,10 @@
 
             <th scope="col">Details</th>
           </tr>
-        </thead>
+        </thead> -->
         <thead class="header" *ngIf="pending">
           <tr>
             <th scope="col">#</th>
-            <!-- <th scope="col">File No</th> -->
             <th scope="col">File Name</th>
             <th scope="col">Created Time</th>
             <th scope="col">Nature of Project</th>
@@ -88,10 +92,9 @@
             <th scope="col">Details</th>
           </tr>
         </thead>
-        <thead class="header" *ngIf="approve">
+        <!-- <thead class="header" *ngIf="approve">
           <tr>
             <th scope="col">#</th>
-            <!-- <th scope="col">File No</th> -->
             <th scope="col">File Name</th>
             <th scope="col">Created Time</th>
             <th scope="col">Nature of Project</th>
@@ -102,12 +105,11 @@
             <th scope="col">Building Sub Category</th>
             <th scope="col">Details</th>
           </tr>
-        </thead>
+        </thead> -->
 
         <tbody *ngIf="pending">
           <tr *ngFor="let element of pendingArray; let i = index">
             <th scope="row">{{ i + 1 }}</th>
-            <!-- <td>{{element.fileNo}}</td> -->
             <td>{{ element.frId }}</td>
             <td>{{ element.fcreatedTime | date : "dd/MM/yyyy" }}</td>
             <td>{{ element.natureOfProject }}</td>
@@ -124,11 +126,30 @@
             </td>
           </tr>
         </tbody>
-
+<!-- 
         <tbody *ngIf="approve">
           <tr *ngFor="let element of approveArray[0]; let i = index">
             <th scope="row">{{ i + 1 }}</th>
-            <!-- <td>{{element.fileNo}}</td> -->
+            <td>{{ element.frId }}</td>
+            <td>{{ element.fcreatedTime | date : "dd/MM/yyyy" }}</td>
+            <td>{{ element.natureOfProject }}</td>
+            <td>{{ element.pArea }}</td>
+            <td>{{ element.assignedAuthRole }}</td>
+            <td>{{ element.status }}</td>
+            <td>{{ element.bCategory }}</td>
+            <td>{{ element.bSubCategory }}</td>
+            <td
+              (click)="viewDetail(element.fileNo, element.status, element.frId)"
+              class="detail"
+              style="color: blue;" >
+              View Details
+            </td>
+          </tr>
+        </tbody>
+
+        <tbody *ngIf="total">
+          <tr *ngFor="let element of totalArray[0]; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
             <td>{{ element.frId }}</td>
             <td>{{ element.fcreatedTime | date : "dd/MM/yyyy" }}</td>
             <td>{{ element.natureOfProject }}</td>
@@ -149,7 +170,6 @@
         <tbody *ngIf="reject">
           <tr *ngFor="let element of rejectArray[0]; let i = index">
             <th scope="row">{{ i + 1 }}</th>
-            <!-- <td>{{element.fileNo}}</td> -->
             <td>{{ element.frId }}</td>
             <td>{{ element.fcreatedTime | date : "dd/MM/yyyy" }}</td>
             <td>{{ element.bCategory }}</td>
@@ -165,7 +185,7 @@
               View Details
             </td>
           </tr>
-        </tbody>
+        </tbody> -->
       </table>
 
       <!-- <mat-paginator #paginator

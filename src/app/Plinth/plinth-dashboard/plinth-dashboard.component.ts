@@ -17,12 +17,13 @@ export class PlinthDashboardComponent {
     private dialogRef: MatDialog,
     private senddata: SendData,
     private router: Router
-  ) {}
+  ) { }
 
   pendingSize = 0;
   approvedSize = 0;
   rejectedSize = 0;
   totalSize: number = 0;
+  totalArray: any[] = [];
   pendingArray: any[] = [];
   approveArray: any[] = [];
   rejectArray: any[] = [];
@@ -31,15 +32,34 @@ export class PlinthDashboardComponent {
   reject: boolean = false;
   approve: boolean = false;
   pending: boolean = false;
+  total: boolean = false;
   totalPendingArray: any[] = [];
-  totalPendingSize: any;
+  totalPendingSize=0;
 
   ngOnInit() {
     this.plinthDashboardData();
+    this.pending = true;
+    // setTimeout(() => {
+    //   // Initialize the totalData array
+    //   this.totalArray = [];
 
-    setTimeout(() => {
-      this.totalSize = this.pendingSize + this.approvedSize + this.rejectedSize;
-    }, 1000);
+    //   // Combine all the data into one array
+    //   const combinedData = [
+    //     ...this.approveArray.length > 0 ? this.approveArray : [],
+    //     ...this.totalPendingArray.length > 0 ? this.totalPendingArray : [],
+    //     ...this.pendingArray.length > 0 ? this.pendingArray : [],
+    //     ...this.rejectArray.length > 0 ? this.rejectArray : []
+    //   ].filter(item => item && Object.keys(item).length > 0); // Removes empty arrays or falsy items      
+      
+
+    //   // Push the combined data into the 0th index of totalData
+    //   this.totalArray.push(combinedData);
+
+    //   console.log(this.totalArray, "total array for plinth dashboard");
+
+    //   this.totalSize = this.totalArray[0].length;
+    //   this.pending = true;
+    // }, 1000);
   }
 
   plinthDashboardData() {
@@ -56,9 +76,9 @@ export class PlinthDashboardComponent {
         this.pending = true;
         this.reject = false;
         this.pendingArray.push(res.data);
-        this.pendingSize = this.pendingArray[0].length;
+        this.totalPendingSize = this.pendingArray[0].length;
         console.log(this.pendingSize, 'size pending plinth');
-        // this.senddata.pendingSize = this.pendingSize;
+        this.senddata.pendingSize = this.pendingSize;
         console.log(this.pendingArray, 'data plint array...');
       });
 
@@ -78,42 +98,42 @@ export class PlinthDashboardComponent {
         console.log(this.approveArray, 'data plint array...');
       });
     //pending
-    this.service
-      .getDeptDashboard(this.apiConstant.PlintPendingDashboard, request)
-      .subscribe((res: any) => {
-        console.log('**************', res);
-        // Ensure `res.data` is an array and not null or undefined
-        if (Array.isArray(res.data) && res.data.length > 0) {
-          // Assuming res.data is an array of elements
-          this.pendArr = res.data;
+    // this.service
+    //   .getDeptDashboard(this.apiConstant.PlintPendingDashboard, request)
+    //   .subscribe((res: any) => {
+    //     console.log('**************', res);
+    //     // Ensure `res.data` is an array and not null or undefined
+    //     if (Array.isArray(res.data) && res.data.length > 0) {
+    //       // Assuming res.data is an array of elements
+    //       this.pendArr = res.data;
 
-          // Concatenate new data to totalPendingArray
-          this.totalPendingArray = this.totalPendingArray.concat(this.pendArr);
-          console.log(
-            this.totalPendingArray,
-            'total pending array after API response'
-          );
-        }
+    //       // Concatenate new data to totalPendingArray
+    //       this.totalPendingArray = this.totalPendingArray.concat(this.pendArr);
+    //       console.log(
+    //         this.totalPendingArray,
+    //         'total pending array after API response'
+    //       );
+    //     }
 
-        // If `this.pendingArray` has data, merge it as well
-        // if (Array.isArray(this.pendingArray) && this.pendingArray.length > 0) {
-        //   this.totalPendingArray = this.totalPendingArray.concat(this.pendingArray);
-        //   console.log(this.totalPendingArray, "total pend array after local array merge");
-        // }
+      //   // If `this.pendingArray` has data, merge it as well
+      //   // if (Array.isArray(this.pendingArray) && this.pendingArray.length > 0) {
+      //   //   this.totalPendingArray = this.totalPendingArray.concat(this.pendingArray);
+      //   //   console.log(this.totalPendingArray, "total pend array after local array merge");
+      //   // }
 
-        console.log(this.totalPendingArray, 'total pending array final');
-        this.totalPendingArray = this.totalPendingArray;
-        this.totalPendingSize = this.totalPendingArray.length + this.pendingSize;
-        // this.senddata.pendingSize = this.pendingSize;
+      //   console.log(this.totalPendingArray, 'total pending array final');
+      //   this.totalPendingArray = this.totalPendingArray;
+      //   this.totalPendingSize = this.totalPendingArray.length + this.pendingSize;
+      //   // this.senddata.pendingSize = this.pendingSize;
 
-        this.senddata.pendingSize = this.totalPendingSize;
+      //   this.senddata.pendingSize = this.totalPendingSize;
 
-        // this.pendingArray[0].push(res.data);
-        // this.pendingSize = this.pendingArray[0].length;
-        // console.log(this.pendingSize,"size pending plinth");
-        // this.senddata.pendingSize = this.pendingSize;
-        // console.log(this.pendingArray,"data plint array...");
-      });
+      //   // this.pendingArray[0].push(res.data);
+      //   // this.pendingSize = this.pendingArray[0].length;
+      //   // console.log(this.pendingSize,"size pending plinth");
+      //   // this.senddata.pendingSize = this.pendingSize;
+      //   // console.log(this.pendingArray,"data plint array...");
+      // });
 
     //rejected
     this.service
@@ -129,12 +149,14 @@ export class PlinthDashboardComponent {
         this.senddata.rejectSize = this.rejectedSize;
         console.log(this.rejectArray, 'data plint array...');
       });
+
   }
 
   totalPending() {
     this.reject = false;
     this.approve = false;
     this.pending = true;
+    this.total = false;
     console.log(this.totalPendingArray);
   }
 
@@ -142,6 +164,7 @@ export class PlinthDashboardComponent {
     this.reject = false;
     this.pending = false;
     this.approve = true;
+    this.total = false;
     console.log(this.approveArray);
   }
 
@@ -149,7 +172,15 @@ export class PlinthDashboardComponent {
     this.reject = true;
     this.pending = false;
     this.approve = false;
+    this.total = false;
     console.log(this.rejectArray);
+  }
+
+  totalReqeust() {
+    this.reject = false;
+    this.pending = false;
+    this.approve = false;
+    this.total = true;
   }
 
   viewDetail(fileNo: string, status: string, frId: string) {
@@ -159,8 +190,9 @@ export class PlinthDashboardComponent {
     this.senddata.callFrom = 'plinth';
     if (status == 'Request Released') {
       this.router.navigate(['/plinthComponent']);
-    } else {
-      this.router.navigate(['/plintComponentView']);
-    }
+    } 
+    // else {
+  //     this.router.navigate(['/plintComponentView']);
+  //   }
   }
 }

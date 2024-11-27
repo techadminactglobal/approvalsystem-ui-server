@@ -7,6 +7,7 @@ import { PhotographnameModalComponent } from '../../photographname-modal/photogr
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { COMMONCONSTANTS } from 'src/app/CONSTANTS/constants';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-view-fire',
@@ -20,7 +21,7 @@ export class ViewFireComponent {
     private service: commonService,
     private router: Router,
     public senddata: SendData,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog, private sanitizer: DomSanitizer) { }
 
   buildingDetails: any[] = [];
   geoDetails: any[] = [];
@@ -113,6 +114,9 @@ export class ViewFireComponent {
   });
 
   referenceDocuments: any = 'File name will come here';
+  refrencePreview: SafeResourceUrl | null = null; // Using SafeResourceUrl for PDF
+  isrefrencePreviewModalOpen: boolean = false;
+  refrenceFileType: string | null = null;
   proff: boolean = false;
   docUUID: any;
   docName: any;
@@ -145,6 +149,19 @@ export class ViewFireComponent {
 
     reader.onload = (event: any) => {
       const inputValue = event.target.result;
+      if (arrayName === 'referenceDocuments') {
+        this.refrenceFileType = fileExtension; // Set the file type
+
+        // For PDFs, create a Blob URL
+        if (fileExtension === 'pdf') {
+          this.refrencePreview =
+            this.sanitizer.bypassSecurityTrustResourceUrl(
+              URL.createObjectURL(fileData)
+            ); // Safe URL for PDF
+        } else {
+          this.refrencePreview = inputValue; // Base64 for images
+        }
+      }
 
       const json = {
         "docFileName": fileData.name.split(".")[0],
@@ -183,7 +200,22 @@ export class ViewFireComponent {
     }
     return true;
   }
+  togglerefrencePreview() {
+    this.isrefrencePreviewModalOpen = !this.isrefrencePreviewModalOpen;
+  }
 
+  // Close the educational certificate preview modal
+  closerefrencePreviewModal() {
+    this.isrefrencePreviewModalOpen = false;
+  }
+
+  // Delete the educational certificate and reset the preview
+  deleterefrenceCertificate() {
+    this.refrencePreview = null;
+    this.referenceDocuments = 'File name will come here';
+    // Reset form control and close modal
+    this.isrefrencePreviewModalOpen = false;
+  }
 
   AcceptData() {
     if (this.deptForm.invalid) {

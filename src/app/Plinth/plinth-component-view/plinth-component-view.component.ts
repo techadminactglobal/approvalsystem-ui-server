@@ -328,7 +328,7 @@ export class PlinthComponentViewComponent {
       this.dept = true;
       this.router.navigate(['/departmentDashboard']);
     } else {
-      this.router.navigate(['/plinthDashboard']);
+      this.router.navigate(['/dashboard']);
     }
   }
 

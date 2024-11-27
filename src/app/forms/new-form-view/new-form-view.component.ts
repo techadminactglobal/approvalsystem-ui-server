@@ -64,7 +64,7 @@ export class NewFormViewComponent {
 
   }
 
-
+status:any;
   backButton: boolean = false;
   ngOnInit(): void {
     this.fileprcessedDetail();
@@ -74,6 +74,7 @@ export class NewFormViewComponent {
       console.log(data);
 
       this.createdBy = data.basicInfo.fileCreatedBy;
+      this.status = data.basicInfo.status;
 
       if (data.basicInfo.status == COMMONCONSTANTS.Status_FileProcessed) {
         this.fileReupload = false;
@@ -409,6 +410,7 @@ export class NewFormViewComponent {
   back() {
     this.router.navigate(['/dashboard']);
   }
+  
 }
 
 

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { SendData } from 'src/app/SendData';
 import { commonService } from 'src/app/services/common.service';
 import { API_PATH } from 'src/environments/api-constant';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-occupancy-component',
@@ -20,13 +21,27 @@ export class OccupancyComponentComponent implements OnInit {
   SaleDeedName: string = 'File name will come here';
   sitePhotographName: string = 'File name will come here';
   mutitionFormName: string = 'File name will come here';
+  isPreviewModalOpen: boolean = false;
+  // For managing preview and file names
+  educationalPreview: SafeResourceUrl | null = null; // Using SafeResourceUrl for PDF
+  isEducationalPreviewModalOpen: boolean = false;
+  educationalFileType: string | null = null;
+  saleDeedPreview: SafeResourceUrl | null = null;
+  isSaleDeedPreviewModalOpen: boolean = false;
+  saleDeedFileType: string | null = null;
+  sitePhotographNamePreview: SafeResourceUrl | null = null;
+  issitePhotographNameModalOpen: boolean = false;
+  sitePhotographNameFileType: string | null = null;
+  mutitionFormNamePreview: SafeResourceUrl | null = null;
+  ismutitionFormNameModalOpen: boolean = false;
+  mutitionFormNameFileType: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private service: commonService,
     private dialogRef: MatDialog,
     private senddata: SendData,
-    private router: Router
+    private router: Router, private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -116,12 +131,73 @@ export class OccupancyComponentComponent implements OnInit {
         this.mutitionFormName = `${fileName}.${fileExt}`;
         break;
     }
+    if (arrayName === 'educationalCertificatename') {
+      this.leaseDeedName = fileData.name;
+    } else if (arrayName === 'SaleDeedCertificatename') {
+      this.SaleDeedName = fileData.name;
+    } else if (arrayName === 'sitePhotographCertificatename') {
+      this.sitePhotographName = fileData.name;
+    } else if (arrayName === 'mutitionFormCertificatename') {
+      this.mutitionFormName = fileData.name;
+    }
+   
 
     const reader = new FileReader();
     reader.readAsDataURL(fileData);
 
     reader.onload = (event: any) => {
       const inputValue = event.target.result;
+      if (arrayName === 'leaseDeedCertificateName') {
+        this.educationalFileType = fileExtension; // Set the file type
+
+        // For PDFs, create a Blob URL
+        if (fileExtension === 'pdf') {
+          this.educationalPreview =
+            this.sanitizer.bypassSecurityTrustResourceUrl(
+              URL.createObjectURL(fileData)
+            ); // Safe URL for PDF
+        } else {
+          this.educationalPreview = inputValue; // Base64 for images
+        }
+      }
+      if (arrayName === 'SaleDeedCertificatename') {
+        this.saleDeedFileType = fileExtension; // Set the file type
+
+        // For PDFs, create a Blob URL
+        if (fileExtension === 'pdf') {
+          this.saleDeedPreview = this.sanitizer.bypassSecurityTrustResourceUrl(
+            URL.createObjectURL(fileData)
+          ); // Safe URL for PDF
+        } else {
+          this.saleDeedPreview = inputValue; // Base64 for images
+        }
+      }
+      if (arrayName === 'sitePhotographCertificatename') {
+        this.sitePhotographNameFileType = fileExtension; // Set the file type
+
+        // For PDFs, create a Blob URL
+        if (fileExtension === 'pdf') {
+          this.sitePhotographNamePreview =
+            this.sanitizer.bypassSecurityTrustResourceUrl(
+              URL.createObjectURL(fileData)
+            ); // Safe URL for PDF
+        } else {
+          this.sitePhotographNamePreview = inputValue; // Base64 for images
+        }
+      }
+      if (arrayName === 'mutitionFormCertificatename') {
+        this.mutitionFormNameFileType = fileExtension; // Set the file type
+
+        // For PDFs, create a Blob URL
+        if (fileExtension === 'pdf') {
+          this.mutitionFormNamePreview =
+            this.sanitizer.bypassSecurityTrustResourceUrl(
+              URL.createObjectURL(fileData)
+            ); // Safe URL for PDF
+        } else {
+          this.mutitionFormNamePreview = inputValue; // Base64 for images
+        }
+      }
 
       const json = {
         "docFileName": fileName,
@@ -147,6 +223,78 @@ export class OccupancyComponentComponent implements OnInit {
       });
     };
   }
+   // Toggle modal visibility for educational preview
+   toggleEducationalPreview() {
+    this.isEducationalPreviewModalOpen = !this.isEducationalPreviewModalOpen;
+  }
+
+  // Close the educational certificate preview modal
+  closeEducationalPreviewModal() {
+    this.isEducationalPreviewModalOpen = false;
+  }
+
+  // Delete the educational certificate and reset the preview
+  deleteEducationalCertificate() {
+    this.educationalPreview = null;
+    this.leaseDeedName = 'File name will come here';
+    // Reset form control and close modal
+    this.isEducationalPreviewModalOpen = false;
+  }
+  // Toggle modal visibility for educational preview
+  toggleEducationalPreviews() {
+    this.isSaleDeedPreviewModalOpen = !this.isSaleDeedPreviewModalOpen;
+  }
+
+  // Close the educational certificate preview modal
+  closeEducationalPreviewModals() {
+    this.isSaleDeedPreviewModalOpen = false;
+  }
+
+  // Delete the educational certificate and reset the preview
+  deleteEducationalCertificates() {
+    this.saleDeedPreview = null;
+    this.SaleDeedName = 'File name will come here';
+    // Reset form control and close modal
+    this.isSaleDeedPreviewModalOpen = false;
+  }
+
+  ////site photo grapg
+  toggleEducationalPreviewsite() {
+    this.issitePhotographNameModalOpen = !this.issitePhotographNameModalOpen;
+  }
+
+  // Close the educational certificate preview modal
+  closeEducationalPreviewModalsite() {
+    this.issitePhotographNameModalOpen = false;
+  }
+
+  // Delete the educational certificate and reset the preview
+  deleteEducationalCertificatesite() {
+    this.sitePhotographNamePreview = null;
+    this.sitePhotographName = 'File name will come here';
+    // Reset form control and close modal
+    this.issitePhotographNameModalOpen = false;
+  }
+
+  ///////mution type
+
+  toggleEducationalPreviewsitemutation() {
+    this.ismutitionFormNameModalOpen = !this.ismutitionFormNameModalOpen;
+  }
+
+  // Close the educational certificate preview modal
+  closeEducationalPreviewModalsitemutation() {
+    this.ismutitionFormNameModalOpen = false;
+  }
+
+  // Delete the educational certificate and reset the preview
+  deleteEducationalCertificatesitemutation() {
+    this.mutitionFormNamePreview = null;
+    this.mutitionFormName = 'File name will come here';
+    // Reset form control and close modal
+    this.ismutitionFormNameModalOpen = false;
+  }
+
 
 
   formData: any[] = [];

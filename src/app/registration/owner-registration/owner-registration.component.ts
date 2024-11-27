@@ -275,7 +275,7 @@ export class OwnerRegistrationComponent implements OnInit {
       reader.readAsDataURL(file);
     }
   }
-
+  today: Date = new Date(); // Sets today's date
   
   onSubmit() {
     this.registrationForm.markAllAsTouched();

@@ -269,14 +269,23 @@
                 </div>
 
                 <div class="col-md-4 col-sm-12 col-xs-12">
-                    <mat-form-field appearance="fill" class="input-control">
-                        <div class="placeholder-wrapper">
-                            <span class="placeholder-text">Zone Working on :</span>
-                            <span class="zoneDetails-value">&nbsp;{{zone}}</span>
-                        </div>
-                        <input  matInput name="zoneDetails" readonly>
+                    <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                      <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start; width: 100%; overflow: hidden; box-sizing: border-box;">
+                        <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">Zone Working on: </span>
+                        
+                        <!-- Apply ellipsis for zone -->
+                        <span class="zoneDetails-value" 
+                              style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 150px); cursor: pointer;" 
+                              title="{{ zone }}">
+                          {{ zone }}
+                        </span>
+                      </div>
+                  
+                      <!-- Input with ellipsis applied, readonly to prevent editing -->
+                      <input matInput name="zoneDetails"  readonly style="width: 100%;" />
                     </mat-form-field>
-                </div>
+                  </div>
+                  
 
                 <div class="col-md-4 col-sm-12 col-xs-12">
                     <mat-form-field appearance="fill" class="input-control">
@@ -290,16 +299,24 @@
 
 
 
-
-                <div class="col-md-4 col-sm-12 col-xs-12">
-                    <mat-form-field appearance="fill" class="input-control">
-                        <div class="placeholder-wrapper">
-                            <span class="placeholder-text">Address :</span>
-                            <span class="address-value">&nbsp;{{address}}</span>
-                        </div>
-                        <input  matInput name="address" readonly>
+                  <div class="col-md-4 col-sm-12 col-xs-12">
+                    <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                      <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start; width: 100%; overflow: hidden; box-sizing: border-box;">
+                        <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">Address: </span>
+                        
+                        <!-- Apply ellipsis for address -->
+                        <span class="address-value" 
+                              style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 150px); cursor: pointer;" 
+                              title="{{ address }}">
+                          {{ address }}
+                        </span>
+                      </div>
+                  
+                      <!-- Input with ellipsis applied, readonly to prevent editing -->
+                      <input matInput name="address" readonly style="width: 100%;" />
                     </mat-form-field>
-                </div>
+                  </div>
+                  
                 
                
             </div>
@@ -425,3 +442,7 @@
         </div>
       </mat-expansion-panel>
     </div>
+
+    <button class="logout-button btn-outline-success" (click)="logout()" *ngIf="viewLogout">
+        Logout
+      </button>

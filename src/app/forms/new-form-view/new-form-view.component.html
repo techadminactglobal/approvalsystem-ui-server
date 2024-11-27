@@ -8,6 +8,14 @@
   <div class="col-md-4 col-sm-12 col-xs-12">
     <mat-label class="title">File Request Id :- </mat-label>
     <p class="fid">{{ frId }}</p>
+    <br>
+    <br>
+    <div class="marquee">
+      <div class="track">
+        <div class="content" *ngIf="status === 'Form Submitted GIS Pending'">
+          ...The file request has been successfully submitted and is now awaiting GIS processing. Please open the GIS app on your mobile and capture the precise Longitude and Latitude coordinates for the plot.        </div>
+      </div>
+    </div>
   </div>
 
   <!-- <div class="col-md-4 col-sm-12 col-xs-12">
@@ -54,24 +62,36 @@
             </div>
 
             <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Project Sub type: </span>
-                  <span class="natureOfProject-value">&nbsp; {{ bSubCategory }}</span>
+              <mat-form-field appearance="fill" class="input-control" style="width: 100%; display: block;">
+                <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: space-between;">
+                  <span class="placeholder-text" style="flex-shrink: 0;">Project Sub type: </span>
+                  <span class="natureOfProject-value" 
+                        style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 150px); position: relative; cursor: pointer;" 
+                        title="{{ bSubCategory }}">
+                    {{ bSubCategory }}
+                  </span>
                 </div>
                 <input matInput name="natureOfProject" readonly />
               </mat-form-field>
             </div>
-
+            
             <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">File current status: </span>
-                  <span class="natureOfProject-value">&nbsp; {{ currentStatus }}</span>
+              <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                  <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
+                    File current status: 
+                  </span>
+                  <!-- Apply inline CSS for ellipsis effect and hover functionality -->
+                  <span class="natureOfProject-value" 
+                        style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; position: relative; cursor: pointer;" 
+                        title="{{ currentStatus }}">
+                    {{ currentStatus }}
+                  </span>
                 </div>
-                <input matInput name="natureOfProject" readonly />
+                <input matInput name="natureOfProject" readonly style="width: 100%;" />
               </mat-form-field>
             </div>
+            
           </div>
         </mat-card-content>
       </mat-card>
@@ -83,19 +103,29 @@
         <mat-card-content>
           <div class="row">
             <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Site address: </span>
-                  <span class="site-value">&nbsp; {{ address }}</span>
+              <mat-form-field appearance="fill" class="input-control" style="width: 100%; display: block;">
+                <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                  <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
+                    Site address:
+                  </span>
+                  <!-- Add the ellipsis functionality -->
+                  <span class="site-value" 
+                        style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 90%; max-width: 100%; position: relative; cursor: pointer;" 
+                        title="{{ address }}">
+                    {{ address }}
+                  </span>
                 </div>
                 <input matInput name="address" readonly />
               </mat-form-field>
             </div>
+            
+            
+            
 
             <div class="col-md-4 col-sm-12 col-xs-12">
               <mat-form-field appearance="fill" class="input-control">
                 <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Block number : </span>
+                  <span class="placeholder-text">Block : </span>
                   <span class="blockNumber-value">&nbsp; {{ blockNumber }}</span>
                 </div>
                 <input matInput name="blockNumber" readonly />
@@ -133,194 +163,27 @@
             </div>
 
             <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Nearest landmark : </span>
-                  <span class="landMark-value">&nbsp; {{ landMark }}</span>
+              <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                  <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
+                    Nearest landmark: 
+                  </span>
+                  <!-- Apply inline CSS for ellipsis effect and hover functionality -->
+                  <span class="landMark-value" 
+                        style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; cursor: pointer;" 
+                        title="{{ landMark }}">
+                    {{ landMark }}
+                  </span>
                 </div>
-                <input matInput name="landMark" readonly />
+                <input matInput name="landMark" readonly style="width: 100%;" />
               </mat-form-field>
             </div>
+            
+            
           </div>
         </mat-card-content>
       </mat-card>
 
-      <!-- <mat-card class="display-6 mb-5">
-        <mat-card-header>
-          <mat-card-title class="mb-3">Applicant particulars/applicant specifics</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="row" *ngFor="let applicantData of ApplicantParticulars; let i = index">
-            <mat-card-title class="mb-3">Applicant {{ i + 1 }}</mat-card-title>
-
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">AadharNum: </span>
-                  <span class="aadharNum-value">&nbsp; {{ applicantData.aadharNum }}</span>
-                </div>
-                <input matInput name="aadharNum" readonly />
-              </mat-form-field>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Name : </span>
-                  <span class="name-value">&nbsp; {{ applicantData.name }}</span>
-                </div>
-                <input matInput name="name" readonly />
-              </mat-form-field>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Phone number : </span>
-                  <span class="contactNumber-value">&nbsp; {{ applicantData.contactNumber }}</span>
-                </div>
-                <input matInput name="contactNumber" readonly />
-              </mat-form-field>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Email : </span>
-                  <span class="email-value">&nbsp; {{ applicantData.email }}</span>
-                </div>
-                <input matInput name="email" readonly />
-              </mat-form-field>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Date of birth </span>
-                  <span class="dob-value">&nbsp; {{ applicantData.dob | date : "dd/MM/yyyy" }}</span>
-                </div>
-                <input matInput name="dob" readonly />
-              </mat-form-field>
-            </div>
-            <mat-card-subtitle> Permanent address </mat-card-subtitle>
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Address : </span>
-                  <span class="address-value">&nbsp; {{ applicantData.primaryAddress.address }}</span>
-                </div>
-                <input matInput name="address" readonly />
-              </mat-form-field>
-            </div>
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">BLock number : </span>
-                  <span class="blockNumber-value">&nbsp; {{ applicantData.primaryAddress.blockNumber }}</span>
-                </div>
-                <input matInput name="blockNumber" readonly />
-              </mat-form-field>
-            </div>
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">District : </span>
-                  <span class="district-value">&nbsp; {{ applicantData.primaryAddress.district }}</span>
-                </div>
-                <input matInput name="district" readonly />
-              </mat-form-field>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">State/provience : </span>
-                  <span class="state-value">&nbsp; {{ applicantData.primaryAddress.state }}</span>
-                </div>
-                <input matInput name="state" readonly />
-              </mat-form-field>
-            </div>
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Pincode : </span>
-                  <span class="pinCode-value">&nbsp; {{ applicantData.primaryAddress.pinCode }}</span>
-                </div>
-                <input matInput name="pinCode" readonly />
-              </mat-form-field>
-            </div>
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Landmark : </span>
-                  <span class="landMark-value">&nbsp; {{ applicantData.primaryAddress.landMark }}</span>
-                </div>
-                <input matInput name="landMark" readonly />
-              </mat-form-field>
-            </div>
-            <mat-card-subtitle> Communication address </mat-card-subtitle>
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Address : </span>
-                  <span class="address-value">&nbsp; {{ applicantData.secondaryAddress.address }}</span>
-                </div>
-                <input matInput name="address" readonly />
-              </mat-form-field>
-            </div>
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">BLock number : </span>
-                  <span class="blockNumber-value">&nbsp;
-                    {{ applicantData.secondaryAddress.blockNumber }}</span>
-                </div>
-                <input matInput name="blockNumber" readonly />
-              </mat-form-field>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">District : </span>
-                  <span class="district-value">&nbsp; {{ applicantData.secondaryAddress.district }}</span>
-                </div>
-                <input matInput name="district" readonly />
-              </mat-form-field>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">State/provience : </span>
-                  <span class="state-value">&nbsp; {{ applicantData.secondaryAddress.state }}</span>
-                </div>
-                <input matInput name="state" readonly />
-              </mat-form-field>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Pincode : </span>
-                  <span class="pinCode-value">&nbsp; {{ applicantData.secondaryAddress.pinCode }}</span>
-                </div>
-                <input matInput name="pinCode" readonly />
-              </mat-form-field>
-            </div>
-
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Landmark : </span>
-                  <span class="landMark-value">&nbsp; {{ applicantData.secondaryAddress.landMark }}</span>
-                </div>
-                <input matInput name="landMark" readonly />
-              </mat-form-field>
-            </div>
-          </div>
-        </mat-card-content>
-      </mat-card> -->
 
       <mat-card class="display-6 mb-5">
         <mat-card-header>
@@ -409,15 +272,27 @@
               </mat-form-field>
             </div>
             <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
-                <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Do you want to take the benefit of lower category
-                    setback:</span>
-                  <span class="lcSetback-value">&nbsp; {{ lcSetback }}</span>
+              <mat-form-field appearance="fill" class="input-control" style="width: 100%; display: block;">
+                <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                  <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
+                    Do you want to take the benefit lower category setback:
+                  </span>
+                  <!-- Apply inline CSS for ellipsis effect and hover functionality -->
+                  <span class="lcSetback-value" 
+                        style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; position: relative; cursor: pointer; transition: all 0.3s ease;"
+                        onmouseover="this.style.whiteSpace='normal'; this.style.overflow='visible'; this.style.textOverflow='unset'; this.style.maxWidth='100%';"
+                        onmouseout="this.style.whiteSpace='nowrap'; this.style.overflow='hidden'; this.style.textOverflow='ellipsis'; this.style.maxWidth='90%';">
+                    {{ lcSetback }}
+                  </span>
                 </div>
                 <input matInput name="lcSetback" readonly />
               </mat-form-field>
             </div>
+            
+            
+            
+            
+            
             <div class="col-md-4 col-sm-12 col-xs-12">
               <mat-form-field appearance="fill" class="input-control">
                 <div class="placeholder-wrapper">
@@ -432,29 +307,31 @@
         </mat-card-content>
       </mat-card>
 
-      <mat-card class="display-6 mb-5">
+      <mat-card class="display-6 mb-5" style="width: 100%;">
         <mat-card-header>
           <mat-card-title class="mb-3">Building layout document/structural drawing file</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-            <h3 class="md-display-2">Building plan</h3>
+          <!-- Full width for the Building Plan header -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
+            <h3 class="md-display-2" style="margin: 0;">Building plan</h3>
           </div>
-          <div class="row">
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <mat-form-field appearance="fill" class="input-control">
+          
+          <div class="row" style="width: 100%;">
+            <div class="col-md-12 col-sm-12 col-xs-12" style="width: 100%; padding: 0;">
+              <!-- Full width for the mat-form-field -->
+              <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
                 <div class="placeholder-wrapper">
-                  <span class="placeholder-text">Building plan blueprint:
-                  </span>
+                  <span class="placeholder-text" style="display: inline-block;">Building plan blueprint:</span>
                   <span class="frName-value">&nbsp; {{ frName }}</span>
                 </div>
-                <input matInput name="frName" readonly />
+                <input matInput name="frName" readonly style="width: 100%;" />
               </mat-form-field>
             </div>
           </div>
         </mat-card-content>
       </mat-card>
-    </div>
+      
   </div>
 
   <div class="row m-1">

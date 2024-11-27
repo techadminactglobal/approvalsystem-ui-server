@@ -40,15 +40,22 @@
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                    <mat-form-field appearance="fill" class="input-control">
-                        <div class="placeholder-wrapper">
-                            <span class="placeholder-text">Remark : </span>
-                            <span class="leaseRemarks-value">&nbsp; {{leaseRemarks}}</span>
-                        </div>
-                        <input matInput name="leaseRemarks" readonly>
+                    <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                      <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                        <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
+                          Remark : 
+                        </span>
+                        <!-- Apply inline CSS for ellipsis effect and hover functionality -->
+                        <span class="leaseRemarks-value" 
+                              style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; position: relative; cursor: pointer;"
+                              title="{{ leaseRemarks }}">
+                          {{ leaseRemarks }}
+                        </span>
+                      </div>
+                      <input matInput name="leaseRemarks" readonly style="width: 100%;" />
                     </mat-form-field>
-                </div>
-
+                  </div>
+                  
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <mat-form-field appearance="fill" class="input-control">
                        
@@ -62,14 +69,22 @@
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                    <mat-form-field appearance="fill" class="input-control">
-                        <div class="placeholder-wrapper">
-                            <span class="placeholder-text">Remark : </span>
-                            <span class="saleRemark-value">&nbsp; {{saleRemark}}</span>
-                        </div>
-                        <input matInput name="saleRemark" readonly>
+                    <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                      <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                        <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
+                          Remark : 
+                        </span>
+                        <!-- Apply inline CSS for ellipsis effect and hover functionality -->
+                        <span class="saleRemark-value" 
+                              style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; position: relative; cursor: pointer;"
+                              title="{{ saleRemark }}">
+                          {{ saleRemark }}
+                        </span>
+                      </div>
+                      <input matInput name="saleRemark" readonly style="width: 100%;" />
                     </mat-form-field>
-                </div>
+                  </div>
+                  
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <mat-form-field appearance="fill" class="input-control">
@@ -84,14 +99,22 @@
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                    <mat-form-field appearance="fill" class="input-control">
-                        <div class="placeholder-wrapper">
-                            <span class="placeholder-text">Remark : </span>
-                            <span class="siteRemark-value">&nbsp; {{siteRemark}}</span>
-                        </div>
-                        <input matInput name="siteRemark" readonly>
+                    <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                      <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                        <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
+                          Remark : 
+                        </span>
+                        <!-- Apply inline CSS for ellipsis effect and hover functionality -->
+                        <span class="siteRemark-value" 
+                              style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; position: relative; cursor: pointer;"
+                              title="{{ siteRemark }}">
+                          {{ siteRemark }}
+                        </span>
+                      </div>
+                      <input matInput name="siteRemark" readonly style="width: 100%;" />
                     </mat-form-field>
-                </div>
+                  </div>
+                  
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <mat-form-field appearance="fill" class="input-control">
@@ -105,14 +128,22 @@
                     </mat-form-field>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                    <mat-form-field appearance="fill" class="input-control">
-                        <div class="placeholder-wrapper">
-                            <span class="placeholder-text">Remark : </span>
-                            <span class="mutitionRemark-value">&nbsp; {{mutitionRemark}}</span>
-                        </div>
-                        <input matInput name="mutitionRemark" readonly>
+                    <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                      <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                        <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
+                          Remark : 
+                        </span>
+                        <!-- Apply inline CSS for ellipsis effect and hover functionality -->
+                        <span class="mutitionRemark-value" 
+                              style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; position: relative; cursor: pointer;"
+                              title="{{ mutitionRemark }}">
+                          {{ mutitionRemark }}
+                        </span>
+                      </div>
+                      <input matInput name="mutitionRemark" readonly style="width: 100%;" />
                     </mat-form-field>
-                </div>
+                  </div>
+                  
 
                
             </div>
@@ -234,14 +265,18 @@
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                  <mat-form-field appearance="fill" class="input-control">
-                    <div class="placeholder-wrapper">
-                      <span class="docReamrk">Updates regarding : {{ doc.docName }} </span>
-                      <!-- <span class="docReamrk">&nbsp; {{ doc.remark }}</span> -->
-                    </div>
-                    <input matInput [name]="doc.docName + 'Remark'" readonly>
-                  </mat-form-field>
-                </div>
+                    <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                      <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                        <span class="docReamrk" 
+                              style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; position: relative; cursor: pointer;" 
+                              title="{{ doc.remark }}">
+                          Remark: {{ doc.remark }}
+                        </span>
+                      </div>
+                      <input matInput [name]="doc.docName + 'Remark'" readonly style="width: 100%;" />
+                    </mat-form-field>
+                  </div>
+                  
               </div>
               
               

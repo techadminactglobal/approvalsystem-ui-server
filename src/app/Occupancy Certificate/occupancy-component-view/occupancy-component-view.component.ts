@@ -352,7 +352,7 @@ export class OccupancyComponentViewComponent {
 
   back() {
     if (this.senddata.callFrom = "OC") {
-      this.router.navigate(['/OccupancyDashborad']);
+      this.router.navigate(['/dashboard']);
     } else {
       this.router.navigate(['/departmentDashboard']);
     }

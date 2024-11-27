@@ -92,6 +92,7 @@ export const API_PATH = {
   view_Amount: 'http://192.168.1.18:9006/payment/viewPaymentAmount',
   prepre_Gateway: 'http://192.168.1.18:9006/payment/prepareGatewayParameters',
   update_Gateway: 'http://192.168.1.18:9006/payment/updatePaymentDetails',
+  saveReceipt: 'http://192.168.1.18:9006/payment/saveReceiptDoc',
 
   downloadUUID: 'http://192.168.1.18:9006/dms/insertDocInDMS',
   viewUUID: 'http://192.168.1.18:9006/dms/getDocFromDMS',
@@ -126,7 +127,6 @@ export const API_PATH = {
     'http://192.168.1.18:9006/workDashboard/rejectDashboardByHierarchyRole',
   DEBARD_VIEW: 'http://192.168.1.18:9006/workDashboard/debardDetailsByAddharNo',
 
-  saveReceipt: 'http://192.168.1.18:9006/saveReceiptDoc',
   GET_USER_DETAIL: 'http://192.168.1.18:9006/findUserName',
   NEW_SAVE_FIRST_FORM_API: 'http://192.168.1.18:9006/record/saveFileRecord',
 

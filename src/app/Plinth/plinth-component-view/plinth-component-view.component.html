@@ -53,34 +53,43 @@
                     <input matInput name="natureOfProject" readonly />
                   </mat-form-field>
                 </div>
-
                 <div class="col-md-4 col-sm-12 col-xs-12">
-                  <mat-form-field appearance="fill" class="input-control">
-                    <div class="placeholder-wrapper">
-                      <span class="placeholder-text"
-                        >Plinth applied Date:
+                  <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                    <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start; width: 100%; overflow: hidden; box-sizing: border-box;">
+                      <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">Plinth applied Date: </span>
+                      
+                      <!-- Apply ellipsis for plinthDetails.fcreatedTime -->
+                      <span class="bHeight-value" 
+                            style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 150px); cursor: pointer;" 
+                            title="{{ plinthDetails.fcreatedTime }}">
+                        {{ plinthDetails.fcreatedTime }}
                       </span>
-                      <span class="bHeight-value"
-                        >&nbsp; {{ plinthDetails.fcreatedTime }}</span
-                      >
                     </div>
-                    <input matInput name="bHeight" readonly />
+                
+                    <!-- Input with ellipsis applied, readonly to prevent editing -->
+                    <input matInput name="bHeight" readonly style="width: 100%;" />
                   </mat-form-field>
                 </div>
+                
 
                 <div class="col-md-4 col-sm-12 col-xs-12">
-                  <mat-form-field appearance="fill" class="input-control">
-                    <div class="placeholder-wrapper">
-                      <span class="placeholder-text"
-                        >Plinth current status:
+                  <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                    <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start; width: 100%; overflow: hidden; box-sizing: border-box;">
+                      <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">Plinth current status: </span>
+                      
+                      <!-- Apply ellipsis for plinthDetails.status -->
+                      <span class="natureOfProject-value" 
+                            style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 150px); cursor: pointer;" 
+                            title="{{ plinthDetails.status }}">
+                        {{ plinthDetails.status }}
                       </span>
-                      <span class="natureOfProject-value"
-                        >&nbsp; {{ plinthDetails.status }}</span
-                      >
                     </div>
-                    <input matInput name="natureOfProject" readonly />
+                
+                    <!-- Input with ellipsis applied, readonly to prevent editing -->
+                    <input matInput name="natureOfProject" readonly style="width: 100%;"/>
                   </mat-form-field>
                 </div>
+                
 
                 <div class="col-md-4 col-sm-12 col-xs-12">
                   <mat-form-field appearance="fill" class="input-control">
@@ -107,18 +116,23 @@
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                  <mat-form-field appearance="fill" class="input-control">
-                    <div class="placeholder-wrapper">
-                      <span class="placeholder-text"
-                        >Updates regarding request :
+                  <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                    <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start; width: 100%; overflow: hidden; box-sizing: border-box;">
+                      <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">Updates regarding request: </span>
+                      
+                      <!-- Apply ellipsis for plinthDetails.remark -->
+                      <span class="leaseRemarks-value" 
+                            style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 150px); cursor: pointer;" 
+                            title="{{ plinthDetails.remark }}">
+                        {{ plinthDetails.remark }}
                       </span>
-                      <span class="leaseRemarks-value"
-                        >&nbsp; {{ plinthDetails.remark }}</span
-                      >
                     </div>
-                    <input matInput name="leaseRemarks" readonly />
+                
+                    <!-- Input with ellipsis applied, readonly to prevent editing -->
+                    <input matInput name="leaseRemarks" readonly style="width: 100%;" />
                   </mat-form-field>
                 </div>
+                
               </div>
             </mat-card-content>
           </mat-card>
@@ -148,16 +162,24 @@
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                  <mat-form-field appearance="fill" class="input-control">
-                    <div class="placeholder-wrapper">
-                      <span class="placeholder-text">Lease deed Remark: </span>
-                      <span class="leaseRemarks-value"
-                        >&nbsp; {{ leaseRemarks }}</span
-                      >
+                  <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                    <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start; width: 100%; overflow: hidden; box-sizing: border-box;">
+                      <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">Remark: </span>
+                      
+                      <!-- Apply ellipsis, ensure no wrapping, and restrict max width -->
+                      <span class="leaseRemarks-value" 
+                            style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 90px); position: relative; cursor: pointer;" 
+                            title="{{ leaseRemarks }}">
+                        {{ leaseRemarks }}
+                      </span>
                     </div>
-                    <input matInput name="leaseRemarks" readonly />
+                    <input matInput name="leaseRemarks" readonly style="width: 100%;"/>
                   </mat-form-field>
                 </div>
+                
+                
+                
+                
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <mat-form-field appearance="fill" class="input-control">
@@ -178,16 +200,23 @@
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                  <mat-form-field appearance="fill" class="input-control">
-                    <div class="placeholder-wrapper">
-                      <span class="placeholder-text">Sale deed Remark: </span>
-                      <span class="saleRemark-value"
-                        >&nbsp; {{ saleRemark }}</span
-                      >
+                  <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                    <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start; width: 100%; overflow: hidden; box-sizing: border-box;">
+                      <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">Remark: </span>
+                      
+                      <!-- Apply ellipsis for saleRemark -->
+                      <span class="saleRemark-value" 
+                            style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 90px); cursor: pointer;" 
+                            title="{{ saleRemark }}">
+                        {{ saleRemark }}
+                      </span>
                     </div>
-                    <input matInput name="saleRemark" readonly />
+                
+                    <!-- Input with ellipsis applied, readonly to prevent editing -->
+                    <input matInput name="saleRemark"  readonly style="width: 100%;"/>
                   </mat-form-field>
                 </div>
+                
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <mat-form-field appearance="fill" class="input-control">
@@ -212,18 +241,23 @@
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                  <mat-form-field appearance="fill" class="input-control">
-                    <div class="placeholder-wrapper">
-                      <span class="placeholder-text"
-                        >Site photograph Remark:
+                  <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                    <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start; width: 100%; overflow: hidden; box-sizing: border-box;">
+                      <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">Remark: </span>
+                      
+                      <!-- Apply ellipsis for siteRemark -->
+                      <span class="siteRemark-value" 
+                            style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 90px); cursor: pointer;" 
+                            title="{{ siteRemark }}">
+                        {{ siteRemark }}
                       </span>
-                      <span class="siteRemark-value"
-                        >&nbsp; {{ siteRemark }}</span
-                      >
                     </div>
-                    <input matInput name="siteRemark" readonly />
+                
+                    <!-- Input with ellipsis applied, readonly to prevent editing -->
+                    <input matInput name="siteRemark" readonly style="width: 100%; "/>
                   </mat-form-field>
                 </div>
+                
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <mat-form-field appearance="fill" class="input-control">
@@ -247,18 +281,23 @@
                   </mat-form-field>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                  <mat-form-field appearance="fill" class="input-control">
-                    <div class="placeholder-wrapper">
-                      <span class="placeholder-text"
-                        >Mutition form Remark:
+                  <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
+                    <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start; width: 100%; overflow: hidden; box-sizing: border-box;">
+                      <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">Remark: </span>
+                      
+                      <!-- Apply ellipsis for mutitionRemark -->
+                      <span class="mutitionRemark-value" 
+                            style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 90px); cursor: pointer;" 
+                            title="{{ mutitionRemark }}">
+                        {{ mutitionRemark }}
                       </span>
-                      <span class="mutitionRemark-value"
-                        >&nbsp; {{ mutitionRemark }}</span
-                      >
                     </div>
-                    <input matInput name="mutitionRemark" readonly />
+                
+                    <!-- Input with ellipsis applied, readonly to prevent editing -->
+                    <input matInput name="mutitionRemark" readonly style="width: 100%;"/>
                   </mat-form-field>
                 </div>
+                
               </div>
             </mat-card-content>
           </mat-card>
@@ -421,15 +460,7 @@
 
       <div class="d-flex justify-content-center text-center mb-3">
         <div class="button-container col-md-12 mt-1">
-          <button
-            mat-raised-button
-            color="primary"
-            type="submit"
-            class="log"
-            (click)="back()"
-          >
-            Back
-          </button>
+      
           <div *ngIf="paybutton">
             <button
               mat-raised-button
@@ -439,6 +470,15 @@
             >
               Pay Now
             </button>
+            <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="log"
+            (click)="back()"
+          >
+            Back
+          </button>
           </div>
         </div>
       </div>

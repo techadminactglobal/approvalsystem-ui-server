@@ -19,10 +19,15 @@ export class NocDashboardComponent implements OnInit {
   ApporveArray: any[] = [];
   pendingArray: any[] = [];
   rejectArray: any[] = [];
+  totalArray: any[] = [];
   loading = -1;
   reject: boolean = false;
   professionalType: any;
   apiConstant = API_PATH;
+
+  pending:boolean = false;
+  approve:boolean = false;
+  total:boolean = true;
 
   constructor(
     private service: commonService,
@@ -35,8 +40,29 @@ export class NocDashboardComponent implements OnInit {
     this.professionalType = this.senddata.professionalType;
     this.Approve();
     this.Reject();
+    this.viewDashboard();
     setTimeout(() => {
-      this.viewDashboard(); 
+      // Initialize the totalData array
+      this.totalArray = [];
+      this.reject = false;
+      this.pending = false;
+      this.approve = false;
+      this.total = true;
+      
+
+      // Combine all the data into one array
+      const combinedData = [
+        ...this.ApporveArray.length > 0 ? this.ApporveArray : [],
+        ...this.pendingArray.length > 0 ? this.pendingArray : [],
+        ...this.rejectArray.length > 0 ? this.rejectArray : []
+      ].filter(item => item && Object.keys(item).length > 0); // Removes empty arrays or falsy items      
+      
+      // Push the combined data into the 0th index of totalData
+      this.totalArray = combinedData;
+
+      console.log(this.totalArray, "total array for plinth dashboard");
+      
+      
     this.reject =false;
     }, 750);
     
@@ -46,8 +72,9 @@ export class NocDashboardComponent implements OnInit {
     this.service.getDeptDashboard(this.apiConstant.GET_DEPT_DASHBOARD + "?hierarchyRole=", this.senddata.hierarchyId).subscribe((res: any) => {
       console.log(res);
       this.reject = false;
-      this.rejectArray=[];
-      this.ApporveArray=[];
+      this.pending = true;
+      this.approve = false;
+      this.total = false;
       if (res.data != null) {
         this.pendingSize = res.data.length;
         this.loading = res.data.length;
@@ -61,9 +88,10 @@ export class NocDashboardComponent implements OnInit {
   Reject() {
     this.service.getDeptDashboard(this.apiConstant.NocRejectDashboard + "?hierarchyRole=", this.senddata.hierarchyId).subscribe((res: any) => {
       console.log(res);
-      this.ApporveArray =[];
-      this.pendingArray = [];
+      this.pending = false;
+      this.approve = false;
       this.reject = true;
+      this.total = false;
       if (res.data != null) {
         this.rejectedSize = res.data.length;
         this.loading = res.data.length;
@@ -74,12 +102,20 @@ export class NocDashboardComponent implements OnInit {
     });
   }
 
+  Total(){
+    this.reject = false;
+      this.pending = false;
+      this.approve = false;
+      this.total = true;
+  }
+
   Approve() {
     this.service.getDeptDashboard(this.apiConstant.NocApproveDashboard + "?hierarchyRole=", this.senddata.hierarchyId).subscribe((res: any) => {
       console.log(res);
-      this.rejectArray = [];
-      this.pendingArray=[];
       this.reject = false;
+      this.pending = false;
+      this.approve = true;
+      this.total = false;
       if (res.data != null) {
         this.approvedSize = res.data.length;
         this.loading = res.data.length;
@@ -107,9 +143,22 @@ export class NocDashboardComponent implements OnInit {
     this.paginator.pageSize = event.pageSize;
   }
 
-  totalSize(): number {
-    return this.reject ? this.rejectArray.length : this.pendingArray.length + this.ApporveArray.length;
+  // totalSize(): number {
+  //   return this.reject ? this.rejectArray.length : this.pendingArray.length + this.ApporveArray.length;
+  // }
+  paginatorLength() {
+    if (this.reject) {
+      return this.rejectArray.length;
+    } else if (this.pending) {
+      return this.pendingArray.length;
+    } else if (this.approve) {
+      return this.ApporveArray.length;
+    } else if (this.total) {
+      return this.totalArray.length;
+    }
+    return 0; // Default length if none are selected
   }
+  
 }
 
 

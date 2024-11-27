@@ -363,47 +363,36 @@
         <thead class="header">
           <tr>
             <th scope="col">#</th>
-            <!-- <th scope="col">File No</th> -->
             <th scope="col">File Name</th>
             <th scope="col">Created Time</th>
             <th scope="col">Architect User Name</th>
-            <!-- <th scope="col">Pull Back Count</th> -->
-            <th scope="col">Eamil Id</th>
+            <th scope="col">Email Id</th>
             <th scope="col">Last Update Date</th>
             <th scope="col">Current Status</th>
-
             <th scope="col">Details</th>
           </tr>
         </thead>
-
+    
         <tbody>
           <tr *ngFor="let element of dashboardDetails; let i = index">
             <th scope="row">{{ i + 1 }}</th>
             <td>{{ element.frId }}</td>
             <td>{{ element.createdDate | date : "dd/MM/yyyy" }}</td>
             <td>{{ element.architectUserName }}</td>
-            <!-- <td>{{ element.pullBackCount }}</td> -->
             <td>{{ element.ownerEmailId }}</td>
             <td>{{ element.updateDate | date : "dd/MM/yyyy" }}</td>
             <td>{{ element.status }}</td>
             <td
               (click)="viewDetail(element.status, element.frId)"
               class="detail"
-            style="color: blue;">
+              style="cursor: pointer; color: blue; text-decoration: underline;">
               View Details
             </td>
           </tr>
         </tbody>
       </table>
-      <!--   
-    <mat-paginator
-      #paginator
-      [length]="collectionSize"
-      [pageSize]="paginator.pageSize"
-      [pageSizeOptions]="[5, 10, 20]"
-      (page)="onPageChange($event)"
-    >
-    </mat-paginator> -->
+      <!-- Add your pagination here if needed -->
     </div>
+    
   </div>
 </div>

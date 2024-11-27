@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { COMMONCONSTANTS } from 'src/app/CONSTANTS/constants';
 import { SendData } from 'src/app/SendData';
@@ -17,7 +18,7 @@ export class FireComponent {
     private service: commonService,
     private fb: FormBuilder,
     private router:Router,
-    public senddata: SendData
+    public senddata: SendData, private sanitizer: DomSanitizer
   ) {  }
 
 
@@ -154,6 +155,9 @@ buildingDetails :any[]=[];
   }
 
   fireDocDetailsName:any = 'File name will come here';
+  refrencePreview: SafeResourceUrl | null = null; // Using SafeResourceUrl for PDF
+  isrefrencePreviewModalOpen: boolean = false;
+  refrenceFileType: string | null = null;
   uploadDoc(event: any, arrayName: string) {
     const fileData = event.target.files[0];
   
@@ -174,12 +178,28 @@ buildingDetails :any[]=[];
       alert('Please upload a file under ' + (maxSize / (1024 * 1024)) + ' MB.');
       return;
     }
+
+    
+
     this.fireDocDetailsName = fileData.name;
     const reader = new FileReader();
     reader.readAsDataURL(fileData);
   
     reader.onload = (event: any) => {
       const inputValue = event.target.result;
+      if (arrayName === 'fireDocDetails') {
+        this.refrenceFileType = fileExtension; // Set the file type
+
+        // For PDFs, create a Blob URL
+        if (fileExtension === 'pdf') {
+          this.refrencePreview =
+            this.sanitizer.bypassSecurityTrustResourceUrl(
+              URL.createObjectURL(fileData)
+            ); // Safe URL for PDF
+        } else {
+          this.refrencePreview = inputValue; // Base64 for images
+        }
+      }
   
       const json = {
         "docFileName": fileData.name.split(".")[0],
@@ -213,6 +233,24 @@ buildingDetails :any[]=[];
       console.log('Error: ', error);
     };
   }
+
+  togglerefrencePreview() {
+    this.isrefrencePreviewModalOpen = !this.isrefrencePreviewModalOpen;
+  }
+
+  // Close the educational certificate preview modal
+  closerefrencePreviewModal() {
+    this.isrefrencePreviewModalOpen = false;
+  }
+
+  // Delete the educational certificate and reset the preview
+  deleterefrenceCertificate() {
+    this.refrencePreview = null;
+    this.fireDocDetailsName = 'File name will come here';
+    // Reset form control and close modal
+    this.isrefrencePreviewModalOpen = false;
+  }
+ 
   
   
 

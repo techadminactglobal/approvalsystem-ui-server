@@ -10,12 +10,12 @@ body {
 .header {
   background-color: #3f51b5;
   color: white;
-  display: flex;              /* Enable flexbox */
-  justify-content: center;    /* Center content horizontally */
-  align-items: center;        /* Vertically center content if needed */
-  text-align: center;         /* Align text in the center */
-  font-size: 24px;            /* Optional: adjust font size */
-  font-weight: bold;          /* Optional: make the header text bold */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
   padding: 20px;
 }
 
@@ -78,52 +78,6 @@ body {
   font-weight: bold;
 }
 
-/* Professional Details Card */
-.professional-details .professional-card {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: silver;
-}
-
-.professional-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.professional-footer {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.detail-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.detail-icon {
-  margin-right: 10px;
-  color: #3f51b5;
-}
-
-.detail-text {
-  font-size: 1em;
-  color: #555;
-}
-
-.professional-name {
-  font-size: 1.6em;
-  font-weight: bold;
-}
-
-.professional-id {
-  font-size: 1.1em;
-  color: #777;
-}
-
 /* Table Styles */
 .consultant-table {
   width: 100%;
@@ -163,62 +117,6 @@ body {
   background-color: #45a049;
 }
 
-/* No Consultants Available */
-.no-consultants-message {
-  text-align: center;
-  font-size: 1.2em;
-  color: #555;
-}
-
-/* Mobile Responsiveness */
-@media screen and (max-width: 768px) {
-  .header {
-    font-size: 1.2em;
-    padding: 10px;
-  }
-
-  .search {
-    padding: 0 10px;
-  }
-
-  .professional-card {
-    padding: 15px;
-  }
-
-  .consultant-table th, .consultant-table td {
-    padding: 8px;
-  }
-}
-/* Apply a "disabled" style to the input when it's not interactive */
-.mat-form-field[disabled] {
-  opacity: 0.6;
-}
-
-.mat-input-element:disabled {
-  background-color: #f5f5f5;
-}
-
-/* Page Title */
-.page-title {
-  font-size: 26px;             /* Default font size */
-  font-weight: bold;
-  color: #333;
-  text-align: center;          /* Center text horizontally */
-  margin: 40px 0;              /* Vertical spacing */
-  padding: 0 15px;             /* Optional: add some padding */
-}
-
-/* Container for Page Title */
-.page-title-container {
-  display: flex;
-  justify-content: center;     /* Center horizontally */
-  align-items: center;         /* Center vertically */
-  width: 100%;
-  height: 100px;               /* Fixed height for container */
-  background-color: #f5f5f5;   /* Optional: background color */
-  padding: 0 15px;             /* Optional: Add padding */
-}
-
 /* Pagination Container */
 .pagination {
   display: flex;
@@ -230,7 +128,6 @@ body {
   gap: 20px;
 }
 
-/* Pagination Buttons */
 .pagination button {
   background-color: #4CAF50;
   color: white;
@@ -240,9 +137,6 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .pagination button:disabled {
@@ -266,12 +160,115 @@ body {
   color: #333;
 }
 
-/* Pagination Container Animation */
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Darker background for better contrast */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 800px;
+  width: 90%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  position: relative; /* Ensure the Close button is positioned inside the modal */
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+/* Modal Table */
+.consultant-details-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.consultant-details-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.consultant-details-table td:first-child {
+  font-weight: bold;
+}
+
+/* Close Button Style */
+.modal-content .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px 16px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.modal-content .close-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Modal Fade-In Animation */
+@keyframes modalFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Page Title */
+.page-title {
+  font-size: 26px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin: 40px 0;
+  padding: 0 15px;
+}
+
+/* Pagination Buttons */
+.pagination button {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.pagination span {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
 .pagination {
   opacity: 0;
   animation: fadeIn 1s ease-out forwards;
 }
 
+/* Pagination Container Animation */
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -283,14 +280,23 @@ body {
   }
 }
 
-/* Style for page number display */
-.pagination span {
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 16px;
+/* Responsive Design for Modal */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .consultant-details-table td {
+    font-size: 14px;
+  }
+
+  .modal-content .close-btn {
+    top: 5px;
+    right: 5px;
+    font-size: 16px;
+    padding: 6px 12px;
+  }
 }
 
 /* Responsive Design for Pagination */
@@ -304,10 +310,4 @@ body {
     width: 100%;
     margin-bottom: 10px;
   }
-}
-
-/* Add this to your CSS */
-.highlight {
-  background-color: yellow;
-  transition: background-color 0.3s;
 }

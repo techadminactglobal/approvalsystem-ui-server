@@ -62,6 +62,12 @@
                   (change)="uploadDoc($event, 'leaseDeedCertificateName')"
                   formControlName="leaseDeedCertificateName"
                 />
+                <button mat-icon-button matSuffix type="button" *ngIf="educationalPreview" (click)="toggleEducationalPreview()">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <button mat-icon-button class="delete-btn" (click)="deleteEducationalCertificate()">
+                  <mat-icon>delete</mat-icon>
+                </button>
                 <mat-hint
                   ><strong
                     >File type must in a .pdf or jpeg format and file size
@@ -70,6 +76,25 @@
                 >
               </mat-form-field>
             </div>
+             <!-- Modal for Viewing the Educational Certificate in Larger Format -->
+             <div *ngIf="isEducationalPreviewModalOpen" class="preview-modal-overlay">
+              <div class="preview-modal-content">
+                <!-- Preview PDF or Image (Based on the File Type) -->
+                <iframe *ngIf="educationalFileType === 'pdf'" [src]="educationalPreview" frameborder="0" class="modal-image"></iframe>
+                <img *ngIf="educationalFileType !== 'pdf'" [src]="educationalPreview" alt="Educational Certificate" class="modal-image" />
+            
+                <!-- Buttons to delete and close -->
+                <div class="modal-btn-container">
+                 <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificate()">
+                      <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+                  </button> -->
+                  <button mat-icon-button class="close-btn" (click)="closeEducationalPreviewModal()">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+
 
             <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="update">
@@ -112,6 +137,13 @@
                   (change)="uploadDoc($event, 'SaleDeedCertificatename')"
                   formControlName="SaleDeedCertificatename"
                 />
+                  <!-- Eye Icon Button to Toggle Preview Modal -->
+                  <button mat-icon-button matSuffix type="button" *ngIf="saleDeedPreview" (click)="toggleEducationalPreviews()">
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+                  <button mat-icon-button class="delete-btn" (click)="deleteEducationalCertificates()">
+                    <mat-icon>delete</mat-icon>
+                  </button>
                 <mat-hint
                   ><strong
                     >File type must in a .pdf or jpeg format and file size
@@ -120,6 +152,25 @@
                 >
               </mat-form-field>
             </div>
+              <!-- Modal for Viewing the Educational Certificate in Larger Format -->
+              <div *ngIf="isSaleDeedPreviewModalOpen" class="preview-modal-overlay">
+                <div class="preview-modal-content">
+                  <!-- Preview PDF or Image (Based on the File Type) -->
+                  <iframe *ngIf="saleDeedFileType === 'pdf'" [src]="saleDeedPreview" frameborder="0" class="modal-image"></iframe>
+                  <img *ngIf="saleDeedFileType !== 'pdf'" [src]="saleDeedPreview" alt="Educational Certificate" class="modal-image" />
+              
+                  <!-- Buttons to delete and close -->
+                  <div class="modal-btn-container">
+                  <!--   <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificates()">
+                        <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+                    </button> -->
+                    <button mat-icon-button class="close-btn" (click)="closeEducationalPreviewModals()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+        
 
             <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="update">
@@ -162,6 +213,12 @@
                   (change)="uploadDoc($event, 'sitePhotographCertificatename')"
                   formControlName="sitePhotographCertificatename"
                 />
+                <button mat-icon-button matSuffix type="button" *ngIf="sitePhotographNamePreview" (click)="toggleEducationalPreviewsite()">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <button mat-icon-button class="delete-btn" (click)="deleteEducationalCertificatesite()">
+                  <mat-icon>delete</mat-icon>
+                </button>
                 <mat-hint
                   ><strong
                     >File type must in a .pdf or jpeg format and file size
@@ -170,6 +227,25 @@
                 >
               </mat-form-field>
             </div>
+                 <!-- Modal for Viewing the Educational Certificate in Larger Format -->
+                 <div *ngIf="issitePhotographNameModalOpen" class="preview-modal-overlay">
+                  <div class="preview-modal-content">
+                    <!-- Preview PDF or Image (Based on the File Type) -->
+                    <iframe *ngIf="sitePhotographNameFileType === 'pdf'" [src]="sitePhotographNamePreview" frameborder="0" class="modal-image"></iframe>
+                    <img *ngIf="sitePhotographNameFileType !== 'pdf'" [src]="sitePhotographNamePreview" alt="Educational Certificate" class="modal-image" />
+                
+                    <!-- Buttons to delete and close -->
+                    <div class="modal-btn-container">
+                     <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificatesite()">
+                          <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+                      </button> -->
+                      <button mat-icon-button class="close-btn" (click)="closeEducationalPreviewModalsite()">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+    
 
             <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="update">
@@ -212,6 +288,12 @@
                   (change)="uploadDoc($event, 'mutitionFormCertificatename')"
                   formControlName="mutitionFormCertificatename"
                 />
+                <button mat-icon-button matSuffix type="button" *ngIf="mutitionFormNamePreview" (click)="toggleEducationalPreviewsitemutation()">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <button mat-icon-button class="delete-btn" (click)="deleteEducationalCertificatesitemutation()">
+                  <mat-icon>delete</mat-icon>
+                </button>
                 <mat-hint
                   ><strong
                     >File type must in a .pdf or jpeg format and file size
@@ -220,6 +302,24 @@
                 >
               </mat-form-field>
             </div>
+ <!-- Modal for Viewing the Educational Certificate in Larger Format -->
+ <div *ngIf="ismutitionFormNameModalOpen" class="preview-modal-overlay">
+  <div class="preview-modal-content">
+    <!-- Preview PDF or Image (Based on the File Type) -->
+    <iframe *ngIf="mutitionFormNameFileType === 'pdf'" [src]="mutitionFormNamePreview" frameborder="0" class="modal-image"></iframe>
+    <img *ngIf="mutitionFormNameFileType !== 'pdf'" [src]="mutitionFormNamePreview" alt="Educational Certificate" class="modal-image" />
+
+    <!-- Buttons to delete and close -->
+    <div class="modal-btn-container">
+     <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificatesitemutation()">
+          <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+      </button> -->
+      <button mat-icon-button class="close-btn" (click)="closeEducationalPreviewModalsitemutation()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
 
             <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="update">

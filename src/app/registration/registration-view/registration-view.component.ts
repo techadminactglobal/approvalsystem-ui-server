@@ -63,6 +63,7 @@ export class RegistrationViewComponent {
   letterUniqueId: any;
   letterName:any;
   photoGraphName: any;
+  viewLogout: boolean = true;
 
   constructor(private service: commonService, public senddata: SendData,private route:Router, private dialog: MatDialog,private _formBuilder: FormBuilder) {
     this.userName = this.senddata.requestid;
@@ -203,7 +204,21 @@ if(data.consultantDetailModel.letterApprovedDs != null && data.consultantDetailM
 
     this.viewHierachyHistory();
     this.viewPaymentHistory();
+
+    this.checkDeptView();
   }
+  checkDeptView(){
+    if(this.senddata.hierarchyId == COMMONCONSTANTS.RegNew_ROLE_ID_JE ||
+      this.senddata.hierarchyId == COMMONCONSTANTS.RegNew_ROLE_ID_AE ||
+      this.senddata.hierarchyId == COMMONCONSTANTS.RegNew_ROLE_ID_AA ||
+      this.senddata.hierarchyId == COMMONCONSTANTS.RegNew_ROLE_ID_SE ){
+      this.viewLogout = false;
+     }else{
+      this.viewLogout = true;
+     }
+
+  }
+
 
   downloadPdf() {
     console.log("download button clicked....");
@@ -586,7 +601,10 @@ this.service.getSecondViewDetails(this.apiConstant.File_Release, request).subscr
 });
 
 }
-
+logout() {
+  console.log('login clicked');
+  this.route.navigate(['/login']);
+}
 
 }
 

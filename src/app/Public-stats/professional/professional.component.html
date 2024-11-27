@@ -36,47 +36,7 @@
       </ul>
     </div>
 
-    <!-- Professional Details Section -->
-    <div *ngIf="selectedProfessional" class="professional-details">
-      <mat-card class="professional-card" [@fadeIn] #detailsCard>
-        <mat-card-header>
-          <mat-card-title class="professional-name">
-            <span class="consultant-name">
-              {{ selectedProfessional.salutation }} {{ selectedProfessional.firstName }}
-              {{ selectedProfessional.middleName }} {{ selectedProfessional.lastName }}
-            </span>
-          </mat-card-title>
-          <mat-card-subtitle class="professional-id">
-            ID: <strong>{{ selectedProfessional.consultantName }}</strong>
-          </mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-content>
-          <!-- Display details in rows -->
-          <div class="detail-row">
-            <mat-icon class="detail-icon">email</mat-icon>
-            <div class="detail-text">{{ selectedProfessional.email }}</div>
-          </div>
-          <div class="detail-row">
-            <mat-icon class="detail-icon">phone</mat-icon>
-            <div class="detail-text">{{ selectedProfessional.contactNo }}</div>
-          </div>
-          <div class="detail-row">
-            <mat-icon class="detail-icon">location_on</mat-icon>
-            <div class="detail-text">{{ selectedProfessional.zone }}</div>
-          </div>
-          <div class="detail-row">
-            <mat-icon class="detail-icon">apartment</mat-icon>
-            <div class="detail-text">{{ selectedProfessional.buildingType }}</div>
-          </div>
-        </mat-card-content>
-
-        <mat-card-footer class="professional-footer">
-          <button mat-raised-button color="primary" (click)="resetSearch()">Back</button>
-        </mat-card-footer>
-      </mat-card>
-    </div>
-
+    <!-- Table to show all professionals -->
     <div *ngIf="!isLoading && consultants.length > 0" class="consultants-container">
       <h1 class="page-title">All Professionals Details</h1>
       <table class="consultant-table">
@@ -102,7 +62,7 @@
             <td>{{ consultant.zone }}</td>
             <td>{{ consultant.buildingType }}</td>
             <td>
-              <button class="btn-view-details" (click)="showDetails(consultant)">
+              <button mat-raised-button color="primary" (click)="showDetails(consultant)">
                 View Details
               </button>
             </td>
@@ -117,5 +77,40 @@
         <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Modal for Showing Consultant Details -->
+<div *ngIf="selectedProfessional" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-btn" (click)="closeDetails()">×</button> <!-- Close button -->
+    <h2>Consultant Details</h2>
+    <table class="consultant-details-table">
+      <tr>
+        <td><strong>Consultant ID:</strong></td>
+        <td>{{ selectedProfessional.consultantName }}</td>
+      </tr>
+      <tr>
+        <td><strong>Full Name:</strong></td>
+        <td>{{ selectedProfessional.salutation }} {{ selectedProfessional.firstName }} {{ selectedProfessional.middleName }} {{ selectedProfessional.lastName }}</td>
+      </tr>
+      <tr>
+        <td><strong>Email:</strong></td>
+        <td>{{ selectedProfessional.email }}</td>
+      </tr>
+      <tr>
+        <td><strong>Contact Number:</strong></td>
+        <td>{{ selectedProfessional.contactNo }}</td>
+      </tr>
+      <tr>
+        <td><strong>Zone Working On:</strong></td>
+        <td>{{ selectedProfessional.zone }}</td>
+      </tr>
+      <tr>
+        <td><strong>Building Type:</strong></td>
+        <td>{{ selectedProfessional.buildingType }}</td>
+      </tr>
+      <!-- Add other details here if needed -->
+    </table>
   </div>
 </div>

@@ -123,10 +123,13 @@ export class ProfessionalComponent implements OnInit {
     );
   }
 
-  // Show the details of the selected professional
   showDetails(professional: any): void {
     this.selectedProfessional = professional;
-    this.disableFormControls();
+  }
+
+  // Close the modal
+  closeDetails(): void {
+    this.selectedProfessional = null;  // Hides the modal by setting it to null
   }
 
   // Disable the form controls

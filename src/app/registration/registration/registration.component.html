@@ -176,7 +176,7 @@
                                   
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <mat-label class="title">Choose Building Type</mat-label>
-                                        <mat-form-field appearance="outline">
+                                        <mat-form-field>
                                           <mat-label>Building type</mat-label>
                                           <mat-select placeholder="Project type" formControlName="buildingType" [(ngModel)]="selectedBuildingTypes" multiple>
                                             <!-- "Select All" Option -->
@@ -281,7 +281,7 @@
                                 <mat-icon>visibility</mat-icon>
                               </button>
                               <button mat-icon-button class="delete-btn" (click)="deleteEducationalCertificate()">
-                                <i class="fa-solid fa-minus"></i>
+                                <mat-icon>delete</mat-icon>
                               </button>
                              
                           
@@ -301,9 +301,9 @@
                           
                               <!-- Buttons to delete and close -->
                               <div class="modal-btn-container">
-                                <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificate()">
+                              <!--   <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificate()">
                                   <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
-                                </button>
+                                </button> -->
                                 <button mat-icon-button class="close-btn" (click)="closeEducationalPreviewModal()">
                                   <mat-icon>close</mat-icon>
                                 </button>
@@ -333,7 +333,7 @@
                                 <mat-icon>visibility</mat-icon>
                               </button>
                               <button mat-icon-button class="delete-btn" (click)="deletePhoto()">
-                                <i class="fa-solid fa-minus"></i>
+                                <mat-icon>delete</mat-icon>
                               </button>
                           
                           
@@ -354,9 +354,9 @@
       <!-- Buttons container -->
       <div class="modal-btn-container">
         <!-- Delete button inside the modal -->
-        <button mat-icon-button class="delete-btns" (click)="deletePhoto()">
+      <!--   <button mat-icon-button class="delete-btns" (click)="deletePhoto()">
           <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
-        </button>
+        </button> -->
     
         <!-- Close button for the modal -->
         <button mat-icon-button class="close-btn" (click)="closePreviewModal()">

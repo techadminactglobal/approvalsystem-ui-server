@@ -199,9 +199,9 @@ export class RegistrationComponent implements OnInit {
 
   ProfessionalCategory = [
     { value: 'Architect', viewValue: 'Architect' },
-    { value: 'Structural Engineering', viewValue: 'Structural Engineering' },
-    { value: 'Civil Engineering', viewValue: 'Civil Engineering' },
-    { value: 'licensed Engineering', viewValue: 'licensed Engineering' }
+    { value: 'Supervisor', viewValue: 'Supervisor' },
+    { value: 'Engineer', viewValue: 'Engineer' },
+    { value: 'Structural Engineer', viewValue: 'Structural Engineer' }
   ];
 
   salutation = [

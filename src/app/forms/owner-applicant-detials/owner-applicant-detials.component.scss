@@ -15,3 +15,34 @@
     // padding: 10px 20px; 
     // width: 35%; 
   }
+
+/* Ensuring the form fields do not overflow */
+.input-control {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Prevent overflow from the mat-form-field */
+mat-form-field {
+  display: block;
+  width: 100%;
+}
+
+/* For input field inside mat-form-field */
+.input[matInput] {
+  width: 100%;                    /* Full width */
+  white-space: nowrap;            /* Prevent wrapping of text */
+  overflow: hidden;               /* Hide the overflow text */
+  text-overflow: ellipsis;        /* Show ellipsis if the text is too long */
+  background-color: transparent; /* Transparent background (optional) */
+  padding: 10px;                  /* Padding for better appearance */
+  border: 1px solid #ccc;         /* Optional border style */
+  box-sizing: border-box;         /* Ensure padding is inside the input box */
+}
+
+/* Optional: Style for better font size and readability */
+.input[matInput] {
+  font-size: 14px;
+  height: auto; /* Adjusts input height based on content */
+}
