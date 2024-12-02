@@ -19,6 +19,7 @@ export class SendData {
   ownerApplicant: boolean=false;
   architectView: boolean = false;
   debard:boolean=false;
+  expired :boolean=false;
 
     constructor () { }
 

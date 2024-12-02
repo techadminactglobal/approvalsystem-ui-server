@@ -325,6 +325,12 @@
             <button mat-raised-button color="primary" type="submit" (click)="payment()">Pay Now</button>
             
         </div>
+
+        <div class="text-center" *ngIf="this.senddata.expired">
+            <button mat-raised-button color="primary" type="submit" (click)="payment()">Renewal Payment</button>
+            
+        </div>
+        
         
         <div class="text-center" *ngIf="viewLetter">
             <button mat-raised-button color="primary" type="submit" class="button-spacing" (click)="ViewDS()">View {{letterName}}</button>

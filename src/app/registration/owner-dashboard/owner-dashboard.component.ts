@@ -14,6 +14,19 @@ import { API_PATH } from 'src/environments/api-constant';
 export class OwnerDashboardComponent implements OnInit {
 
   myGroup!: FormGroup;
+  isCheckeds = false;  // This controls the checkbox status
+  isTrues = false;     // Example variable for message condition
+  messages = "Please enter a valid email";  // Example message
+
+  
+  emailopen(){
+     if (this.isCheckeds) {
+      this.isCheckeds = false;
+     }
+     else {
+      this.isCheckeds = true;
+     }
+  }
 
   // Getter for applicantDetails for easier access in the template
   get applicantDetails(): FormArray {
@@ -194,6 +207,7 @@ export class OwnerDashboardComponent implements OnInit {
     //   companyControl!.reset();
     // }
   }
+
 
 
   removeOwner(index: number) {

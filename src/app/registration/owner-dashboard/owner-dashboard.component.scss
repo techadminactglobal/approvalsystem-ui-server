@@ -1,25 +1,36 @@
 @import './src/app/app.component.scss';
 
+/* Apply .parentbackgroundcolor extension */
 .some-element {
   @extend .parentbackgroundcolor;
 }
 
+/* Registration Container - Add padding and other styles */
 .registration-container {
-    padding: 20px;
-  }
-  
-  .header {
-    text-align: center;
-  }
-  
-  .input-control {
-    width: 100%;
-  }
-  
-  .w-100 {
-    width: 100%;
-  }
- /* Overall styling for table */
+  padding: 20px;
+  background-color: #f5f5f5; /* Light gray background for the panel */
+  border-radius: 8px;  /* Rounded corners for a modern look */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin: 10px 0; /* Space between panels */
+  padding: 20px; /* Padding inside the panel for spacing */
+}
+
+/* Header styling */
+.header {
+  text-align: center;
+}
+
+/* Input control styling */
+.input-control {
+  width: 100%;
+}
+
+/* Width 100% helper class */
+.w-100 {
+  width: 100%;
+}
+
+/* Table responsive styles */
 .table-responsive {
   overflow-x: auto;
   margin-bottom: 20px;
@@ -32,7 +43,7 @@
   font-size: 14px;
 }
 
-/* Header styling */
+/* Header styling for table */
 .table th {
   text-align: left;
   padding: 12px;
@@ -42,14 +53,14 @@
   border-bottom: 2px solid #ddd;
 }
 
-/* Body styling */
+/* Body styling for table */
 .table td {
   padding: 12px;
   border-bottom: 1px solid #ddd;
   vertical-align: middle;
 }
 
-/* Row hover effect */
+/* Row hover effect for table */
 .table tbody tr:hover {
   background-color: #f1f1f1; /* Light grey background on hover */
 }
@@ -71,5 +82,89 @@
 @media (max-width: 768px) {
   .table th, .table td {
     padding: 8px;
+  }
+}
+
+/* Panel Header Styling */
+.link-style {
+  cursor: pointer;
+  color: white;  /* White text color */
+  text-decoration: none;  /* Remove underline */
+  border-radius: 4px; /* Rounded corners for the header */
+  padding: 15px; /* Padding inside the header for spacing */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.link-style:hover {
+  background-color: #0056b3;  /* Darker blue on hover */
+  font-weight: bold;  /* Make the text bolder when hovered */
+}
+
+/* Expanded Panel Style */
+mat-expansion-panel[expanded] {
+  background-color: #e6f7ff; /* Light blue background when expanded */
+  border: 1px solid #cce5ff; /* Light blue border when expanded */
+}
+
+/* Content styling for expanded panel */
+mat-expansion-panel .mat-expansion-panel-body {
+  padding: 20px;
+  background-color: #ffffff; /* White background for the content */
+  border-radius: 4px; /* Rounded corners for the content section */
+  box-shadow: inset 0px 2px 6px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
+}
+
+/* Table Cell Alignment */
+.table td, .table th {
+  text-align: left; /* Ensures text is left-aligned */
+  vertical-align: middle;
+}
+
+/* Enhanced Blinking Text Effect with Glowing and Smooth Animations */
+.blink-text {
+  font-size: 15px; /* Slightly larger font size for emphasis */
+  font-weight: bold; /* Bold text for added impact */
+  color: #3498db; /* Initial blue color */
+  padding: 8px 16px; /* Larger padding for a more spacious look */
+  display: inline-block; /* Ensures text behaves like a block element */
+  border: 2px solid transparent; /* Keeps the border square */
+  border-radius: 6px; /* Slightly rounded corners for a modern effect */
+  background-color: transparent; /* Transparent background */
+  text-shadow: 0 0 5px rgba(52, 152, 219, 0.6); /* Adds a subtle glow effect */
+  animation: blink-glow 1.5s infinite alternate, color-change 2s infinite alternate; /* Enhanced blinking and color-changing effect */
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.blink-text:hover {
+  color: #2980b9; /* Darker blue when hovered */
+  text-shadow: 0 0 10px rgba(52, 152, 219, 1), 0 0 20px rgba(52, 152, 219, 0.8); /* Glowing effect on hover */
+}
+
+/* Keyframe for Smooth Blinking Effect with Glow */
+@keyframes blink-glow {
+  0% {
+    opacity: 1;
+    text-shadow: 0 0 5px rgba(52, 152, 219, 0.6);
+  }
+  50% {
+    opacity: 0.5;
+    text-shadow: 0 0 15px rgba(52, 152, 219, 1);
+  }
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 5px rgba(52, 152, 219, 0.6);
+  }
+}
+
+/* Keyframe for Smooth Color Change */
+@keyframes color-change {
+  0% {
+    color: #3498db;
+  }
+  50% {
+    color: #1abc9c; /* Change to greenish blue */
+  }
+  100% {
+    color: #3498db; /* Return to initial blue */
   }
 }

@@ -334,26 +334,7 @@
         </div>
       </div>
 
-      <div class="text-center" *ngIf="plinthReleased">
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          class="button-spacing"
-          (click)="ViewDS()"
-        >
-          View {{ letterName }}
-        </button>
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          class="button-spacing"
-          (click)="fileRelease()"
-        >
-          File Release
-        </button>
-      </div>
+   
 
       <div class="buttonHierachy" *ngIf="viewHistoryButton">
         <mat-expansion-panel>
@@ -550,5 +531,26 @@
         </button>
       </div>
     </div>
+    <div class="text-center" *ngIf="plinthReleased">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="button-spacing"
+        (click)="ViewDS()"
+      >
+        View {{ letterName }}
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="button-spacing"
+        (click)="fileRelease()"
+      >
+        File Release
+      </button>
+    </div>
+
   <!-- </div>
 </div> -->

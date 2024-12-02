@@ -15,57 +15,23 @@
   box-sizing: border-box;
 }
 
-
+/* Header */
 .header {
-  background-color: cadetblue;
-  color: var(--highlight-color);
-  height: 80px;
+  background-color: #3f51b5;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px; /* Slight rounded corners for a more refined look */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Soft shadow for depth */
-  margin-top: 20px;
-  padding: 0 20px; /* Horizontal padding for spacing */
-}
-
-.header div {
-  font-size: var(--font-size-large);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 12px; /* Adequate spacing between text and icon */
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--highlight-color);
   text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 20px;
 }
 
 .header i {
-  font-size: 1.4em; /* Icon size adjusted */
-  color: var(--accent-color); /* Accent color for the icon */
+  margin-left: 10px;
 }
 
-@media (max-width: 768px) {
-  .header {
-    height: 70px;
-  }
-  .header div {
-    font-size: 4vw;
-  }
-}
-
-@media (max-width: 480px) {
-  .header {
-    height: 60px;
-  }
-  .header div {
-    font-size: var(--font-size-small);
-  }
-  .header i {
-    font-size: 1.2em; /* Smaller icon for small screens */
-  }
-}
 
 
 ///////deatils

@@ -66,7 +66,18 @@ export class PaymentReceiptComponent {
     // if(data != null){
     let request = {};
     this.paymentUserFor = this.senddata.paymentType;
-    if (this.senddata.paymentType == "regNew") {
+
+    if(this.senddata.paymentType=="RenewalConsultant"){
+      request = {
+        "userName": this.senddata.requestid,
+        "amount": this.senddata.amount,
+        "paymentId": this.senddata.paymentId,
+        "transactionNumber": 754826748656187,
+        "status": "Success",
+        "paymentRequestFor": this.senddata.comment
+      }
+
+    }else if (this.senddata.paymentType == "regNew") {
       this.viewBuild = false;
       request = {
         "userName": this.senddata.requestid,
@@ -107,14 +118,13 @@ export class PaymentReceiptComponent {
         "paymentRequestFor": this.senddata.comment
       }
     }
-
     this.service.getDataService(this.apiConstant.update_Gateway, request).subscribe((data: any) => {
       console.log(data);
 
       if (data != null) {
         // this.hidePaymentButton = true;
 
-        if (this.senddata.paymentType == "regNew") {
+        if (this.senddata.paymentType == "regNew" || this.senddata.paymentType=="RenewalConsultant") {
           console.log(data, "generating recipt");
 
           this.fullName = data.data.BasicDetails.salutation + " " + data.data.BasicDetails.firstName + " " + data.data.BasicDetails.middleName + " " + data.data.BasicDetails.lastName;
@@ -130,7 +140,7 @@ export class PaymentReceiptComponent {
           this.paymentRespect = data.data.PaymentDetails.paymentRespective;
           this.ReceptNo = data.data.PaymentDetails.reciptNo;
 
-          if (this.senddata.comment == "Security Deposite") {
+          if (this.senddata.comment == "Security Deposite" || this.senddata.comment == "Renewal consultant Fee") {
             this.viewCharge1 = true;
             this.viewCharge2345 = false
           } else if (this.senddata.comment == "Final Payment") {
@@ -323,8 +333,8 @@ export class PaymentReceiptComponent {
 
       }, 1000);
     });
-
-
+  
+   
 
     // setTimeout(() => {
     //   this.downloadAsPDF();
@@ -371,7 +381,7 @@ export class PaymentReceiptComponent {
     }).catch((error) => {
       console.error("Error generating PDF:", error);
     });
-
+    this.router.navigate(['/dashboard'])
 
   }
 

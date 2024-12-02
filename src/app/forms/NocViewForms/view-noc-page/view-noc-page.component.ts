@@ -287,4 +287,8 @@ back(){
   this.router.navigate(['/dashboard']);
 }
 
+BacktoNocdeptdasbhoard(){
+  this.router.navigate(['/nocPage']);
+}
+
 }

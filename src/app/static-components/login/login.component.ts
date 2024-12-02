@@ -271,10 +271,18 @@ export class LoginComponent {
             this.senddata.professionalType = res.professionalType;
             this.router.navigate(['/nocDashboard']);
           } else if (res.roleId == '1001') {
+
+            if(res.expired==true){
+              this.senddata.expired = true;
+              this.senddata.requestid = res.userName;
+              this.router.navigate(['/registrationView']);
+            }
+            else{
             this.senddata.hierarchyId = res.roleId;
             this.senddata.architectView = true;
             this.senddata.hierarchyUserName = res.userName;
             this.router.navigate(['/dashboard']);
+          }
           } else if (res.roleId == '301' || res.roleId == '302') {
             this.senddata.callFrom = 'plinth';
             this.senddata.hierarchyId = res.roleId;

@@ -15,14 +15,12 @@
       <br />
       <hr />
       <br />
-
-      <mat-expansion-panel
-        class="registration-container mt-0 parentbackgroundcolor"
-      >
-        <mat-expansion-panel-header style="height: 104px;">
-          <mat-panel-title
-             style="font-size: larger; font-weight: 800;">Initiate for a New Building Plan Sanction Request 👇</mat-panel-title
-         >
+      <mat-expansion-panel class="registration-container mt-0 parentbackgroundcolor">
+        <mat-expansion-panel-header class="link-style" style="height: 104px">
+          <mat-panel-title style="font-size: larger; font-weight: 800">
+            Initiate for a New Building Plan Sanction Request 
+            <span class="blink-text">Click here</span> <!-- Blinking text with a square-like gap -->
+          </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="column right">
           <div class="m-4">
@@ -95,105 +93,86 @@
                   <input matInput readonly />
                 </mat-form-field>
               </div>
-            </div>
-
-            <!-- ++++++++++++++++++++++++++++++++++++ -->
-
-            <!-- <div class="row mb-3" formGroupName="applicantInfo">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="justify-content d-flex">
-                            <mat-form-field appearance="fill" style="width: 100%;">
-                                <mat-label>Search Architect</mat-label>
-                                <input matInput [matAutocomplete]="auto" formControlName="architectNum"
-                                    (keyup)="onKeyup(architectInput.value)" #architectInput />
-                                <button mat-button matSuffix (click)="resetArchitect()">Clear</button>
-                                <mat-autocomplete #auto="matAutocomplete">
-                                    <mat-option *ngFor="let architect of filteredArchitects" [value]="architect.consultantId"
-                                        (onSelectionChange)="selectArchitect(architect)">
-                                        {{ architect.consultantId }}
-                                    </mat-option>
-                                </mat-autocomplete>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </div> -->
-
-            <div formGroupName="applicantInfo">
-              <div class="row mb-3">
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                  <mat-label class="title">Search Architect</mat-label>
-                  <mat-form-field appearance="fill">
-                    <input
-                      type="text"
-                      matInput
-                      (keyup)="onKeyup(architectInput.value)"
-                      #architectInput
-                      placeholder="Type to search..."
-                      formControlName="architectNum"
-                    />
-                    <button mat-button matSuffix (click)="resetArchitect()">
-                      Clear
+              <!-- this is email    -->
+              <div class="justify-content d-flex">
+                <!-- Checkbox to enable the form functionality -->
+                <div class="col-xl-4 col-lg-6 col-12">
+                  <mat-checkbox (change)="emailopen()" [checked]="isCheckeds">
+                    Add Another Owner (Optional)
+                  </mat-checkbox>
+                </div>
+              </div>
+              
+              <!-- Conditionally show the form based on checkbox state -->
+              <div *ngIf="isCheckeds" style="margin-top: 15px;"> <!-- Add margin-top for space below the checkbox -->
+                <div class="col-xl-4 col-lg-6 col-12">
+                  <mat-label class="title" style="font-size: 14px; font-weight: bold;">Enter email address to add members.</mat-label>
+                  <mat-form-field appearance="fill" style="width: 100%; margin-bottom: 10px;"> <!-- Added margin-bottom -->
+                    <mat-label>Email Id</mat-label>
+                    <input matInput #aadharInput formControlName="addharNum" style="width: 100%;" />
+                    
+                    <!-- Buttons inside the input field -->
+                    <button mat-button matSuffix (click)="searchUser(aadharInput.value)" style="margin-top: 10px;">
+                      Search
                     </button>
-                    <mat-hint
-                      ><strong>
-                        <span style="color: rgb(246, 5, 5)">**</span>(Please
-                        type min 3 character like CA/***/***).
-                      </strong></mat-hint
-                    >
                   </mat-form-field>
                 </div>
-
-                <div
-                  class="col-md-6 col-sm-12 col-xs-12"
-                  *ngIf="!viewArchitect"
-                >
-                  <mat-label
-                    style="color: rgb(246, 5, 5); margin-left: 10%; size: 14px"
-                    >{{ architectMessage }}</mat-label
-                  >
+              
+                <!-- Message display -->
+                <div class="col-xl-4 col-lg-6 col-12">
+                  <span *ngIf="isTrue" style="color: rgb(246, 5, 5); margin-left: 10%; font-size: 14px;">
+                    {{message}}
+                  </span>
+                  <span *ngIf="!isTrue" style="color: rgb(2, 85, 25); margin-left: 10%; font-size: 14px;">
+                    {{message}}
+                  </span>
+                </div>
+              
+                <!-- Add Owner Details button -->
+                <div class="col-xl-4 col-lg-6 col-12">
+                  <button mat-button color="primary" matSuffix (click)="AddDetails()" style="margin-top: 10px;">
+                    Add Owner Details
+                  </button>
                 </div>
               </div>
+              
+            
 
-              <div class="row mb-3">
-                <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="viewArchitect">
-                  <mat-label class="title">Select Architect</mat-label>
-                  <mat-form-field appearance="fill">
-                    <mat-select
-                      placeholder="Select Architect"
-                      formControlName="consultantId"
-                    >
-                      <mat-option
-                        *ngFor="let architect of filteredArchitects"
-                        [value]="architect.consultantId"
-                        (click)="selectArchitectId(architect.consultantId)"
-                      >
-                        {{ architect.consultantId }}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
+            <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-                <div class="col-md-4 col-sm-12 col-xs-12" *ngIf="viewName">
-                  <mat-label class="title">Full name of Architect </mat-label>
-                  <mat-form-field appearance="fill" class="input-control">
-                    <div class="placeholder-wrapper">
-                      <span class="dob-value"
-                        >&nbsp;
-                        {{
-                          selectedArchitect.firstName +
-                            " " +
-                            selectedArchitect.middleName +
-                            " " +
-                            selectedArchitect.lastName
-                        }}</span
-                      >
-                    </div>
-                    <input matInput readonly />
-                  </mat-form-field>
-                </div>
+            <div class="justify-content d-flex">
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-checkbox (click)="resetForm()">
+                  If Company (Optional)
+                </mat-checkbox>
               </div>
             </div>
 
+            <div *ngIf="isChecked" class="company-details">
+              <h3>Enter Company Details</h3>
+              <div formGroupName="companyDetails">
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Company Name</mat-label>
+                  <input matInput formControlName="companyName" required />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Email ID</mat-label>
+                  <input matInput formControlName="email" required email />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Phone Number</mat-label>
+                  <input matInput formControlName="phoneNo" required />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>GST Number</mat-label>
+                  <input matInput formControlName="gstNo" required />
+                </mat-form-field>
+              </div>
+            </div>
+            </div>
             <div
               class="row"
               *ngFor="let owner of applicantDetails.controls; let i = index"
@@ -273,82 +252,101 @@
                 </div>
               </div>
             </div>
+            <br>
+            <br>
 
-            <div class="justify-content d-flex">
-              <div class="col-xl-4 col-lg-6 col-12">
-                <mat-form-field appearance="fill" style="width: 100%">
-                  <mat-label>Email Id</mat-label>
-                  <input matInput #aadharInput formControlName="addharNum" />
+            <!-- ++++++++++++++++++++++++++++++++++++ -->
 
-                  <!-- Buttons inside the input field -->
-                  <button
-                    mat-button
-                    matSuffix
-                    (click)="searchUser(aadharInput.value)"
-                  >
-                    Search
-                  </button>
-                </mat-form-field>
-              </div>
-              <div class="col-xl-4 col-lg-6 col-12">
-                <span
-                  *ngIf="isTrue"
-                  style="color: rgb(246, 5, 5); margin-left: 10%; size: 14px"
-                  >{{ message }}</span
-                >
+            <!-- <div class="row mb-3" formGroupName="applicantInfo">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="justify-content d-flex">
+                            <mat-form-field appearance="fill" style="width: 100%;">
+                                <mat-label>Search Architect</mat-label>
+                                <input matInput [matAutocomplete]="auto" formControlName="architectNum"
+                                    (keyup)="onKeyup(architectInput.value)" #architectInput />
+                                <button mat-button matSuffix (click)="resetArchitect()">Clear</button>
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let architect of filteredArchitects" [value]="architect.consultantId"
+                                        (onSelectionChange)="selectArchitect(architect)">
+                                        {{ architect.consultantId }}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div> -->
 
-                <span
-                  *ngIf="!isTrue"
-                  style="color: rgb(2, 85, 25); margin-left: 10%; size: 14px"
-                  >{{ message }}</span
-                >
-              </div>
-              <div class="col-xl-4 col-lg-6 col-12">
-                <button
-                  mat-button
-                  color="primary"
-                  matSuffix
-                  (click)="AddDetails()"
-                >
-                  Add Owner Details
-                </button>
-              </div>
-            </div>
+          <div formGroupName="applicantInfo">
+  <!-- Search Architect Section -->
+  <div class="row mb-3">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <mat-label class="title">Search Architect</mat-label>
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-icon matPrefix>search</mat-icon> <!-- Search icon for better UX -->
+        <input
+          type="text"
+          matInput
+          (keyup)="onKeyup(architectInput.value)"
+          #architectInput
+          placeholder="Type architect name or ID (min 3 characters)"
+          formControlName="architectNum"
+        />
+        <button mat-button matSuffix (click)="resetArchitect()" style="margin-left: 10px;">
+          Clear
+        </button>
+        <mat-hint>
+          <strong>
+            <span style="color: rgb(246, 5, 5)">**</span>(Please type min 3 characters like CA/***/***).
+          </strong>
+        </mat-hint>
+      </mat-form-field>
+    </div>
 
-            <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- Error message or Architect not found message -->
+    <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="!viewArchitect">
+      <mat-label
+        style="color: rgb(246, 5, 5); font-size: 14px; margin-left: 10%"
+        >{{ architectMessage }}</mat-label
+      >
+    </div>
+  </div>
 
-            <div class="justify-content d-flex">
-              <div class="col-xl-4 col-lg-6 col-12">
-                <mat-checkbox (click)="resetForm()">
-                  I agree to provide my company details
-                </mat-checkbox>
-              </div>
-            </div>
+  <!-- Architect Selection Section -->
+  <div class="row mb-3">
+    <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="viewArchitect">
+      <mat-label class="title">Select Architect</mat-label>
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-select placeholder="Select Architect" formControlName="consultantId">
+          <mat-option
+            *ngFor="let architect of filteredArchitects"
+            [value]="architect.consultantId"
+            (click)="selectArchitectId(architect.consultantId)"
+          >
+            {{ architect.consultantId }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-            <div *ngIf="isChecked" class="company-details">
-              <h3>Enter Company Details</h3>
-              <div formGroupName="companyDetails">
-                <mat-form-field appearance="fill" style="width: 100%">
-                  <mat-label>Company Name</mat-label>
-                  <input matInput formControlName="companyName" required />
-                </mat-form-field>
+    <!-- Display Architect Name once selected -->
+    <div class="col-md-4 col-sm-12 col-xs-12" *ngIf="viewName">
+      <mat-label class="title">Full name of Architect</mat-label>
+      <mat-form-field appearance="fill" class="input-control">
+        <div class="placeholder-wrapper">
+          <span class="dob-value">
+            &nbsp; {{ selectedArchitect.firstName + " " + selectedArchitect.middleName + " " + selectedArchitect.lastName }}
+          </span>
+        </div>
+        <input matInput readonly />
+      </mat-form-field>
+    </div>
+  </div>
+</div>
 
-                <mat-form-field appearance="fill" style="width: 100%">
-                  <mat-label>Email ID</mat-label>
-                  <input matInput formControlName="email" required email />
-                </mat-form-field>
+            
 
-                <mat-form-field appearance="fill" style="width: 100%">
-                  <mat-label>Phone Number</mat-label>
-                  <input matInput formControlName="phoneNo" required />
-                </mat-form-field>
 
-                <mat-form-field appearance="fill" style="width: 100%">
-                  <mat-label>GST Number</mat-label>
-                  <input matInput formControlName="gstNo" required />
-                </mat-form-field>
-              </div>
-            </div>
+
 
             <button mat-raised-button color="primary" (click)="submitForm()">
               Submit
@@ -372,7 +370,7 @@
             <th scope="col">Details</th>
           </tr>
         </thead>
-    
+
         <tbody>
           <tr *ngFor="let element of dashboardDetails; let i = index">
             <th scope="row">{{ i + 1 }}</th>
@@ -385,7 +383,8 @@
             <td
               (click)="viewDetail(element.status, element.frId)"
               class="detail"
-              style="cursor: pointer; color: blue; text-decoration: underline;">
+              style="cursor: pointer; color: blue; text-decoration: underline"
+            >
               View Details
             </td>
           </tr>
@@ -393,6 +392,5 @@
       </table>
       <!-- Add your pagination here if needed -->
     </div>
-    
   </div>
 </div>

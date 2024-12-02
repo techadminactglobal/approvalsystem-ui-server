@@ -1,3 +1,19 @@
+/* Header */
+.header {
+  background-color: #3f51b5;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.header i {
+  margin-left: 10px;
+}
 .even-row {
     background-color: lightgray; /* Change to your desired color */
     border-radius: 1px solid black;

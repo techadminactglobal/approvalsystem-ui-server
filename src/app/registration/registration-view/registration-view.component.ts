@@ -469,8 +469,14 @@ viewFlow() {
 
 payment(){
   this.senddata.requestid = this.userName;
-    this.senddata.paymentType="regNew";
+  if(this.senddata.expired){
+    this.senddata.paymentType="RenewalConsultant";
     this.route.navigate(["/payment"]);
+  }
+  else{
+    this.senddata.paymentType="regNew";
+    this.route.navigate(["/payment"]);   
+  }
 }
 
 
