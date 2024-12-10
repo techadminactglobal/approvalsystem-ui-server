@@ -62,10 +62,20 @@
                   (change)="uploadDoc($event, 'referenceDocuments')"
                   formControlName="referenceDocuments"
                 />
-                <button mat-icon-button matSuffix type="button" *ngIf="refrencePreview" (click)="togglerefrencePreview()">
+                <button
+                  mat-icon-button
+                  matSuffix
+                  type="button"
+                  *ngIf="refrencePreview"
+                  (click)="togglerefrencePreview()"
+                >
                   <mat-icon>visibility</mat-icon>
                 </button>
-                <button mat-icon-button class="delete-btn" (click)="deleterefrenceCertificate()">
+                <button
+                  mat-icon-button
+                  class="delete-btn"
+                  (click)="deleterefrenceCertificate()"
+                >
                   <mat-icon>delete</mat-icon>
                 </button>
               </mat-form-field>
@@ -80,24 +90,38 @@
               >*Add all the releated file in one pdf, then upload here.
             </mat-hint>
           </div>
-                           <!-- Modal for Viewing the Educational Certificate in Larger Format -->
-                           <div *ngIf="isrefrencePreviewModalOpen" class="preview-modal-overlay">
-                            <div class="preview-modal-content">
-                              <!-- Preview PDF or Image (Based on the File Type) -->
-                              <iframe *ngIf="refrenceFileType === 'pdf'" [src]="refrencePreview" frameborder="0" class="modal-image"></iframe>
-                              <img *ngIf="refrenceFileType !== 'pdf'" [src]="refrencePreview" alt="Educational Certificate" class="modal-image" />
-                          
-                              <!-- Buttons to delete and close -->
-                              <div class="modal-btn-container">
-                               <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificatesitemutationotherid()">
+          <!-- Modal for Viewing the Educational Certificate in Larger Format -->
+          <div *ngIf="isrefrencePreviewModalOpen" class="preview-modal-overlay">
+            <div class="preview-modal-content">
+              <!-- Preview PDF or Image (Based on the File Type) -->
+              <iframe
+                *ngIf="refrenceFileType === 'pdf'"
+                [src]="refrencePreview"
+                frameborder="0"
+                class="modal-image"
+              ></iframe>
+              <img
+                *ngIf="refrenceFileType !== 'pdf'"
+                [src]="refrencePreview"
+                alt="Educational Certificate"
+                class="modal-image"
+              />
+
+              <!-- Buttons to delete and close -->
+              <div class="modal-btn-container">
+                <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificatesitemutationotherid()">
                                     <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
                                 </button> -->
-                                <button mat-icon-button class="close-btn" (click)="closerefrencePreviewModal()">
-                                  <mat-icon>close</mat-icon>
-                                </button>
-                              </div>
-                            </div>
-                          </div>
+                <button
+                  mat-icon-button
+                  class="close-btn"
+                  (click)="closerefrencePreviewModal()"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
 
           <div class="m-5 d-flex justify-content-between">
             <button
@@ -213,10 +237,20 @@
                       (change)="uploadPDF($event, 'pdfFile')"
                       formControlName="pdfFile"
                     />
-                    <button mat-icon-button matSuffix type="button" *ngIf="approverefrencePreview" (click)="togglerefrenceapprovePreview()">
+                    <button
+                      mat-icon-button
+                      matSuffix
+                      type="button"
+                      *ngIf="approverefrencePreview"
+                      (click)="togglerefrenceapprovePreview()"
+                    >
                       <mat-icon>visibility</mat-icon>
                     </button>
-                    <button mat-icon-button class="delete-btn" (click)="deleterefrenceapproveCertificate()">
+                    <button
+                      mat-icon-button
+                      class="delete-btn"
+                      (click)="deleterefrenceapproveCertificate()"
+                    >
                       <mat-icon>delete</mat-icon>
                     </button>
                     <mat-hint
@@ -227,25 +261,40 @@
                     >
                   </mat-form-field>
                 </div>
-                <div *ngIf="isapproveisrefrencePreviewModalOpen" class="preview-modal-overlay">
+                <div
+                  *ngIf="isapproveisrefrencePreviewModalOpen"
+                  class="preview-modal-overlay"
+                >
                   <div class="preview-modal-content">
                     <!-- Preview PDF or Image (Based on the File Type) -->
-                    <iframe *ngIf="approverefrenceFileType === 'pdf'" [src]="approverefrencePreview" frameborder="0" class="modal-image"></iframe>
-                    <img *ngIf="approverefrenceFileType !== 'pdf'" [src]="approverefrencePreview" alt="Educational Certificate" class="modal-image" />
-                
+                    <iframe
+                      *ngIf="approverefrenceFileType === 'pdf'"
+                      [src]="approverefrencePreview"
+                      frameborder="0"
+                      class="modal-image"
+                    ></iframe>
+                    <img
+                      *ngIf="approverefrenceFileType !== 'pdf'"
+                      [src]="approverefrencePreview"
+                      alt="Educational Certificate"
+                      class="modal-image"
+                    />
+
                     <!-- Buttons to delete and close -->
                     <div class="modal-btn-container">
-                     <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificatesitemutationotherid()">
+                      <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificatesitemutationotherid()">
                           <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
                       </button> -->
-                      <button mat-icon-button class="close-btn" (click)="closerefrenceapprovePreviewModal()">
+                      <button
+                        mat-icon-button
+                        class="close-btn"
+                        (click)="closerefrenceapprovePreviewModal()"
+                      >
                         <mat-icon>close</mat-icon>
                       </button>
                     </div>
                   </div>
                 </div>
-      
-
 
                 <!-- <div class="col-md-6 col-sm-12 col-xs-12">
                         <mat-label class="title">Lease Deed</mat-label>

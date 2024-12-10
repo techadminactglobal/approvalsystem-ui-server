@@ -32,8 +32,15 @@ export class SanctionreviseComponent {
   pending: boolean = false;
   totalPendingArray: any[] = [];
   totalPendingSize: any;
-
+  hierarchyUserName:any;
+  callFrom:any;
+  requestid:any;
+  frid:any;
   ngOnInit() {
+    this.hierarchyUserName = localStorage.getItem('hierarchyUserName');
+    this.callFrom = localStorage.getItem('callFrom');
+    this.requestid = localStorage.getItem('requestid');
+    this.frid = localStorage.getItem('frid');
     this.plinthDashboardData();
 
     setTimeout(() => {
@@ -45,7 +52,7 @@ export class SanctionreviseComponent {
     this.service
       .getDeptDashboard(
         this.apiConstant.PlinthDashboardDetails,
-        this.senddata.hierarchyUserName
+        this.hierarchyUserName
       )
       .subscribe((res: any) => {
         console.log('**************', res);
@@ -153,9 +160,9 @@ export class SanctionreviseComponent {
 
   viewDetail(fileNo: string, status: string, frId: string) {
     console.log(fileNo);
-    this.senddata.requestid = fileNo;
-    this.senddata.frid = frId;
-    this.senddata.callFrom = 'plinth';
+    this.requestid = fileNo;
+    this.frid = frId;
+    this.callFrom = 'plinth';
     if (status == 'Request Released') {
       this.router.navigate(['/plinthComponent']);
     } else {

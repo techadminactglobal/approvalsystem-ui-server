@@ -31,9 +31,17 @@ export class ViewFireComponent {
   NocDeptDashboard: boolean = false;
   InternalDeptNoc: boolean = false;
   viewback:boolean = false;
+   hierarchyId:any;
+   requestId:any;
+   frids:any;
+   hierarchyName:any;
 
   ngOnInit(): void {
-      if(this.senddata.hierarchyId === 'f-101'){
+    this.requestId = localStorage.getItem('requestid');
+    this.frids = localStorage.getItem('frid');
+    this.hierarchyId = localStorage.getItem('hierarchyId')
+    this.hierarchyName = localStorage.getItem('hierarchyUserName');
+      if(this.hierarchyId === 'f-101'){
         this.viewback=true;
     this.NocDeptDashboard = true;
       }else{
@@ -45,7 +53,7 @@ export class ViewFireComponent {
 
   viewDoc:boolean = false;
   fireDetails() {
-    let request = '?fileNo=' + this.senddata.requestid + '&frId=' + this.senddata.frid + '&callFor=' + this.senddata.callFrom;
+    let request = '?fileNo=' + this.requestId + '&frId=' + this.frids + '&callFor=' + this.senddata.callFrom;
     this.service.getButtonDetails(this.apiConstant.ViewNocFire, request).subscribe((data: any) => {
       console.log(data, "response from api...");
       this.fireNocs = data.data.fireNocs[0];
@@ -64,7 +72,7 @@ export class ViewFireComponent {
   openFireServicePdf(): void {
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId": this.requestId,
       "docUUID": this.fireNocs.fileUniqueNo
     }
 
@@ -223,10 +231,10 @@ export class ViewFireComponent {
       return;
     } else {
       let request: any = {
-        "referenceId": this.senddata.requestid,
-        "hierachyUserName": this.senddata.hierarchyUserName,
+        "referenceId": this.requestId,
+        "hierachyUserName": this.hierarchyName,
         "hierachyRemark": this.deptForm.value.hierachyRemark,
-        "hierachyRoleId": this.senddata.hierarchyId,
+        "hierachyRoleId": this.hierarchyId,
         "docName": this.docName,
         "docUUID": this.docUUID,
         "docType": this.docType
@@ -251,10 +259,10 @@ export class ViewFireComponent {
       return;
     } else {
       let request: any = {
-        "referenceId": this.senddata.requestid,
-        "hierachyUserName": this.senddata.hierarchyUserName,
+        "referenceId": this.requestId,
+        "hierachyUserName": this.hierarchyName,
         "hierachyRemark": this.deptForm.value.hierachyRemark,
-        "hierachyRoleId": this.senddata.hierarchyId,
+        "hierachyRoleId": this.hierarchyId,
         "docName": this.docName,
         "docUUID": this.docUUID,
         "docType": this.docType

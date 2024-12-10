@@ -44,8 +44,14 @@ export class PlintComponentComponent implements OnInit {
     private senddata: SendData,
     private router: Router, private sanitizer: DomSanitizer
   ) { }
+requestid:any;
+frid:any;
+hierarchyUserName:any;
 
   ngOnInit(): void {
+    this.requestid = localStorage.getItem('requestid');
+    this.frid = localStorage.getItem('frid');
+    this.hierarchyUserName = localStorage.getItem('hierarchyUserName');
     this.buildForm();
     this.previousData();
   }
@@ -346,7 +352,7 @@ export class PlintComponentComponent implements OnInit {
 
 data: any;
   previousData() {
-    this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.senddata.requestid).subscribe((data: any) => {
+    this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.requestid).subscribe((data: any) => {
       console.log(data); 
       this.data = data;
     });
@@ -371,7 +377,7 @@ data: any;
       "pArea": this.data.basicInfo.pArea,
       "bHeight": this.data.basicInfo.bHeight,
       "fileCreatedBy": this.data.basicInfo.fileCreatedBy,
-      "assignedArchitect" :this.senddata.hierarchyUserName,
+      "assignedArchitect" :this.hierarchyUserName,
       "natureOfProject": this.data.basicInfo.natureOfProject,
       "remark": this.plinthForm.value.remark,
       "docDetailsModel": this.formData,
@@ -381,8 +387,8 @@ data: any;
     this.service.getDataService(this.apiConstant.PlinthSaveDetails, json).subscribe((data: any) => {
       console.log(data); 
       if (data.httpStatus == "OK") {
-        this.senddata.requestid = this.data.basicInfo.fileNo;
-        this.senddata.frid = this.data.basicInfo.frId;
+        this.requestid = this.data.basicInfo.fileNo;
+        this.frid = this.data.basicInfo.frId;
         
         this.senddata.dialog=true;
         this.senddata.datasave =true;

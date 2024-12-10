@@ -624,7 +624,8 @@ deleteEducationalCertificate() {
 
       if (res.data != null) {
         this.userName = res.data.Details.consultantName;
-        this.senddata.requestid = res.data.Details.consultantName;
+        // this.senddata.requestid = res.data.Details.consultantName;
+        localStorage.setItem('requestid',res.data.Details.consultantName);
         this.senddata.datasave = true;
 
         this.senddata.regForm = true;

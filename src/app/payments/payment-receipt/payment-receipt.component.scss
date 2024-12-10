@@ -52,4 +52,23 @@
     display: flex;
     justify-content: center;
   }
+
+  .logout-button {
+    margin: 2%;
+    background-color: blueviolet;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    
+    /* Centering the button horizontally and vertically */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  
+  .logout-button:hover {
+    background-color: green;
+  }
   

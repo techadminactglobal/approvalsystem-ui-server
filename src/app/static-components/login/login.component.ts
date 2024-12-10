@@ -139,6 +139,7 @@ export class LoginComponent {
     });
   }
   ngOnInit() {
+    localStorage.clear();
     this.store.select('loginReducer').subscribe((res) => {
       console.log('subscribe', res);
     });
@@ -257,50 +258,81 @@ export class LoginComponent {
             res.roleId == COMMONCONSTANTS.RegNew_ROLE_ID_SE ||
             res.roleId == COMMONCONSTANTS.fileNew_ROLE_ID_JE ||
             res.roleId == COMMONCONSTANTS.fileNew_ROLE_ID_AE
-          ) {
-            this.senddata.hierarchyId = res.roleId;
-            this.senddata.hierarchyUserName = res.userName;
-            this.router.navigate(['/departmentDashboard']);
+          ) 
+          
+          {
+             localStorage.setItem('hierarchyId', res.roleId);   //set in local storage for heirarchy id
+           /*  this.senddata.hierarchyId = res.roleId;
+            this.senddata.hierarchyUserName = res.userName; */
+           localStorage.setItem('hierarchyUserName', res.userName);   //set in local storage for heirarchy username
+              this.router.navigate(['/departmentDashboard']);
+           
           } else if (res.roleId == '002') {
-            this.senddata.hierarchyId = 0;
-            this.senddata.requestid = res.userName;
+            // this.senddata.hierarchyId = 0;
+            localStorage.setItem('requestid', res.userName);   //set in local storage for user name
+           /*  this.senddata.requestid = res.userName; */
             this.router.navigate(['/registrationView']);
           } else if (res.roleId == 'f-101') {
-            this.senddata.hierarchyId = res.roleId;
-            this.senddata.hierarchyUserName = res.userName;
-            this.senddata.professionalType = res.professionalType;
+            localStorage.setItem('hierarchyId', res.roleId);   //set in local storage for heirarchy id
+            // this.senddata.hierarchyId = res.roleId;
+            localStorage.setItem('hierarchyUserName', res.userName);   //set in local storage for heirarchy username
+            // this.senddata.hierarchyUserName = res.userName;
+            localStorage.setItem('professionalType',res.professionalType);
+          /*   this.senddata.professionalType = res.professionalType; */
             this.router.navigate(['/nocDashboard']);
           } else if (res.roleId == '1001') {
-
             if(res.expired==true){
+
               this.senddata.expired = true;
-              this.senddata.requestid = res.userName;
+
+              localStorage.setItem('hierarchyUserName', res.userName); 
+
               this.router.navigate(['/registrationView']);
+
             }
+
             else{
-            this.senddata.hierarchyId = res.roleId;
-            this.senddata.architectView = true;
-            this.senddata.hierarchyUserName = res.userName;
+            // this.senddata.hierarchyId = res.roleId;
+            localStorage.setItem('hierarchyId', res.roleId);   //set in local storage for heirarchy id
+           /*  this.senddata.architectView = true; */
+           localStorage.setItem('architectView', true.toString());  // Storing boolean as string
+            // this.senddata.hierarchyUserName = res.userName;
+            localStorage.setItem('hierarchyUserName', res.userName);   //set in local storage for heirarchy username
             this.router.navigate(['/dashboard']);
-          }
+            }
           } else if (res.roleId == '301' || res.roleId == '302') {
-            this.senddata.callFrom = 'plinth';
-            this.senddata.hierarchyId = res.roleId;
-            this.senddata.hierarchyUserName = res.userName;
+            // this.senddata.callFrom = 'plinth';
+            // Directly set the value 'plinth' in localStorage
+            localStorage.setItem('callFrom', 'plinth');
+
+            // this.senddata.hierarchyId = res.roleId;
+            localStorage.setItem('hierarchyId', res.roleId); 
+            // this.senddata.hierarchyUserName = res.userName;
+            localStorage.setItem('hierarchyUserName', res.userName); 
+
             this.router.navigate(['/departmentDashboard']);
           } else if (
             res.roleId == '401' ||
             res.roleId == '402' ||
             res.roleId == '403'
           ) {
-            this.senddata.callFrom = 'OC';
-            this.senddata.hierarchyId = res.roleId;
-            this.senddata.hierarchyUserName = res.userName;
+            localStorage.setItem('callFrom', 'OC');
+            // this.senddata.callFrom = 'OC';
+            localStorage.setItem('hierarchyId', res.roleId); 
+            // this.senddata.hierarchyId = res.roleId;
+            // this.senddata.hierarchyUserName = res.userName;
+            localStorage.setItem('hierarchyUserName', res.userName); 
             this.router.navigate(['/departmentDashboard']);
           } else if (res.roleId == '001') {
-            this.senddata.architectView = false;
-            this.senddata.hierarchyId = res.roleId;
-            this.senddata.hierarchyUserName = res.userName;
+            // this.senddata.architectView = false;
+            // Storing the boolean value 'false' in localStorage
+            localStorage.setItem('architectView', false.toString());
+
+            // this.senddata.hierarchyId = res.roleId;
+            localStorage.setItem('hierarchyId', res.roleId); 
+
+            // this.senddata.hierarchyUserName = res.userName;
+            localStorage.setItem('hierarchyUserName', res.userName); 
             this.router.navigate(['/OwnerDashboard']);
           }
         } else {
@@ -358,19 +390,18 @@ export class LoginComponent {
   // }
   isOpen = false;
   userInput = '';
-  messages: { user: string; bot: string }[] = [];
-  isBotTyping = false; // New variable for bot typing state
+  isBotTyping = false;
+  messages: { user: string; bot: string; type: string }[] = [];
 
   openChat() {
     this.isOpen = true;
-
-    // Show greeting message only if it hasn't been shown yet
     if (!this.greetingShown) {
       this.messages.push({
         user: '',
         bot: 'Hello!🙏 How can I assist you today?',
+        type: 'normal'  // Normal message type
       });
-      this.greetingShown = true; // Mark the greeting as shown
+      this.greetingShown = true;
     }
   }
 
@@ -382,7 +413,7 @@ export class LoginComponent {
     if (!this.userInput.trim()) return;
 
     // Add user's message to the chat
-    this.messages.push({ user: this.userInput, bot: '' });
+    this.messages.push({ user: this.userInput, bot: '', type: 'normal' });
 
     // Show typing indicator
     this.isBotTyping = true;
@@ -390,12 +421,11 @@ export class LoginComponent {
     // Prepare the API request
     const query = encodeURIComponent(this.userInput);
     const prompt =
-      "Do not write that the text or the document do not provide you this. Only answer based on the documentation, not from outside it. If it is from outside, respond according to what is not mentioned in the document and clarify that you only provide responses from the Building Plan Website. Ensure to refer to MCD as 'ActGlobal' and do not include any URLs in your response. User can give input, and the bot will provide related answers. In any answer, do not mention that the documents do not provide specific time. and answer give step by step not a parapgraph and step change line by line.";
+      "Do not write that the text or the document do not provide you this. Only answer based on the documentation, not from outside it. If it is from outside, respond according to what is not mentioned in the document and clarify that you only provide responses from the Building Plan Website. Ensure to refer to MCD as 'ActGlobal' and do not include any URLs in your response. User can give input, and the bot will provide related answers. In any answer, do not mention that the documents do not provide specific time. and answer give step by step not a parapgraph and step change line by line. Write the response stepwise. All the responses should be step wise and not write it in single paragraph. Each step should begin in new line.";
+
     const uuid_number = 'fce4b9cc-83be-11ef-99f0-42004e494300'; // Adjust as necessary
 
-    const apiUrl = `${
-      API_PATH.ChatBot
-    }?query_string=${query}&prompt=${encodeURIComponent(
+    const apiUrl = `${API_PATH.ChatBot}?query_string=${query}&prompt=${encodeURIComponent(
       prompt
     )}&uuid_number=${uuid_number}`;
 
@@ -404,17 +434,26 @@ export class LoginComponent {
 
     this.http.get<{ answer: string; reply: string }>(apiUrl, {}).subscribe({
       next: (response) => {
-        this.messages[this.messages.length - 1].bot = response.answer;
-        console.log(response.answer);
+        // Split the response into steps based on newline character and remove empty steps
+        const steps = response.answer.split('\n').filter(step => step.trim() !== '');
+        
+        // Add a header message
+        this.messages.push({ 
+          user: '', 
+          bot: 'To do the registration on the Building Plan Website, follow these steps:', 
+          type: 'header' // Mark this as a header
+        });
 
+        // Add each step to the messages array with a delay
+        this.addStepsWithDelay(steps);
+        
         // Hide typing indicator after receiving response
         this.isBotTyping = false;
       },
       error: (error) => {
         console.error('Error:', error); // Log the error
-        this.messages[this.messages.length - 1].bot =
-          'Sorry, something went wrong.';
-
+        this.messages[this.messages.length - 1].bot = 'Sorry, something went wrong.';
+        
         // Hide typing indicator in case of error
         this.isBotTyping = false;
       },
@@ -422,8 +461,16 @@ export class LoginComponent {
 
     this.userInput = ''; // Clear input after sending
   }
-}
 
+  addStepsWithDelay(steps: string[]) {
+    steps.forEach((step, index) => {
+      setTimeout(() => {
+        // Push each step into messages array with animation and delay
+        this.messages.push({ user: '', bot: step, type: 'normal' });
+      }, index * 1500); // Add delay for each step (1.5 second per step)
+    });
+  }
+}
 // this.store.dispatch(new LoginActions.LoggedIn(res));
 // this.router.navigate(["/"], { replaceUrl: true });
 

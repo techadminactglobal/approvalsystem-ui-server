@@ -19,25 +19,28 @@ export class SideBarComponent implements OnInit {
   owner:boolean = false;
 
   constructor(private router: Router, private senddata: SendData) {
-    if (this.senddata.hierarchyId === '1001') {
+    if (localStorage.getItem('hierarchyId') === '1001') {
       this.form = true;
-    } else if (this.senddata.hierarchyId === COMMONCONSTANTS.RegNew_ROLE_ID_JE ||
-      this.senddata.hierarchyId === COMMONCONSTANTS.RegNew_ROLE_ID_AE ||
-      this.senddata.hierarchyId === COMMONCONSTANTS.RegNew_ROLE_ID_AA ||
-      this.senddata.hierarchyId === COMMONCONSTANTS.RegNew_ROLE_ID_SE ||
-      this.senddata.hierarchyId === COMMONCONSTANTS.fileNew_ROLE_ID_JE ||
-      this.senddata.hierarchyId === COMMONCONSTANTS.fileNew_ROLE_ID_AE || this.senddata.hierarchyId === '301' || 
-      this.senddata.hierarchyId === '302'||this.senddata.hierarchyId==='401'||this.senddata.hierarchyId==='402'||this.senddata.hierarchyId==='403') {
+    } else if (localStorage.getItem('hierarchyId') === COMMONCONSTANTS.RegNew_ROLE_ID_JE ||
+      localStorage.getItem('hierarchyId') === COMMONCONSTANTS.RegNew_ROLE_ID_AE ||
+      localStorage.getItem('hierarchyId') === COMMONCONSTANTS.RegNew_ROLE_ID_AA ||
+      localStorage.getItem('hierarchyId') === COMMONCONSTANTS.RegNew_ROLE_ID_SE ||
+      localStorage.getItem('hierarchyId') === COMMONCONSTANTS.fileNew_ROLE_ID_JE ||
+      localStorage.getItem('hierarchyId') === COMMONCONSTANTS.fileNew_ROLE_ID_AE || localStorage.getItem('hierarchyId') === '301' || 
+      localStorage.getItem('hierarchyId') === '302'|| localStorage.getItem('hierarchyId')==='401'|| localStorage.getItem('hierarchyId')==='402'|| localStorage.getItem('hierarchyId')==='403') {
       this.debard = true;
-    } else if (this.senddata.hierarchyId == 'f-101') {
+    } else if ( localStorage.getItem('hierarchyId') == 'f-101') {
       this.noc = true;
-    }else if(this.senddata.hierarchyId ==='001') {
+    }else if( localStorage.getItem('hierarchyId') ==='001') {
       this.owner = true;
     }
   }
-
+  hierarchyId:any;
+  hierarchyUserName:any;
   ngOnInit() {
-    this.senddata.hierarchyUserName = this.senddata.hierarchyUserName;
+  //  this.hierarchyUserName = localStorage.getItem('hierarchyUserName'); 
+  //    this.hierarchyUserName = this.hierarchyUserName;
+  //   this.hierarchyId = localStorage.getItem('hierarchyId');
     this.getLocation(); // Call getLocation on initialization
   }
 

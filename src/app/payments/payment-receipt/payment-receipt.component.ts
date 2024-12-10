@@ -58,73 +58,102 @@ export class PaymentReceiptComponent {
   }
 
   viewBuild:boolean = false;
-  ngOnInit(): void {
+  paymentType:any;
+  requestId:any;
+  amountType:any;
+  paymentId:any;
+  comments:any;
+  frids:any;
+  hierarchyId:any;
 
+  ngOnInit(): void {
+this.paymentType = localStorage.getItem('paymentType')
+    this.requestId = localStorage.getItem('requestid');
+    this.amount = localStorage.getItem('amount');
+    this.paymentId = localStorage.getItem('paymentId')
+    this.comment = localStorage.getItem('comment');
+    this.frids = localStorage.getItem('frid');
+    this.hierarchyId = localStorage.getItem('hierarchyId')
+    
+    
     // let request ={};
     // this.service.getDataService(this.apiConstant.prepre_Gateway, request).subscribe((data: any) => {
     //   console.log(data);
     // if(data != null){
     let request = {};
-    this.paymentUserFor = this.senddata.paymentType;
+    this.paymentUserFor = this.paymentType;
+    if(this.paymentType=="RenewalConsultant"){
 
-    if(this.senddata.paymentType=="RenewalConsultant"){
       request = {
-        "userName": this.senddata.requestid,
-        "amount": this.senddata.amount,
-        "paymentId": this.senddata.paymentId,
+
+        "userName": this.requestId,
+
+        "amount": this.amount,
+
+        "paymentId": this.paymentId,
+
         "transactionNumber": 754826748656187,
+
         "status": "Success",
-        "paymentRequestFor": this.senddata.comment
+
+        "paymentRequestFor": this.comment
+
       }
 
-    }else if (this.senddata.paymentType == "regNew") {
+
+
+    }else if (this.paymentType == "regNew") {
       this.viewBuild = false;
       request = {
-        "userName": this.senddata.requestid,
-        "amount": this.senddata.amount,
-        "paymentId": this.senddata.paymentId,
+        "userName": this.requestId,
+        "amount": this.amount,
+        "paymentId": this.paymentId,
         "transactionNumber": 754826748656187,
         "status": "Success",
-        "paymentRequestFor": this.senddata.comment
+        "paymentRequestFor": this.comment
       }
-    } else if (this.senddata.paymentType == "fileNew") {
+    } else if (this.paymentType == "fileNew") {
       this.viewBuild= true;
       request = {
-        "fileNo": this.senddata.requestid,
-        "amount": this.senddata.amount,
-        "paymentId": this.senddata.paymentId,
+        "fileNo": this.requestId,
+        "amount": this.amount,
+        "paymentId": this.paymentId,
         "transactionNumber": 754826748656187,
         "status": "Success",
-        "paymentRequestFor": this.senddata.comment
+        "paymentRequestFor": this.comment
       }
-    } else if (this.senddata.paymentType == "plinthNew") {
+    } else if (this.paymentType == "plinthNew") {
       this.viewBuild= true;
       request = {
-        "fileNo": this.senddata.requestid,
-        "amount": this.senddata.amount,
-        "paymentId": this.senddata.paymentId,
+        "fileNo": this.requestId,
+        "amount": this.amount,
+        "paymentId": this.paymentId,
         "transactionNumber": 754826748656187,
         "status": "Success",
-        "paymentRequestFor": this.senddata.comment
+        "paymentRequestFor": this.comment
       }
-    } else if (this.senddata.paymentType == "OC") {
+    } else if (this.paymentType == "OC") {
       this.viewBuild= true;
       request = {
-        "fileNo": this.senddata.requestid,
-        "amount": this.senddata.amount,
-        "paymentId": this.senddata.paymentId,
+        "fileNo": this.requestId,
+        "amount": this.amount,
+        "paymentId": this.paymentId,
         "transactionNumber": 754826748656187,
         "status": "Success",
-        "paymentRequestFor": this.senddata.comment
+        "paymentRequestFor": this.comment
       }
     }
+
+    console.log(request,"data for update_gateway for payment.....");
+    
+
     this.service.getDataService(this.apiConstant.update_Gateway, request).subscribe((data: any) => {
       console.log(data);
 
       if (data != null) {
         // this.hidePaymentButton = true;
 
-        if (this.senddata.paymentType == "regNew" || this.senddata.paymentType=="RenewalConsultant") {
+        if (this.paymentType == "regNew" || this.paymentType=="RenewalConsultant") {
           console.log(data, "generating recipt");
 
           this.fullName = data.data.BasicDetails.salutation + " " + data.data.BasicDetails.firstName + " " + data.data.BasicDetails.middleName + " " + data.data.BasicDetails.lastName;
@@ -140,10 +169,10 @@ export class PaymentReceiptComponent {
           this.paymentRespect = data.data.PaymentDetails.paymentRespective;
           this.ReceptNo = data.data.PaymentDetails.reciptNo;
 
-          if (this.senddata.comment == "Security Deposite" || this.senddata.comment == "Renewal consultant Fee") {
+          if (this.comment == "Security Deposite" || this.comment == "Renewal consultant Fee") {
             this.viewCharge1 = true;
             this.viewCharge2345 = false
-          } else if (this.senddata.comment == "Final Payment") {
+          } else if (this.comment == "Final Payment") {
             this.viewCharge1 = true;
             this.viewCharge2345 = true;
           }
@@ -170,7 +199,7 @@ export class PaymentReceiptComponent {
 
 
 
-        } else if (this.senddata.paymentType == "fileNew" || this.senddata.paymentType == "plinthNew" || this.senddata.paymentType == "OC") {
+        } else if (this.paymentType == "fileNew" || this.paymentType == "plinthNew" || this.paymentType == "OC") {
 
           this.paymentDate = data.data.PaymentDetails.paymentSuccessDate;
           this.transactionNo = data.data.PaymentDetails.transactionRefNo;
@@ -180,10 +209,10 @@ export class PaymentReceiptComponent {
           this.ReceptNo = data.data.PaymentDetails.reciptNo;
           this.userName = data.data.PaymentDetails.frId;
 
-          if (this.senddata.comment == "File Security Deposite" || this.senddata.comment == "Plinth Processing Fee" || this.senddata.comment == "OC Security Deposite") {
+          if (this.comment == "File Security Deposite" || this.comment == "Plinth Processing Fee" || this.comment == "OC Security Deposite") {
             this.viewCharge1 = true;
             this.viewCharge2345 = false
-          } else if (this.senddata.comment == "File Processing Fee" || this.senddata.comment == "OC Final Payment") {
+          } else if (this.comment == "File Processing Fee" || this.comment == "OC Final Payment") {
             this.viewCharge1 = true;
             this.viewCharge2345 = true;
           }
@@ -324,7 +353,7 @@ export class PaymentReceiptComponent {
       setTimeout(() => {
         this.downloadAsPDF();
         setTimeout(() => {
-          if (this.senddata.comment == "Final Payment" || this.senddata.comment == "File Processing Fee" || this.senddata.comment == "OC Final Payment") {
+          if (this.comment == "Final Payment" || this.comment == "File Processing Fee" || this.comment == "OC Final Payment") {
             console.log("redirect to dsletter");
             this.dsLetter = true;
             // this.router.navigate(['/dsLetter']);
@@ -333,8 +362,8 @@ export class PaymentReceiptComponent {
 
       }, 1000);
     });
-  
-   
+
+
 
     // setTimeout(() => {
     //   this.downloadAsPDF();
@@ -381,7 +410,7 @@ export class PaymentReceiptComponent {
     }).catch((error) => {
       console.error("Error generating PDF:", error);
     });
-    this.router.navigate(['/dashboard'])
+
 
   }
 
@@ -422,10 +451,10 @@ export class PaymentReceiptComponent {
 
   saveDoc() {
     const json = {
-      "docFileName": this.senddata.comment,
-      "docType": this.senddata.comment,
+      "docFileName": this.comment,
+      "docType": this.comment,
       "docByteStream": this.fileData,
-      "docName": this.senddata.comment
+      "docName": this.comment
 
     };
 
@@ -437,35 +466,35 @@ export class PaymentReceiptComponent {
 
       console.log("uuid: " + res.docUUID);
       let json1 = {};
-      if (this.senddata.paymentType == "regNew") {
+      if (this.paymentType == "regNew") {
         json1 = {
-          "userName": this.senddata.requestid,
+          "userName": this.requestId,
           "docUniqueId": res.docUUID,
-          "docName": this.senddata.comment,
+          "docName": this.comment,
           "reciptNo": this.ReceptNo
         };
-      } else if (this.senddata.paymentType == "fileNew") {
+      } else if (this.paymentType == "fileNew") {
         json1 = {
-          "fileNo": this.senddata.requestid,
-          "frId": this.senddata.frid,
+          "fileNo": this.requestId,
+          "frId": this.frids,
           "docUniqueId": res.docUUID,
-          "docName": this.senddata.comment,
+          "docName": this.comment,
           "reciptNo": this.ReceptNo
         };
-      } else if (this.senddata.paymentType == "plinthNew") {
+      } else if (this.paymentType == "plinthNew") {
         json1 = {
-          "fileNo": this.senddata.requestid,
-          "frId": this.senddata.frid,
+          "fileNo": this.requestId,
+          "frId": this.frids,
           "docUniqueId": res.docUUID,
-          "docName": this.senddata.comment,
+          "docName": this.comment,
           "reciptNo": this.ReceptNo
         };
-      } else if (this.senddata.paymentType == "OC") {
+      } else if (this.paymentType == "OC") {
         json1 = {
-          "fileNo": this.senddata.requestid,
-          "frId": this.senddata.frid,
+          "fileNo": this.requestId,
+          "frId": this.frids,
           "docUniqueId": res.docUUID,
-          "docName": this.senddata.comment,
+          "docName": this.comment,
           "reciptNo": this.ReceptNo
         };
       }
@@ -485,25 +514,25 @@ export class PaymentReceiptComponent {
   }
 
   RegistrationView() {
-    this.senddata.requestid = this.senddata.requestid;
+    this.requestId = this.requestId;
     this.router.navigate(['/registrationView'])
   }
 
   ViewDashboard() {
-    this.senddata.requestid = this.senddata.requestid;
-    this.senddata.hierarchyId = this.senddata.hierarchyId;
+    this.requestId = this.requestId;
+    this.hierarchyId = this.hierarchyId;
     this.router.navigate(['/dashboard'])
   }
 
   ViewPlinthDashboard() {
-    this.senddata.requestid = this.senddata.requestid;
-    this.senddata.hierarchyId = this.senddata.hierarchyId;
+    this.requestId = this.requestId;
+    this.hierarchyId = this.hierarchyId;
     this.router.navigate(['/plinthDashboard'])
   }
 
   ViewOCDashboard() {
-    this.senddata.requestid = this.senddata.requestid;
-    this.senddata.hierarchyId = this.senddata.hierarchyId;
+    this.requestId = this.requestId;
+    this.hierarchyId = this.hierarchyId;
     this.router.navigate(['/OccupancyDashborad'])
   }
 

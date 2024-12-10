@@ -93,8 +93,13 @@ export class OwnerDashboardComponent implements OnInit {
   apiConstant = API_PATH;
   ownerDetail: any;
   addintionalOwner: boolean = false;
+  hierarchyId:any;
+  hierarchyUsersName:any;
 
   ngOnInit(): void {
+    this.hierarchyId = localStorage.getItem('hierarchyId');
+    this.hierarchyUsersName = localStorage.getItem('hierarchyUserName');
+
     this.viewOwner();
     this.viewOwnerDashboard();
     this.createForm();
@@ -105,7 +110,7 @@ export class OwnerDashboardComponent implements OnInit {
 
   dashboardDetails: any;
   viewOwnerDashboard() {
-    this.service.getDeptDashboard(this.apiConstant.GetOwnerDashboard, this.senddata.hierarchyUserName).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.GetOwnerDashboard, this.hierarchyUsersName).subscribe((res: any) => {
       console.log("**************", res);
       if (res.httpStatus === "OK") {
         this.dashboardDetails = res.data;
@@ -117,7 +122,7 @@ export class OwnerDashboardComponent implements OnInit {
   viewOwner() {
     // this.senddata.hierarchyUserName
     // "df@asdg.in"
-    this.service.getButtonDetails(this.apiConstant.GetOwnerByEmail, this.senddata.hierarchyUserName).subscribe((res: any) => {
+    this.service.getButtonDetails(this.apiConstant.GetOwnerByEmail,this.hierarchyUsersName).subscribe((res: any) => {
       console.log(res);
       if (res.httpStatus === "OK") {
         this.ownerDetail = res;
@@ -293,8 +298,10 @@ export class OwnerDashboardComponent implements OnInit {
 
 
   viewDetail(status: string, frId: string) {
-    this.senddata.frid = frId;
-    // if (status == COMMONCONSTANTS.Status_Documents_Uploaded) {
+    // this.senddata.frid = frId;
+    // Remove the 'frid' key from localStorage
+      localStorage.removeItem('frid');
+localStorage.setItem('frid', frId);    // if (status == COMMONCONSTANTS.Status_Documents_Uploaded) {
     //   this.router.navigate(['/supportView']);
     // } else if (status === COMMONCONSTANTS.Status_InitialDepositedAssigned1hierarchy || status ===
     //   COMMONCONSTANTS.Status_Approval_Hierarchy2nd || status ===

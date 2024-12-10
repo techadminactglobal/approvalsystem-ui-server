@@ -140,39 +140,7 @@
 
             <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-            <div class="justify-content d-flex">
-              <div class="col-xl-4 col-lg-6 col-12">
-                <mat-checkbox (click)="resetForm()">
-                  If Company (Optional)
-                </mat-checkbox>
-              </div>
-            </div>
-
-            <div *ngIf="isChecked" class="company-details">
-              <h3>Enter Company Details</h3>
-              <div formGroupName="companyDetails">
-                <mat-form-field appearance="fill" style="width: 100%">
-                  <mat-label>Company Name</mat-label>
-                  <input matInput formControlName="companyName" required />
-                </mat-form-field>
-
-                <mat-form-field appearance="fill" style="width: 100%">
-                  <mat-label>Email ID</mat-label>
-                  <input matInput formControlName="email" required email />
-                </mat-form-field>
-
-                <mat-form-field appearance="fill" style="width: 100%">
-                  <mat-label>Phone Number</mat-label>
-                  <input matInput formControlName="phoneNo" required />
-                </mat-form-field>
-
-                <mat-form-field appearance="fill" style="width: 100%">
-                  <mat-label>GST Number</mat-label>
-                  <input matInput formControlName="gstNo" required />
-                </mat-form-field>
-              </div>
-            </div>
-            </div>
+        
             <div
               class="row"
               *ngFor="let owner of applicantDetails.controls; let i = index"
@@ -251,6 +219,39 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="justify-content d-flex">
+              <div class="col-xl-4 col-lg-6 col-12">
+                <mat-checkbox (click)="resetForm()">
+                  If Company (Optional)
+                </mat-checkbox>
+              </div>
+            </div>
+
+            <div *ngIf="isChecked" class="company-details">
+              <h3>Enter Company Details</h3>
+              <div formGroupName="companyDetails">
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Company Name</mat-label>
+                  <input matInput formControlName="companyName" required />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Email ID</mat-label>
+                  <input matInput formControlName="email" required email />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>Phone Number</mat-label>
+                  <input matInput formControlName="phoneNo" required />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" style="width: 100%">
+                  <mat-label>GST Number</mat-label>
+                  <input matInput formControlName="gstNo" required />
+                </mat-form-field>
+              </div>
+            </div>
             </div>
             <br>
             <br>

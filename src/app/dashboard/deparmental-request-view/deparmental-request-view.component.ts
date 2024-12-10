@@ -49,17 +49,31 @@ export class DeparmentalRequestViewComponent {
   documents: any[] = [];
   letterUniqueId: any;
   // letterName: any;
+  requestId:any;
+  frId:any;
+  paymentFor:any;
+  hierarchyId:any;
+  hierarchyUserName:any;
+  paymentType:any;
+  
 
   ngOnInit() {
-    this.referenceId = this.senddata.requestid;
-    this.viewPart = this.senddata.paymentFor;
+    this.requestId = localStorage.getItem('requestid');
+    this.paymentType = localStorage.getItem('paymentType')
+    this.hierarchyId = localStorage.getItem('hierarchyId');
+    this.paymentFor = localStorage.getItem('paymentFor');
+    this.frId = localStorage.getItem('frid');
+   this.hierarchyUserName = localStorage.getItem('hierarchyUserName');
+
+    this.referenceId = this.requestId;
+    this.viewPart = this.paymentFor;
     console.log(this.referenceId);
 
 
     //OC
     let request = {
-      "fileNo": this.senddata.requestid,
-      "frId": this.senddata.frid
+      "fileNo": this.requestId, 
+      "frId": this.frId
     }
     this.service.getDataService(this.apiConstant.OccupancyDetails, request).subscribe((res: any) => {
       console.log("**************", res);
@@ -80,8 +94,8 @@ export class DeparmentalRequestViewComponent {
 
     //plinth
     let requestPlinth = {
-      "fileNo": this.senddata.requestid,
-      "frId": this.senddata.frid
+      "fileNo": this.requestId,
+      "frId": this.frId
     }
     console.log(requestPlinth, "request plinth...");
 
@@ -132,8 +146,8 @@ export class DeparmentalRequestViewComponent {
       if (this.dsOC == true) {
 
         let request = {
-          "fileNo": this.senddata.requestid,
-          "frId": this.senddata.frid
+          "fileNo": this.requestId,
+          "frId": this.frId
         }
         this.service.getDataService(this.apiConstant.OccupancyDetails, request).subscribe((res: any) => {
           console.log("**************", res);
@@ -158,8 +172,8 @@ export class DeparmentalRequestViewComponent {
       } else if (this.dsPlinthDept == true) {
 
         let request = {
-          "fileNo": this.senddata.requestid,
-          "frId": this.senddata.frid
+          "fileNo": this.requestId,
+          "frId": this.frId
         }
         this.service.getDataService(this.apiConstant.PlinthDetails, request).subscribe((res: any) => {
           console.log("**************", res);
@@ -182,7 +196,7 @@ export class DeparmentalRequestViewComponent {
       } else {
 
 
-        let request: any = { "name": this.senddata.requestid }
+        let request: any = { "name": this.requestId }
         this.service.getDataService(this.apiConstant.GET_DETAILS, request).subscribe((data: any) => {
           console.log(data);
 
@@ -197,7 +211,7 @@ export class DeparmentalRequestViewComponent {
         });
 
 
-        this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.senddata.requestid).subscribe((data: any) => {
+        this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.requestId).subscribe((data: any) => {
           if (data.basicInfo.status == COMMONCONSTANTS.Status_DSPending) {
             this.viewWork = false;
             this.viewDsWork = true;
@@ -244,9 +258,9 @@ export class DeparmentalRequestViewComponent {
     this.service.getButtonDetails(this.apiConstant.VIEW_BUTTON, this.referenceId).subscribe((data: any) => {
       console.log(data, "aman");
       if (data.httpStatus == 'OK') {
-        console.log(this.senddata.hierarchyId, "hierarchyId");
+        console.log(this.hierarchyId, "hierarchyId");
         console.log(data.data.asignTo, "asignTo");
-        if (data.data.asignTo == this.senddata.hierarchyId && data.data.hierarchyStatus == "Assigned" || data.data.hierarchyStatus == "Start") {
+        if (data.data.asignTo == this.hierarchyId && data.data.hierarchyStatus == "Assigned" || data.data.hierarchyStatus == "Start") {
           this.viewWork = true;
 
         }
@@ -269,10 +283,10 @@ export class DeparmentalRequestViewComponent {
       return;
     } else {
       let request: any = {
-        "referenceId": this.senddata.requestid,
-        "hierachyUserName": this.senddata.hierarchyUserName,
+        "referenceId": this.requestId,
+        "hierachyUserName": this.hierarchyUserName,
         "hierachyRemark": this.deptForm.value.hierachyRemark,
-        "hierachyRoleId": this.senddata.hierarchyId,
+        "hierachyRoleId": this.hierarchyId,
         "docName": this.docName,
         "docUUID": this.docUUID,
         "docType": this.docType
@@ -286,9 +300,10 @@ export class DeparmentalRequestViewComponent {
         if (data.httpStatus == 'OK') {
           //ds letter generate
           if (this.dsPlinth == true) {
-            this.senddata.paymentType = "plinthNew";
-            this.senddata.requestid = this.senddata.requestid;
-            this.senddata.frid = this.senddata.frid;
+            // this.paymentType = "plinthNew";
+            localStorage.setItem('paymentType', "plinthNew");
+            // this.requestId = this.requestId;
+            // this.frId = this.frId;
             this.router.navigate(['/dsLetter']);
             // setTimeout(() => {
             //   this.router.navigate(['/departmentDashboard']);
@@ -309,10 +324,10 @@ export class DeparmentalRequestViewComponent {
     } else {
       console.log(this.senddata.hierarchyUserName);
       let request: any = {
-        "referenceId": this.senddata.requestid,
-        "hierachyUserName": this.senddata.hierarchyUserName,
+        "referenceId": this.requestId,
+        "hierachyUserName": this.hierarchyUserName,
         "hierachyRemark": this.deptForm.value.hierachyRemark,
-        "hierachyRoleId": this.senddata.hierarchyId,
+        "hierachyRoleId": this.hierarchyId,
         "referBackTo": value,
         "docName": this.docName,
         "docUUID": this.docUUID,
@@ -334,10 +349,10 @@ export class DeparmentalRequestViewComponent {
       return;
     } else {
       let request: any = {
-        "referenceId": this.senddata.requestid,
-        "hierachyUserName": this.senddata.hierarchyUserName,
+        "referenceId": this.requestId,
+        "hierachyUserName": this.hierarchyUserName,
         "hierachyRemark": this.deptForm.value.hierachyRemark,
-        "hierachyRoleId": this.senddata.hierarchyId,
+        "hierachyRoleId": this.hierarchyId,
         "docName": this.docName,
         "docUUID": this.docUUID,
         "docType": this.docType
@@ -685,29 +700,29 @@ export class DeparmentalRequestViewComponent {
       let json1 = {};
       if (this.dsOC == true) {
         json1 = {
-          "fileNo": this.senddata.requestid,
-          "frId": this.senddata.frid,
+          "fileNo": this.requestId,
+          "frId": this.frId,
           "letterUinqueId": this.docUUID,
           "letterType": "OCAcceptDS"
         };
       } else if (this.dsPlinthDept == true) {
         json1 = {
-          "fileNo": this.senddata.requestid,
-          "frId": this.senddata.frid,
+          "fileNo": this.requestId,
+          "frId": this.frId,
           "letterUinqueId": this.docUUID,
           "letterType": "plinthAcceptDS"
         };
-      } else if (this.senddata.paymentFor == "fileNew") {
+      } else if (this.paymentFor == "fileNew") {
         json1 = {
-          "fileNo": this.senddata.requestid,
-          "frId": this.senddata.frid,
+          "fileNo": this.requestId,
+          "frId": this.frId,
           "letterUinqueId": this.docUUID,
           "letterType": "Letter Accepted DS"
         };
 
       } else {
         json1 = {
-          "userName": this.senddata.requestid,
+          "userName": this.requestId,
           "letterUinqueId": this.docUUID,
           "letterType": "Letter Accepted DS"
         };
@@ -731,7 +746,7 @@ export class DeparmentalRequestViewComponent {
     event.stopPropagation();
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId": this.requestId,
       "docUUID": this.letterUnqueId
     };
 

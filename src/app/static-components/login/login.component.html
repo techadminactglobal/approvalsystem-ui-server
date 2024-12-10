@@ -568,14 +568,10 @@
   <div class="chat-body">
     <div class="message" *ngFor="let message of messages">
       <div class="user-message" *ngIf="message.user">
-        <span class="user"
-          ><i class="fa-solid fa-user"></i> {{ message.user }}</span
-        >
+        <span class="user"><i class="fa-solid fa-user"></i> {{ message.user }}</span>
       </div>
       <div class="bot-message" *ngIf="message.bot">
-        <span class="bot"
-          ><i class="fa-solid fa-robot"></i> {{ message.bot }}</span
-        >
+        <span class="bot"><i class="fa-solid fa-message-bot" style="color: #63E6BE;"></i> {{ message.bot }}</span>
       </div>
     </div>
     <!-- Typing indicator with icons -->
@@ -594,9 +590,11 @@
     <button (click)="sendMessage()">Send</button>
   </div>
 </div>
+
 <button (click)="openChat()" class="chat-button">
   <i class="fa-brands fa-bots fa-4x fa-fade"></i>
 </button>
+
 
 <div class="foot">
   <app-footer></app-footer>

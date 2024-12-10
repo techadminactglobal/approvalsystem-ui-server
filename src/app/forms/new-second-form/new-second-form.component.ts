@@ -38,8 +38,9 @@ export class NewSecondFormComponent implements OnInit {
     private fb: FormBuilder,
     public senddata: SendData
   ) {}
-
+  requestId:any;
   ngOnInit(): void {
+    this.requestId = localStorage.getItem('requestid');
     this.createForm();
     for (let i = 0; i < 5; i++) {
       this.addGeoCoordinate();
@@ -549,7 +550,7 @@ export class NewSecondFormComponent implements OnInit {
     const formData = this.SecondForm.value;
 
     // Extracting data from form
-    const fileNumber = this.senddata.requestid; // Assuming a static value for fileNumber
+    const fileNumber = this.requestId; // Assuming a static value for fileNumber
     const engineerDetails = formData.engineerDetails;
     const superintendentDetails = formData.superintendentDetails;
     const civilDetails = formData.civilDetails;
@@ -562,7 +563,7 @@ export class NewSecondFormComponent implements OnInit {
     };
 
     this.saveForm = this.fb.group({
-      fileNumber: [this.senddata.requestid],
+      fileNumber: [this.requestId],
       engineerDetails: [engineerDetails],
       superintendentDetails: [superintendentDetails],
       civilDetails: [civilDetails],

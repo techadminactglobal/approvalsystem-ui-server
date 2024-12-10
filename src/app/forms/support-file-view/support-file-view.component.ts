@@ -48,13 +48,14 @@ export class SupportFileViewComponent {
 
   documents: any[] = [];
   nextDisable: boolean = false;
-
+requestId:any;
   ngOnInit(): void {
+    this.requestId = localStorage.getItem('requestid');
 
-    this.service.getButtonDetails(this.apiConstant.supportFile_View, this.senddata.requestid).subscribe((data: any) => {
+    this.service.getButtonDetails(this.apiConstant.supportFile_View,  this.requestId).subscribe((data: any) => {
       console.log(data, "ppp");
 
-    this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.senddata.requestid).subscribe((data: any) => {
+    this.service.getButtonDetails(this.apiConstant.newFORM_VIEW,  this.requestId).subscribe((data: any) => {
       if(data.basicInfo.status == COMMONCONSTANTS.Status_Documents_Uploaded){
         this.nextDisable = true;}
     });
@@ -159,7 +160,7 @@ export class SupportFileViewComponent {
 
   openPdf(docUniqueId: string): void {
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId":  this.requestId,
       "docUUID": docUniqueId
 
     }
@@ -187,7 +188,7 @@ export class SupportFileViewComponent {
   openCertificatePdf(): void {
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId":  this.requestId,
       "docUUID": this.leaseDeedCertificateName
 
     }
@@ -213,7 +214,7 @@ export class SupportFileViewComponent {
   openSaleDeedCertificatePdf(): void {
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId":  this.requestId,
       "docUUID": this.SaleDeedCertificatename
     }
 
@@ -238,7 +239,7 @@ export class SupportFileViewComponent {
   opensitePhotographCertificatePdf(): void {
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId":  this.requestId,
       "docUUID": this.sitePhotographCertificatename
     }
 
@@ -263,7 +264,7 @@ export class SupportFileViewComponent {
   openmutitionFormCertificatePdf(): void {
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId":  this.requestId,
       "docUUID": this.mutitionFormCertificatename
     }
 
@@ -287,7 +288,7 @@ export class SupportFileViewComponent {
 
   openphotograpFormCertificatePdf(): void {
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId": this.requestId,
       "docUUID": this.photograpFormCertificatename
     };
 
@@ -324,7 +325,7 @@ export class SupportFileViewComponent {
   openphotoIdCertificatePdf(): void {
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId":  this.requestId,
       "docUUID": this.photoIdCertificatename
     }
 
@@ -350,7 +351,7 @@ export class SupportFileViewComponent {
   opencompanyIdCertificatePdf(): void {
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId":  this.requestId,
       "docUUID": this.companyIdCertificatename
     }
 

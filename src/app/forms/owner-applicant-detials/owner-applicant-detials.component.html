@@ -307,12 +307,12 @@
 
 
 
-    <div class="col button" *ngIf="senddata.architectView && acceptArchitect">
+    <div class="col button" *ngIf="architectview === 'true' && acceptArchitect">
         <button mat-raised-button color="primary" type="submit" class="log" (click)="accept()">Accept</button>
         <button mat-raised-button color="primary" type="submit" class="log" (click)="reject()">Reject</button>
     </div>
 
-    <div class="col button" *ngIf="!senddata.architectView && pullBacks">
+    <div class="col button" *ngIf="architectview === 'false' && pullBacks">
         <button mat-raised-button color="primary" type="submit" class="log" (click)="pullBack()">Pull Back</button>
         <button mat-raised-button color="primary" (click)="back()" style="margin-left:1%">
             Back

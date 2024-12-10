@@ -45,19 +45,30 @@ export class SupportFileDocumentComponent {
     public sendData: SendData,
     private sanitizer: DomSanitizer
   ) {}
+  requestId: any;
   ngOnInit(): void {
+    this.requestId = localStorage.getItem('requestid');
     this.buildForm();
   }
 
   buildForm() {
     this.supportForm = new FormGroup({
-      leaseDeedCertificateName: this.fb.array([this.fileTypeForm()]),
+      leaseDeedCertificateName: this.fb.array(
+        [this.fileTypeForm()],
+        [Validators.required]
+      ),
       SaleDeedCertificatename: this.fb.array(
         [this.fileTypeForm()],
         [Validators.required]
       ),
-      sitePhotographCertificatename: this.fb.array([this.fileTypeForm()]),
-      mutitionFormCertificatename: this.fb.array([this.fileTypeForm()]),
+      sitePhotographCertificatename: this.fb.array(
+        [this.fileTypeForm()],
+        [Validators.required]
+      ),
+      mutitionFormCertificatename: this.fb.array(
+        [this.fileTypeForm()],
+        [Validators.required]
+      ),
       leaseRemarks: new FormControl(''),
       saleRemark: new FormControl(''),
       siteRemark: new FormControl(''),
@@ -69,8 +80,7 @@ export class SupportFileDocumentComponent {
       // companyIdCertificatename: this.fb.array([this.fileTypeForm()]),
       // companyIdRemark: new FormControl('', [Validators.required]),
       docDetailsModel: this.fb.array(
-        [this.fileTypeForm()],
-        [Validators.required]
+        [this.fileTypeFormOther()]
       ),
       otherRemark: new FormControl(''),
 
@@ -170,7 +180,7 @@ export class SupportFileDocumentComponent {
     console.log('this.supportForm.value', this.supportForm.value);
     this.setData();
     let result = {
-      fileNumber: this.sendData.requestid,
+      fileNumber: this.requestId,
       docDetailsModel: this.formData,
     };
     console.log(result, 'supportive file dfoashgo................');
@@ -220,11 +230,23 @@ export class SupportFileDocumentComponent {
     }
   }
 
-  fileTypeForm() {
+  fileTypeFormOther(){
     return this.fb.group({
       docType: [''],
       docName: [''],
       docUniqueId: [''],
+      remark: [''],
+    });
+  }
+
+  fileTypeForm() {
+    return this.fb.group({
+      docType: ['',
+        [Validators.required]],
+      docName: ['',
+        [Validators.required]],
+      docUniqueId: ['',
+        [Validators.required]],
       remark: [''],
     });
   }
@@ -253,7 +275,7 @@ export class SupportFileDocumentComponent {
   mutitionFormNameFileType: string | null = null;
   otherIdNamePreview: SafeResourceUrl | null = null;
   isotherIdNameModalOpen: boolean = false;
-  otherIdNameFileType:  string | null = null;
+  otherIdNameFileType: string | null = null;
 
   uploadDoc(
     event: any,
@@ -364,9 +386,7 @@ export class SupportFileDocumentComponent {
       this.sitePhotographName = fileData.name;
     } else if (arrayName === 'mutitionFormCertificatename') {
       this.mutitionFormName = fileData.name;
-    }
-    else if (arrayName === 'docDetailsModel')
-    {
+    } else if (arrayName === 'docDetailsModel') {
       this.otherIdName = fileData.name;
     }
 

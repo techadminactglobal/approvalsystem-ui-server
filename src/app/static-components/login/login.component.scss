@@ -788,68 +788,6 @@ p:hover {
   }
 }
 
-//wheather staus btn
-/* $color: #0cf;
-
-.button {
-  display: inline-block;
-  padding: 0.75rem 1.25rem;
-  border-radius: 10rem;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 1rem;
-  letter-spacing: 0.15rem;
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  width: 100%;
-  color: black;
-  text-decoration: none;
-  text-align: center;
-  &:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: $color;
-    border-radius: 10rem;
-    z-index: -2;
-  }
-  &:before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0%;
-    height: 100%;
-    background-color: darken($color, 15%);
-    transition: all 0.3s;
-    border-radius: 10rem;
-    z-index: -1;
-  }
-  &:hover {
-    color: #fff;
-    &:before {
-      width: 100%;
-    }
-  }
-}
-  */
-
-/* .btn {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 11vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background: bisque;
-} */
 
 .glow-on-hover {
   width: 100%; /* Make buttons fill their column */
@@ -1027,40 +965,6 @@ a.website {
   margin-top: 6px;
 }
 
-/* SVG Icon Colors */
-/* .service-card:nth-child(1) .icon-header svg circle {
-  fill: var(--color-icon-1);
-}
-
-.service-card:nth-child(2) .icon-header svg circle {
-  fill: var(--color-icon-2);
-}
-
-.service-card:nth-child(3) .icon-header svg circle {
-  fill: var(--color-icon-3);
-}
-
-.service-card:nth-child(4) .icon-header svg circle {
-  fill: var(--color-icon-4);
-}
-
-.service-card:nth-child(5) .icon-header svg circle {
-  fill: var(--color-icon-5);
-}
-
-.service-card:nth-child(6) .icon-header svg circle {
-  fill: var(--color-icon-6);
-}
-
-.service-card:nth-child(7) .icon-header svg circle {
-  fill: var(--color-icon-7);
-}
-
-.service-card:nth-child(8) .icon-header svg circle {
-  fill: var(--color-icon-8);
-}
- */
-/* Responsive adjustments */
 @media (max-width: 1024px) {
   .services {
     grid-template-columns: repeat(2, 1fr);
@@ -1123,6 +1027,7 @@ a.website {
   z-index: 1000;
   display: flex;
   flex-direction: column;
+  font-family: 'Arial', sans-serif;
 }
 
 .chat-header {
@@ -1134,6 +1039,12 @@ a.website {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  opacity: 0; /* Initially hidden */
+  animation: slideIn 1s forwards; /* Apply sliding effect */
+}
+
+.chat-header i {
+  animation: fadeIn 1.5s forwards; /* Animate bot icon */
 }
 
 .close-button {
@@ -1148,27 +1059,38 @@ a.website {
   overflow-y: auto;
   flex-grow: 1;
   max-height: 300px; /* Adjust as needed */
+  position: relative;
 }
 
 .message {
-  margin: 5px 0;
+  margin: 8px 0;
+  opacity: 0; /* Initially hidden for animation */
+  animation: fadeInMessage 1s forwards; /* Apply fade-in effect for each message */
 }
 
 .user-message {
   text-align: right;
-  color: black;
+  color: #000;
   font-weight: 300;
 }
 
 .bot-message {
   text-align: left;
   color: #5d7894; /* Bot message color */
+  background-color: #f0f4f7;
+  padding: 10px 15px;
+  border-radius: 15px;
+  max-width: 75%;
+  margin-left: auto;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .chat-input {
   display: flex;
   padding: 10px;
   border-top: 1px solid #ccc;
+  background-color: #fafafa;
 }
 
 .chat-input input {
@@ -1176,6 +1098,7 @@ a.website {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  background-color: #f9f9f9;
 }
 
 .chat-input button {
@@ -1200,10 +1123,12 @@ a.website {
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
 .typing-indicator {
   display: flex;
   align-items: center;
   margin-top: 10px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .typing-indicator i {
@@ -1213,14 +1138,35 @@ a.website {
   animation: typing 0.6s infinite;
 }
 
-.typing-indicator i:nth-child(1) {
-  animation-delay: 0s;
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-.typing-indicator i:nth-child(2) {
-  animation-delay: 0.2s;
+
+@keyframes fadeInMessage {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.typing-indicator i:nth-child(3) {
-  animation-delay: 0.4s;
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes typing {
@@ -1233,6 +1179,20 @@ a.website {
     transform: scale(1.5);
   }
 }
+
+/* Specific styling for the header message */
+.header {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #007bff; /* Blue color */
+  background-color: #f0f8ff; /* Light background */
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+
 .citizen-corner {
   border: 2px solid yellowgreen; /* Border color and width */
   padding: 10px; /* Reduced padding */

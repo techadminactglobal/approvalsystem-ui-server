@@ -192,3 +192,15 @@
   height: 50%;
   width: 30%;
 }
+.aadhaar-message {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.aadhaar-message.success {
+  color: green;
+}
+
+.aadhaar-message.error {
+  color: red;
+}

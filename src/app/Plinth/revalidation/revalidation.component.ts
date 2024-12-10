@@ -31,8 +31,16 @@ export class RevalidationComponent{
   pending: boolean = false;
   totalPendingArray: any[] = [];
   totalPendingSize: any;
-
+  hierarchyUserName:any;
+  callFrom:any;
+  requestid:any;
+  frid:any;
   ngOnInit() {
+    this.hierarchyUserName = localStorage.getItem('hierarchyUserName');
+    this.callFrom = localStorage.getItem('callFrom');
+    this.requestid = localStorage.getItem('requestid');
+    this.frid = localStorage.getItem('frid');
+
     this.plinthDashboardData();
 
     setTimeout(() => {
@@ -44,7 +52,7 @@ export class RevalidationComponent{
     this.service
       .getDeptDashboard(
         this.apiConstant.PlinthDashboardDetails,
-        this.senddata.hierarchyUserName
+        this.hierarchyUserName
       )
       .subscribe((res: any) => {
         console.log('**************', res);
@@ -61,7 +69,7 @@ export class RevalidationComponent{
       });
 
     //Approve
-    let request = this.senddata.hierarchyUserName;
+    let request = this.hierarchyUserName;
     this.service
       .getDeptDashboard(this.apiConstant.PlintApprovedDashboard, request)
       .subscribe((res: any) => {
@@ -152,9 +160,9 @@ export class RevalidationComponent{
 
   viewDetail(fileNo: string, status: string, frId: string) {
     console.log(fileNo);
-    this.senddata.requestid = fileNo;
-    this.senddata.frid = frId;
-    this.senddata.callFrom = 'plinth';
+    this.requestid = fileNo;
+    this.frid = frId;
+    this.callFrom = 'plinth';
     if (status == 'Request Released') {
       this.router.navigate(['/plinthComponent']);
     } else {

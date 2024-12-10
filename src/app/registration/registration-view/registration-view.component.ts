@@ -66,11 +66,13 @@ export class RegistrationViewComponent {
   viewLogout: boolean = true;
 
   constructor(private service: commonService, public senddata: SendData,private route:Router, private dialog: MatDialog,private _formBuilder: FormBuilder) {
-    this.userName = this.senddata.requestid;
+    // this.userName = this.senddata.requestid;
 
   }
 
+  requestId:any;
   ngOnInit(): void {
+this.referenceId = localStorage.getItem('requestid');
 
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
@@ -94,7 +96,7 @@ export class RegistrationViewComponent {
   
   
 
-    let request: any = { "name": this.userName }
+    let request: any = { "name": this.referenceId }
 
     this.service.getDataService(this.apiConstant.GET_DETAILS, request).subscribe((data: any) => {
       console.log(data);
@@ -255,7 +257,7 @@ viewHierachyHistory() {
 
   this.history = true;
   console.log(this.history);
-  this.service.getButtonDetails(this.apiConstant.HIERARCHY_HISTORY, this.userName).subscribe((data: any) => {
+  this.service.getButtonDetails(this.apiConstant.HIERARCHY_HISTORY, this.referenceId).subscribe((data: any) => {
     console.log(data);
    
     this.hierarchyHistoryData = data.filter((item: any) => {
@@ -299,7 +301,7 @@ docUUID:any;
 
 openPhotographPdf(event: any): void {
   let request: any = { 
-    "referenceId": this.senddata.requestid,  
+    "referenceId": this.referenceId,  
     "docUUID": this.photoGraph
   };
 
@@ -350,7 +352,7 @@ openPhotographModal(imageUrl: string): void {
 
 openCertificatePdf( event: any): void {
   let request: any = { 
-    "referenceId": this.senddata.requestid,  
+    "referenceId": this.referenceId,  
     "docUUID": this.educationalCertificate
 
   }
@@ -384,7 +386,7 @@ openCertificatePdf( event: any): void {
 
 openLicensePdf( event: any): void {
   let request: any = { 
-    "referenceId": this.senddata.requestid,  
+    "referenceId":this.referenceId,  
     "docUUID": this.licensedNo
     // "docUUID": 84bf552a-4547-462f-9732-63fc9e4142fa
   }
@@ -447,7 +449,7 @@ testNew(): void {
 
 acceptFlowIsHigher: boolean = true;
 viewFlow() {
-  this.service.getDeptDashboard(this.apiConstant.VIEW_FLOW, this.userName).subscribe((data: any) => {
+  this.service.getDeptDashboard(this.apiConstant.VIEW_FLOW,this.referenceId).subscribe((data: any) => {
     console.log(data);
 
     const acceptFlows = data.filter((item: any) => item.flow === 'Accept');
@@ -468,14 +470,21 @@ viewFlow() {
 
 
 payment(){
-  this.senddata.requestid = this.userName;
   if(this.senddata.expired){
-    this.senddata.paymentType="RenewalConsultant";
+
+    // this.senddata.paymentType="RenewalConsultant";
+    localStorage.setItem('paymentType',"RenewalConsultant");
+
     this.route.navigate(["/payment"]);
+
   }
+
   else{
-    this.senddata.paymentType="regNew";
-    this.route.navigate(["/payment"]);   
+  this.requestId = this.referenceId;
+
+    // this.senddata.paymentType="regNew";
+localStorage.setItem('paymentType',"regNew");
+    this.route.navigate(["/payment"]);
   }
 }
 
@@ -518,7 +527,7 @@ viewPaymentHistory(){
   console.log(this.paymentHistory);
 
   let request={
-    "userName":this.senddata.requestid,
+    "userName":this.referenceId,
    
   }
 
@@ -566,7 +575,7 @@ openPaymentPdf(docUniqueId: string): void {
 
 ViewDS(): void {
   let request: any = {
-    "referenceId": this.senddata.requestid,
+    "referenceId":this.referenceId,
     "docUUID": this.letterUniqueId
   }
 console.log(this.letterUniqueId,"uiqueif");
@@ -593,8 +602,9 @@ console.log(this.letterUniqueId,"uiqueif");
 fileRelease(){
 
 let request = {
- "userName":this.senddata.requestid
+ "userName":  localStorage.getItem('requestid')
 }
+
 this.service.getSecondViewDetails(this.apiConstant.File_Release, request).subscribe((data: any) => {
   console.log(data, "okkkkk");
   if (data.httpStatus === "OK") {

@@ -18,14 +18,17 @@ export class OwnerApplicantDetialsComponent {
         applicantInfo: new FormGroup({
           architectNum: new FormControl(''),
           consultantId: new FormControl('',Validators.required),
-          frId: new FormControl(this.senddata.frid)
+          frId: new FormControl( this.frId)
       }),
     });
     }
 
   apiConstant = API_PATH;
-
+  frId:any;
+architectview:any;
   ngOnInit(): void {
+   this.architectview =  localStorage.getItem('architectView');
+    this.frId = localStorage.getItem('frid');
     this.viewDetais();
   }
 
@@ -41,7 +44,7 @@ export class OwnerApplicantDetialsComponent {
   acceptArchitect:boolean = false;
   viewDetais() {
     
-    this.service.getDeptDashboard(this.apiConstant.viewOwnerApplicantDetails, this.senddata.frid).subscribe((data: any) => {
+    this.service.getDeptDashboard(this.apiConstant.viewOwnerApplicantDetails, this.frId).subscribe((data: any) => {
       console.log(data);
 
       if (data.httpStatus === "OK") {
@@ -77,7 +80,7 @@ export class OwnerApplicantDetialsComponent {
   }
 
   accept() {
-    this.service.getDeptDashboard(this.apiConstant.AcceptByArchitect, this.senddata.frid).subscribe((data: any) => {
+    this.service.getDeptDashboard(this.apiConstant.AcceptByArchitect,  this.frId).subscribe((data: any) => {
       console.log(data);
 
       if (data.httpStatus === "OK") {
@@ -87,7 +90,7 @@ export class OwnerApplicantDetialsComponent {
   }
 
   reject() {
-    this.service.getDeptDashboard(this.apiConstant.RejectByArchitect, this.senddata.frid).subscribe((data: any) => {
+    this.service.getDeptDashboard(this.apiConstant.RejectByArchitect, this.frId).subscribe((data: any) => {
       console.log(data);
 
       if (data.httpStatus === "OK") {
@@ -97,7 +100,7 @@ export class OwnerApplicantDetialsComponent {
   }
 
   pullBack(){
-    this.service.getDeptDashboard(this.apiConstant.PullBack, this.senddata.frid).subscribe((data: any) => {
+    this.service.getDeptDashboard(this.apiConstant.PullBack,  this.frId).subscribe((data: any) => {
       console.log(data);
 
       if (data.httpStatus === "OK") {
@@ -144,7 +147,7 @@ export class OwnerApplicantDetialsComponent {
 
   SubmitRequest(){
     console.log(this.applicantInfoForm.value,"form resubmit to new architect");
-    let json = "frId="+this.applicantInfoForm.value.applicantInfo.frId+"&consultantId="+this.applicantInfoForm.value.applicantInfo.consultantId;
+    let json = "frId="+this.applicantInfoForm.value.applicantInfo.this.frId+"&consultantId="+this.applicantInfoForm.value.applicantInfo.consultantId;
 console.log(json,"json value");
 
     this.service.getButtonDetails(this.apiConstant.resignToArchitect, json).subscribe((res: any) => {

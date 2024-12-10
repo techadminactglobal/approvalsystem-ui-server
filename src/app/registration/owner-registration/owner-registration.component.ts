@@ -515,5 +515,112 @@ deleteEducationalCertificate() {
 
   }
 
+  aadhaarExists: boolean = false; // Flag to determine if Aadhaar exists
+  aadhaarMessage: string = '';
+  aadhaarMessageClass: string = '';
   
+  checkAadhaarExistence() {
+    const aadhaarNo = this.registrationForm.get('addharNo')?.value;
+    
+    // Check if Aadhaar number is valid (12 digits and numeric only)
+    if (aadhaarNo && aadhaarNo.length === 12 && /^\d+$/.test(aadhaarNo)) {
+      // Call your API to check if Aadhaar exists
+      this.service.getDeptDashboard(this.apiConstant.checkOwnerExistAadharNo, aadhaarNo).subscribe((response: any) => {
+      // this.service.getDeptDashboard(this.apiConstant.checkOwnerExistAadharNo, aadhaarNo).subscribe(
+        // (response: any) => {
+          console.log("API Response:", response);
+  
+          // Check the condition if Aadhaar exists
+          if (response.data === "Aadhar Number is alredy register") {
+            this.aadhaarExists = true;
+            this.aadhaarMessage = "Aadhaar number already exists.";
+            this.aadhaarMessageClass = 'error';  // Success class
+          } else {
+            // If the response indicates the Aadhaar is available
+            this.aadhaarExists = false;
+            this.aadhaarMessage = '';  // Clear message if no issue
+            this.aadhaarMessageClass = '';  // Clear class
+          }
+        },
+        (error) => {
+          console.error("Error checking Aadhaar:", error);
+  
+          // Handle specific HTTP errors (e.g., 404, 500, etc.)
+          if (error.status && error.status !== 200) {
+            this.aadhaarMessage = `Error: ${error.statusText}`;
+          } else {
+            // General error when the API call fails
+            this.aadhaarMessage = "Unable to verify Aadhaar number. Please try again later.";
+          }
+          this.aadhaarExists = false;
+          this.aadhaarMessageClass = 'error';  // Error class for API failure
+        }
+      );
+      
+    } else {
+      // Invalid Aadhaar number input (not 12 digits or non-numeric)
+      this.aadhaarExists = false;
+      this.aadhaarMessage = "Please enter a valid 12-digit Aadhaar number.";
+      this.aadhaarMessageClass = 'error';  // Error class for invalid input
+    }
+  }
+  
+  emailExists: boolean = false; 
+  emailMessage: string = ''; 
+  emailMessageClass: string = ''; 
+  
+  checkEmailExistence() {
+    const emailId = this.registrationForm.get('email')?.value;
+  
+    // Check if emailId is provided
+    if (!emailId) {
+      this.emailExists = false;
+      this.emailMessage = "Please enter a valid email address.";  // Correct validation message
+      this.emailMessageClass = 'error';  // Error class for empty input
+      return;
+    }
+  
+    // Optional: You could also validate email format here
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailRegex.test(emailId)) {
+      this.emailExists = false;
+      this.emailMessage = "Please enter a valid email address.";  // Email format validation message
+      this.emailMessageClass = 'error';  // Error class for invalid format
+      return;
+    }
+  
+    // Call your API to check if the email exists
+    this.service.getDeptDashboard(this.apiConstant.checkOwnerExistEamil, emailId).subscribe(
+      (response: any) => {
+        console.log("API Response:", response);
+  
+        // Assuming the response has a 'data' property and it contains the message
+        if (response.data === "Email is alredy register") {
+          this.emailExists = true;
+          this.emailMessage = "Email is already registered";  // Corrected message
+          this.emailMessageClass = 'error';  // Error class for already registered email
+        } else {
+          this.emailExists = false;
+          this.emailMessage = '';  // Clear message if no issue
+          this.emailMessageClass = '';  // Clear class
+        }
+      },
+      (error) => {
+        console.error("Error checking email:", error);
+  
+        // Handle specific HTTP errors (e.g., 404, 500, etc.)
+        if (error.status && error.status !== 200) {
+          this.emailMessage = `Error: ${error.statusText}`;
+        } else {
+          // General error when the API call fails
+          this.emailMessage = "Unable to verify email. Please try again later.";
+        }
+        this.emailExists = false;
+        this.emailMessageClass = 'error';  // Error class for API failure
+      }
+    );
+  }
+  
+
+
 }

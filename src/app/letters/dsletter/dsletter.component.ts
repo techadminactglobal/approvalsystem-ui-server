@@ -55,9 +55,16 @@ export class DsletterComponent {
     private datePipe: DatePipe) {
 
   }
-
+  requestid:any;
+  frids:any;
+  comment:any;
 
   ngOnInit(): void {
+    this.paymentType = localStorage.getItem('paymentType')
+    this.requestid = localStorage.getItem('requestid');
+    this.comment = localStorage.getItem('comment');
+    this.frids = localStorage.getItem('frid');
+ 
 
     this.currentDate = new Date();
     // let request = {};
@@ -82,17 +89,17 @@ export class DsletterComponent {
     // }
 
     let request = {};
-    this.paymentType = this.senddata.paymentType;
+    this.paymentType = this.paymentType;
     console.log(this.paymentType,"payment type..");
     
-    if (this.senddata.paymentType == "regNew") {
+    if (this.paymentType == "regNew") {
       request = {
-        "userName": this.senddata.requestid
+        "userName": this.requestid
       }
-    } else if (this.senddata.paymentType == "fileNew" || this.senddata.paymentType == "plinthNew" || this.senddata.paymentType === "OC") {
+    } else if (this.paymentType == "fileNew" || this.paymentType == "plinthNew" || this.paymentType === "OC") {
       request = {
-        "fileNo": this.senddata.requestid,
-        "frId": this.senddata.frid
+        "fileNo": this.requestid,
+        "frId": this.frids
       }
     }
     this.service.getDataService(this.apiConstant.update_Letter, request).subscribe((data: any) => {
@@ -100,7 +107,7 @@ export class DsletterComponent {
 
       if (data != null) {
 
-        if (this.senddata.paymentType == "regNew") {
+        if (this.paymentType == "regNew") {
           console.log(data, "aaaaaa generating letter");
           console.log(data.data.HierarchyDetails, "HierarchyDetails......")
 
@@ -119,14 +126,14 @@ export class DsletterComponent {
 
 
 
-        } else if (this.senddata.paymentType == "fileNew" || this.senddata.paymentType == "plinthNew" || this.senddata.paymentType == "OC") {
+        } else if (this.paymentType == "fileNew" || this.paymentType == "plinthNew" || this.paymentType == "OC") {
 
-          if (this.senddata.paymentType == "plinthNew") {
+          if (this.paymentType == "plinthNew") {
             this.letterType = "plinthAccept";
-            this.paymentType = this.senddata.paymentType;
-          } else if (this.senddata.paymentType == "OC") {
+            this.paymentType = this.paymentType;
+          } else if (this.paymentType == "OC") {
             this.letterType = "OCAccept";
-            this.paymentType = this.senddata.paymentType;
+            this.paymentType = this.paymentType;
           } else {
             this.letterType = data.data.HierarchyDetails.hierachyFlowProcess;
           }
@@ -270,7 +277,7 @@ export class DsletterComponent {
 
   saveLetter() {
     var json:any;
-    if(this.senddata.paymentType == "plinthNew"){
+    if(this.paymentType == "plinthNew"){
       json = {
         "docFileName": "Ds letter",
         "docType": "Ds letter",
@@ -280,10 +287,10 @@ export class DsletterComponent {
       };
     }else{
     json = {
-      "docFileName": this.senddata.comment,
-      "docType": this.senddata.comment,
+      "docFileName": this.comment,
+      "docType": this.comment,
       "docByteStream": this.fileData,
-      "docName": this.senddata.comment
+      "docName": this.comment
 
     };
   }
@@ -298,33 +305,33 @@ export class DsletterComponent {
 
 
       let json1 = {};
-      console.log(this.senddata.paymentType, "payemtntyoaSDBvjk");
+      console.log(this.paymentType, "payemtntyoaSDBvjk");
 
-      if (this.senddata.paymentType == "regNew") {
+      if (this.paymentType == "regNew") {
         json1 = {
-          "userName": this.senddata.requestid,
+          "userName": this.requestid,
           "letterType": "Letter Accepted",
           "letterUinqueId": res.docUUID
         };
-      } else if (this.senddata.paymentType == "fileNew") {
+      } else if (this.paymentType == "fileNew") {
         json1 = {
-          "fileNo": this.senddata.requestid,
-          "frId": this.senddata.frid,
+          "fileNo": this.requestid,
+          "frId": this.frids,
           "letterType": "Letter Accepted",
           "letterUinqueId": res.docUUID
         };
 
-      } else if (this.senddata.paymentType == "plinthNew") {
+      } else if (this.paymentType == "plinthNew") {
         json1 = {
-          "fileNo": this.senddata.requestid,
-          "frId": this.senddata.frid,
+          "fileNo": this.requestid,
+          "frId": this.frids,
           "letterType": "plinthAccept",
           "letterUinqueId": res.docUUID
         };
-      } else if (this.senddata.paymentType == "OC") {
+      } else if (this.paymentType == "OC") {
         json1 = {
-          "fileNo": this.senddata.requestid,
-          "frId": this.senddata.frid,
+          "fileNo": this.requestid,
+          "frId": this.frids,
           "letterType": "OCAccept",
           "letterUinqueId": res.docUUID
         };
@@ -333,9 +340,9 @@ export class DsletterComponent {
       this.service.postService(this.apiConstant.LetterSave, json1).subscribe((res: any) => {
         console.log("vishal data =================> ", res);
         setTimeout(() => {
-          if (this.senddata.paymentType == "OC") {
+          if (this.paymentType == "OC") {
             this.router.navigate(['/OccupancyDashborad']);
-          } else if (this.senddata.paymentType == "OC") {
+          } else if (this.paymentType == "OC") {
             this.router.navigate(['/departmentDashboard']);
           }else{
             this.router.navigate(['/dashboard'])

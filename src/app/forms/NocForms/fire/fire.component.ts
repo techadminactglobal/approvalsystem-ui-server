@@ -37,11 +37,16 @@ export class FireComponent {
 data :any;
 buildingDetails :any[]=[];
   fireForm!: FormGroup;
+  requestId:any;
+  frids:any;
 
 
   ngOnInit(): void {
+    
+    this.requestId = localStorage.getItem('requestid');
+    this.frids = localStorage.getItem('frid');
 
-    this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.senddata.requestid).subscribe((data: any) => {
+    this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.requestId).subscribe((data: any) => {
       console.log(data);
 
       this.pArea = data.plotDetails.pArea;
@@ -58,8 +63,8 @@ buildingDetails :any[]=[];
     });
 
     let request = {
-      "fileNo": this.senddata.requestid,
-      "frId": this.senddata.frid
+      "fileNo": this.requestId,
+      "frId":  this.frids
     }
     this.service.getSecondViewDetails(this.apiConstant.SecondFORM_VIEW, request).subscribe((data: any) => {
       console.log(data, "okkkkk");
@@ -76,8 +81,8 @@ buildingDetails :any[]=[];
 
   buildForm() {
     this.fireForm = this.fb.group({
-      fileNo:[this.senddata.requestid],
-      frId:[this.senddata.frid],
+      fileNo:[this.requestId],
+      frId:[ this.frids],
       geoDetails: this.fb.array([this.geoDetails]),
       buildingDetails: this.fb.array([this.buildingDetails]),
       siteDetails: this.fb.group({

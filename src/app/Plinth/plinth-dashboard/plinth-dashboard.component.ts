@@ -35,8 +35,10 @@ export class PlinthDashboardComponent {
   total: boolean = false;
   totalPendingArray: any[] = [];
   totalPendingSize=0;
+  hierarchyUserName:any;
 
   ngOnInit() {
+    this.hierarchyUserName = localStorage.getItem('hierarchyUserName'); 
     this.plinthDashboardData();
     this.pending = true;
     // setTimeout(() => {
@@ -66,7 +68,7 @@ export class PlinthDashboardComponent {
     this.service
       .getDeptDashboard(
         this.apiConstant.PlinthDashboardDetails,
-        this.senddata.hierarchyUserName
+        this.hierarchyUserName
       )
       .subscribe((res: any) => {
         console.log('**************', res);
@@ -83,7 +85,7 @@ export class PlinthDashboardComponent {
       });
 
     //Approve
-    let request = this.senddata.hierarchyUserName;
+    let request = this.hierarchyUserName;
     this.service
       .getDeptDashboard(this.apiConstant.PlintApprovedDashboard, request)
       .subscribe((res: any) => {
@@ -185,9 +187,12 @@ export class PlinthDashboardComponent {
 
   viewDetail(fileNo: string, status: string, frId: string) {
     console.log(fileNo);
-    this.senddata.requestid = fileNo;
-    this.senddata.frid = frId;
-    this.senddata.callFrom = 'plinth';
+    // this.senddata.requestid = fileNo;
+    localStorage.setItem('requestid',fileNo);
+    // this.senddata.frid = frId;
+    localStorage.setItem('frid',frId);
+    // this.senddata.callFrom = 'plinth';
+    localStorage.setItem('callFrom' , 'plinth')
     if (status == 'Request Released') {
       this.router.navigate(['/plinthComponent']);
     } 

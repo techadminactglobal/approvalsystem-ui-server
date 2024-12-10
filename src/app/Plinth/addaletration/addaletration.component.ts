@@ -32,8 +32,14 @@ export class AddaletrationComponent  {
   pending: boolean = false;
   totalPendingArray: any[] = [];
   totalPendingSize: any;
-
+  callFrom:any;
+  hierarchyUserName:any;
+  requestid:any;
+  frid:any;
   ngOnInit() {
+    this.callFrom = localStorage.getItem('callFrom');
+    this.requestid = localStorage.getItem('requestid');
+    this.frid = localStorage.getItem('frid');
     this.plinthDashboardData();
 
     setTimeout(() => {
@@ -45,7 +51,7 @@ export class AddaletrationComponent  {
     this.service
       .getDeptDashboard(
         this.apiConstant.PlinthDashboardDetails,
-        this.senddata.hierarchyUserName
+        this.hierarchyUserName
       )
       .subscribe((res: any) => {
         console.log('**************', res);
@@ -62,7 +68,7 @@ export class AddaletrationComponent  {
       });
 
     //Approve
-    let request = this.senddata.hierarchyUserName;
+    let request = this.hierarchyUserName;
     this.service
       .getDeptDashboard(this.apiConstant.PlintApprovedDashboard, request)
       .subscribe((res: any) => {
@@ -153,9 +159,9 @@ export class AddaletrationComponent  {
 
   viewDetail(fileNo: string, status: string, frId: string) {
     console.log(fileNo);
-    this.senddata.requestid = fileNo;
-    this.senddata.frid = frId;
-    this.senddata.callFrom = 'plinth';
+    this.requestid = fileNo;
+    this.frid = frId;
+    this.callFrom = 'plinth';
     if (status == 'Request Released') {
       this.router.navigate(['/plinthComponent']);
     } else {

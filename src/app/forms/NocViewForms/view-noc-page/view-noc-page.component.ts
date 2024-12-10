@@ -25,11 +25,15 @@ export class ViewNocPageComponent {
   viewLetter:boolean=false;
   letterUniqueId:any;
   letterName:any;
+  requestId:any;
+  frids:any;
 
   ngOnInit(): void {
+    this.requestId = localStorage.getItem('requestid');
+    this.frids = localStorage.getItem('frid');
 
-    this.userName = this.senddata.requestid;
-    this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.senddata.requestid).subscribe((data: any) => {
+    this.userName = this.requestId;
+    this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.requestId).subscribe((data: any) => {
       if(data.basicInfo.status == COMMONCONSTANTS.Status_InitialDepositedAssigned1hierarchy || data.basicInfo.status == COMMONCONSTANTS.Status_PaymentCompleted
         || data.basicInfo.status == COMMONCONSTANTS.Status_DSPending  ){
         this.viewHistoryButton = true;
@@ -68,7 +72,7 @@ export class ViewNocPageComponent {
   }
 
   fireDetails() {
-    let request = '?fileNo=' + this.senddata.requestid + '&frId=' + this.senddata.frid + '&callFor=' + this.senddata.callFrom;
+    let request = '?fileNo=' + this.requestId + '&frId=' +  this.frids + '&callFor=' + this.senddata.callFrom;
     this.service.getButtonDetails(this.apiConstant.ViewNocFire, request).subscribe((data: any) => {
       console.log(data, "response from api...");
       if (data.httpStatus === "NOT_FOUND") {
@@ -85,9 +89,11 @@ export class ViewNocPageComponent {
   }
 
   payment(){
-    this.senddata.requestid = this.senddata.requestid,
-    this.senddata.frid = this.senddata.frid;
-    this.senddata.paymentType = "fileNew"
+    this.requestId  = this.requestId ,
+    this.frids =  this.frids;
+    // this.senddata.paymentType = "fileNew"
+    localStorage.removeItem('paymentType');
+    localStorage.setItem('paymentType', 'fileNew');
     this.router.navigate(['/payment']);
   }
 
@@ -143,8 +149,8 @@ export class ViewNocPageComponent {
     console.log(this.paymentHistory);
 
     let request={
-      "fileNo":this.senddata.requestid,
-      "frId":this.senddata.frid
+      "fileNo": this.requestId,
+      "frId":this.frids
     }
 
     this.service.getHierarchyService(this.apiConstant.Payment_History, request).subscribe((data: any) => {
@@ -217,7 +223,7 @@ export class ViewNocPageComponent {
 
   ViewDS(): void {
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId":  this.requestId,
       "docUUID": this.letterUniqueId
     }
 console.log(this.letterUniqueId,"uiqueif");
@@ -244,8 +250,8 @@ console.log(this.letterUniqueId,"uiqueif");
 fileRelease(){
 
   let request = {
-    "fileNo": this.senddata.requestid,
-    "frId": this.senddata.frid
+    "fileNo":  this.requestId,
+    "frId": this.frids
   }
   this.service.getSecondViewDetails(this.apiConstant.File_Release, request).subscribe((data: any) => {
     console.log(data, "okkkkk");

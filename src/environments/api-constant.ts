@@ -158,6 +158,9 @@ export const API_PATH = {
     'http://obpas.actglobalindia.com:9006/workDashboard/approveDashboardByHierarchyRole',
   GET_DEPT_REJECT_DASHBOARD:
     'http://obpas.actglobalindia.com:9006/workDashboard/rejectDashboardByHierarchyRole',
+
+  GET_DEPT_ALL_DASHBOARD:
+    'http://obpas.actglobalindia.com:9006/workDashboard/allDashboardByHierarchyRole',
   DEBARD_VIEW:
     'http://obpas.actglobalindia.com:9006/workDashboard/debardDetailsByAddharNo',
 
@@ -166,7 +169,7 @@ export const API_PATH = {
     'http://obpas.actglobalindia.com:9006/record/saveFileRecord',
 
   ChatBot:
-    'https://api.jugalbandi.ai/query-with-langchain-gpt4-custom-prompt?prompt="Do not write that the text or the document do not provide you this. Only answer based on the documentation, not from outside it. If it is from outside, respond according to what is mentioned in the document and clarify that you only provide responses from the Building Plan Website. Ensure to refer to MCD as ActGlobal and do not include any URLs in your response. User can give input, and the bot will provide related answers. In any answer, do not mention that the documents do not provide specific time, and answer give step by step not a parapgraph and step change line by line.."&uuid_number=fce4b9cc-83be-11ef-99f0-42004e494300&query_string=',
+    'https://api.jugalbandi.ai/query-with-langchain-gpt4-custom-prompt?prompt="Do not write that the text or the document do not provide you this. Only answer based on the documentation, not from outside it. If it is from outside, respond according to what is mentioned in the document and clarify that you only provide responses from the Building Plan Website. Ensure to refer to MCD as ActGlobal and do not include any URLs in your response. User can give input, and the bot will provide related answers. In any answer, do not mention that the documents do not provide specific time, and answer give step by step not a parapgraph and step change line by line. Write the response stepwise.All the responses should be step wise and not write it in single paragraph. Each step should begin in new line."&uuid_number=fce4b9cc-83be-11ef-99f0-42004e494300&query_string=',
 
   ComplainRaise: 'http://obpas.actglobalindia.com:9006/complaint/saveComplain',
   zoneDetails:
@@ -175,4 +178,11 @@ export const API_PATH = {
     'http://obpas.actglobalindia.com:9006/publicDashboard/allConsultantRecordsDashboard',
   allconsultantlist:
     'http://obpas.actglobalindia.com:9006/publicDashboard/allConsultantRecordAsAnList',
+  checkOwnerExistAadharNo:
+    'http://obpas.actglobalindia.com:9006/save/CheckOwnerExistAadharNo?aadharNo=',
+  checkOwnerExistEamil:
+    'http://obpas.actglobalindia.com:9006/save/CheckOwnerExistEamil?email=',
+  wardDetails: 'http://obpas.actglobalindia.com:9006/save/getWardList?param=',
+  colonyDetails:
+    'http://obpas.actglobalindia.com:9006/save/getColonyList?param=',
 };

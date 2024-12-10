@@ -22,12 +22,23 @@ export class DeparmentalDashboardComponent implements AfterViewInit {
   constructor(private service: commonService,
     private router: Router, private senddata: SendData) { }
 
+hierarchyId:any;
+requestId:any;
+paymentFor:any;
+frId:any;
+
   ngOnInit() {
+    this.hierarchyId = localStorage.getItem('hierarchyId');
+    this.requestId = localStorage.getItem('requestId');
+    this.paymentFor = localStorage.getItem('paymentFor');
+    this.frId = localStorage.getItem('frId');
+
+    
 
     this.viewDashboard();
 
 
-    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_APPROVE_DASHBOARD + "?hierarchyRole=", this.senddata.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_APPROVE_DASHBOARD + "?hierarchyRole=", this.hierarchyId).subscribe((res: any) => {
       console.log(res);
       if (res.data != null) {
         this.approvedSize = res.data.length;
@@ -39,7 +50,7 @@ export class DeparmentalDashboardComponent implements AfterViewInit {
       }
     })
 
-    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_REJECT_DASHBOARD + "?hierarchyRole=", this.senddata.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_REJECT_DASHBOARD + "?hierarchyRole=", this.hierarchyId).subscribe((res: any) => {
       console.log(res);
       if (res.data != null) {
         this.rejectedSize = res.data.length;
@@ -51,27 +62,49 @@ export class DeparmentalDashboardComponent implements AfterViewInit {
       }
     })
 
+    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_ALL_DASHBOARD + "?hierarchyRole=", this.hierarchyId).subscribe((res: any) => {
+
+      console.log(res);
+
+      if (res.data != null) {
+
+        this.totalData = [];
+
+        this.totalSize = res.data.length;
+
+        this.senddata.totalSize = res.data.length;
+
+        console.log(this.totalSize);
+
+        this.totalData = res.data;
+
+        console.log(this.totalData);
+
+      }
+
+    })
+
     setTimeout(() => {
-
-      // Initialize the totalData array
-      this.totalData = [];
-
-      // Combine all the data into one array
-      const combinedData = [
-        ...this.approveData != null ? this.approveData : [],
-        ...this.dataArray != null ? this.dataArray : [],
-        ...this.rejectData != null ? this.rejectData : []
-      ].filter(item => item && Object.keys(item).length > 0); // Removes empty arrays or falsy items  
-
-      // Push the combined data into the 0th index of totalData
-      this.totalData.push(combinedData);
-
-      console.log(this.totalData, "total data visible");
-
       this.totalArray();
+      // // Initialize the totalData array
+      // this.totalData = [];
 
-      this.totalSize = this.approvedSize + this.pendingSize + this.rejectedSize;
-      this.senddata.totalSize = this.totalSize;
+      // // Combine all the data into one array
+      // const combinedData = [
+      //   ...this.approveData != null ? this.approveData : [],
+      //   ...this.dataArray != null ? this.dataArray : [],
+      //   ...this.rejectData != null ? this.rejectData : []
+      // ].filter(item => item && Object.keys(item).length > 0); // Removes empty arrays or falsy items  
+
+      // // Push the combined data into the 0th index of totalData
+      // this.totalData.push(combinedData);
+
+      // console.log(this.totalData, "total data visible");
+
+      // this.totalArray();
+
+      // this.totalSize = this.approvedSize + this.pendingSize + this.rejectedSize;
+      // this.senddata.totalSize = this.totalSize;
     }, 1000);
 
     let data: any = localStorage.getItem('userData');
@@ -99,7 +132,7 @@ export class DeparmentalDashboardComponent implements AfterViewInit {
   // }
 
   viewDashboard() {
-    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_DASHBOARD + "?hierarchyRole=", this.senddata.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_DASHBOARD + "?hierarchyRole=", this.hierarchyId).subscribe((res: any) => {
       console.log(res);
       if (res.data != null) {
         // this.dataArray = res.data;
@@ -125,27 +158,38 @@ export class DeparmentalDashboardComponent implements AfterViewInit {
   viewDetail(consultantName: string, fileNo: any, hierarchyId: string, frId: string) {
     if (hierarchyId == "regNew") {
       console.log(consultantName);
-      this.senddata.paymentFor = hierarchyId;
-      this.senddata.requestid = consultantName;
+      // this.paymentFor = hierarchyId;
+      localStorage.setItem('paymentFor',hierarchyId);
+      // this.requestId = consultantName;
+      localStorage.setItem('requestid',consultantName);
       this.router.navigate(['/deptRequestView']);
     } else if (hierarchyId == "fileNew") {
       console.log(fileNo);
-      this.senddata.paymentFor = hierarchyId;
-      this.senddata.requestid = fileNo;
-      this.senddata.frid = frId;
+      // this.paymentFor = hierarchyId;
+      localStorage.setItem('paymentFor',hierarchyId);
+      // this.requestId = fileNo;
+      localStorage.setItem('requestid',fileNo);
+      // this.frId = frId;
+      localStorage.setItem('frid',frId);
       this.router.navigate(['/deptRequestView'])
     } else if (hierarchyId == "plinthNew") {
       console.log(fileNo);
-      this.senddata.paymentFor = hierarchyId;
-      this.senddata.requestid = fileNo;
-      this.senddata.frid = frId;
-      this.senddata.callFrom = "Dept",
+      // this.senddata.paymentFor = hierarchyId;
+      localStorage.setItem('paymentFor',hierarchyId);
+      // this.senddata.requestid = fileNo;
+      localStorage.setItem('requestid',fileNo);
+      // this.senddata.frid = frId;
+      localStorage.setItem('frid',frId);
+      // this.senddata.callFrom = "Dept",
+      localStorage.setItem('callFrom' , 'Dept')
         this.router.navigate(['/deptRequestView']);
     } else if (hierarchyId == "OCNew") {
       console.log(fileNo);
-      this.senddata.paymentFor = hierarchyId;
-      this.senddata.requestid = fileNo;
-      this.senddata.frid = frId;
+      localStorage.setItem('paymentFor',hierarchyId);
+      // this.senddata.requestid = fileNo;
+      localStorage.setItem('requestid',fileNo);
+      // this.senddata.frid = frId;
+      localStorage.setItem('frid',frId);
       this.router.navigate(['/deptRequestView']);
     }
   }
@@ -203,7 +247,7 @@ export class DeparmentalDashboardComponent implements AfterViewInit {
   approvedSize: any = 0;
   rejectedSize: any = 0;
   totalPending() {
-    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_DASHBOARD + "?hierarchyRole=", this.senddata.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_DASHBOARD + "?hierarchyRole=", this.hierarchyId).subscribe((res: any) => {
       console.log(res);
       if (res.data != null) {
         // this.pendingSize = res.data.length;
@@ -260,7 +304,7 @@ export class DeparmentalDashboardComponent implements AfterViewInit {
     this.dataArray = [];
     console.log(this.dataArray)
 
-    this.dataArray = this.totalData[0].map((item: any, index: number) => {
+    this.dataArray = this.totalData.map((item: any, index: number) => {
       return {
         ...item, serialNumber: index + 1
       };

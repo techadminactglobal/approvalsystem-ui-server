@@ -29,21 +29,32 @@ export class NocDashboardComponent implements OnInit {
   approve:boolean = false;
   total:boolean = true;
 
+  totalSize = 0;
+
   constructor(
     private service: commonService,
     private dialogRef: MatDialog,
     private senddata: SendData,
     private router: Router
   ) {}
-
+  hierarchyId:any;
+  professionalTypes:any;
+  requestId:any;
+  frids:any;
   ngOnInit() {
-    this.professionalType = this.senddata.professionalType;
+    this.requestId = localStorage.getItem('requestId');
+    this.hierarchyId = localStorage.getItem('hierarchyId');
+    this.professionalTypes = localStorage.getItem('professionalType');
+    this.frids = localStorage.getItem('frid')
     this.Approve();
     this.Reject();
+
+    this.allDetails();
+    
     this.viewDashboard();
     setTimeout(() => {
       // Initialize the totalData array
-      this.totalArray = [];
+      // this.totalArray = [];
       this.reject = false;
       this.pending = false;
       this.approve = false;
@@ -51,16 +62,16 @@ export class NocDashboardComponent implements OnInit {
       
 
       // Combine all the data into one array
-      const combinedData = [
-        ...this.ApporveArray.length > 0 ? this.ApporveArray : [],
-        ...this.pendingArray.length > 0 ? this.pendingArray : [],
-        ...this.rejectArray.length > 0 ? this.rejectArray : []
-      ].filter(item => item && Object.keys(item).length > 0); // Removes empty arrays or falsy items      
+      // const combinedData = [
+      //   ...this.ApporveArray.length > 0 ? this.ApporveArray : [],
+      //   ...this.pendingArray.length > 0 ? this.pendingArray : [],
+      //   ...this.rejectArray.length > 0 ? this.rejectArray : []
+      // ].filter(item => item && Object.keys(item).length > 0); // Removes empty arrays or falsy items      
       
-      // Push the combined data into the 0th index of totalData
-      this.totalArray = combinedData;
+      // // Push the combined data into the 0th index of totalData
+      // this.totalArray = combinedData;
 
-      console.log(this.totalArray, "total array for plinth dashboard");
+      // console.log(this.totalArray, "total array for plinth dashboard");
       
       
     this.reject =false;
@@ -68,8 +79,34 @@ export class NocDashboardComponent implements OnInit {
     
   }
 
+  allDetails(){
+
+    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_ALL_DASHBOARD + "?hierarchyRole=", this.hierarchyId).subscribe((res: any) => {
+
+      console.log(res);
+
+      if (res.data != null) {
+
+        this.totalArray = [];
+
+        this.totalSize = res.data.length;
+
+        this.senddata.totalSize = res.data.length;
+
+        console.log(this.totalSize);
+
+        this.totalArray = res.data;
+
+        console.log(this.totalArray);
+
+      }
+
+    })
+
+  }
+
   viewDashboard() {
-    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_DASHBOARD + "?hierarchyRole=", this.senddata.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_DASHBOARD + "?hierarchyRole=", this.hierarchyId).subscribe((res: any) => {
       console.log(res);
       this.reject = false;
       this.pending = true;
@@ -86,7 +123,7 @@ export class NocDashboardComponent implements OnInit {
   }
 
   Reject() {
-    this.service.getDeptDashboard(this.apiConstant.NocRejectDashboard + "?hierarchyRole=", this.senddata.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.NocRejectDashboard + "?hierarchyRole=",  this.hierarchyId).subscribe((res: any) => {
       console.log(res);
       this.pending = false;
       this.approve = false;
@@ -110,7 +147,7 @@ export class NocDashboardComponent implements OnInit {
   }
 
   Approve() {
-    this.service.getDeptDashboard(this.apiConstant.NocApproveDashboard + "?hierarchyRole=", this.senddata.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.NocApproveDashboard + "?hierarchyRole=",  this.hierarchyId).subscribe((res: any) => {
       console.log(res);
       this.reject = false;
       this.pending = false;
@@ -127,8 +164,10 @@ export class NocDashboardComponent implements OnInit {
   }
 
   viewDetail(fileNo: any, frId: string,reqeustType:string) {
-    this.senddata.requestid = fileNo;
-    this.senddata.frid = frId;
+    // this.requestId = fileNo;
+    localStorage.setItem('requestid', fileNo);
+    localStorage.setItem('frid', frId);
+    // this.frids = frId;
     this.senddata.NocDeptDashboard=true;
     if(reqeustType=='approve' || reqeustType=='reject'){
       this.senddata.NocDept=false;

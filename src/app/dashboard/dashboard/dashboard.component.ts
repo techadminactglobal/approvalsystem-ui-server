@@ -1,4 +1,3 @@
-
 // import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { commonService } from 'src/app/services/common.service';
@@ -43,14 +42,20 @@ export class DashboardComponent implements OnInit {
 
   activeUser: any;
   reports = [];
+  hierarchyId:any;
+  userNames:any;
+  architectViews:any;
   
   ngOnInit() {
+    this.hierarchyId = localStorage.getItem('hierarchyId');
+    this.userNames = localStorage.getItem('hierarchyUserName');
+    this.architectViews = localStorage.getItem('architectView');
     this.saralTableData();
     this.refreshCountries();
   }
 
   saralTableData() {
-    let request = this.senddata.hierarchyUserName;
+    let request = this.userNames;
 
     this.service.getDeptDashboard(this.apiConstant.DASHBOARD, request).subscribe((res: any) => {
       console.log("**************", res);
@@ -87,17 +92,32 @@ export class DashboardComponent implements OnInit {
   updateVariables(data: any) {
 
     let pendingStatus = [COMMONCONSTANTS.Status_OwnerAssigned, COMMONCONSTANTS.Status_AcceptByArchitect, COMMONCONSTANTS.Status_FileProcess, COMMONCONSTANTS.Status_FileRe_Upoload, COMMONCONSTANTS.Status_Documents_Uploaded, COMMONCONSTANTS.Status_InitialDepositedAssigned1hierarchy,
-    COMMONCONSTANTS.Status_Approval_Hierarchy2nd,
-    COMMONCONSTANTS.Status_Approval_Hierarchy3rd,
-    COMMONCONSTANTS.RegNew_ROLE_ID_AA,
-    COMMONCONSTANTS.Status_Rejection_Hierarchy2nd,
-    COMMONCONSTANTS.Status_Rejection_Hierarchy3rd,
-    COMMONCONSTANTS.Status_Rejection_Hierarchy4th, COMMONCONSTANTS.Status_Final_Form_Submit,
-    COMMONCONSTANTS.Status_Rule_Violation_Error, COMMONCONSTANTS.Status_State_Laws_Error, COMMONCONSTANTS.Status_PendingPayment,
-    COMMONCONSTANTS.Status_PaymentCompleted, COMMONCONSTANTS.Status_NocFilled, COMMONCONSTANTS.Status_InitialDepositedAssignedNOCDept,
-    COMMONCONSTANTS.Status_DSPending,COMMONCONSTANTS.Status_Form_Submitted_GIS_Pending];
-    let approvedStatus = ['Fee Paid', COMMONCONSTANTS.Status_FileProcessed, COMMONCONSTANTS.Status_DSAppliedRequestApproved, COMMONCONSTANTS.Status_Request_Released];
-    let rejectStatus = ['Rejected'];
+
+      COMMONCONSTANTS.Status_Approval_Hierarchy2nd,
+  
+      COMMONCONSTANTS.Status_Approval_Hierarchy3rd,
+  
+      COMMONCONSTANTS.RegNew_ROLE_ID_AA,
+  
+      COMMONCONSTANTS.Status_Rejection_Hierarchy2nd,
+  
+      COMMONCONSTANTS.Status_Rejection_Hierarchy3rd,
+  
+      COMMONCONSTANTS.Status_Rejection_Hierarchy4th, COMMONCONSTANTS.Status_Final_Form_Submit,
+  
+      COMMONCONSTANTS.Status_Rule_Violation_Error, COMMONCONSTANTS.Status_State_Laws_Error, COMMONCONSTANTS.Status_PendingPayment,
+  
+      COMMONCONSTANTS.Status_PaymentCompleted, COMMONCONSTANTS.Status_NocFilled, COMMONCONSTANTS.Status_InitialDepositedAssignedNOCDept,
+  
+      COMMONCONSTANTS.Status_DSPending,COMMONCONSTANTS.Status_Form_Submitted_GIS_Pending,];
+  
+      let approvedStatus = [COMMONCONSTANTS.Status_FileProcessed, COMMONCONSTANTS.Status_DSAppliedRequestApproved, 
+  
+        COMMONCONSTANTS.Status_Request_Released, 'Occupancy Ds Applied - Occupancy Approved','Occupancy Released'
+  
+      ,'Plinth Ds Applied - Plinth Approved','Plinth Released'];
+  
+      let rejectStatus = ['Rejected','Plinth Rejected','Occupancy Rejected','Rejected by Architect'];
 
     // Iterate through the data
     data.forEach((item: any) => {
@@ -121,7 +141,7 @@ export class DashboardComponent implements OnInit {
     this.senddata.approveSize = this.approvedSize;
     this.senddata.rejectSize = this.rejectedSize;
     this.senddata.totalSize = this.pendingSize + this.approvedSize + this.rejectedSize;
-    this.totalSize = this.pendingSize + this.approvedSize + this.rejectedSize;
+    this.totalSize = this.totalArray.length;
   }
 
   totalPending() {
@@ -181,9 +201,20 @@ export class DashboardComponent implements OnInit {
 
   viewDetail(consultantName: string, status: string, frId: string) {
     console.log(consultantName);
-    this.senddata.requestid = consultantName;
-    this.senddata.frid = frId;
-    this.senddata.paymentType = "fileNew"
+    // Remove the 'frid' key from localStorage
+localStorage.removeItem('requestid');
+localStorage.removeItem('frid');
+localStorage.removeItem('paymentType');
+
+
+    // this.senddata.requestid = consultantName;
+  localStorage.setItem('requestid',consultantName);
+    // this.senddata.frid = frId;
+    localStorage.setItem('frid',frId)
+    // this.senddata.paymentType = "fileNew"
+    localStorage.setItem('paymentType', "fileNew")
+
+    
     if (status == COMMONCONSTANTS.Status_Documents_Uploaded) {
       this.router.navigate(['/supportView']);
     } else if (status === COMMONCONSTANTS.Status_InitialDepositedAssigned1hierarchy || status ===
@@ -198,7 +229,7 @@ export class DashboardComponent implements OnInit {
     } else if (status == COMMONCONSTANTS.Status_Final_Form_Submit || status == COMMONCONSTANTS.Status_Form_Submitted_GIS_Pending) {
       this.router.navigate(['/secondView']);
     } else if (status == COMMONCONSTANTS.Status_OwnerAssigned) {
-      this.senddata.architectView = true;
+      this.architectViews = true;
       this.router.navigate(['/OwnerApplicantDetials']);
     } else if(status == COMMONCONSTANTS.Status_AcceptByArchitect){
       this.router.navigate(['/form/new-first-component']);

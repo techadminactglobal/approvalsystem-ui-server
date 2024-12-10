@@ -55,14 +55,19 @@ export class OccupancyComponentViewComponent {
       this.viewPlinth = false;
     }
   }
-
-
-
+  callFrom:any;
+  requestid:any;
+  frid:any;
+  paymentType:any;
   ngOnInit() {
+    this.callFrom = localStorage.getItem('callFrom');
+    this.requestid = localStorage.getItem('requestid');
+    this.frid = localStorage.getItem('frid');
+    this.paymentType = localStorage.getItem('paymentType');
     // setTimeout(() => {
     let request = {
-      "fileNo": this.senddata.requestid,
-      "frId": this.senddata.frid
+      "fileNo": this.requestid,
+      "frId": this.frid
     }
     console.log(request, "request...");
 
@@ -164,7 +169,7 @@ export class OccupancyComponentViewComponent {
   }
 
   fireDetails() {
-    let request = '?fileNo=' + this.senddata.requestid + '&frId=' + this.senddata.frid + '&callFor=' + this.senddata.callFrom;
+    let request = '?fileNo=' + this.requestid + '&frId=' + this.frid + '&callFor=' + this.callFrom;
     this.service.getButtonDetails(this.apiConstant.ViewNocFire, request).subscribe((data: any) => {
       console.log(data, "response from api...");
       if (data.httpStatus === "NOT_FOUND") {
@@ -176,21 +181,26 @@ export class OccupancyComponentViewComponent {
   }
 
   ViewNocFire() {
-    this.senddata.callFrom = "OC";
+    this.callFrom = "OC";
     this.router.navigate(['/viewFire']);
   }
 
   payment(){
-    this.senddata.callFrom = "OC";
-    this.senddata.requestid = this.senddata.requestid,
-    this.senddata.frid = this.senddata.frid;
-    this.senddata.paymentType = "OC"
+    localStorage.setItem('callFrom',"OC");
+    // this.senddata.callFrom = "OC";
+    // this.senddata.requestid = this.senddata.requestid,
+    // localStorage.setItem('requestid', 'requestid');
+    // // this.senddata.frid = this.senddata.frid;
+    // localStorage.setItem('frid', 'frid');
+    
+    // this.senddata.paymentType = "OC"
+    localStorage.setItem('paymentType',"OC");
     this.router.navigate(['/payment']);
   }
 
   openPdf(docUniqueId: string): void {
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId": this.requestid,
       "docUUID": docUniqueId
 
     }
@@ -218,7 +228,7 @@ export class OccupancyComponentViewComponent {
   openCertificatePdf(): void {
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId": this.requestid,
       "docUUID": this.leaseDeedCertificateName
 
     }
@@ -244,7 +254,7 @@ export class OccupancyComponentViewComponent {
   openSaleDeedCertificatePdf(): void {
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId": this.requestid,
       "docUUID": this.SaleDeedCertificatename
     }
 
@@ -269,7 +279,7 @@ export class OccupancyComponentViewComponent {
   opensitePhotographCertificatePdf(): void {
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId": this.requestid,
       "docUUID": this.sitePhotographCertificatename
     }
 
@@ -294,7 +304,7 @@ export class OccupancyComponentViewComponent {
   openmutitionFormCertificatePdf(): void {
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId": this.requestid,
       "docUUID": this.mutitionFormCertificatename
     }
 
@@ -351,7 +361,7 @@ export class OccupancyComponentViewComponent {
 
 
   back() {
-    if (this.senddata.callFrom = "OC") {
+    if (this.callFrom = "OC") {
       this.router.navigate(['/dashboard']);
     } else {
       this.router.navigate(['/departmentDashboard']);
@@ -359,7 +369,7 @@ export class OccupancyComponentViewComponent {
   }
 
   NocFill(){
-    this.senddata.callFrom = "OC"
+    this.callFrom = "OC"
       this.router.navigate(['/nocPage']);
     }
 
@@ -372,7 +382,7 @@ export class OccupancyComponentViewComponent {
   viewHierachyHistory() {
     this.history = true;
     console.log(this.history);
-    this.service.getButtonDetails(this.apiConstant.HIERARCHY_HISTORY, this.senddata.requestid).subscribe((data: any) => {
+    this.service.getButtonDetails(this.apiConstant.HIERARCHY_HISTORY, this.requestid).subscribe((data: any) => {
       console.log(data, "ashish");
 
       this.hierarchyHistoryData = data.filter((item: any) => {
@@ -392,7 +402,7 @@ export class OccupancyComponentViewComponent {
   nocHistoryData : any;
 
   viewNocHistory(){
-    this.service.getButtonDetails(this.apiConstant.NOC_HISTORY, this.senddata.requestid).subscribe((data: any) => {
+    this.service.getButtonDetails(this.apiConstant.NOC_HISTORY, this.requestid).subscribe((data: any) => {
       console.log(data,"ashish");
      
       this.nocHistoryData = data.data.filter((item: any) => {
@@ -413,8 +423,8 @@ export class OccupancyComponentViewComponent {
     console.log(this.paymentHistory);
 
     let request = {
-      "fileNo": this.senddata.requestid,
-      "frId": this.senddata.frid
+      "fileNo": this.requestid,
+      "frId": this.frid
     }
 
     this.service.getHierarchyService(this.apiConstant.Payment_History, request).subscribe((data: any) => {
@@ -489,7 +499,7 @@ export class OccupancyComponentViewComponent {
 
   ViewDS(): void {
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId": this.requestid,
       "docUUID": this.letterUniqueId
     }
     console.log(this.letterUniqueId, "uiqueif");
@@ -516,8 +526,8 @@ export class OccupancyComponentViewComponent {
   fileRelease() {
 
     let request = {
-      "fileNo": this.senddata.requestid,
-      "frId": this.senddata.frid
+      "fileNo": this.requestid,
+      "frId": this.frid
     }
     this.service.getSecondViewDetails(this.apiConstant.File_Release, request).subscribe((data: any) => {
       console.log(data, "okkkkk");

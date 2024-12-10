@@ -29,9 +29,11 @@ export class OccupancyDashboradComponent {
   approve: boolean = false;
   pending: boolean = false;
   total: boolean = false;
-
+  
+  hierarchyUserName:any;
 
   ngOnInit() {
+    this.hierarchyUserName = localStorage.getItem('hierarchyUserName'); 
     this.occupancyDashboradData();
     this.total = false;
     this.pending = true;
@@ -58,7 +60,7 @@ export class OccupancyDashboradComponent {
   }
 
   occupancyDashboradData() {
-    this.service.getDeptDashboard(this.apiConstant.OccupancyDashboardDetails, this.senddata.hierarchyUserName).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.OccupancyDashboardDetails, this.hierarchyUserName).subscribe((res: any) => {
       console.log("**************", res);
       if (res.data == null) {
         return
@@ -92,7 +94,7 @@ export class OccupancyDashboradComponent {
     })
 
     //Approve
-    let request = 'assignedArchitect='+this.senddata.hierarchyUserName;
+    let request = 'assignedArchitect='+this.hierarchyUserName;
     this.service.getDeptDashboard(this.apiConstant.OccupancyApprovedDashboard, request).subscribe((res: any) => {
       console.log("**************", res);
       if (res == null) {
@@ -157,9 +159,12 @@ export class OccupancyDashboradComponent {
 
   viewDetail(fileNo: string, status: string, frId: string) {
     console.log(fileNo);
-    this.senddata.requestid = fileNo;
-    this.senddata.frid = frId;
-    this.senddata.callFrom = "OC";
+    // this.senddata.requestid = fileNo;
+    localStorage.setItem('requestid',fileNo);
+    // this.senddata.frid = frId;
+    localStorage.setItem('frid',frId);
+    // this.senddata.callFrom = "OC";
+    localStorage.setItem('callFrom' , 'OC')
     if (status == "Plinth Released") {
       this.router.navigate(['/OccupancyComponent']);
     } 

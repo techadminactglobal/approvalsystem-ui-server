@@ -58,31 +58,31 @@ export class HomeComponent {
 	}
 
 	ViewData() {
-		this.senddata.requestid = this.senddata.requestid;
-		console.log(this.senddata.requestid, "lllllllll")
+		this.requestid = this.requestid;
+		console.log(this.requestid, "lllllllll")
 		this.router.navigate(["/registrationView"]);
 	}
 
 	payment() {
-		this.senddata.requestid = this.senddata.requestid;
-		this.senddata.paymentType = "regNew";
+		this.requestid = this.requestid;
+		this.payementType = "regNew";
 		this.router.navigate(["/payment"]);
 	}
 
 
 	//For First Form
 	Detail() {
-		this.senddata.requestid = this.senddata.requestid;
+		this.requestid = this.requestid;
 		this.router.navigate(['/NewFormView']);
 	}
 
 	Dashboard() {
-		this.senddata.hierarchyUserName = this.senddata.hierarchyUserName;
+		localStorage.setItem('hierarchyUserName', this.hierarchyUserName);
 		this.router.navigate(['/dashboard']);
 	}
 
 	internalDashboard() {
-		this.senddata.hierarchyUserName = this.senddata.hierarchyUserName;
+		localStorage.setItem('hierarchyUserName',this.hierarchyUserName);
 		this.senddata.debard = false;
 		this.router.navigate(['/departmentDashboard']);
 	}
@@ -116,20 +116,20 @@ export class HomeComponent {
 
 	//Plinth Form
 	viewDetails(){
-		this.senddata.requestid = this.senddata.requestid;
-		this.senddata.frid = this.senddata.frid;
+		this.requestid = this.requestid;
+		this.frid = this.frid;
 		this.router.navigate(['/plintComponentView']);
 	}
   
 	pay(){
-	  this.senddata.paymentType = "plinthNew";
+		this.payementType = "plinthNew";                ////////////////////chck
 	  this.router.navigate(['/payment']);
 	}
 
 	//Occupancy Form
 	viewOcDetails(){
-		this.senddata.requestid = this.senddata.requestid;
-		this.senddata.frid = this.senddata.frid;
+		this.requestid = this.requestid;
+		this.frid = this.frid;
 		this.router.navigate(['/OccupancyComponentView']);
 	}
   
@@ -140,17 +140,28 @@ export class HomeComponent {
 
 
 	DashboardReuplad(){
-		this.senddata.hierarchyUserName=this.senddata.hierarchyUserName;
+		localStorage.setItem('hierarchyUserName',this.hierarchyUserName);
 		this.router.navigate(['/dashboard']);
 	  }
 
 	  OwnerDashboard(){
-		this.senddata.hierarchyUserName = this.senddata.hierarchyUserName;
+		this.hierarchyUserName = this.hierarchyUserName;
 		this.router.navigate(['/OwnerDashboard']);
 	  }
 
+	  frid:any;
+	  requestid:any;
+	  hierarchyUserName:any;
+	  payementType:any;
+
 	ngOnInit(): void {
-		this.senddata.hierarchyUserName = this.senddata.hierarchyUserName;
+
+		this.frid = localStorage.getItem('frid');
+		this.payementType = localStorage.getItem('payementType');
+		this.requestid = localStorage.getItem('requestid');
+		this.hierarchyUserName = localStorage.getItem('hierarchyUserName');
+
+		this.hierarchyUserName = this.hierarchyUserName;
 		if(this.senddata.OCForm == true){
 			this.senddata.plinthForm = false;
 			this.senddata.fireNocForm = false;

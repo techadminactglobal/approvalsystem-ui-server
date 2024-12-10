@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, LOCALE_ID } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -51,21 +51,28 @@ export class PlinthComponentViewComponent {
     private senddata: SendData,
     private router: Router
   ) {
-    if (this.senddata.callFrom == "Dept") {
+    if (this.callFrom == "Dept") {
       this.dept = true;
-    }else if (this.senddata.callFrom == "OC"){
+    }else if (this.callFrom == "OC"){
       this.viewPlinth = false;
     }
   }
 
 
-
+  callFrom:any;
+  requestid:any;
+  frid:any;
+  paymentType:any;
   ngOnInit() {
-    this.reference = this.senddata.requestid;
+    this.callFrom = localStorage.getItem('callFrom');
+    this.requestid = localStorage.getItem('requestid');
+    this.frid = localStorage.getItem('frid');
+    this.paymentType = localStorage.getItem('paymentType');
+    this.reference = this.requestid;
     // setTimeout(() => {
     let request = {
-      "fileNo": this.senddata.requestid,
-      "frId": this.senddata.frid
+      "fileNo": this.requestid,
+      "frId": this.frid
     }
     console.log(request, "request...");
 
@@ -163,7 +170,7 @@ export class PlinthComponentViewComponent {
 
   openPdf(docUniqueId: string): void {
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId": this.requestid,
       "docUUID": docUniqueId
 
     }
@@ -191,7 +198,7 @@ export class PlinthComponentViewComponent {
   openCertificatePdf(): void {
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId": this.requestid,
       "docUUID": this.leaseDeedCertificateName
 
     }
@@ -217,7 +224,7 @@ export class PlinthComponentViewComponent {
   openSaleDeedCertificatePdf(): void {
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId": this.requestid,
       "docUUID": this.SaleDeedCertificatename
     }
 
@@ -242,7 +249,7 @@ export class PlinthComponentViewComponent {
   opensitePhotographCertificatePdf(): void {
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId": this.requestid,
       "docUUID": this.sitePhotographCertificatename
     }
 
@@ -267,7 +274,7 @@ export class PlinthComponentViewComponent {
   openmutitionFormCertificatePdf(): void {
 
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId": this.requestid,
       "docUUID": this.mutitionFormCertificatename
     }
 
@@ -324,7 +331,7 @@ export class PlinthComponentViewComponent {
 
 
   back() {
-    if (this.senddata.callFrom == "Dept") {
+    if (this.callFrom == "Dept") {
       this.dept = true;
       this.router.navigate(['/departmentDashboard']);
     } else {
@@ -333,7 +340,9 @@ export class PlinthComponentViewComponent {
   }
 
   pay() {
-    this.senddata.paymentType = "plinthNew";
+    // this.paymentType = "plinthNew";
+    localStorage.removeItem('paymentType');
+    localStorage.setItem('paymentType',"plinthNew");
     this.router.navigate(['/payment']);
   }
 
@@ -346,7 +355,7 @@ export class PlinthComponentViewComponent {
   viewHierachyHistory() {
     // this.history = true;
     console.log(this.history);
-    this.service.getButtonDetails(this.apiConstant.HIERARCHY_HISTORY, this.senddata.requestid).subscribe((data: any) => {
+    this.service.getButtonDetails(this.apiConstant.HIERARCHY_HISTORY, this.requestid).subscribe((data: any) => {
       console.log(data, "ashish");
 
       this.hierarchyHistoryData = data.filter((item: any) => {
@@ -377,8 +386,8 @@ export class PlinthComponentViewComponent {
     console.log(this.paymentHistory);
 
     let request = {
-      "fileNo": this.senddata.requestid,
-      "frId": this.senddata.frid
+      "fileNo": this.requestid,
+      "frId": this.frid
     }
 
     this.service.getHierarchyService(this.apiConstant.Payment_History, request).subscribe((data: any) => {
@@ -453,7 +462,7 @@ export class PlinthComponentViewComponent {
 
   ViewDS(): void {
     let request: any = {
-      "referenceId": this.senddata.requestid,
+      "referenceId": this.requestid,
       "docUUID": this.letterUniqueId
     }
     console.log(this.letterUniqueId, "uiqueif");
@@ -480,8 +489,8 @@ export class PlinthComponentViewComponent {
   fileRelease() {
 
     let request = {
-      "fileNo": this.senddata.requestid,
-      "frId": this.senddata.frid
+      "fileNo": this.requestid,
+      "frId": this.frid
     }
     this.service.getSecondViewDetails(this.apiConstant.File_Release, request).subscribe((data: any) => {
       console.log(data, "okkkkk");

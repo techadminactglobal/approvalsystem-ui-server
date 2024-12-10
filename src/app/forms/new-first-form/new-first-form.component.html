@@ -33,7 +33,8 @@
             <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Choose state</mat-label>
-                <mat-select placeholder="Choose State" (selectionChange)="onStateChange($event)" formControlName="state">
+                <mat-select placeholder="Choose State" (selectionChange)="onStateChange($event)"
+                  formControlName="state">
                   <mat-option value="">Select state</mat-option>
                   <mat-option value="AN">Andaman and Nicobar Islands</mat-option>
                   <mat-option value="AP">Andhra Pradesh</mat-option>
@@ -85,6 +86,54 @@
                 </mat-select>
               </mat-form-field>
             </div>
+
+            <!-- add ward And colony  -->
+
+
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Choose Zone</mat-label>
+                <mat-select placeholder="Choose Zone" formControlName="zone"
+                  (selectionChange)="onZoneChange($event)">
+                  <mat-option [value]="">-- Select --</mat-option>
+                  <mat-option [value]="zone.zoneName" *ngFor="let zone of zones">
+                    {{ zone.zoneName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+            <!-- Ward Selection -->
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Choose Ward</mat-label>
+                <mat-select placeholder="Choose Ward" formControlName="ward" (selectionChange)="onWardChange($event)">
+                  <mat-option [value]="">-- Select --</mat-option>
+                  <mat-option [value]="ward.wardName" *ngFor="let ward of wards">
+                    {{ ward.wardName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+            <!-- Colony Selection -->
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline">
+                <mat-label>Choose Colony</mat-label>
+                <mat-select placeholder="Choose Colony" formControlName="colony">
+                  <mat-option [value]="">-- Select --</mat-option>
+                  <mat-option [value]="colony.colonyName" *ngFor="let colony of colonies">
+                    {{ colony.colonyName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+
+
             <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Pincode</mat-label>
@@ -101,8 +150,8 @@
         </div>
       </mat-card-content>
     </mat-card>
-    
-    
+
+
     <mat-card class="display-6 mb-5">
       <mat-card-header>
         <mat-card-title class="mb-3">Project overview</mat-card-title>
@@ -125,7 +174,8 @@
                 <mat-label>Project type</mat-label>
                 <mat-select placeholder="Project type" formControlName="bCategory">
                   <mat-option [value]="">-- Select --</mat-option>
-                  <mat-option [value]="bt.buildingTypeId" *ngFor="let bt of buildingType" (click)="findBuildingSubType(bt.buildingTypeId)">{{ bt.buildingTypeName }}
+                  <mat-option [value]="bt.buildingTypeId" *ngFor="let bt of buildingType"
+                    (click)="findBuildingSubType(bt.buildingTypeId)">{{ bt.buildingTypeName }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>

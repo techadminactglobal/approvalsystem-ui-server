@@ -15,6 +15,8 @@ import { MatSelectChange } from '@angular/material/select';
   styleUrls: ['./new-first-form.component.scss']
 })
 export class NewFirstFormComponent {
+ngModel: any;
+ 
 onCancel() {
 throw new Error('Method not implemented.');
 }
@@ -264,18 +266,31 @@ findBuildingSubType(buildingId:string){
   ) {
 
   }
+
+
+  hierarchyUserName:any;
+  frId:any;
   ngOnInit(): void {
 
+    this.getZones();
+    this.getColonies(this.wards);
+    this.getWards(this.zones);
+    this.hierarchyUserName = localStorage.getItem('hierarchyUserName');
+    this.frId = localStorage.getItem('frid');
+
     this.FORM_NAME = this.getFormName();
-    this.buildForm()
-    this.newForm.get(["plotDetails", "pArea"])?.valueChanges.subscribe(() => {
-      console.log("adeww");
+    this.buildForm();
+    this.newForm.get(['plotDetails', 'pArea'])?.valueChanges.subscribe(() => {
+      console.log('adeww');
 
       this.calculateNpArea();
     });
-    this.newForm.get(["plotDetails", "areaAffectedInRoadWidening"])?.valueChanges.subscribe(() => {
-      this.calculateNpArea();
-    });
+    this.newForm
+      .get(['plotDetails', 'areaAffectedInRoadWidening'])
+      ?.valueChanges.subscribe(() => {
+        this.calculateNpArea();
+      });
+
   }
 
   calculateNpArea() {
@@ -333,8 +348,8 @@ findBuildingSubType(buildingId:string){
         bCategory: ['', [Validators.required]],
         natureOfProject: ['', [Validators.required]],
         bSubCategory: ['', [Validators.required]],
-        consultantLoginId: [this.senddata.hierarchyUserName, [Validators.required]],
-        frId: [this.senddata.frid, [Validators.required]],
+        consultantLoginId: [this.hierarchyUserName, [Validators.required]],
+        frId: [this.frId, [Validators.required]],
         recordId: [''],
       }),
       siteLocationDetails: this.fb.group({
@@ -344,7 +359,9 @@ findBuildingSubType(buildingId:string){
         pinCode: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]],
         address: ['', [Validators.required]],
         blockNumber: ['', [Validators.required]],
-
+        zone:['', [Validators.required]],
+        ward:['', [Validators.required]],
+        colony:['', [Validators.required]],
       }),
       // applicantInfo: this.fb.group({
       //   oType: ['', [Validators.required]],
@@ -353,22 +370,62 @@ findBuildingSubType(buildingId:string){
       // applicantDetails: this.fb.array([this.createOwner()], [Validators.required]),
       plotDetails: this.fb.group({
         cPlot: [false, [Validators.required]],
-        pArea: ['', [Validators.required, Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/)]],
-        areaAffectedInRoadWidening: ['', Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/)],
-        npArea: ['', [Validators.required, Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/)]],
+        pArea: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/),
+          ],
+        ],
+        areaAffectedInRoadWidening: [
+          '',
+          Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/),
+        ],
+        npArea: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/),
+          ],
+        ],
         lcSetback: [false],
         lcFar: [false],
         mVentilation: [false],
-        cArea: ['', [Validators.required, Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/)]],
-        cAreaFar: ['', [Validators.required, Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/)]],
-        frontWidth: ['', [Validators.required, Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/)]],
-        bHeight: ['', [Validators.required, Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/)]],
+        cArea: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/),
+          ],
+        ],
+        cAreaFar: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/),
+          ],
+        ],
+        frontWidth: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/),
+          ],
+        ],
+        bHeight: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/),
+          ],
+        ],
       }),
 
-      fileDocDetails: this.fb.array([this.fileTypeForm()], [Validators.required]),
-
+      fileDocDetails: this.fb.array(
+        [this.fileTypeForm()],
+        [Validators.required]
+      ),
     });
-
 
   }
 
@@ -414,43 +471,52 @@ findBuildingSubType(buildingId:string){
   frid: any;
   createdBy: any;
   newFormSubmit() {
-    this.senddata.hierarchyUserName = this.senddata.hierarchyUserName;
+    // this.senddata.hierarchyUserName = this.hierarchyUserName;
     if (this.newForm.invalid) {
       console.log(this.newForm.value);
 
       const nparea = this.newForm.value.plotDetails.npArea;
       if (nparea < 0) {
-        alert("Plot area must be greater then Area affected under road widening");
+        alert(
+          'Plot area must be greater then Area affected under road widening'
+        );
       }
 
-      alert("Please fill all the details properly..");
+      alert('Please fill all the details properly..');
       return;
     }
-    console.log("this.newForm.value", this.newForm.value);
+    console.log('this.newForm.value', this.newForm.value);
 
-    this.service.getFileService(this.apiConstant.form_Data, this.newForm.value).subscribe((data: any) => {
-      console.log(data);
-      this.senddata.frid = data.data.frId;
-      this.senddata.requestid = data.data.fileNo;
-      this.senddata.hierarchyUserName = data.data.createdBy;
-      if (data.httpStatus === "OK") {
-        this.senddata.dialog = true;
-        this.senddata.datasave = true;
-        this.hideSubmit = true;
-        this.fileNo = data.data.fileNo;
-        this.frid = data.data.frId;
-        this.createdBy = data.data.createdBy;
+    this.service
+      .getFileService(this.apiConstant.form_Data, this.newForm.value)
+      .subscribe((data: any) => {
+        console.log(data);
 
-        this.senddata.formOne = true;
-        this.router.navigate(['/home']);
-      } else {
-        this.senddata.dialog = true;
-        this.senddata.datasave = true;
-        this.senddata.hideSubmit = true;
-      }
+        localStorage.removeItem('frid');
+        localStorage.removeItem('requestid');
+        // localStorage.removeItem('hierarchyUserName');
+        localStorage.setItem('frid', data.data.frId);
+        localStorage.setItem('requestid', data.data.fileNo);
+        // localStorage.setItem('hierarchyUserName', this.hierarchyUserName);
+        // this.senddata.frid = data.data.frId;
+        // this.senddata.requestid = data.data.fileNo;
+        // this.senddata.hierarchyUserName = data.data.createdBy;
+        if (data.httpStatus === 'OK') {
+          this.senddata.dialog = true;
+          this.senddata.datasave = true;
+          this.hideSubmit = true;
+          this.fileNo = data.data.fileNo;
+          this.frid = data.data.frId;
+          this.createdBy = data.data.createdBy;
 
-    });
-
+          this.senddata.formOne = true;
+          this.router.navigate(['/home']);
+        } else {
+          this.senddata.dialog = true;
+          this.senddata.datasave = true;
+          this.senddata.hideSubmit = true;
+        }
+      });
   }
 
 
@@ -538,7 +604,7 @@ findBuildingSubType(buildingId:string){
 
   AlldataSubmit() {
     if (this.newForm.invalid) {
-      return
+      return;
     } else {
       // this.spinerLoader = true;
       // this.dialogRef.open(SubmitDialogComponent, {
@@ -549,7 +615,10 @@ findBuildingSubType(buildingId:string){
       // this.apiConstant.submitSaralForm1
       // http://172.18.1.175:9011/obps/save/sanctionform
       this.service
-        .postService(this.apiConstant.NEW_SAVE_FIRST_FORM_API, this.newForm.value)
+        .postService(
+          this.apiConstant.NEW_SAVE_FIRST_FORM_API,
+          this.newForm.value
+        )
         .subscribe(
           (res: any) => {
             // this.spinerLoader = true;
@@ -557,10 +626,11 @@ findBuildingSubType(buildingId:string){
             //   disableClose: true, // This option prevents closing the dialog by clicking outside
             // });
             console.log('successfull--res', res.data);
-            this.requestID = res.data.obp_building_plan_req.buildingPlanReqDetailId;
+            this.requestID =
+              res.data.obp_building_plan_req.buildingPlanReqDetailId;
             console.log('requestID', this.requestID);
             if (this.requestID > 0) {
-              console.log("request id: " + this.requestID)
+              console.log('request id: ' + this.requestID);
               this.dialogRef.closeAll();
               // this.dialogRef.open(SubmitDialogComponent, {
               //   disableClose: true, // This option prevents closing the dialog by clicking outside
@@ -599,4 +669,153 @@ findBuildingSubType(buildingId:string){
   back(){
     this.router.navigate(['/dashboard']);
   }
+ 
+
+
+  // zones: any;
+  // selectedZone: string = ''; 
+  // getZones(): void {
+  //   this.service.getButtonDetails(this.apiConstant.zoneDetails, "").subscribe(
+  //     (response: any) => {
+  //       // Log the response to ensure we're getting the correct data
+  //       console.log('API Response:', response);
+
+  //       // Check the response structure and extract zones
+  //       if (response.httpStatus === 'OK' && Array.isArray(response.data)) {
+  //         this.zones = response.data;
+  //         console.log('Zones data:', this.zones); // Log zones to check
+  //       } else {
+  //         console.error('Invalid data structure or response');
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching zones:', error);
+  //     }
+  //   );
+  // }
+
+  // onZoneChange(event: any): void {
+  //   const selectedZone = event.value;
+  //   console.log('Selected Zone:', selectedZone);
+  // }
+
+ zones: any = [];
+wards: any = [];
+colonies: any = [];
+selectedZone: string = ''; 
+selectedWard: string = ''; 
+selectedColony: string = ''; 
+// Fetch Zones from API
+getZones(): void {
+  this.service.getButtonDetails(this.apiConstant.zoneDetails, "").subscribe(
+    (response: any) => {
+      // Log the response to ensure we're getting the correct data
+      console.log('API Response for Zones:', response);
+
+      // Check the response structure and extract zones
+      if (response.httpStatus === 'OK' && Array.isArray(response.data)) {
+        this.zones = response.data;
+        console.log('Zones data:', this.zones); // Log zones to check
+      } else {
+        console.error('Invalid data structure or response for Zones');
+      }
+    },
+    (error) => {
+      console.error('Error fetching zones:', error);
+    }
+  );
 }
+
+// Fetch Wards based on the selected Zone
+getWards(zoneId: string): void {
+  this.service.getButtonDetails(this.apiConstant.wardDetails, zoneId).subscribe(
+    (response: any) => {
+      console.log('API Response for Wards:', response);
+
+      if (response.httpStatus === 'OK') {
+        this.wards = response.data;
+        console.log('Wards data:', this.wards);
+      } else {
+        console.error('Invalid data structure or response for Wards');
+      }
+    },
+    (error) => {
+      console.error('Error fetching wards:', error);
+    }
+  );
+}
+
+// Fetch Colonies based on the selected Ward
+getColonies(wardId: string): void {
+  this.service.getButtonDetails(this.apiConstant.colonyDetails, wardId).subscribe(
+    (response: any) => {
+      console.log('API Response for Colonies:', response);
+
+      if (response.httpStatus === 'OK' && Array.isArray(response.data)) {
+        this.colonies = response.data;
+        console.log('Colonies data:', this.colonies);
+      } else {
+        console.error('Invalid data structure or response for Colonies');
+      }
+    },
+    (error) => {
+      console.error('Error fetching colonies:', error);
+    }
+  );
+}
+
+// onZoneChange(event: any): void {
+
+// onZoneChange(event: any): void {
+//   const selectedZoneId = event.value;
+//   console.log('Selected Zone ID:', selectedZoneId);
+//   const selectedZone = this.zones.find((zone: { zoneGenerateId: any; }) => zone.zoneGenerateId === selectedZoneId);
+  
+//   if (selectedZone) {
+//     this.selectedZone = selectedZone.zoneName;
+//     console.log('Selected Zone Name:', this.selectedZone);
+//     this.newForm.get('siteLocationDetails')?.get('zone')?.setValue(selectedZone.zoneName);
+//     this.getWards(selectedZoneId);
+//   }
+// }
+
+
+onZoneChange(event: any): void {
+  const selectedZoneId = event.value;
+  console.log('Selected Zone ID:', selectedZoneId);
+  const selectedZone = this.zones.find((zone: { zoneName: any; }) => zone.zoneName === selectedZoneId);
+  
+  if (selectedZone) {
+    this.selectedZone = selectedZone.zoneGenerateId;
+    console.log('Selected Zone Name:', selectedZone);
+    this.newForm.get('siteLocationDetails')?.get('zone')?.setValue(selectedZone.zoneName);
+  }
+  if(this.selectedZone){
+    this.getWards(this.selectedZone);
+  }
+  console.log("Form Value After Ward Change:", this.newForm.value);
+
+}
+
+onWardChange(event: any): void {
+  const selectedWardId = event.value;
+  console.log("Selected Ward ID:", selectedWardId);
+  
+  // Check the selectedWard object
+  const selectedWard = this.wards.find((ward: { wardName: any }) => ward.wardName === selectedWardId);
+  if (selectedWard) {
+    this.selectedWard=selectedWard.wardId;
+    console.log("Selected Ward: ", selectedWard);
+    this.newForm.get('siteLocationDetails')?.get('ward')?.setValue(selectedWard.wardName);
+  }
+
+  if (this.selectedWard) {
+    this.getColonies(this.selectedWard);
+  }
+  
+  console.log("Form Value After Ward Change:", this.newForm.value);
+}
+
+
+}
+

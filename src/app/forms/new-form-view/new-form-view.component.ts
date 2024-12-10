@@ -66,11 +66,22 @@ export class NewFormViewComponent {
 
 status:any;
   backButton: boolean = false;
+  requestId:any;
+  frids:any;
+  heirarchyuserName:any;
+  
+  zone:any;
+  ward:any;
+  colony:any;
+  planType:any;
   ngOnInit(): void {
+    this.requestId = localStorage.getItem('requestid');
+    this.frids = localStorage.getItem('frid');
+    this.heirarchyuserName = localStorage.getItem('hierarchyUserName');
     this.fileprcessedDetail();
     this.buildForm();
 
-    this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.senddata.requestid).subscribe((data: any) => {
+    this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.requestId).subscribe((data: any) => {
       console.log(data);
 
       this.createdBy = data.basicInfo.fileCreatedBy;
@@ -92,6 +103,10 @@ status:any;
       this.state = data.siteLocationDetails.state;
       this.pinCode = data.siteLocationDetails.pinCode;
       this.landMark = data.siteLocationDetails.landMark;
+      
+      this.zone = data.siteLocationDetails.zone;
+      this.ward = data.siteLocationDetails.ward;
+      this.colony = data.siteLocationDetails.colony;
 
 
       this.currentStatus = data.basicInfo.status;
@@ -120,6 +135,8 @@ status:any;
       // this.natureOfProject = data.basicInfo.natureOfProject;
       // this.bCategory = data.basicInfo.bCategory;
       this.bSubCategory = data.basicInfo.buildingSubType;
+      
+      this.planType = data.basicInfo.planType;
 
 
       //   if (data.applicantDetails && data.applicantDetails.length > 0) {
@@ -187,8 +204,8 @@ status:any;
   }
 
   next() {
-    this.senddata.requestid = this.fileNo;
-    this.senddata.frid = this.frId;
+    this.requestId = this.fileNo;
+    this.frids = this.frId;
     this.router.navigate(['/SupportFileDocument']);
   }
 
@@ -305,8 +322,8 @@ status:any;
     else {
 
       const request = {
-        "fileNo": this.senddata.requestid,
-        "frId": this.senddata.frid,
+        "fileNo": this.requestId,
+        "frId": this.frids,
         "frName": this.supportForm.value.DrawingFileCertificateName[0].docName,
         "frUniqueNo": this.supportForm.value.DrawingFileCertificateName[0].docUniqueId,
         "frType": this.supportForm.value.DrawingFileCertificateName[0].docType
@@ -320,7 +337,7 @@ status:any;
           this.datasave = true;
           this.hideSubmit = true;
 
-          this.senddata.hierarchyUserName = this.createdBy;
+          this.heirarchyuserName = this.createdBy;
           this.senddata.dwgReupload = true;
           this.router.navigate(['/home']);
 
@@ -340,7 +357,7 @@ status:any;
   ProcessedFileDetails:any;
   FileDetails:any;
   fileprcessedDetail() {
-    this.service.getDeptDashboard(this.apiConstant.FileProcessedDetails, this.senddata.frid).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.FileProcessedDetails, this.frids).subscribe((res: any) => {
       console.log("data =================> ", res);
 
       if (res.httpStatus === "OK") {
@@ -412,6 +429,10 @@ status:any;
   }
   
 }
+
+
+
+
 
 
 

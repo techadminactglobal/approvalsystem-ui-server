@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { SendData } from 'src/app/SendData';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
@@ -66,51 +65,86 @@ export class PaymentFormComponent implements OnInit {
     private fb: FormBuilder, public senddata: SendData) {
 
   }
-
+   paymentType:any;
+   requestId:any;
+   frids:any;
+   amountType:any;
   ngOnInit(): void {
+    this.paymentType = localStorage.getItem('paymentType');
+    this.requestId = localStorage.getItem('requestid');
+    this.frids = localStorage.getItem('frid');
+    this.amountType = localStorage.getItem('amount');
     this.createForm();
 
-    this.service.getButtonDetails(this.apiConstant.Payment_Mode, this.senddata.paymentType).subscribe((data: any) => {
+    this.service.getButtonDetails(this.apiConstant.Payment_Mode, this.paymentType).subscribe((data: any) => {
       this.PaymentOption = data.data;
       console.log(this.PaymentOption, 'Payment Option');
 
     });
 
-    if(this.senddata.paymentType=="RenewalConsultant"){
-      let request: any = { "name": this.senddata.requestid }
+    if(this.paymentType=="RenewalConsultant"){
+
+      let request: any = { "name": this.requestId }
+
       this.service.getDataService(this.apiConstant.GET_DETAILS, request).subscribe((data: any) => {
 
+
+
         this.currentStatus = data.consultantDetailModel.statusId;
+
         let requestJson = {
-          "userName": this.senddata.requestid,
+
+          "userName": this.requestId,
+
           "referenceId": "RenewalConsultant"
+
         }
 
+
+
         this.service.getDataService(this.apiConstant.view_Amount, requestJson).subscribe((data: any) => {
+
           console.log(data);
+
           let tempArr: any[] = data.data.PaymentDetailsList;
+
           tempArr.forEach((element) => {
+
             if (element.amountType === "Renewal consultant Fee") {
+
               this.amount = data.data.paymentCharges.charge1;
+
               this.charge1 = data.data.paymentCharges.charge1;
+
               this.comment = element.amountType;
+
               this.viewCharge1 = true;
+
               this.viewCharge2345 = false
+
               this.PaymentForm.patchValue({ comment: this.comment, amount: this.amount });
+
             } 
+
           });
 
+
+
         });
+
       });
+
     
 
-    }else if (this.senddata.paymentType == "regNew") {
-      let request: any = { "name": this.senddata.requestid }
+
+
+    }else if (this.paymentType == "regNew") {
+      let request: any = { "name": this.requestId }
       this.service.getDataService(this.apiConstant.GET_DETAILS, request).subscribe((data: any) => {
 
         this.currentStatus = data.consultantDetailModel.statusId;
         let requestJson = {
-          "userName": this.senddata.requestid,
+          "userName": this.requestId,
           "referenceId": "regNew"
         }
 
@@ -141,15 +175,15 @@ export class PaymentFormComponent implements OnInit {
 
         });
       });
-    } else if (this.senddata.paymentType == "fileNew") {
+    } else if (this.paymentType == "fileNew") {
 
-      this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.senddata.requestid).subscribe((data: any) => {
+      this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.requestId).subscribe((data: any) => {
         console.log(data);
         this.currentStatus = data.basicInfo.status;
 
         let requestJson = {
-          "frId": this.senddata.frid,
-          "fileNo": this.senddata.requestid,
+          "frId": this.frids,
+          "fileNo": this.requestId,
           "referenceId": "fileNew"
         }
         this.service.getDataService(this.apiConstant.view_Amount, requestJson).subscribe((data: any) => {
@@ -163,7 +197,7 @@ export class PaymentFormComponent implements OnInit {
               this.comment = element.amountType;
               this.viewCharge1 = true;
               this.viewCharge2345 = false
-              this.PaymentForm.patchValue({ comment: this.comment, amount: this.amount });
+              this.PaymentForm.patchValue({ comment: this.comment, amount: this.amount});
             } else if (element.amountType === "File Processing Fee" && this.currentStatus == COMMONCONSTANTS.Status_PendingPayment) {
               this.amount = data.data.paymentCharges.charge2 + data.data.paymentCharges.charge3 + data.data.paymentCharges.charge4 + data.data.paymentCharges.charge5;
               this.charge1 = data.data.paymentCharges.charge1;
@@ -182,10 +216,10 @@ export class PaymentFormComponent implements OnInit {
 
 
       });
-    }else if (this.senddata.paymentType == "plinthNew"){
+    }else if (this.paymentType == "plinthNew"){
       let requestJson = {
-        "frId": this.senddata.frid,
-        "fileNo": this.senddata.requestid,
+        "frId": this.frids,
+        "fileNo": this.requestId,
         "referenceId": "plinthNew"
       }
       this.service.getDataService(this.apiConstant.view_Amount, requestJson).subscribe((data: any) => {
@@ -202,15 +236,15 @@ export class PaymentFormComponent implements OnInit {
     
     
     
-    else if (this.senddata.paymentType == "OC"){
+    else if (this.paymentType == "OC"){
 
-      this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.senddata.requestid).subscribe((data: any) => {
+      this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.requestId).subscribe((data: any) => {
         console.log(data);
         this.currentStatus = data.basicInfo.status;
 
       let requestJson = {
-        "frId": this.senddata.frid,
-        "fileNo": this.senddata.requestid,
+        "frId": this.frids,
+        "fileNo": this.requestId,
         "referenceId": "OCNew"
       }
       this.service.getDataService(this.apiConstant.view_Amount, requestJson).subscribe((data: any) => {
@@ -271,36 +305,42 @@ export class PaymentFormComponent implements OnInit {
       return;
     } else {
       let request = {};
- 
-     if(this.senddata.paymentType=="RenewalConsultant"){
+      if(this.paymentType=="RenewalConsultant"){
+
         request = {
-          "userName": this.senddata.requestid,
+
+          "userName": this.requestId,
+
           "amount": this.amount,
+
           "comment":this.comment
+
+        }
+
+      }
+
+      if (this.paymentType == "regNew") {
+        request = {
+          "userName": this.requestId,
+          "amount": this.amount
+        }
+      } else if (this.paymentType == "fileNew") {
+        request = {
+          "fileNo": this.requestId,
+          "frId": this.frids,
+          "amount": this.amount
+        }
+      }else if (this.paymentType == "plinthNew") {
+        request = {
+          "fileNo": this.requestId,
+          "frId": this.frids,
+          "amount": this.amount
         }
       }
-      if (this.senddata.paymentType == "regNew") {
+      else if (this.paymentType == "OC") {
         request = {
-          "userName": this.senddata.requestid,
-          "amount": this.amount
-        }
-      } else if (this.senddata.paymentType == "fileNew") {
-        request = {
-          "fileNo": this.senddata.requestid,
-          "frId": this.senddata.frid,
-          "amount": this.amount
-        }
-      }else if (this.senddata.paymentType == "plinthNew") {
-        request = {
-          "fileNo": this.senddata.requestid,
-          "frId": this.senddata.frid,
-          "amount": this.amount
-        }
-      }
-      else if (this.senddata.paymentType == "OC") {
-        request = {
-          "fileNo": this.senddata.requestid,
-          "frId": this.senddata.frid,
+          "fileNo": this.requestId,
+          "frId": this.frids,
           "amount": this.amount
         }
       }
@@ -311,11 +351,21 @@ export class PaymentFormComponent implements OnInit {
         console.log(data);
         if (data != null) {
 
-          this.senddata.requestid = this.senddata.requestid;
-          this.senddata.frid = this.senddata.frid;
-          this.senddata.amount = this.amount;
-          this.senddata.paymentId = data.paymentId;
-          this.senddata.comment = this.comment;
+          this.requestId = this.requestId;
+          this.frids = this.frids;
+          // this.senddata.amount = this.amount;
+          // localStorage.removeItem('amount');
+          // localStorage.removeItem('paymentId');
+          // localStorage.removeItem('comment');
+          localStorage.setItem('amount', this.amount);
+          // this.senddata.paymentId = data.paymentId;
+          localStorage.setItem('paymentType',this.paymentType)
+         
+          localStorage.setItem('paymentId', data.paymentId);
+          // this.senddata.comment = this.comment;
+        
+          localStorage.setItem('comment',this.comment);
+
 
           this.router.navigate(['paymentReceipt'])
 
