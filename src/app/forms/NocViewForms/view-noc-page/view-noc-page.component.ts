@@ -27,10 +27,14 @@ export class ViewNocPageComponent {
   letterName:any;
   requestId:any;
   frids:any;
+  ownerCall:any;
 
   ngOnInit(): void {
     this.requestId = localStorage.getItem('requestid');
     this.frids = localStorage.getItem('frid');
+    this.ownerCall = localStorage.getItem("ownerCall");
+    this.ownerCall= this.ownerCall==null?'false':this.ownerCall;
+
 
     this.userName = this.requestId;
     this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.requestId).subscribe((data: any) => {
@@ -295,6 +299,10 @@ back(){
 
 BacktoNocdeptdasbhoard(){
   this.router.navigate(['/nocPage']);
+}
+
+BacktoOwnerDasbhoard(){
+  this.router.navigate(['/OwnerDashboard']);
 }
 
 }

@@ -38,7 +38,8 @@ mat-form-field {
   background-color: transparent; /* Transparent background (optional) */
   padding: 10px;                  /* Padding for better appearance */
   border: 1px solid #ccc;         /* Optional border style */
-  box-sizing: border-box;         /* Ensure padding is inside the input box */
+  box-sizing: border-box;    
+  position: fixed;     /* Ensure padding is inside the input box */
 }
 
 /* Optional: Style for better font size and readability */

@@ -49,8 +49,15 @@ export class SupportFileViewComponent {
   documents: any[] = [];
   nextDisable: boolean = false;
 requestId:any;
+ownerCall:any;
   ngOnInit(): void {
     this.requestId = localStorage.getItem('requestid');
+    this.ownerCall = localStorage.getItem("ownerCall");
+    this.ownerCall= this.ownerCall==null?'false':this.ownerCall;
+    console.log(this.ownerCall+ " asuujj");
+    
+
+    
 
     this.service.getButtonDetails(this.apiConstant.supportFile_View,  this.requestId).subscribe((data: any) => {
       console.log(data, "ppp");

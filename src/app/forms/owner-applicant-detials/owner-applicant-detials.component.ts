@@ -26,10 +26,24 @@ export class OwnerApplicantDetialsComponent {
   apiConstant = API_PATH;
   frId:any;
 architectview:any;
+ownerCall:any;
+disalePullBack:any;
+status:any;
   ngOnInit(): void {
    this.architectview =  localStorage.getItem('architectView');
     this.frId = localStorage.getItem('frid');
     this.viewDetais();
+
+    this.ownerCall = localStorage.getItem("ownerCall");
+    // this.disalePullBack = localStorage.getItem("disablePullBack");
+    // this.status = localStorage.getItem("status");
+   
+
+    // this.disalePullBack = this.status=='File In Process'?this.disalePullBack='true':'false';
+    // console.log(this.status + ' erweryg');
+    // console.log(this.disalePullBack + ' erweryg');
+    
+    
   }
 
   initailOwnerDetails: any;

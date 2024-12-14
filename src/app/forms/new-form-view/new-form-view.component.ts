@@ -46,6 +46,10 @@ export class NewFormViewComponent {
   currentStatus: any;
   apiConstant = API_PATH;
   supportForm!: FormGroup;
+  zone:any;
+  ward:any;
+  colony:any;
+  planType:any;
 
 
 
@@ -69,11 +73,7 @@ status:any;
   requestId:any;
   frids:any;
   heirarchyuserName:any;
-  
-  zone:any;
-  ward:any;
-  colony:any;
-  planType:any;
+ 
   ngOnInit(): void {
     this.requestId = localStorage.getItem('requestid');
     this.frids = localStorage.getItem('frid');
@@ -103,10 +103,10 @@ status:any;
       this.state = data.siteLocationDetails.state;
       this.pinCode = data.siteLocationDetails.pinCode;
       this.landMark = data.siteLocationDetails.landMark;
-      
       this.zone = data.siteLocationDetails.zone;
       this.ward = data.siteLocationDetails.ward;
       this.colony = data.siteLocationDetails.colony;
+     
 
 
       this.currentStatus = data.basicInfo.status;
@@ -135,7 +135,6 @@ status:any;
       // this.natureOfProject = data.basicInfo.natureOfProject;
       // this.bCategory = data.basicInfo.bCategory;
       this.bSubCategory = data.basicInfo.buildingSubType;
-      
       this.planType = data.basicInfo.planType;
 
 
@@ -429,10 +428,6 @@ status:any;
   }
   
 }
-
-
-
-
 
 
 

@@ -1,4 +1,5 @@
 <div class="main-container">
+
   <div class="splitMain leftMain">
     <div class="centeredMain">
       <app-side-bar></app-side-bar>
@@ -9,7 +10,6 @@
       <div class="m-5" *ngIf="viewPart == 'regNew'">
         <app-registration-view></app-registration-view>
       </div>
-
       <div class="m-5" *ngIf="viewPart == 'fileNew'">
         <app-view-noc-page></app-view-noc-page>
       </div>
@@ -20,103 +20,92 @@
         <app-occupancy-component-view></app-occupancy-component-view>
       </div>
 
+
+      
+
+      <div *ngIf="rework">
+        <div class="row">
+          <form [formGroup]="form">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <mat-label class="title">Select that file need to Modified</mat-label>
+            <mat-form-field>
+              <mat-label>Choose that file need to Modified</mat-label>
+              <mat-select placeholder="Choose file Name" formControlName="zoneDetails" multiple>
+                <!-- 'All' Option, toggle select/deselect -->
+                <mat-option (click)="selectAllZones()" [disabled]="isAllSelectedZones() && selectedZones.length > 0">
+                  {{ isAllSelectedZones() ? 'Deselect All' : 'Select All' }}
+                </mat-option>
+        
+                <!-- Dynamic zone options -->
+                <mat-option *ngFor="let file of fileName" [value]="file">
+                  {{ file }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div> 
+          </form>  
+        </div>
+        
+
+
+      </div>
+
+
+
+
+
+
       <div *ngIf="viewWork">
         <form [formGroup]="deptForm">
           <div class="update">
             <mat-label class="title">Updates regarding request</mat-label>
             <div class="remarktext">
-              <textarea
-                name=""
-                id=""
-                cols="50"
-                rows="10"
-                placeholder="Remarks"
-                formControlName="hierachyRemark"
-              ></textarea>
+              <textarea name="" id="" cols="50" rows="10" placeholder="Remarks"
+                formControlName="hierachyRemark"></textarea>
             </div>
           </div>
 
           <div class="col-md-6 col-sm-12 col-xs-12 optional" *ngIf="!proff">
             <div class="align">
               <mat-label class="title mt-2">Reference document</mat-label>
+             
               <mat-form-field appearance="fill" class="input-control">
-                <button
-                  mat-icon-button
-                  matPrefix
-                  type="button"
-                  (click)="f_input.click()"
-                >
+                <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
                   <mat-icon>attach_file</mat-icon>
                 </button>
-                <input
-                  type="text"
-                  readonly
-                  matInput
-                  placeholder="{{ referenceDocuments }}"
-                />
-                <input
-                  readonly
-                  type="file"
-                  hidden
-                  #f_input
-                  (change)="uploadDoc($event, 'referenceDocuments')"
-                  formControlName="referenceDocuments"
-                />
-                <button
-                  mat-icon-button
-                  matSuffix
-                  type="button"
-                  *ngIf="refrencePreview"
-                  (click)="togglerefrencePreview()"
-                >
+                <input type="text" readonly matInput placeholder="{{ referenceDocuments }}" />
+                <input readonly type="file" hidden #f_input (change)="uploadDoc($event, 'referenceDocuments')"
+                  formControlName="referenceDocuments" />
+                <button mat-icon-button matSuffix type="button" *ngIf="refrencePreview"
+                  (click)="togglerefrencePreview()">
                   <mat-icon>visibility</mat-icon>
                 </button>
-                <button
-                  mat-icon-button
-                  class="delete-btn"
-                  (click)="deleterefrenceCertificate()"
-                >
+                <button mat-icon-button class="delete-btn" (click)="deleterefrenceCertificate()">
                   <mat-icon>delete</mat-icon>
                 </button>
               </mat-form-field>
             </div>
-            <mat-hint
-              ><strong
-                >File type must in a .pdf or jpeg format and file size should
+            <mat-hint><strong>File type must in a .pdf or jpeg format and file size should
                 NOT be more than 10MB.
-              </strong></mat-hint
-            ><br />
-            <mat-hint style="color: rgb(255, 0, 0)"
-              >*Add all the releated file in one pdf, then upload here.
+              </strong></mat-hint><br />
+            <mat-hint style="color: rgb(255, 0, 0)">*Add all the releated file in one pdf, then upload here.
             </mat-hint>
           </div>
           <!-- Modal for Viewing the Educational Certificate in Larger Format -->
           <div *ngIf="isrefrencePreviewModalOpen" class="preview-modal-overlay">
             <div class="preview-modal-content">
               <!-- Preview PDF or Image (Based on the File Type) -->
-              <iframe
-                *ngIf="refrenceFileType === 'pdf'"
-                [src]="refrencePreview"
-                frameborder="0"
-                class="modal-image"
-              ></iframe>
-              <img
-                *ngIf="refrenceFileType !== 'pdf'"
-                [src]="refrencePreview"
-                alt="Educational Certificate"
-                class="modal-image"
-              />
+              <iframe *ngIf="refrenceFileType === 'pdf'" [src]="refrencePreview" frameborder="0"
+                class="modal-image"></iframe>
+              <img *ngIf="refrenceFileType !== 'pdf'" [src]="refrencePreview" alt="Educational Certificate"
+                class="modal-image" />
 
               <!-- Buttons to delete and close -->
               <div class="modal-btn-container">
                 <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificatesitemutationotherid()">
                                     <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
                                 </button> -->
-                <button
-                  mat-icon-button
-                  class="close-btn"
-                  (click)="closerefrencePreviewModal()"
-                >
+                <button mat-icon-button class="close-btn" (click)="closerefrencePreviewModal()">
                   <mat-icon>close</mat-icon>
                 </button>
               </div>
@@ -124,36 +113,15 @@
           </div>
 
           <div class="m-5 d-flex justify-content-between">
-            <button
-              mat-raised-button
-              color="primary"
-              type="submit"
-              class="log"
-              (click)="AcceptData()"
-              *ngIf="accept"
-            >
+            <button mat-raised-button color="primary" type="submit" class="log" (click)="AcceptData()" *ngIf="accept">
               Approval
             </button>
-            <button
-              mat-raised-button
-              color="primary"
-              type="submit"
-              class="log"
-              *ngIf="recheck"
-            >
+            <button mat-raised-button color="primary" type="submit" class="log" *ngIf="recheck">
               <mat-label>Refer Back To </mat-label>
               <mat-select>
-                <mat-option
-                  *ngFor="let category of referBackArr"
-                  [value]="category.value"
-                >
-                  <button
-                    mat-raised-button
-                    color="primary"
-                    type="submit"
-                    class="log"
-                    (click)="RecheckData(category.value)"
-                  >
+                <mat-option *ngFor="let category of referBackArr" [value]="category.value">
+                  <button mat-raised-button color="primary" type="submit" class="log"
+                    (click)="RecheckData(category.value)">
                     {{ category.viewValue }}
                   </button>
                 </mat-option>
@@ -167,16 +135,9 @@
               (click)="ReviseData()"
               *ngIf="revise"
             >
-              Revise
+              Rework
             </button>
-            <button
-              mat-raised-button
-              color="primary"
-              type="submit"
-              class="log"
-              (click)="RejectData()"
-              *ngIf="reject"
-            >
+            <button mat-raised-button color="primary" type="submit" class="log" (click)="RejectData()" *ngIf="reject">
               Rejection
             </button>
           </div>
@@ -199,14 +160,9 @@
                   <!-- <mat-label class="title">Builder Phone Number</mat-label> -->
                   <mat-form-field appearance="fill" class="input-control">
                     <div class="placeholder-wrapper">
-                      <span class="letterName-value"
-                        >&nbsp;{{ letterName }}</span
-                      >
-                      <i
-                        class="fa fa-download text-primary"
-                        (click)="openCertificatePdf($event)"
-                        matTooltip="Download certificate PDF"
-                      ></i>
+                      <span class="letterName-value">&nbsp;{{ letterName }}</span>
+                      <i class="fa fa-download text-primary" (click)="openCertificatePdf($event)"
+                        matTooltip="Download certificate PDF"></i>
                     </div>
                     <input matInput name="builderPhone" readonly />
                   </mat-form-field>
@@ -214,82 +170,38 @@
 
                 <div class="col-md-4 col-sm-12 col-xs-12">
                   <mat-form-field appearance="fill" class="input-control">
-                    <button
-                      mat-icon-button
-                      matPrefix
-                      type="button"
-                      (click)="f_input.click()"
-                    >
+                    <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
                       <mat-icon>attach_file</mat-icon>
                     </button>
-                    <input
-                      type="text"
-                      readonly
-                      matInput
-                      placeholder="{{ pdfFileName }}"
-                    />
+                    <input type="text" readonly matInput placeholder="{{ pdfFileName }}" />
                     <!-- <input readonly type="file" hidden #f_input (change)="uploadPDF()" formControlName="pdfFile" accept=".pdf" /> -->
-                    <input
-                      readonly
-                      type="file"
-                      hidden
-                      #f_input
-                      (change)="uploadPDF($event, 'pdfFile')"
-                      formControlName="pdfFile"
-                    />
-                    <button
-                      mat-icon-button
-                      matSuffix
-                      type="button"
-                      *ngIf="approverefrencePreview"
-                      (click)="togglerefrenceapprovePreview()"
-                    >
+                    <input readonly type="file" hidden #f_input (change)="uploadPDF($event, 'pdfFile')"
+                      formControlName="pdfFile" />
+                    <button mat-icon-button matSuffix type="button" *ngIf="approverefrencePreview"
+                      (click)="togglerefrenceapprovePreview()">
                       <mat-icon>visibility</mat-icon>
                     </button>
-                    <button
-                      mat-icon-button
-                      class="delete-btn"
-                      (click)="deleterefrenceapproveCertificate()"
-                    >
+                    <button mat-icon-button class="delete-btn" (click)="deleterefrenceapproveCertificate()">
                       <mat-icon>delete</mat-icon>
                     </button>
-                    <mat-hint
-                      ><strong
-                        >File type must be .pdf and file size should NOT be more
-                        than 10 MB.</strong
-                      ></mat-hint
-                    >
+                    <mat-hint><strong>File type must be .pdf and file size should NOT be more
+                        than 10 MB.</strong></mat-hint>
                   </mat-form-field>
                 </div>
-                <div
-                  *ngIf="isapproveisrefrencePreviewModalOpen"
-                  class="preview-modal-overlay"
-                >
+                <div *ngIf="isapproveisrefrencePreviewModalOpen" class="preview-modal-overlay">
                   <div class="preview-modal-content">
                     <!-- Preview PDF or Image (Based on the File Type) -->
-                    <iframe
-                      *ngIf="approverefrenceFileType === 'pdf'"
-                      [src]="approverefrencePreview"
-                      frameborder="0"
-                      class="modal-image"
-                    ></iframe>
-                    <img
-                      *ngIf="approverefrenceFileType !== 'pdf'"
-                      [src]="approverefrencePreview"
-                      alt="Educational Certificate"
-                      class="modal-image"
-                    />
+                    <iframe *ngIf="approverefrenceFileType === 'pdf'" [src]="approverefrencePreview" frameborder="0"
+                      class="modal-image"></iframe>
+                    <img *ngIf="approverefrenceFileType !== 'pdf'" [src]="approverefrencePreview"
+                      alt="Educational Certificate" class="modal-image" />
 
                     <!-- Buttons to delete and close -->
                     <div class="modal-btn-container">
                       <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificatesitemutationotherid()">
                           <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
                       </button> -->
-                      <button
-                        mat-icon-button
-                        class="close-btn"
-                        (click)="closerefrenceapprovePreviewModal()"
-                      >
+                      <button mat-icon-button class="close-btn" (click)="closerefrenceapprovePreviewModal()">
                         <mat-icon>close</mat-icon>
                       </button>
                     </div>
@@ -309,17 +221,9 @@
                     </div> -->
               </div>
 
-              <div
-                class="d-flex justify-content-center me-2 mt-5 mb-5 text-center"
-              >
+              <div class="d-flex justify-content-center me-2 mt-5 mb-5 text-center">
                 <div class="col-md-12 mt-1">
-                  <button
-                    mat-raised-button
-                    color="primary"
-                    type="submit"
-                    class="log"
-                    (click)="submit()"
-                  >
+                  <button mat-raised-button color="primary" type="submit" class="log" (click)="submit()">
                     Submit
                   </button>
                 </div>

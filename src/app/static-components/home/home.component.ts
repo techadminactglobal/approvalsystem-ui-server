@@ -65,7 +65,9 @@ export class HomeComponent {
 
 	payment() {
 		this.requestid = this.requestid;
-		this.payementType = "regNew";
+		// this.payementType = "regNew";
+		localStorage.setItem('paymentType',"regNew");
+
 		this.router.navigate(["/payment"]);
 	}
 
@@ -122,7 +124,8 @@ export class HomeComponent {
 	}
   
 	pay(){
-		this.payementType = "plinthNew";                ////////////////////chck
+		// this.payementType = "plinthNew";                ////////////////////chck
+		localStorage.setItem('paymentType',"plinthNew");
 	  this.router.navigate(['/payment']);
 	}
 
@@ -153,6 +156,7 @@ export class HomeComponent {
 	  requestid:any;
 	  hierarchyUserName:any;
 	  payementType:any;
+	  name:any;
 
 	ngOnInit(): void {
 
@@ -160,6 +164,7 @@ export class HomeComponent {
 		this.payementType = localStorage.getItem('payementType');
 		this.requestid = localStorage.getItem('requestid');
 		this.hierarchyUserName = localStorage.getItem('hierarchyUserName');
+		this.name = localStorage.getItem('name');
 
 		this.hierarchyUserName = this.hierarchyUserName;
 		if(this.senddata.OCForm == true){
@@ -203,6 +208,7 @@ export class HomeComponent {
 			this.senddata.formOne = false;
 		}else if (this.senddata.ownerApplicant == true){
 			this.senddata.ownerSave = false;
+			this.senddata.regForm = false;
 		}
 	}
 

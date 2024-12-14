@@ -13,9 +13,20 @@
     <div class="marquee">
       <div class="track">
         <div class="content" *ngIf="status === 'Form Submitted GIS Pending'">
-          ...The file request has been successfully submitted and is now awaiting GIS processing. Please open the GIS app on your mobile and capture the precise Longitude and Latitude coordinates for the plot.        </div>
+          ...The file request has been successfully submitted and is now awaiting GIS processing. Please open the GIS
+          app on your mobile and capture the precise Longitude and Latitude coordinates for the plot. </div>
       </div>
     </div>
+    <div class="marquee">
+      <div class="track">
+        <div class="content"
+          *ngIf="status === 'Plinth Payment Completed & Inspection Schedule' || status === 'Occupancy Payment Completed & Inspection Schedule'">
+          ...The file request has been successfully Assigned to you and Inspection is Scheduled. Please open the GIS app
+          on your mobile and capture the precise images to complete the Inspection. </div>
+      </div>
+    </div>
+
+
   </div>
 
   <!-- <div class="col-md-4 col-sm-12 col-xs-12">
@@ -24,7 +35,7 @@
     </div> -->
   <hr />
 
-  
+
   <mat-expansion-panel class="mt-4">
     <mat-expansion-panel-header>
       <mat-panel-title>Owners Sections 👇</mat-panel-title>
@@ -54,6 +65,17 @@
             <div class="col-md-4 col-sm-12 col-xs-12">
               <mat-form-field appearance="fill" class="input-control">
                 <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Plan type: </span>
+                  <span class="natureOfProject-value">&nbsp; {{ planType }}</span>
+                </div>
+                <input matInput name="natureOfProject" readonly />
+              </mat-form-field>
+            </div>
+
+
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
                   <span class="placeholder-text">Project type: </span>
                   <span class="natureOfProject-value">&nbsp; {{ bCategory }}</span>
                 </div>
@@ -61,37 +83,40 @@
               </mat-form-field>
             </div>
 
+
             <div class="col-md-4 col-sm-12 col-xs-12">
               <mat-form-field appearance="fill" class="input-control" style="width: 100%; display: block;">
-                <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: space-between;">
+                <div class="placeholder-wrapper"
+                  style="display: flex; align-items: center; justify-content: space-between;">
                   <span class="placeholder-text" style="flex-shrink: 0;">Project Sub type: </span>
-                  <span class="natureOfProject-value" 
-                        style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 150px); position: relative; cursor: pointer;" 
-                        title="{{ bSubCategory }}">
+                  <span class="natureOfProject-value"
+                    style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 150px); position: relative; cursor: pointer;"
+                    title="{{ bSubCategory }}">
                     {{ bSubCategory }}
                   </span>
                 </div>
                 <input matInput name="natureOfProject" readonly />
               </mat-form-field>
             </div>
-            
+
             <div class="col-md-4 col-sm-12 col-xs-12">
               <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
-                <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                <div class="placeholder-wrapper"
+                  style="display: flex; align-items: center; justify-content: flex-start;">
                   <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
-                    File current status: 
+                    File current status:
                   </span>
                   <!-- Apply inline CSS for ellipsis effect and hover functionality -->
-                  <span class="natureOfProject-value" 
-                        style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; position: relative; cursor: pointer;" 
-                        title="{{ currentStatus }}">
+                  <span class="natureOfProject-value"
+                    style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; position: relative; cursor: pointer;"
+                    title="{{ currentStatus }}">
                     {{ currentStatus }}
                   </span>
                 </div>
                 <input matInput name="natureOfProject" readonly style="width: 100%;" />
               </mat-form-field>
             </div>
-            
+
           </div>
         </mat-card-content>
       </mat-card>
@@ -104,23 +129,24 @@
           <div class="row">
             <div class="col-md-4 col-sm-12 col-xs-12">
               <mat-form-field appearance="fill" class="input-control" style="width: 100%; display: block;">
-                <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                <div class="placeholder-wrapper"
+                  style="display: flex; align-items: center; justify-content: flex-start;">
                   <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
                     Site address:
                   </span>
                   <!-- Add the ellipsis functionality -->
-                  <span class="site-value" 
-                        style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 90%; max-width: 100%; position: relative; cursor: pointer;" 
-                        title="{{ address }}">
+                  <span class="site-value"
+                    style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 90%; max-width: 100%; position: relative; cursor: pointer;"
+                    title="{{ address }}">
                     {{ address }}
                   </span>
                 </div>
                 <input matInput name="address" readonly />
               </mat-form-field>
             </div>
-            
-            
-            
+
+
+
 
             <div class="col-md-4 col-sm-12 col-xs-12">
               <mat-form-field appearance="fill" class="input-control">
@@ -151,40 +177,40 @@
                 <input matInput name="state" readonly />
               </mat-form-field>
             </div>
-<!-- View zone ward colony -->
-<div class="col-md-4 col-sm-12 col-xs-12">
-  <mat-form-field appearance="fill" class="input-control">
-    <div class="placeholder-wrapper">
-      <span class="placeholder-text">Zone: </span>
-      <span class="zone-value">&nbsp; {{ zone }}</span>
-    </div>
-    <input matInput name="zone" readonly />
-  </mat-form-field>
-</div>
+            <!-- View zone ward colony -->
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Zone: </span>
+                  <span class="zone-value">&nbsp; {{ zone }}</span>
+                </div>
+                <input matInput name="zone" readonly />
+              </mat-form-field>
+            </div>
 
-<div class="col-md-4 col-sm-12 col-xs-12">
-  <mat-form-field appearance="fill" class="input-control">
-    <div class="placeholder-wrapper">
-      <span class="placeholder-text">Ward: </span>
-      <span class="ward-value">&nbsp; {{ ward }}</span>
-    </div>
-    <input matInput name="ward" readonly />
-  </mat-form-field>
-</div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Ward: </span>
+                  <span class="ward-value">&nbsp; {{ ward }}</span>
+                </div>
+                <input matInput name="ward" readonly />
+              </mat-form-field>
+            </div>
 
-<div class="col-md-4 col-sm-12 col-xs-12">
-  <mat-form-field appearance="fill" class="input-control">
-    <div class="placeholder-wrapper">
-      <span class="placeholder-text">Colony: </span>
-      <span class="colony-value">&nbsp; {{ colony }}</span>
-    </div>
-    <input matInput name="colony" readonly />
-  </mat-form-field>
-</div>
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <mat-form-field appearance="fill" class="input-control">
+                <div class="placeholder-wrapper">
+                  <span class="placeholder-text">Colony: </span>
+                  <span class="colony-value">&nbsp; {{ colony }}</span>
+                </div>
+                <input matInput name="colony" readonly />
+              </mat-form-field>
+            </div>
 
 
 
-<!-- end View zone ward colony -->
+            <!-- end View zone ward colony -->
             <div class="col-md-4 col-sm-12 col-xs-12">
               <mat-form-field appearance="fill" class="input-control">
                 <div class="placeholder-wrapper">
@@ -197,22 +223,23 @@
 
             <div class="col-md-4 col-sm-12 col-xs-12">
               <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
-                <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                <div class="placeholder-wrapper"
+                  style="display: flex; align-items: center; justify-content: flex-start;">
                   <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
-                    Nearest landmark: 
+                    Nearest landmark:
                   </span>
                   <!-- Apply inline CSS for ellipsis effect and hover functionality -->
-                  <span class="landMark-value" 
-                        style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; cursor: pointer;" 
-                        title="{{ landMark }}">
+                  <span class="landMark-value"
+                    style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; cursor: pointer;"
+                    title="{{ landMark }}">
                     {{ landMark }}
                   </span>
                 </div>
                 <input matInput name="landMark" readonly style="width: 100%;" />
               </mat-form-field>
             </div>
-            
-            
+
+
           </div>
         </mat-card-content>
       </mat-card>
@@ -306,26 +333,27 @@
             </div>
             <div class="col-md-4 col-sm-12 col-xs-12">
               <mat-form-field appearance="fill" class="input-control" style="width: 100%; display: block;">
-                <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start;">
+                <div class="placeholder-wrapper"
+                  style="display: flex; align-items: center; justify-content: flex-start;">
                   <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">
                     Do you want to take the benefit lower category setback:
                   </span>
                   <!-- Apply inline CSS for ellipsis effect and hover functionality -->
-                  <span class="lcSetback-value" 
-                        style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; position: relative; cursor: pointer; transition: all 0.3s ease;"
-                        onmouseover="this.style.whiteSpace='normal'; this.style.overflow='visible'; this.style.textOverflow='unset'; this.style.maxWidth='100%';"
-                        onmouseout="this.style.whiteSpace='nowrap'; this.style.overflow='hidden'; this.style.textOverflow='ellipsis'; this.style.maxWidth='90%';">
+                  <span class="lcSetback-value"
+                    style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90%; position: relative; cursor: pointer; transition: all 0.3s ease;"
+                    onmouseover="this.style.whiteSpace='normal'; this.style.overflow='visible'; this.style.textOverflow='unset'; this.style.maxWidth='100%';"
+                    onmouseout="this.style.whiteSpace='nowrap'; this.style.overflow='hidden'; this.style.textOverflow='ellipsis'; this.style.maxWidth='90%';">
                     {{ lcSetback }}
                   </span>
                 </div>
                 <input matInput name="lcSetback" readonly />
               </mat-form-field>
             </div>
-            
-            
-            
-            
-            
+
+
+
+
+
             <div class="col-md-4 col-sm-12 col-xs-12">
               <mat-form-field appearance="fill" class="input-control">
                 <div class="placeholder-wrapper">
@@ -349,7 +377,7 @@
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
             <h3 class="md-display-2" style="margin: 0;">Building plan</h3>
           </div>
-          
+
           <div class="row" style="width: 100%;">
             <div class="col-md-12 col-sm-12 col-xs-12" style="width: 100%; padding: 0;">
               <!-- Full width for the mat-form-field -->
@@ -364,126 +392,127 @@
           </div>
         </mat-card-content>
       </mat-card>
-      
-  </div>
 
-  <div class="row m-1">
-    <div class="col-md-6 col-sm-12 col-xs-6">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Uploaded DWG Files 👇 </mat-panel-title>
-        </mat-expansion-panel-header>
-        <table>
-          <thead>
-            <tr>
-              <th>S.No</th>
-              <th>Uploaded Date</th>
-              <th>FR ID_File Name</th>
-              <th>FR ID_Version</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let file of FileDetails  let i = index">
-              <td>{{i+1}}</td>
-              <td>{{ file.fcreatedDate | date: 'short'}}</td>
-              <td  (click)="downloadDwg(file.frUniqueNo,file.frName)" class="viewDoc">{{ file.frName }}</td>
-              <td>{{ file.frIdVer }}</td>
-            </tr>
-          </tbody>
-        </table>
-        
-      </mat-expansion-panel>
     </div>
 
-    <div class="col-md-6 col-sm-12 col-xs-6">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Processed File Reports 👇 </mat-panel-title>
-        </mat-expansion-panel-header>
-        <table>
-          <thead>
-            <tr>
-              <th>S.No</th>
-              <th>Processed Date</th>
-              <th>Report Name</th>
-              <th>File Version</th>
-            </tr>
-          </thead>
-          <tbody>
-            <ng-container *ngIf="message">
-              <tr *ngFor="let file of ProcessedFileDetails  let i = index">
-                <td>{{i+1}}</td>
-                <td>{{ file.createdDate | date: 'short'}}</td>
-                <td  (click)="openPaymentPdf(file.uuId)" class="viewDoc">{{ file.reportName }}</td>
-                <td>{{ file.frIdVersion }}</td>
+    <div class="row m-1">
+      <div class="col-md-6 col-sm-12 col-xs-6">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Uploaded DWG Files 👇 </mat-panel-title>
+          </mat-expansion-panel-header>
+          <table>
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Uploaded Date</th>
+                <th>FR ID_File Name</th>
+                <th>FR ID_Version</th>
               </tr>
-            </ng-container>
-            
-            <tr *ngIf="!message">
-              <mat-label style="color: rgb(246, 5, 5); margin: 10%; size: 14px">{{ ProcessedFileMessage }}</mat-label>
-            </tr>
-          </tbody>
-        </table>
-      </mat-expansion-panel>
-    </div>
-  </div>
+            </thead>
+            <tbody>
+              <tr *ngFor="let file of FileDetails  let i = index">
+                <td>{{i+1}}</td>
+                <td>{{ file.fcreatedDate | date: 'short'}}</td>
+                <td (click)="downloadDwg(file.frUniqueNo,file.frName)" class="viewDoc">{{ file.frName }}</td>
+                <td>{{ file.frIdVer }}</td>
+              </tr>
+            </tbody>
+          </table>
 
-  <div class="d-flex justify-content-center text-center" *ngIf="nextButt">
-    <div class="col-md-12 mt-1">
-      <button mat-raised-button color="primary" (click)="next()">Next</button>
-      <button mat-raised-button color="primary" type="submit" class="log" (click)="back()" *ngIf="currentStatus == 'File Processed'" style="margin-left: 2%;">
-        Back
-      </button>
-    </div>
-  </div>
-  
- 
+        </mat-expansion-panel>
+      </div>
 
-  <div class="document-upload" [formGroup]="supportForm" *ngIf="fileReupload">
-    <div class="m-4">
-      <div class="row mb-2 mt-2 d-flex justify-content-between">
-        <mat-card class="display-6 mb-5">
-          <mat-card-header>
-            <mat-card-title class="mb-3">Building layout document/structural drawing file re-upload on
-              error</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <div class="row">
-              <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="proff">
-                <mat-label class="title">Upload new drawing document</mat-label>
-                <mat-form-field appearance="fill" class="input-control">
-                  <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
-                    <mat-icon>attach_file</mat-icon>
-                  </button>
-                  <input type="text" readonly matInput placeholder="{{ drawingFileName }}" />
-                  <input readonly type="file" hidden #f_input (change)="
+      <div class="col-md-6 col-sm-12 col-xs-6">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Processed File Reports 👇 </mat-panel-title>
+          </mat-expansion-panel-header>
+          <table>
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Processed Date</th>
+                <th>Report Name</th>
+                <th>File Version</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngIf="message">
+                <tr *ngFor="let file of ProcessedFileDetails  let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{ file.createdDate | date: 'short'}}</td>
+                  <td (click)="openPaymentPdf(file.uuId)" class="viewDoc">{{ file.reportName }}</td>
+                  <td>{{ file.frIdVersion }}</td>
+                </tr>
+              </ng-container>
+
+              <tr *ngIf="!message">
+                <mat-label style="color: rgb(246, 5, 5); margin: 10%; size: 14px">{{ ProcessedFileMessage }}</mat-label>
+              </tr>
+            </tbody>
+          </table>
+        </mat-expansion-panel>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center text-center" *ngIf="nextButt">
+      <div class="col-md-12 mt-1">
+        <button mat-raised-button color="primary" (click)="next()">Next</button>
+        <button mat-raised-button color="primary" type="submit" class="log" (click)="back()"
+          *ngIf="currentStatus == 'File Processed'" style="margin-left: 2%;">
+          Back
+        </button>
+      </div>
+    </div>
+
+
+
+    <div class="document-upload" [formGroup]="supportForm" *ngIf="fileReupload">
+      <div class="m-4">
+        <div class="row mb-2 mt-2 d-flex justify-content-between">
+          <mat-card class="display-6 mb-5">
+            <mat-card-header>
+              <mat-card-title class="mb-3">Building layout document/structural drawing file re-upload on
+                error</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="proff">
+                  <mat-label class="title">Upload new drawing document</mat-label>
+                  <mat-form-field appearance="fill" class="input-control">
+                    <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                      <mat-icon>attach_file</mat-icon>
+                    </button>
+                    <input type="text" readonly matInput placeholder="{{ drawingFileName }}" />
+                    <input readonly type="file" hidden #f_input (change)="
                       uploadDoc($event, 'DrawingFileCertificateName', [
                         'dwg',
                         'dfx'
                       ])
                     " formControlName="DrawingFileCertificateName" />
-                  <mat-hint><strong>File type must be .dwg or .dfx and file size should NOT
-                      be more than 50 MB.</strong></mat-hint>
-                </mat-form-field>
+                    <mat-hint><strong>File type must be .dwg or .dfx and file size should NOT
+                        be more than 50 MB.</strong></mat-hint>
+                  </mat-form-field>
+                </div>
               </div>
-            </div>
-          </mat-card-content>
-        </mat-card>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- <button mat-raised-button color="primary" (click)="submit()">Submit Drawing File </button> -->
+
+      <div class="d-flex justify-content-center me-2 mt-5 mb-5 text-center">
+        <div class="col-md-12 mt-1">
+          <button mat-raised-button color="primary" type="submit" class="log" (click)="submit()">
+            Submit Drawing File
+          </button>
+          <button mat-raised-button color="primary" type="submit" class="log" (click)="back()"
+            *ngIf="currentStatus == 'File Processed'" style="margin-left: 2%;">
+            Back
+          </button>
+        </div>
       </div>
     </div>
-
-    <!-- <button mat-raised-button color="primary" (click)="submit()">Submit Drawing File </button> -->
-
-    <div class="d-flex justify-content-center me-2 mt-5 mb-5 text-center">
-      <div class="col-md-12 mt-1">
-        <button mat-raised-button color="primary" type="submit"
-          class="log" (click)="submit()">
-          Submit Drawing File
-        </button>
-        <button mat-raised-button color="primary" type="submit" class="log" (click)="back()" *ngIf="currentStatus == 'File Processed'" style="margin-left: 2%;">
-          Back
-        </button>
-      </div>
-    </div>
-  </div>
   </div>

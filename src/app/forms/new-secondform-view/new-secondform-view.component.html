@@ -260,7 +260,7 @@
 
 
 
-<div class="text-center" *ngIf="noc">
+<div class="text-center" *ngIf="noc && ownerCall !== 'true'">
     <!-- <button mat-raised-button color="primary" type="submit" (click)="payment()">Pay Now</button> -->
     <button mat-raised-button color="primary" type="submit" (click)="NocForm()">Fill Noc Form</button>
     

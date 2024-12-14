@@ -54,6 +54,7 @@ export class PaymentFormComponent implements OnInit {
   genderDetails: any;
   createdDateDetails: any;
   contactNoDetails: any;
+  planType: any;
 
 
 
@@ -180,7 +181,7 @@ export class PaymentFormComponent implements OnInit {
       this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.requestId).subscribe((data: any) => {
         console.log(data);
         this.currentStatus = data.basicInfo.status;
-
+this.planType=data.basicInfo.planType;
         let requestJson = {
           "frId": this.frids,
           "fileNo": this.requestId,
@@ -190,15 +191,17 @@ export class PaymentFormComponent implements OnInit {
           console.log(data);
           let tempArr: any[] = data.data.PaymentDetailsList;
           tempArr.forEach((element) => {
-            if ((element.amountType === "File Security Deposite" && this.currentStatus == COMMONCONSTANTS.Status_NocFilled) 
-              || (element.amountType === "File Security Deposite" && this.currentStatus == COMMONCONSTANTS.Status_Final_Form_Submit)) {
+            if ((element.amountType === "File Security Deposite" && this.currentStatus == COMMONCONSTANTS.Status_NocFilled && this.planType=="SANCTION") 
+              || (element.amountType === "File Security Deposite" && this.currentStatus == COMMONCONSTANTS.Status_Final_Form_Submit&& this.planType=="SANCTION")) {
               this.amount = data.data.paymentCharges.charge1;
               this.charge1 = data.data.paymentCharges.charge1;
               this.comment = element.amountType;
               this.viewCharge1 = true;
               this.viewCharge2345 = false
               this.PaymentForm.patchValue({ comment: this.comment, amount: this.amount});
-            } else if (element.amountType === "File Processing Fee" && this.currentStatus == COMMONCONSTANTS.Status_PendingPayment) {
+            } else if ((element.amountType === "File Processing Fee" && this.currentStatus == COMMONCONSTANTS.Status_PendingPayment)
+              ||(element.amountType === "File Processing Fee" && this.currentStatus == COMMONCONSTANTS.Status_NocFilled && this.planType!="SANCTION") 
+              || (element.amountType === "File Processing Fee" && this.currentStatus == COMMONCONSTANTS.Status_Final_Form_Submit&& this.planType!="SANCTION")) {
               this.amount = data.data.paymentCharges.charge2 + data.data.paymentCharges.charge3 + data.data.paymentCharges.charge4 + data.data.paymentCharges.charge5;
               this.charge1 = data.data.paymentCharges.charge1;
               this.charge2 = data.data.paymentCharges.charge2;

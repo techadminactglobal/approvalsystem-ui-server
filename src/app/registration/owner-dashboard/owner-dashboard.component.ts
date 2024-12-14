@@ -92,7 +92,7 @@ export class OwnerDashboardComponent implements OnInit {
 
   apiConstant = API_PATH;
   ownerDetail: any;
-  addintionalOwner: boolean = false;
+  addintionalOwner: boolean = true; // To show additional owners
   hierarchyId:any;
   hierarchyUsersName:any;
 
@@ -144,6 +144,8 @@ export class OwnerDashboardComponent implements OnInit {
           this.isTrue = false;
 
           this.resetAddharNo();
+
+          this.AddDetails();
 
         } else if (res.httpStatus === "OK" && res.data == null) {
           this.message = "You are not register in your system";
@@ -289,7 +291,9 @@ export class OwnerDashboardComponent implements OnInit {
 
         if (data.httpStatus === "OK") {
           this.senddata.ownerApplicant = true;
-          this.senddata.frid = data.data;
+          // this.senddata.frid = data.name;
+          localStorage.setItem('name',data.name),
+          localStorage.setItem('frid', data.data);  
           this.router.navigate(['/home']);
         }
       });
@@ -297,33 +301,51 @@ export class OwnerDashboardComponent implements OnInit {
   }
 
 
-  viewDetail(status: string, frId: string) {
+  viewDetail(consultantName:string,status: string, frId: string) {
+    console.log(consultantName);
+    localStorage.setItem("requestid",consultantName);
+    localStorage.setItem("frid",frId);
+    localStorage.setItem("paymentType","fileNew");
+    localStorage.setItem("ownerCall",true.toString());
+    // localStorage.setItem("disablePullBack",true.toString());
+    // localStorage.setItem("status",status);
+   
+    // this.senddata.requestid = consultantName;
     // this.senddata.frid = frId;
-    // Remove the 'frid' key from localStorage
-      localStorage.removeItem('frid');
-localStorage.setItem('frid', frId);    // if (status == COMMONCONSTANTS.Status_Documents_Uploaded) {
-    //   this.router.navigate(['/supportView']);
-    // } else if (status === COMMONCONSTANTS.Status_InitialDepositedAssigned1hierarchy || status ===
-    //   COMMONCONSTANTS.Status_Approval_Hierarchy2nd || status ===
-    //   COMMONCONSTANTS.Status_Approval_Hierarchy3rd || status ===
-    //   COMMONCONSTANTS.Status_Approval_Hierarchy4th || status ===
-    //   COMMONCONSTANTS.Status_Rejection_Hierarchy2nd || status ===
-    //   COMMONCONSTANTS.Status_Rejection_Hierarchy3rd || status ===
-    //   COMMONCONSTANTS.Status_Rejection_Hierarchy4th || status == COMMONCONSTANTS.Status_PendingPayment || status == COMMONCONSTANTS.Status_PaymentCompleted || status == COMMONCONSTANTS.Status_DSAppliedRequestApproved
-    //   || status == COMMONCONSTANTS.Status_Request_Released || status == COMMONCONSTANTS.Status_NocFilled || status == COMMONCONSTANTS.Status_InitialDepositedAssignedNOCDept || status == COMMONCONSTANTS.Status_Rejected || status == COMMONCONSTANTS.Status_DSPending) {
-    //   this.router.navigate(['/viewNocPage']);
-    // } else if (status == COMMONCONSTANTS.Status_Final_Form_Submit) {
-    //   this.router.navigate(['/secondView']);
-    // } else if (status == COMMONCONSTANTS.Status_OwnerAssigned) {
-    //   this.senddata.architectView = false;
-    //   this.router.navigate(['/OwnerApplicantDetials']);
-    // } else if(status == COMMONCONSTANTS.Status_AcceptByArchitect){
-    //   this.router.navigate(['/form/new-first-component']);
-    // }else{
-    //   this.router.navigate(['/NewFormView']);
-    // }
-    this.router.navigate(['/OwnerApplicantDetials']);
+    // this.senddata.paymentType = "fileNew";
+    if (status == COMMONCONSTANTS.Status_Documents_Uploaded) {
+      this.router.navigate(['/supportView']);
+    } else if (status === COMMONCONSTANTS.Status_InitialDepositedAssigned1hierarchy || status ===
+      COMMONCONSTANTS.Status_Approval_Hierarchy2nd || status ===
+      COMMONCONSTANTS.Status_Approval_Hierarchy3rd || status ===
+      COMMONCONSTANTS.Status_Approval_Hierarchy4th || status ===
+      COMMONCONSTANTS.Status_Rejection_Hierarchy2nd || status ===
+      COMMONCONSTANTS.Status_Rejection_Hierarchy3rd || status ===
+      COMMONCONSTANTS.Status_Rejection_Hierarchy4th || status == COMMONCONSTANTS.Status_PendingPayment || status == COMMONCONSTANTS.Status_PaymentCompleted || status == COMMONCONSTANTS.Status_DSAppliedRequestApproved
+      || status == COMMONCONSTANTS.Status_Request_Released || status == COMMONCONSTANTS.Status_NocFilled || status == COMMONCONSTANTS.Status_InitialDepositedAssignedNOCDept || status == COMMONCONSTANTS.Status_Rejected || status == COMMONCONSTANTS.Status_DSPending) {
+      this.router.navigate(['/viewNocPage']);
+    } else if (status == COMMONCONSTANTS.Status_Final_Form_Submit || status == COMMONCONSTANTS.Status_Form_Submitted_GIS_Pending) {
+      this.router.navigate(['/secondView']);
+    } else if (status == COMMONCONSTANTS.Status_OwnerAssigned) {
+      this.senddata.architectView = true;
+      this.router.navigate(['/OwnerApplicantDetials']);
+    } else if(status == COMMONCONSTANTS.Status_AcceptByArchitect){
+      this.router.navigate(['/OwnerApplicantDetials']); //Changes
+    }else if (status == 'Request Released') {
+      this.router.navigate(['/plintComponentView']);
+    } else if (status == 'Plinth Applied' || status == 'Plinth Payment Completed & Inspection Schedule' || status == 'Plinth Approval Hierachy - 2nd' || status == 'Plinth Rejection Hierachy - 2nd' || status == 'Plinth Ds Pending' || status == 'Plinth Ds Applied - Plinth Approved' || status == 'Plinth Released' || status == 'Plinth Initial Deposite' || status == 'Plinth Rejected') {
+      this.router.navigate(['/plintComponentView']);
+    } else if (status == "Plinth Released") {
+      this.router.navigate(['/plintComponentView']);
+    } else if (status == 'Occupancy Applied' || status == 'Occupancy Noc Submit' || status == 'Occupancy Payment Completed & Assigned to Noc Dept' || status == 'Occupany Initial Deposite' || status == 'Occupancy Payment Completed & Inspection Schedule' || status == 'Occupancy Approval Hierachy - 2nd' || status == 'Occupancy Approval Hierachy - 3nd' || status == 'Occupancy Rejection Hierachy - 2nd' || status == 'Occupancy Rejection Hierachy - 3nd' || 
+      status == 'Occupancy Pending For payment' || status == 'Occupancy Payment Completed' || status == 'Occupancy Ds Pending' || status == 'Occupancy Ds Applied - Occupancy Approved' || status == 'Occupancy Released' || status == 'Occupancy Rejected') {
+      this.router.navigate(['/OccupancyComponentView']);
+    } else{
+      this.router.navigate(['/OwnerApplicantDetials']);
+    }
+    // this.router.navigate(['/OwnerApplicantDetials']);
 
   }
+
 
 }

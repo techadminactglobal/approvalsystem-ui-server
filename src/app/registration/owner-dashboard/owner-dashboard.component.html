@@ -123,17 +123,17 @@
                   <span *ngIf="isTrue" style="color: rgb(246, 5, 5); margin-left: 10%; font-size: 14px;">
                     {{message}}
                   </span>
-                  <span *ngIf="!isTrue" style="color: rgb(2, 85, 25); margin-left: 10%; font-size: 14px;">
+                  <!-- <span *ngIf="!isTrue" style="color: rgb(2, 85, 25); margin-left: 10%; font-size: 14px;">
                     {{message}}
-                  </span>
+                  </span> -->
                 </div>
               
                 <!-- Add Owner Details button -->
-                <div class="col-xl-4 col-lg-6 col-12">
+                <!-- <div class="col-xl-4 col-lg-6 col-12">
                   <button mat-button color="primary" matSuffix (click)="AddDetails()" style="margin-top: 10px;">
                     Add Owner Details
                   </button>
-                </div>
+                </div> -->
               </div>
               
             
@@ -220,6 +220,8 @@
                 </div>
               </div>
             </div>
+            
+            
             <div class="justify-content d-flex">
               <div class="col-xl-4 col-lg-6 col-12">
                 <mat-checkbox (click)="resetForm()">
@@ -256,27 +258,7 @@
             <br>
             <br>
 
-            <!-- ++++++++++++++++++++++++++++++++++++ -->
-
-            <!-- <div class="row mb-3" formGroupName="applicantInfo">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="justify-content d-flex">
-                            <mat-form-field appearance="fill" style="width: 100%;">
-                                <mat-label>Search Architect</mat-label>
-                                <input matInput [matAutocomplete]="auto" formControlName="architectNum"
-                                    (keyup)="onKeyup(architectInput.value)" #architectInput />
-                                <button mat-button matSuffix (click)="resetArchitect()">Clear</button>
-                                <mat-autocomplete #auto="matAutocomplete">
-                                    <mat-option *ngFor="let architect of filteredArchitects" [value]="architect.consultantId"
-                                        (onSelectionChange)="selectArchitect(architect)">
-                                        {{ architect.consultantId }}
-                                    </mat-option>
-                                </mat-autocomplete>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </div> -->
-
+        
           <div formGroupName="applicantInfo">
   <!-- Search Architect Section -->
   <div class="row mb-3">
@@ -382,7 +364,7 @@
             <td>{{ element.updateDate | date : "dd/MM/yyyy" }}</td>
             <td>{{ element.status }}</td>
             <td
-              (click)="viewDetail(element.status, element.frId)"
+            (click)="viewDetail(element.fileNo,element.status, element.frId)"
               class="detail"
               style="cursor: pointer; color: blue; text-decoration: underline"
             >

@@ -171,6 +171,16 @@
             </div>
             <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
               <mat-form-field appearance="outline">
+                <mat-label>Plan type</mat-label>
+                <mat-select placeholder="Plan type" formControlName="planType" (selectionChange)="findPlanType($event)">
+                  <mat-option [value]="">-- Select --</mat-option>
+                  <mat-option [value]="pt.planTypeName" *ngFor="let pt of planType"> {{ pt.planTypeName }} 
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+              <mat-form-field appearance="outline">
                 <mat-label>Project type</mat-label>
                 <mat-select placeholder="Project type" formControlName="bCategory">
                   <mat-option [value]="">-- Select --</mat-option>
@@ -368,8 +378,22 @@
               <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Plot area (In meter) </mat-label>
                 <input matInput placeholder="Plot area" formControlName="pArea" type="number" />
+            
+                <!-- Error Messages -->
+                <mat-error *ngIf="newForm.get('plotDetails.pArea')?.hasError('required')">
+                  Plot area is required.
+                </mat-error>
+            
+                <mat-error *ngIf="newForm.get('plotDetails.pArea')?.hasError('max')">
+                  Plot area cannot exceed {{ pAreaMaxValue }} meters.
+                </mat-error>
+            
+                <mat-error *ngIf="newForm.get('plotDetails.pArea')?.hasError('pattern')">
+                  Invalid plot area format. Please enter a valid number.
+                </mat-error>
               </mat-form-field>
             </div>
+            
 
             <div class="col-xl-4 col-lg-6 col-12">
               <mat-form-field appearance="outline" class="w-100">

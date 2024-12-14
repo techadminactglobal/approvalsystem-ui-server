@@ -113,7 +113,7 @@ export class ViewFireComponent {
   }
 
   BacktoNocdeptdasbhoard(){
-    this.router.navigate(['/nocDashboard']);
+    this.router.navigate(['/viewNocPage']);
   }
 
   deptForm = new FormGroup({

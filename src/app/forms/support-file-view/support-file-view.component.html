@@ -325,9 +325,9 @@
     </div>
 </div>
 
-<div class="d-flex justify-content-center text-center mb-3" *ngIf="nextDisable">
+<div class="d-flex justify-content-center text-center mb-3"  *ngIf="nextDisable && ownerCall !== 'true'">
     <!-- <div class="col-md-12  mt-1"> -->
-        <button mat-raised-button color="primary" (click)="SecondFrom()">Next </button>
+        <button mat-raised-button color="primary" (click)="SecondFrom()" >Next </button>
     <!-- </div> -->
     
     <button mat-raised-button color="primary" type="submit" class="log" (click)="back()" *ngIf="senddata.status =='Documents Uploaded'" style="margin-left: 2%;">

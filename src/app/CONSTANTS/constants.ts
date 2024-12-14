@@ -8,6 +8,8 @@ export const COMMONCONSTANTS = {
     fileNew_ROLE_ID_AE: "202",
 
     Status_OwnerAssigned: "Assign to Architect",
+    Status_Plinth_Inspection_Scheduled:"Plinth Payment Completed & Inspection Schedule",
+    Status_OC_Inspection_Scheduled:"Occupancy Payment Completed & Inspection Schedule",
     Status_AcceptByArchitect: "Accept by Architect",
     Status_Registration_Initiated: "Registration Initiated",
     Status_PendingPayment: "Pending For payment",

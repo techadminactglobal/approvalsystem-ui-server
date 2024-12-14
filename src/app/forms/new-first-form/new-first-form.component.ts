@@ -189,21 +189,8 @@ statesList: any;
   underRoadWidening: boolean = false;
   owners = 1
   apiConstant = API_PATH;
-  planType: any = [{ id: 1, name: 'Fresh' }];
-  buildingType: any = [{
-    "buildingTypeId": 1,
-    "buildingTypeName": "Residential",
-  },{
-    "buildingTypeId": 2,
-    "buildingTypeName": "Commercial",
-  },{
-    "buildingTypeId": 3,
-    "buildingTypeName": "Industrial",
-  },{
-    "buildingTypeId": 40,
-    "buildingTypeName": "Other",
-  },
-];
+  // planType: any = [{ id: 1, name: 'Fresh' }];
+ 
 
 
 buildingSubType: any;
@@ -266,31 +253,83 @@ findBuildingSubType(buildingId:string){
   ) {
 
   }
-
-
+  
+  
   hierarchyUserName:any;
-  frId:any;
+frId:any;
+  
+planType: any;
+buildingType: any 
+pAreaMaxValue: number = 0;
   ngOnInit(): void {
+
+    // if (this.senddata.hierarchyUserName?.toLowerCase().startsWith('ca')) {
+    //   this.planType= [{
+    //     "planTypeName": "SARAL",
+    //   },{
+    //     "planTypeName": "UPTO500",
+    //   },{
+    //     "planTypeName": "SANCTION",
+    //   },
+    // ];
+    // }
+    // else if (this.senddata.hierarchyUserName?.toLowerCase().startsWith('e')) {
+    //   this.planType= [{
+    //     "planTypeName": "SARAL",
+    //   },{
+    //     "planTypeName": "UPTO500",
+    //   }
+    // ];
+    // } else {
+    //   this.planType= [{
+    //     "planTypeName": "SARAL",
+    //   }
+    // ];
+    // }
+
+    
+    if (localStorage.getItem("hierarchyUserName")?.toLowerCase().startsWith('ca')) {
+      this.planType = [
+        { "planTypeName": "SARAL"},
+        { "planTypeName": "UPTO500"},
+        { "planTypeName": "SANCTION" }
+      ];
+      // this.pAreaMaxValue = 9999999;  // No limit on plot area for 'ca'
+    } else if (localStorage.getItem("hierarchyUserName")?.toLowerCase().startsWith('e')) {
+      this.planType = [
+        { "planTypeName": "SARAL"},
+        { "planTypeName": "UPTO500" }
+      ];
+      // this.pAreaMaxValue = 500;  // Maximum plot area of 500 for 'e'
+    } else if (localStorage.getItem("hierarchyUserName")?.toLowerCase().startsWith('s')) {
+      this.planType = [
+        { "planTypeName": "SARAL" }
+      ];
+      // this.pAreaMaxValue = 250;  // Maximum plot area of 250 for 's'
+    }
+  
+    // Rebuild form to apply dynamic validation
+    this.buildForm();
+  
+  
+ 
+
 
     this.getZones();
     this.getColonies(this.wards);
-    this.getWards(this.zones);
+    this.getWards(this.zones);    
     this.hierarchyUserName = localStorage.getItem('hierarchyUserName');
     this.frId = localStorage.getItem('frid');
-
     this.FORM_NAME = this.getFormName();
-    this.buildForm();
-    this.newForm.get(['plotDetails', 'pArea'])?.valueChanges.subscribe(() => {
-      console.log('adeww');
+    this.buildForm()
+    this.newForm.get(["plotDetails", "pArea"])?.valueChanges.subscribe(() => {
+      console.log("adeww");
 
       this.calculateNpArea();
     });
-    this.newForm
-      .get(['plotDetails', 'areaAffectedInRoadWidening'])
-      ?.valueChanges.subscribe(() => {
-        this.calculateNpArea();
-      });
-
+    this.newForm.get(["plotDetails", "areaAffectedInRoadWidening"])?.valueChanges.subscribe(() => {
+      this.calculateNpArea();
+    });
   }
 
   calculateNpArea() {
@@ -351,6 +390,7 @@ findBuildingSubType(buildingId:string){
         consultantLoginId: [this.hierarchyUserName, [Validators.required]],
         frId: [this.frId, [Validators.required]],
         recordId: [''],
+        planType: ['', [Validators.required]],
       }),
       siteLocationDetails: this.fb.group({
         landMark: [''],
@@ -362,6 +402,7 @@ findBuildingSubType(buildingId:string){
         zone:['', [Validators.required]],
         ward:['', [Validators.required]],
         colony:['', [Validators.required]],
+        
       }),
       // applicantInfo: this.fb.group({
       //   oType: ['', [Validators.required]],
@@ -370,62 +411,27 @@ findBuildingSubType(buildingId:string){
       // applicantDetails: this.fb.array([this.createOwner()], [Validators.required]),
       plotDetails: this.fb.group({
         cPlot: [false, [Validators.required]],
-        pArea: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/),
-          ],
-        ],
-        areaAffectedInRoadWidening: [
-          '',
-          Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/),
-        ],
-        npArea: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/),
-          ],
-        ],
+        pArea: ['', [
+          Validators.required, 
+          Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/), // Validate number with decimal places
+          Validators.max(this.pAreaMaxValue) // Dynamic max value
+        ]
+      ],
+        areaAffectedInRoadWidening: ['', Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/)],
+        npArea: ['', [Validators.required, Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/)]],
         lcSetback: [false],
         lcFar: [false],
         mVentilation: [false],
-        cArea: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/),
-          ],
-        ],
-        cAreaFar: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/),
-          ],
-        ],
-        frontWidth: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/),
-          ],
-        ],
-        bHeight: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/),
-          ],
-        ],
+        cArea: ['', [Validators.required, Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/)]],
+        cAreaFar: ['', [Validators.required, Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/)]],
+        frontWidth: ['', [Validators.required, Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/)]],
+        bHeight: ['', [Validators.required, Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/)]],
       }),
 
-      fileDocDetails: this.fb.array(
-        [this.fileTypeForm()],
-        [Validators.required]
-      ),
+      fileDocDetails: this.fb.array([this.fileTypeForm()], [Validators.required]),
+
     });
+    this.updatePlotAreaValidator();
 
   }
 
@@ -471,26 +477,22 @@ findBuildingSubType(buildingId:string){
   frid: any;
   createdBy: any;
   newFormSubmit() {
-    // this.senddata.hierarchyUserName = this.hierarchyUserName;
+    // this.senddata.hierarchyUserName = this.senddata.hierarchyUserName;
     if (this.newForm.invalid) {
       console.log(this.newForm.value);
 
       const nparea = this.newForm.value.plotDetails.npArea;
       if (nparea < 0) {
-        alert(
-          'Plot area must be greater then Area affected under road widening'
-        );
+        alert("Plot area must be greater then Area affected under road widening");
       }
 
-      alert('Please fill all the details properly..');
+      alert("Please fill all the details properly..");
       return;
     }
-    console.log('this.newForm.value', this.newForm.value);
+    console.log("this.newForm.value", this.newForm.value);
 
-    this.service
-      .getFileService(this.apiConstant.form_Data, this.newForm.value)
-      .subscribe((data: any) => {
-        console.log(data);
+    this.service.getFileService(this.apiConstant.form_Data, this.newForm.value).subscribe((data: any) => {
+      console.log(data);
 
         localStorage.removeItem('frid');
         localStorage.removeItem('requestid');
@@ -502,21 +504,23 @@ findBuildingSubType(buildingId:string){
         // this.senddata.requestid = data.data.fileNo;
         // this.senddata.hierarchyUserName = data.data.createdBy;
         if (data.httpStatus === 'OK') {
-          this.senddata.dialog = true;
-          this.senddata.datasave = true;
-          this.hideSubmit = true;
-          this.fileNo = data.data.fileNo;
-          this.frid = data.data.frId;
-          this.createdBy = data.data.createdBy;
+        this.senddata.dialog = true;
+        this.senddata.datasave = true;
+        this.hideSubmit = true;
+        this.fileNo = data.data.fileNo;
+        this.frid = data.data.frId;
+        this.createdBy = data.data.createdBy;
 
-          this.senddata.formOne = true;
-          this.router.navigate(['/home']);
-        } else {
-          this.senddata.dialog = true;
-          this.senddata.datasave = true;
-          this.senddata.hideSubmit = true;
-        }
-      });
+        this.senddata.formOne = true;
+        this.router.navigate(['/home']);
+      } else {
+        this.senddata.dialog = true;
+        this.senddata.datasave = true;
+        this.senddata.hideSubmit = true;
+      }
+
+    });
+
   }
 
 
@@ -615,10 +619,7 @@ findBuildingSubType(buildingId:string){
       // this.apiConstant.submitSaralForm1
       // http://172.18.1.175:9011/obps/save/sanctionform
       this.service
-        .postService(
-          this.apiConstant.NEW_SAVE_FIRST_FORM_API,
-          this.newForm.value
-        )
+        .postService(this.apiConstant.NEW_SAVE_FIRST_FORM_API, this.newForm.value)
         .subscribe(
           (res: any) => {
             // this.spinerLoader = true;
@@ -626,11 +627,10 @@ findBuildingSubType(buildingId:string){
             //   disableClose: true, // This option prevents closing the dialog by clicking outside
             // });
             console.log('successfull--res', res.data);
-            this.requestID =
-              res.data.obp_building_plan_req.buildingPlanReqDetailId;
+            this.requestID = res.data.obp_building_plan_req.buildingPlanReqDetailId;
             console.log('requestID', this.requestID);
             if (this.requestID > 0) {
-              console.log('request id: ' + this.requestID);
+              console.log("request id: " + this.requestID)
               this.dialogRef.closeAll();
               // this.dialogRef.open(SubmitDialogComponent, {
               //   disableClose: true, // This option prevents closing the dialog by clicking outside
@@ -705,11 +705,9 @@ colonies: any = [];
 selectedZone: string = ''; 
 selectedWard: string = ''; 
 selectedColony: string = ''; 
-// Fetch Zones from API
 getZones(): void {
   this.service.getButtonDetails(this.apiConstant.zoneDetails, "").subscribe(
     (response: any) => {
-      // Log the response to ensure we're getting the correct data
       console.log('API Response for Zones:', response);
 
       // Check the response structure and extract zones
@@ -763,23 +761,6 @@ getColonies(wardId: string): void {
     }
   );
 }
-
-// onZoneChange(event: any): void {
-
-// onZoneChange(event: any): void {
-//   const selectedZoneId = event.value;
-//   console.log('Selected Zone ID:', selectedZoneId);
-//   const selectedZone = this.zones.find((zone: { zoneGenerateId: any; }) => zone.zoneGenerateId === selectedZoneId);
-  
-//   if (selectedZone) {
-//     this.selectedZone = selectedZone.zoneName;
-//     console.log('Selected Zone Name:', this.selectedZone);
-//     this.newForm.get('siteLocationDetails')?.get('zone')?.setValue(selectedZone.zoneName);
-//     this.getWards(selectedZoneId);
-//   }
-// }
-
-
 onZoneChange(event: any): void {
   const selectedZoneId = event.value;
   console.log('Selected Zone ID:', selectedZoneId);
@@ -816,6 +797,75 @@ onWardChange(event: any): void {
   console.log("Form Value After Ward Change:", this.newForm.value);
 }
 
+// findPlanType(event: any): void {
+//   const plan = event.value;
+//   // const planType = this.newForm?.get(['basicInfo', 'planType'])?.value;
+// console.log(plan,"plangyutfugu")
+//   if (plan==="SARAL"){
+//     this.pAreaMaxValue = 250; 
+//   }else if (plan==="UPTO500"){
+//     this.pAreaMaxValue = 500; 
+//   }else if (plan==="SANCTION") {
+//     this.pAreaMaxValue = 9999999; 
+//   }
+// }
+updatePlotAreaValidator(): void {
+  const plotAreaControl = this.newForm.get('plotDetails.pArea');
 
+  // Remove existing validators and set the new ones
+  plotAreaControl?.clearValidators();
+
+  plotAreaControl?.setValidators([
+    Validators.required,
+    Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/), // Validate number with decimal places
+    Validators.max(this.pAreaMaxValue) // Apply dynamic max value
+  ]);
+
+  // Manually trigger validation after updating the validators
+  plotAreaControl?.updateValueAndValidity();
 }
 
+
+findPlanType(event: any): void {
+  const plan = event.value;
+  console.log(plan, "plan");
+
+  if (plan === "SARAL") {
+    this.pAreaMaxValue = 250; 
+    
+    this.buildingType= [{
+      "buildingTypeId": 1,
+      "buildingTypeName": "Residential",
+    }
+    ];
+  } else if (plan === "UPTO500") {
+    this.pAreaMaxValue = 500; 
+    
+    this.buildingType= [{
+      "buildingTypeId": 1,
+      "buildingTypeName": "Residential",
+    }
+    ];
+  } else if (plan === "SANCTION") {
+    this.pAreaMaxValue = 9999999; 
+    this.buildingType= [{
+      "buildingTypeId": 1,
+      "buildingTypeName": "Residential",
+    },{
+      "buildingTypeId": 2,
+      "buildingTypeName": "Commercial",
+    },{
+      "buildingTypeId": 3,
+      "buildingTypeName": "Industrial",
+    },{
+      "buildingTypeId": 40,
+      "buildingTypeName": "Other",
+    },
+    ];
+  }
+
+  // Update the validator for the pArea control
+  this.updatePlotAreaValidator();
+}
+
+}

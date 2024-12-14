@@ -26,7 +26,7 @@ export class DeparmentalRequestViewComponent {
 
 
   constructor(private service: commonService, public senddata: SendData,
-    private router: Router, private fb: FormBuilder,private sanitizer: DomSanitizer) {
+    private router: Router, private fb: FormBuilder, private sanitizer: DomSanitizer) {
     this.supportForm = this.fb.group({
       pdfFile: ['', Validators.required],
 
@@ -49,13 +49,17 @@ export class DeparmentalRequestViewComponent {
   documents: any[] = [];
   letterUniqueId: any;
   // letterName: any;
-  requestId:any;
-  frId:any;
-  paymentFor:any;
-  hierarchyId:any;
-  hierarchyUserName:any;
-  paymentType:any;
-  
+  requestId: any;
+  frId: any;
+  paymentFor: any;
+  hierarchyId: any;
+  hierarchyUserName: any;
+  paymentType: any;
+  rework: boolean = false;
+
+  selectedZones: string[] = [];
+  fileName: any[] = [];
+  form!: FormGroup;
 
   ngOnInit() {
     this.requestId = localStorage.getItem('requestid');
@@ -63,7 +67,15 @@ export class DeparmentalRequestViewComponent {
     this.hierarchyId = localStorage.getItem('hierarchyId');
     this.paymentFor = localStorage.getItem('paymentFor');
     this.frId = localStorage.getItem('frid');
-   this.hierarchyUserName = localStorage.getItem('hierarchyUserName');
+    this.hierarchyUserName = localStorage.getItem('hierarchyUserName');
+
+    if (this.hierarchyId == "101" || this.hierarchyId == "201" || this.hierarchyId == "301" || this.hierarchyId == "401") {
+      this.rework = true;
+      this.fileName = ["leaseDeedCertificateName", "SaleDeedCertificateName", "sitePhotographCertificateName", "mutationFormCertificateName"]
+      this.form = new FormGroup({
+        zoneDetails: new FormControl(this.selectedZones)
+      });
+    }
 
     this.referenceId = this.requestId;
     this.viewPart = this.paymentFor;
@@ -72,7 +84,7 @@ export class DeparmentalRequestViewComponent {
 
     //OC
     let request = {
-      "fileNo": this.requestId, 
+      "fileNo": this.requestId,
       "frId": this.frId
     }
     this.service.getDataService(this.apiConstant.OccupancyDetails, request).subscribe((res: any) => {
@@ -215,6 +227,12 @@ export class DeparmentalRequestViewComponent {
           if (data.basicInfo.status == COMMONCONSTANTS.Status_DSPending) {
             this.viewWork = false;
             this.viewDsWork = true;
+          } else if(data.basicInfo.status == COMMONCONSTANTS.Status_Plinth_Inspection_Scheduled 
+            || data.basicInfo.status == COMMONCONSTANTS.Status_OC_Inspection_Scheduled
+          ){
+            
+              this.viewWork = false;
+              this.viewDsWork = false; 
           }
           console.log(data, "amanaryan........");
           if (data.basicInfo.approvedLetter != null) {
@@ -231,14 +249,24 @@ export class DeparmentalRequestViewComponent {
     this.viewReferButton();
     this.viewButton();
 
-
-
-
-
-
-
   }
 
+  isAllSelectedZones(): boolean {
+    return this.selectedZones.length === this.fileName.length;
+  }
+
+  selectAllZones() {
+    if (this.isAllSelectedZones()) {
+      // If all zones are already selected, unselect all
+      this.selectedZones = [];
+    } else {
+      // Otherwise, select all zones
+      this.selectedZones = [...this.fileName];
+    }
+
+    // Update the form control with the selected zones
+    this.form.get('zoneDetails')?.setValue(this.selectedZones);
+  }
 
   referBackArr: { value: string, viewValue: string }[] = [];
 
@@ -368,8 +396,42 @@ export class DeparmentalRequestViewComponent {
   }
 
   ReviseData() {
+    if (this.form.value.zoneDetails.length === 0) {
+      alert("Please fill all the details properly..");
+      return;
+    } else if (this.deptForm.invalid) {
+      alert("Please fill all the details properly..");
+      return;
+    } else {
 
+      let listdocument = [];
+      let zoneDetails = this.form.get('zoneDetails')?.value;
+      for (let i = 0; i < zoneDetails.length; i++) {
+        let document = {
+          docName: zoneDetails[i]
+        };
+        listdocument.push(document);
+      }
+
+      let request: any = {
+        "referenceId": this.requestId,
+        "hierachyUserName": this.hierarchyUserName,
+        "hierachyRemark": this.deptForm.value.hierachyRemark,
+        "hierachyRoleId": this.hierarchyId,
+        "docName": this.docName,
+        "docUUID": this.docUUID,
+        "docType": this.docType,
+        "listdocument": listdocument
+      }
+      this.service.getHierarchyService(this.apiConstant.REWORK_API, request).subscribe((data: any) => {
+        console.log(data);
+        if (data.httpStatus == 'OK') {
+          this.router.navigate(['/departmentDashboard']);
+        }
+      });
+    }
   }
+
 
 
   referenceDocuments: any = 'File name will come here';
@@ -425,7 +487,7 @@ export class DeparmentalRequestViewComponent {
           this.refrencePreview = inputValue; // Base64 for images
         }
       }
-     
+
 
       const json = {
         "docFileName": fileData.name.split(".")[0],
@@ -482,7 +544,7 @@ export class DeparmentalRequestViewComponent {
     this.isrefrencePreviewModalOpen = false;
   }
 
-  
+
 
   buildForm() {
     this.supportForm = new FormGroup({
@@ -523,7 +585,7 @@ export class DeparmentalRequestViewComponent {
 
     reader.onload = (event: any) => {
       const inputValue = event.target.result;
-      if(arrayName === 'pdfFile'){
+      if (arrayName === 'pdfFile') {
         this.approverefrenceFileType = fileExtension; // Set the file type
 
         // For PDFs, create a Blob URL

@@ -26,11 +26,13 @@ geoDetails:any[]=[];
 data :any;
 requestId:any;
 frids:any;
-
+ownerCall:any;
 
   ngOnInit(): void {
     this.requestId = localStorage.getItem('requestid');
     this.frids = localStorage.getItem('frid');
+    this.ownerCall = localStorage.getItem("ownerCall");
+    this.ownerCall= this.ownerCall==null?'false':this.ownerCall;
 
     console.log(this.requestId,this.frids,"data is get on file 2........");
     

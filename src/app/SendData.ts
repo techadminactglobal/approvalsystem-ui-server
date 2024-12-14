@@ -26,6 +26,7 @@ export class SendData {
     public datatemp= 0;
     public requestid:any =0 ;
     public frid:any =0;
+    public name:any;
     public paymentFor:any;
     public paymentType :any;
 
@@ -51,5 +52,7 @@ export class SendData {
     regForm: boolean = false;
     plinthForm:boolean = false;
     OCForm: boolean = false;
+
+    disablePullBack:any;
 
 }

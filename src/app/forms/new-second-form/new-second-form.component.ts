@@ -49,11 +49,11 @@ export class NewSecondFormComponent implements OnInit {
     this.service
       .getButtonDetails(
         this.apiConstant.newSecondForm_DropDown,
-        'Civil Engineering'
+        'Supervisor'
       )
       .subscribe((data: any) => {
         this.civil = data.data;
-        console.log(this.civil, 'Civil Engineering');
+        console.log(this.civil, 'Supervisor');
       });
 
     this.service
@@ -69,11 +69,11 @@ export class NewSecondFormComponent implements OnInit {
     this.service
       .getButtonDetails(
         this.apiConstant.newSecondForm_DropDown,
-        'licensed Engineering'
+        'Engineer'
       )
       .subscribe((data: any) => {
         this.Licensed = data.data;
-        console.log(this.Licensed, 'licensed Engineering');
+        console.log(this.Licensed, 'Engineer');
       });
   }
 

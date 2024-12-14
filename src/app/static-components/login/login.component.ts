@@ -285,7 +285,7 @@ export class LoginComponent {
 
               this.senddata.expired = true;
 
-              localStorage.setItem('hierarchyUserName', res.userName); 
+              localStorage.setItem('requestid', res.userName); 
 
               this.router.navigate(['/registrationView']);
 
@@ -432,17 +432,17 @@ export class LoginComponent {
     console.log('Sending request to:', apiUrl); // Log the API URL
     console.log('User input:', this.userInput); // Log the user input
 
+
     this.http.get<{ answer: string; reply: string }>(apiUrl, {}).subscribe({
       next: (response) => {
         // Split the response into steps based on newline character and remove empty steps
         const steps = response.answer.split('\n').filter(step => step.trim() !== '');
         
         // Add a header message
-        this.messages.push({ 
-          user: '', 
-          bot: 'To do the registration on the Building Plan Website, follow these steps:', 
-          type: 'header' // Mark this as a header
-        });
+        // this.messages.push({ 
+        //   user: '', 
+        //   type: 'header' // Mark this as a header
+        // });
 
         // Add each step to the messages array with a delay
         this.addStepsWithDelay(steps);
@@ -460,19 +460,41 @@ export class LoginComponent {
     });
 
     this.userInput = ''; // Clear input after sending
+
   }
 
   addStepsWithDelay(steps: string[]) {
-    steps.forEach((step, index) => {
-      setTimeout(() => {
-        // Push each step into messages array with animation and delay
-        this.messages.push({ user: '', bot: step, type: 'normal' });
-      }, index * 1500); // Add delay for each step (1.5 second per step)
-    });
-  }
-}
-// this.store.dispatch(new LoginActions.LoggedIn(res));
-// this.router.navigate(["/"], { replaceUrl: true });
+  // Define the max length of a single message
+  const MAX_LINE_LENGTH = 205; // You can adjust this based on the desired line length
 
-// this.store.dispatch(new LoginActions.LoggedIn(res));
-// this.router.navigate(["/"], { replaceUrl: true });
+  steps.forEach((step, index) => {
+    // If the step is too long, split it into multiple parts
+    if (step.length > MAX_LINE_LENGTH) {
+      const splitSteps = this.splitLongMessage(step, MAX_LINE_LENGTH);
+      splitSteps.forEach((splitStep, splitIndex) => {
+        setTimeout(() => {
+          this.messages.push({ user: '', bot: splitStep, type: 'bot' });
+        }, (index + splitIndex) * 1500); // Adjust delay for each step
+      });
+    } else {
+      // For short messages, just add them directly
+      setTimeout(() => {
+        this.messages.push({ user: '', bot: step, type: 'bot' });
+      }, index * 1500);
+    }
+  });
+}
+
+// Helper method to split long messages into smaller chunks
+splitLongMessage(message: string, maxLength: number): string[] {
+  const result: string[] = [];
+  while (message.length > maxLength) {
+    result.push(message.substring(0, maxLength));
+    message = message.substring(maxLength);
+  }
+  if (message.length > 0) {
+    result.push(message); // Add remaining part if any
+  }
+  return result;
+}
+}
