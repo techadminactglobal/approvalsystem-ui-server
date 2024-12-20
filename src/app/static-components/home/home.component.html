@@ -128,6 +128,28 @@
   </div>
 </div>
 
+
+<!-- Document form Rework -->
+<div class="header" *ngIf="senddata.docDetailsRework || senddata.docDetailsReworkPlinth || senddata.docDetailsReworkOC">
+  <div class="success-container">
+    <div class="icon-container">
+      <div class="success-icon">&#10004;</div>
+      <p class="success-text">Success!</p>
+    </div>
+  </div>
+
+  <div class="message-container">
+    <p>Your document is Re-Submitted</p>
+    <p>Your File Req. Id: <span class="file-id">{{frid}}</span></p>
+  </div>
+
+  <div class="col button">
+    <button type="button" class="btn btn-secondary float-right" data-bs-dismiss="modal"
+      (click)="Dashboard()">Dashboard</button>
+  </div>
+</div>
+
+
 <!-- Document form -->
 <div class="header" *ngIf="senddata.docDetails">
   <div class="success-container">

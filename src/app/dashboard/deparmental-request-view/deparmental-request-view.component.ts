@@ -45,6 +45,7 @@ export class DeparmentalRequestViewComponent {
   docUniqueId: any;
   dsPlinth: boolean = false;
   dsPlinthDept: boolean = false;
+  disalePayNow:any;
   plinthDetails: any;
   documents: any[] = [];
   letterUniqueId: any;
@@ -60,6 +61,7 @@ export class DeparmentalRequestViewComponent {
   selectedZones: string[] = [];
   fileName: any[] = [];
   form!: FormGroup;
+  status:any;
 
   ngOnInit() {
     this.requestId = localStorage.getItem('requestid');
@@ -68,14 +70,20 @@ export class DeparmentalRequestViewComponent {
     this.paymentFor = localStorage.getItem('paymentFor');
     this.frId = localStorage.getItem('frid');
     this.hierarchyUserName = localStorage.getItem('hierarchyUserName');
+    this.disalePayNow = localStorage.setItem("disalePayNow",true.toString());
 
-    if (this.hierarchyId == "101" || this.hierarchyId == "201" || this.hierarchyId == "301" || this.hierarchyId == "401") {
+    setTimeout(() => {
+    if (this.hierarchyId == "101" || this.hierarchyId == "201" || (this.hierarchyId == "301" && this.status == COMMONCONSTANTS.Status_Plinth_Inspection_Completed )|| (this.hierarchyId == "401" && this.status == COMMONCONSTANTS.Status_OC_Inspection_Completed )) {
       this.rework = true;
       this.fileName = ["leaseDeedCertificateName", "SaleDeedCertificateName", "sitePhotographCertificateName", "mutationFormCertificateName"]
       this.form = new FormGroup({
         zoneDetails: new FormControl(this.selectedZones)
       });
     }
+    // if(this.hierarchyId == "301" || this.hierarchyId == "401"){
+    //   this.revise =false;
+    // }
+  }, 100);
 
     this.referenceId = this.requestId;
     this.viewPart = this.paymentFor;
@@ -112,10 +120,11 @@ export class DeparmentalRequestViewComponent {
     console.log(requestPlinth, "request plinth...");
 
     this.service.getDataService(this.apiConstant.PlinthDetails, requestPlinth).subscribe((res: any) => {
-      console.log("**************", res);
+      console.log("**************plinth", res);
       if (res.data == null) {
         return
       }
+      this.status = res.data.PlinthDetails[0].status;
       if (res.data.PlinthDetails[0].currentStatus == "103") {
         this.dsPlinth = true;
       } else if (res.data.PlinthDetails[0].currentStatus == "107") {
@@ -224,6 +233,7 @@ export class DeparmentalRequestViewComponent {
 
 
         this.service.getButtonDetails(this.apiConstant.newFORM_VIEW, this.requestId).subscribe((data: any) => {
+         
           if (data.basicInfo.status == COMMONCONSTANTS.Status_DSPending) {
             this.viewWork = false;
             this.viewDsWork = true;

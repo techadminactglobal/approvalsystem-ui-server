@@ -24,118 +24,78 @@
           <hr />
 
           <mat-card class="display-6 mb-5">
-            <mat-card-header>
-              <mat-card-title class="mb-3">Basic details</mat-card-title>
+            <mat-card-header style="display: flex; justify-content: space-between; align-items: center;">
+              <!-- Left side: Basic details title -->
+              <mat-card-title class="mb-3" style="flex-grow: 1;">Basic details</mat-card-title>
+          
+              <!-- Right side: Plinth current status -->
+              <div class="plinth-status" style="font-weight: normal; font-size: 16px;">
+                <span style="margin-right: 28px;">Plinth current status: </span>
+                <span style="font-weight: bold; font-size: 17px; color: blue;">
+                  {{ plinthDetails.status }}
+                </span>
+              </div>
             </mat-card-header>
+          
             <mat-card-content>
               <div class="row">
-                <!-- 
-                        <div class="col-md-4 col-sm-12 col-xs-12">
-                            <mat-form-field appearance="fill" class="input-control">
-                                <div class="placeholder-wrapper">
-                                    <span class="placeholder-text">File number </span> -->
-                <!-- <span class="natureOfProject-value">&nbsp; {{plinthDetails.fileNo}}</span> -->
-                <!-- <span class="natureOfProject-value">&nbsp; {{plinthDetails.frId}}</span>
-
-                                </div>
-                                <input matInput name="natureOfProject" readonly>
-                            </mat-form-field>
-                        </div> -->
-
                 <div class="col-md-4 col-sm-12 col-xs-12">
                   <mat-form-field appearance="fill" class="input-control">
                     <div class="placeholder-wrapper">
                       <span class="placeholder-text">File request id</span>
-                      <span class="natureOfProject-value"
-                        >&nbsp; {{ plinthDetails.frId }}</span
-                      >
+                      <span class="natureOfProject-value">&nbsp; {{ plinthDetails.frId }}</span>
                     </div>
                     <input matInput name="natureOfProject" readonly />
                   </mat-form-field>
                 </div>
+          
                 <div class="col-md-4 col-sm-12 col-xs-12">
                   <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
                     <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start; width: 100%; overflow: hidden; box-sizing: border-box;">
                       <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">Plinth applied Date: </span>
-                      
-                      <!-- Apply ellipsis for plinthDetails.fcreatedTime -->
-                      <span class="bHeight-value" 
-                            style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 150px); cursor: pointer;" 
-                            title="{{ plinthDetails.fcreatedTime }}">
+                      <span class="bHeight-value" style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 150px); cursor: pointer;" title="{{ plinthDetails.fcreatedTime }}">
                         {{ plinthDetails.fcreatedTime }}
                       </span>
                     </div>
-                
-                    <!-- Input with ellipsis applied, readonly to prevent editing -->
                     <input matInput name="bHeight" readonly style="width: 100%;" />
                   </mat-form-field>
                 </div>
-                
-
-                <div class="col-md-4 col-sm-12 col-xs-12">
-                  <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
-                    <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start; width: 100%; overflow: hidden; box-sizing: border-box;">
-                      <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">Plinth current status: </span>
-                      
-                      <!-- Apply ellipsis for plinthDetails.status -->
-                      <span class="natureOfProject-value" 
-                            style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 150px); cursor: pointer;" 
-                            title="{{ plinthDetails.status }}">
-                        {{ plinthDetails.status }}
-                      </span>
-                    </div>
-                
-                    <!-- Input with ellipsis applied, readonly to prevent editing -->
-                    <input matInput name="natureOfProject" readonly style="width: 100%;"/>
-                  </mat-form-field>
-                </div>
-                
-
+          
                 <div class="col-md-4 col-sm-12 col-xs-12">
                   <mat-form-field appearance="fill" class="input-control">
                     <div class="placeholder-wrapper">
                       <span class="placeholder-text">Plot area: </span>
-                      <span class="pArea-value"
-                        >&nbsp; {{ plinthDetails.pArea }}</span
-                      >
+                      <span class="pArea-value">&nbsp; {{ plinthDetails.pArea }}</span>
                     </div>
                     <input matInput name="pArea" readonly />
                   </mat-form-field>
                 </div>
-
+          
                 <div class="col-md-4 col-sm-12 col-xs-12">
                   <mat-form-field appearance="fill" class="input-control">
                     <div class="placeholder-wrapper">
-                      <span class="placeholder-text">Building height : </span>
-                      <span class="bHeight-value"
-                        >&nbsp; {{ plinthDetails.bHeight }}</span
-                      >
+                      <span class="placeholder-text">Building height: </span>
+                      <span class="bHeight-value">&nbsp; {{ plinthDetails.bHeight }}</span>
                     </div>
                     <input matInput name="bHeight" readonly />
                   </mat-form-field>
                 </div>
-
+          
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <mat-form-field appearance="fill" class="input-control" style="width: 100%;">
                     <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start; width: 100%; overflow: hidden; box-sizing: border-box;">
                       <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">Updates regarding request: </span>
-                      
-                      <!-- Apply ellipsis for plinthDetails.remark -->
-                      <span class="leaseRemarks-value" 
-                            style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 150px); cursor: pointer;" 
-                            title="{{ plinthDetails.remark }}">
+                      <span class="leaseRemarks-value" style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 150px); cursor: pointer;" title="{{ plinthDetails.remark }}">
                         {{ plinthDetails.remark }}
                       </span>
                     </div>
-                
-                    <!-- Input with ellipsis applied, readonly to prevent editing -->
                     <input matInput name="leaseRemarks" readonly style="width: 100%;" />
                   </mat-form-field>
                 </div>
-                
               </div>
             </mat-card-content>
           </mat-card>
+          
 
           <mat-card class="display-6 mb-5">
             <mat-card-header>
@@ -304,19 +264,241 @@
         </div>
       </div>
 
-      <div class="main" *ngIf="Inspection">
-        <h1>
-          Inspection Details :
-          <div class="roller">
-            <span id="rolltext"
-              ><br />
-              Authority : - {{ InspectionDetails.authority }}<br />
-              On : - {{ InspectionDetails.inspectionDate | date : "dd/MM/yyyy"
-              }}<br />
+      <div class="m-5" *ngIf="rework && deptCall">
+        <form [formGroup]="supportForm">
+            <div class="header">
+                <h2>Reupload Documents</h2>
+            </div>
+
+            <mat-card>
+                <!-- <mat-card-header>
+                    <mat-card-title class="header mt-3">Reupload Documents</mat-card-title>
+                </mat-card-header> -->
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="leaseDeedCertificateNameRework">
+                            <mat-label class="title">Lease deed</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                                    <mat-icon>attach_file</mat-icon>
+                                </button>
+                                <input type="text" readonly matInput placeholder="{{leaseDeedName}}" />
+                                <input readonly type="file" hidden #f_input
+                                    (change)="uploadDoc($event, 'leaseDeedCertificateName')"
+                                    formControlName="leaseDeedCertificateName" />
+                                <button mat-icon-button matSuffix type="button" *ngIf="educationalPreview"
+                                    (click)="toggleEducationalPreview()">
+                                    <mat-icon>visibility</mat-icon>
+                                </button>
+                                <button mat-icon-button class="delete-btn" (click)="deleteEducationalCertificate()">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+
+                                <mat-hint><strong>File type must in a .pdf or jpeg format and file size
+                                        should NOT be more than 10 MB.
+                                    </strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- Modal for Viewing the Educational Certificate in Larger Format -->
+                        <div *ngIf="isEducationalPreviewModalOpen" class="preview-modal-overlay">
+                            <div class="preview-modal-content">
+                                <!-- Preview PDF or Image (Based on the File Type) -->
+                                <iframe *ngIf="educationalFileType === 'pdf'" [src]="educationalPreview" frameborder="0"
+                                    class="modal-image"></iframe>
+                                <img *ngIf="educationalFileType !== 'pdf'" [src]="educationalPreview"
+                                    alt="Educational Certificate" class="modal-image" />
+
+                                <!-- Buttons to delete and close -->
+                                <div class="modal-btn-container">
+                                    <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificate()">
+                                <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+                            </button> -->
+                                    <button mat-icon-button class="close-btn" (click)="closeEducationalPreviewModal()">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="SaleDeedCertificatenameRework">
+                            <mat-label class="title">Sale deed</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                                    <mat-icon>attach_file</mat-icon>
+                                </button>
+                                <input type="text" readonly matInput placeholder="{{SaleDeedName}}" />
+                                <input readonly type="file" hidden #f_input
+                                    (change)="uploadDoc($event, 'SaleDeedCertificatename')"
+                                    formControlName="SaleDeedCertificatename" />
+
+                                <!-- Eye Icon Button to Toggle Preview Modal -->
+                                <button mat-icon-button matSuffix type="button" *ngIf="saleDeedPreview"
+                                    (click)="toggleEducationalPreviews()">
+                                    <mat-icon>visibility</mat-icon>
+                                </button>
+                                <button mat-icon-button class="delete-btn" (click)="deleteEducationalCertificates()">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+
+                                <mat-hint><strong>File type must be in .pdf or .jpeg format and file size should NOT be
+                                        more
+                                        than 10 MB.</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- Modal for Viewing the Educational Certificate in Larger Format -->
+                        <div *ngIf="isSaleDeedPreviewModalOpen" class="preview-modal-overlay">
+                            <div class="preview-modal-content">
+                                <!-- Preview PDF or Image (Based on the File Type) -->
+                                <iframe *ngIf="saleDeedFileType === 'pdf'" [src]="saleDeedPreview" frameborder="0"
+                                    class="modal-image"></iframe>
+                                <img *ngIf="saleDeedFileType !== 'pdf'" [src]="saleDeedPreview"
+                                    alt="Educational Certificate" class="modal-image" />
+
+                                <!-- Buttons to delete and close -->
+                                <div class="modal-btn-container">
+                                    <!--   <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificates()">
+                                <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+                            </button> -->
+                                    <button mat-icon-button class="close-btn" (click)="closeEducationalPreviewModals()">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="sitePhotographCertificatenameRework">
+                            <mat-label class="title">Site photograph</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                                    <mat-icon>attach_file</mat-icon>
+                                </button>
+                                <input type="text" readonly matInput placeholder="{{sitePhotographName}}" />
+                                <input readonly type="file" hidden #f_input
+                                    (change)="uploadDoc($event, 'sitePhotographCertificatename')"
+                                    formControlName="sitePhotographCertificatename" />
+                                <button mat-icon-button matSuffix type="button" *ngIf="sitePhotographNamePreview"
+                                    (click)="toggleEducationalPreviewsite()">
+                                    <mat-icon>visibility</mat-icon>
+                                </button>
+                                <button mat-icon-button class="delete-btn" (click)="deleteEducationalCertificatesite()">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                                <mat-hint><strong>File type must in a .pdf or jpeg format and file size
+                                        should NOT be more than 10 MB.
+                                    </strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- Modal for Viewing the Educational Certificate in Larger Format -->
+                        <div *ngIf="issitePhotographNameModalOpen" class="preview-modal-overlay">
+                            <div class="preview-modal-content">
+                                <!-- Preview PDF or Image (Based on the File Type) -->
+                                <iframe *ngIf="sitePhotographNameFileType === 'pdf'" [src]="sitePhotographNamePreview"
+                                    frameborder="0" class="modal-image"></iframe>
+                                <img *ngIf="sitePhotographNameFileType !== 'pdf'" [src]="sitePhotographNamePreview"
+                                    alt="Educational Certificate" class="modal-image" />
+
+                                <!-- Buttons to delete and close -->
+                                <div class="modal-btn-container">
+                                    <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificatesite()">
+                            <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+                        </button> -->
+                                    <button mat-icon-button class="close-btn"
+                                        (click)="closeEducationalPreviewModalsite()">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="mutitionFormCertificatenameRework">
+                            <mat-label class="title">Mutation form</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                                    <mat-icon>attach_file</mat-icon>
+                                </button>
+                                <input type="text" readonly matInput placeholder="{{mutitionFormName}}" />
+                                <input readonly type="file" hidden #f_input
+                                    (change)="uploadDoc($event, 'mutitionFormCertificatename')"
+                                    formControlName="mutitionFormCertificatename" />
+                                <button mat-icon-button matSuffix type="button" *ngIf="mutitionFormNamePreview"
+                                    (click)="toggleEducationalPreviewsitemutation()">
+                                    <mat-icon>visibility</mat-icon>
+                                </button>
+                                <button mat-icon-button class="delete-btn"
+                                    (click)="deleteEducationalCertificatesitemutation()">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                                <mat-hint><strong>File type must in a .pdf or jpeg format and file size
+                                        should NOT be more than 10 MB.
+                                    </strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- Modal for Viewing the Educational Certificate in Larger Format -->
+                        <div *ngIf="ismutitionFormNameModalOpen" class="preview-modal-overlay">
+                            <div class="preview-modal-content">
+                                <!-- Preview PDF or Image (Based on the File Type) -->
+                                <iframe *ngIf="mutitionFormNameFileType === 'pdf'" [src]="mutitionFormNamePreview"
+                                    frameborder="0" class="modal-image"></iframe>
+                                <img *ngIf="mutitionFormNameFileType !== 'pdf'" [src]="mutitionFormNamePreview"
+                                    alt="Educational Certificate" class="modal-image" />
+
+                                <!-- Buttons to delete and close -->
+                                <div class="modal-btn-container">
+                                    <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificatesitemutation()">
+                            <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+                        </button> -->
+                                    <button mat-icon-button class="close-btn"
+                                        (click)="closeEducationalPreviewModalsitemutation()">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class=""> -->
+                            <div class="col-xl-4 col-lg-6 col-12">
+                                <mat-label class="title">Other Remark</mat-label>
+                                <div class="remarktext">
+                                    <textarea name="" id="" cols="50" rows="2" placeholder="Remarks"
+                                        formControlName="otherRemark"></textarea>
+                                </div>
+                            <!-- </div> -->
+                        </div>
+
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+            <div class="d-flex justify-content-center me-2 mt-5 mb-5" *ngIf="!hideSubmit">
+                <div class="button-container col-md-12 mt-1">
+                    <button mat-raised-button color="primary" type="submit" class="log"
+                        (click)="supportFormSubmit()">Submit</button>
+                    <button mat-raised-button color="primary" type="submit" class="log" (click)="back()"
+                        style="margin-left: 2%;">Back</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="main" *ngIf="Inspection">
+      <h1>
+        <span class="inspection-title">Inspection Details :</span>
+        <div class="roller">
+          <div id="rolltext">
+            <span class="inspection-info">
+              <strong>Authority:</strong> {{ InspectionDetails.authority }}
+            </span>
+            <span class="inspection-info">
+              <strong>On:</strong> {{ InspectionDetails.inspectionDate | date : "dd/MM/yyyy" }}
             </span>
           </div>
-        </h1>
-      </div>
+        </div>
+      </h1>
+    </div>
+    
+    
 
       <div class="buttonHierachy" *ngIf="viewHistoryButton">
         <mat-expansion-panel>

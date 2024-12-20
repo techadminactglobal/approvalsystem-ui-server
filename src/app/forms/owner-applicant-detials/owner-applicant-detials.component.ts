@@ -29,9 +29,17 @@ architectview:any;
 ownerCall:any;
 disalePullBack:any;
 status:any;
+hierarchyId:any;
+ownerView:boolean = false;
+
   ngOnInit(): void {
    this.architectview =  localStorage.getItem('architectView');
     this.frId = localStorage.getItem('frid');
+    this.hierarchyId = localStorage.getItem('hierarchyId');
+if(this.hierarchyId === "001"){
+  this.ownerView = true;
+}
+
     this.viewDetais();
 
     this.ownerCall = localStorage.getItem("ownerCall");

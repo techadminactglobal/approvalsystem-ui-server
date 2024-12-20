@@ -65,6 +65,20 @@ export class OwnerDashboardComponent implements OnInit {
     });
   }
 
+/////masking adhar card
+  // Method to mask Aadhaar number in the format xxxx xxxx 9012
+  maskAadhaar(aadhaar: string): string {
+    if (aadhaar && aadhaar.length >= 12) {
+      // Mask first 8 digits as 'xxxx xxxx' and leave last 4 digits as is
+      const maskedPart = aadhaar.slice(0, 8).replace(/\d/g, 'x');  // Mask the first 8 digits
+      const lastFourDigits = aadhaar.slice(-4);  // Get the last 4 digits
+      return `${maskedPart.slice(0, 4)} ${maskedPart.slice(4)} ${lastFourDigits}`;  // Format as 'xxxx xxxx 9012'
+    }
+    return aadhaar;  // Return as is if it's less than 12 digits
+  }
+
+
+
   viewName:boolean=false;
   selectedArchitect: any;
   selectArchitectId(consultantId: string) {

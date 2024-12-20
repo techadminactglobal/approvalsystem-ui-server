@@ -27,19 +27,30 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12 col-xs-12">
-                                    <button type="button" class="btn btn-primary" (click)="NocFire()" [disabled]="NocPageForm.get('NocPageDetails.fireType')?.value !== '1' || fireForm">Fire Dept</button>
+                                    <button type="button" class="btn btn-primary" (click)="NocFire()"
+                                        [disabled]="NocPageForm.get('NocPageDetails.fireType')?.value !== '1' || fireForm">Fire
+                                        Dept</button>
                                 </div>
                             </div>
                         </div>
                     </mat-card-content>
-                    
+
                 </mat-card>
 
             </div>
-            <div class="text-center" >
-            <button type="button" class="btn btn-primary" (click)="submit()">Preview</button>
-            <button type="button" class="btn btn-primary" (click)="back()" style="margin-left: 2%;">Back</button>
-        </div>
+            <div class="text-center">
+                <!-- Conditionally render the buttons based on the 'fireType' selection -->
+                <button *ngIf="NocPageForm.get('NocPageDetails.fireType')?.value === '1'" 
+                        type="button" class="btn btn-primary" 
+                        (click)="submit()">Preview</button>
+                
+                <button *ngIf="NocPageForm.get('NocPageDetails.fireType')?.value === '2'" 
+                        type="button" class="btn btn-primary" 
+                        (click)=" payment()">Pay</button>
+            
+                <button type="button" class="btn btn-primary" (click)="back()" style="margin-left: 2%;">Back</button>
+            </div>
+            
         </form>
 
     </div>

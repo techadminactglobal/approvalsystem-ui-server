@@ -1,9 +1,25 @@
 <nav class="side-nav">
+  <!-- Logo Section -->
   <div class="logo">
     <img src="../../../assets/Act_logo/Logo-ACTGlobal-removebg-preview.png" alt="Logo" />
   </div>
+
+  <!-- User Info Section -->
+  <div class="user-info">
+    <div class="avatar">
+      <img [src]="url" alt="User Photo" class="user-photo" />
+    </div>
+    <div class="user-details">
+      <h4 class="user-name">{{this.name}}</h4>
+      <p class="user-designation">{{this.professionalType}}</p>
+      <p class="user-designation">{{this.email}}</p>
+      
+    </div>
+  </div>
+
+  <!-- Navigation Links -->
   <ul>
-    <li *ngIf="!debard && !noc && !owner" >
+    <li *ngIf="!debard && !noc && !owner">
       <a routerLink="/dashboard" class="nav-link">
         <i class="material-icons">dashboard</i>
         <span>Dashboard</span>
@@ -21,8 +37,6 @@
         <span>Dashboard</span>
       </a>
     </li>
-    
-
     <li *ngIf="debard">
       <a routerLink="/departmentDashboard" class="nav-link">
         <i class="material-icons">unarchive</i>
@@ -44,7 +58,7 @@
     <li *ngIf="form">
       <a routerLink="/OccupancyDashborad" class="nav-link">
         <i class="material-icons">unarchive</i>
-        <span> Occupancy Cert</span>
+        <span>Occupancy Cert</span>
       </a>
     </li>
     <li *ngIf="form">
@@ -65,47 +79,15 @@
         <span>Revalidation</span>
       </a>
     </li>
-  <!--   <li>
-      <a routerLink="/profile" class="nav-link">
-        <i class="material-icons">person</i>
-        <span>Profile</span>
-      </a>
-    </li> -->
     <li>
       <a routerLink="/staticalDashboard" class="nav-link">
         <i class="material-icons">pie_chart</i>
         <span>Statistical MIS</span>
       </a>
     </li>
-   <!--  <li>
-      <a routerLink="/maps" class="nav-link">
-        <i class="material-icons">location_on</i>
-        <span>Location</span>
-      </a>
-    </li> -->
   </ul>
 
-<!--   <div class="loca" *ngIf="latLogMap">
-    <br />
-    <mat-label>
-      <b>
-        <span style="text-align: center; font-family: 'Times New Roman', Times, serif;">
-          Current Location👇
-        </span>
-        <br /><br />
-        <span style="font-family: 'Times New Roman', Times, serif">latitude:</span>
-        {{ latitude }},
-        <span style="font-family: 'Times New Roman', Times, serif"><b>longitude:</b></span>
-        {{ longitude }}
-      </b>
-    </mat-label>
-    <br /><br />
-    <p (click)="showMap()">
-      <b>View on Google Map</b>
-    </p>
-    <br />
-  </div> -->
-
+  <!-- Logout Button -->
   <button class="logout-button btn-outline-success" (click)="logout()">
     Logout
   </button>

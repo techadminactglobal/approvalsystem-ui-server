@@ -12,6 +12,15 @@
                 <div class="col-md-4 col-sm-12 col-xs-12 box-type">
                     <h3>File Details</h3>
                 </div>
+                
+                <div *ngIf="ownerView"  class="col-md-4 col-sm-12 col-xs-12 text-right" style="position: relative; padding-right: 20px; margin-right: -12%;">
+                    <span style="font-weight: normal; font-size: 16px; display: inline;">Current Status: </span>
+                    <span style="font-weight: bold; font-size: 17px; color: blue; display: inline;">
+                        {{ fileDetails.status }}
+                    </span>
+                </div>
+                
+                
             </div>
 
             <div class="col-md-4 col-sm-12 col-xs-12">
@@ -34,7 +43,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-4 col-sm-12 col-xs-12">
+            <!-- <div class="col-md-4 col-sm-12 col-xs-12">
                 <mat-form-field appearance="fill" class="input-control">
                     <div class="placeholder-wrapper">
                         <span class="placeholder-text">Status:</span>
@@ -42,13 +51,13 @@
                     </div>
                     <input matInput readonly />
                 </mat-form-field>
-            </div>
+            </div> -->
 
             <div class="col-md-4 col-sm-12 col-xs-12">
                 <mat-form-field appearance="fill" class="input-control">
                     <div class="placeholder-wrapper">
                         <span class="placeholder-text">Created Time:</span>
-                        <span class="created-time-value">&nbsp; {{ fileDetails.fcreatedTime }}</span>
+                        <span class="created-time-value">&nbsp; {{ fileDetails.fcreatedTime | date: 'yyyy-MM-dd HH:mm:ss' }}</span>
                     </div>
                     <input matInput readonly />
                 </mat-form-field>

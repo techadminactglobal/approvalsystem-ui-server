@@ -1,83 +1,187 @@
+/* Sidebar Styling */
 .side-nav {
-  width: 250px;
-  height: 100vh;
-  background-color: #686060;
+  background-color: #2f3d4c;
   color: #fff;
-  padding: 20px;
+  width: 260px;
+  height: 102vh;
   position: fixed;
   top: 0;
   left: 0;
-  transition: width 0.5s;
-  border-right: 1px solid #444;
-  overflow: hidden;
+  padding-top: 30px;
+  transition: all 0.3s ease;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+  z-index: 100;
 }
 
-.logo {
-  padding: 20px;
+.side-nav .logo {
   text-align: center;
-  border-bottom: 1px solid #444;
+  margin-bottom: 30px;
 }
 
-.logo img {
-  width: 150px;
-  height: 77px;
-
-  margin: 0 auto;
+.side-nav .logo img {
+  width: 100px;
+  height: auto;
 }
 
-.side-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.side-nav li {
+/* User Info Styling */
+.user-info {
+  display: flex;
+  flex-direction: column;  /* Stack avatar and details vertically */
+  align-items: center;
+  padding: 3px;  /* Reduce padding to make the box smaller */
   margin-bottom: 20px;
-  padding: 10px;
-  border-bottom: 1px solid #444;
+  animation: fadeIn 1s ease-out;
+  background-color: #1a2531;
+  border-radius: px;
+  height: auto;  /* Allow height to adjust based on content */
 }
 
-.side-nav a {
+.avatar {
+  width: 114px;  /* Adjust avatar size */
+  height: 114px;
+  margin-bottom: 10px;  /* Add space between photo and text */
+}
+
+.user-photo {
+  width: 114%;
+  height: 114%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+}
+
+.user-details {
   color: #fff;
-  text-decoration: none;
+  text-align: center;  /* Center-align the details */
+  // margin-top: -5%;
+}
+
+.user-name {
+  font-size: 1.2em;  /* Slightly larger name for emphasis */
+  font-weight: 700;  /* Bold user name */
+  margin: 8px 0;
+  color: rgb(112, 112, 218); /* White for high contrast */
+  text-transform: capitalize;  /* Ensure the name has a clean appearance */
+}
+
+.user-designation {
+  font-size: 1em;
+  color: #d1d3e2;  /* Lighter gray color for the designation */
+  margin: 0;
+  font-style: italic;  /* Slightly italicized for a softer look */
+}
+
+
+/* Sidebar Navigation */
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  margin: 10px 0;
+}
+
+.nav-link {
   display: flex;
   align-items: center;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #ddd;
+  border-radius: 5px;
+  transition: all 0.3s ease;
 }
 
-.side-nav a:hover {
-  background-color: #444;
+.nav-link i {
+  margin-right: 15px;
+}
+
+.nav-link:hover {
+  background-color: #4e5b69;
+  overflow: hidden;
+  color: #fff;
+  transform: translateX(10px);
+}
+
+.nav-link.active {
+  background-color: #3b4c63;
   color: #fff;
 }
 
-.side-nav i {
-  font-size: 24px;
-  margin-right: 10px;
+/* Animation for fade-in effect */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-.side-nav span {
-  font-size: 18px;
-}
+/* Logout Button Styling */
 .logout-button {
   position: absolute;
   bottom: 20px;
-  left: 20px;
-  background-color: blueviolet;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
+  width: 90%;
+  margin: 0 auto;
+  display: block;
+  border-radius: 20px;
+  padding: 12px;
+  text-align: center;
+  font-size: 1em;
+  color: white;
+  background-color: #dc3545;
+  transition: background-color 0.3s ease;
 }
 
 .logout-button:hover {
-  background-color: green;
+  background-color: #c82333;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
+/* Responsive Design */
+@media screen and (max-width: 768px) {
   .side-nav {
-    width: 100px;
+    width: 100%;
+    height: auto;
+    padding-top: 20px;
+    position: relative;
   }
-  .side-nav span {
-    display: none;
+
+  .user-info {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .avatar {
+    width: 90px;  /* Adjust avatar size for smaller screens */
+    height: 90px;
+    margin-bottom: 10px;
+  }
+
+  .user-name {
+    font-size: 1em;
+  }
+
+  .user-designation {
+    font-size: 0.85em;
+  }
+
+  .nav-link {
+    padding: 10px 15px;
+  }
+
+  .logout-button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .side-nav {
+    width: 100%;
+  }
+
+  .nav-link {
+    font-size: 0.85em;
   }
 }

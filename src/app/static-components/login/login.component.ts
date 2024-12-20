@@ -265,6 +265,12 @@ export class LoginComponent {
            /*  this.senddata.hierarchyId = res.roleId;
             this.senddata.hierarchyUserName = res.userName; */
            localStorage.setItem('hierarchyUserName', res.userName);   //set in local storage for heirarchy username
+           //new implements
+           localStorage.setItem('professionalType', res.professionalType);
+           localStorage.setItem('name', res.name);
+           localStorage.setItem('photoDocId', res.photoDocId); 
+           localStorage.setItem('email', res.email);
+
               this.router.navigate(['/departmentDashboard']);
            
           } else if (res.roleId == '002') {
@@ -278,6 +284,9 @@ export class LoginComponent {
             localStorage.setItem('hierarchyUserName', res.userName);   //set in local storage for heirarchy username
             // this.senddata.hierarchyUserName = res.userName;
             localStorage.setItem('professionalType',res.professionalType);
+            localStorage.setItem('email', res.email);
+            localStorage.setItem('name', res.name);
+            localStorage.setItem('photoDocId', res.photoDocId); 
           /*   this.senddata.professionalType = res.professionalType; */
             this.router.navigate(['/nocDashboard']);
           } else if (res.roleId == '1001') {
@@ -286,6 +295,11 @@ export class LoginComponent {
               this.senddata.expired = true;
 
               localStorage.setItem('requestid', res.userName); 
+
+        localStorage.setItem('professionalType', res.professionalType);
+           localStorage.setItem('name', res.name);
+           localStorage.setItem('photoDocId', res.photoDocId); 
+           localStorage.setItem('email', res.email);
 
               this.router.navigate(['/registrationView']);
 
@@ -297,7 +311,17 @@ export class LoginComponent {
            /*  this.senddata.architectView = true; */
            localStorage.setItem('architectView', true.toString());  // Storing boolean as string
             // this.senddata.hierarchyUserName = res.userName;
+            localStorage.setItem('professionalType', res.professionalType);
+            localStorage.setItem('name', res.name);
+
             localStorage.setItem('hierarchyUserName', res.userName);   //set in local storage for heirarchy username
+            localStorage.setItem('photoDocId', res.photoDocId); 
+            localStorage.setItem('email', res.email);
+
+
+
+            
+            
             this.router.navigate(['/dashboard']);
             }
           } else if (res.roleId == '301' || res.roleId == '302') {
@@ -309,6 +333,10 @@ export class LoginComponent {
             localStorage.setItem('hierarchyId', res.roleId); 
             // this.senddata.hierarchyUserName = res.userName;
             localStorage.setItem('hierarchyUserName', res.userName); 
+            localStorage.setItem('professionalType', res.professionalType);
+           localStorage.setItem('name', res.name);
+           localStorage.setItem('photoDocId', res.photoDocId); 
+           localStorage.setItem('email', res.email);
 
             this.router.navigate(['/departmentDashboard']);
           } else if (
@@ -322,8 +350,19 @@ export class LoginComponent {
             // this.senddata.hierarchyId = res.roleId;
             // this.senddata.hierarchyUserName = res.userName;
             localStorage.setItem('hierarchyUserName', res.userName); 
+            localStorage.setItem('professionalType', res.professionalType);
+           localStorage.setItem('name', res.name);
+           localStorage.setItem('photoDocId', res.photoDocId); 
+           localStorage.setItem('email', res.email);
             this.router.navigate(['/departmentDashboard']);
-          } else if (res.roleId == '001') {
+          } else if (res.roleId == '001') {       /////////////////////////////owner
+            localStorage.setItem('professionalType', "Owner");
+            localStorage.setItem('photoDocId', res.photoDocId); 
+            localStorage.setItem('name', res.name);
+                 localStorage.setItem('email', res.email);
+
+
+
             // this.senddata.architectView = false;
             // Storing the boolean value 'false' in localStorage
             localStorage.setItem('architectView', false.toString());

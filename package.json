@@ -25,6 +25,7 @@
     "@ngrx/store": "^15.0.1",
     "@ngrx/store-devtools": "^15.0.1",
     "@popperjs/core": "^2.11.6",
+    "angular": "file:",
     "angularx-qrcode": "^15.0.1",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.4",

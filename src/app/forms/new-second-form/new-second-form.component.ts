@@ -59,11 +59,11 @@ export class NewSecondFormComponent implements OnInit {
     this.service
       .getButtonDetails(
         this.apiConstant.newSecondForm_DropDown,
-        'Structural Engineering'
+        'Structural Engineer'
       )
       .subscribe((data: any) => {
         this.Superintendent = data.data;
-        console.log(this.Superintendent, 'Structural Engineering');
+        console.log(this.Superintendent, 'Structural Engineer');
       });
 
     this.service

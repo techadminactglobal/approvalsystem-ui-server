@@ -281,10 +281,12 @@
   </section>
 
   <div class="button">
-    <button mat-raised-button color="primary" type="submit" class="log" (click)="RegistrationView()" *ngIf="paymentUserFor == 'regNew'">View Detail</button>
-    <button mat-raised-button color="primary" type="submit" class="log" (click)="ViewDashboard()" *ngIf="paymentUserFor == 'fileNew'">Dashboard</button>
+    <button mat-raised-button color="primary" type="submit" class="log" (click)="RegistrationView()" *ngIf="paymentUserFor == 'regNew' ">View Detail</button>
+    <button mat-raised-button color="primary" type="submit" class="log" (click)="ViewDashboard()" *ngIf="paymentUserFor == 'fileNew' ">Dashboard</button>
     <button mat-raised-button color="primary" type="submit" class="log" (click)="ViewPlinthDashboard()" *ngIf="paymentUserFor == 'plinthNew'">Dashboard</button>
     <button mat-raised-button color="primary" type="submit" class="log" (click)="ViewOCDashboard()" *ngIf="paymentUserFor == 'OC'">Dashboard</button>
+    <button mat-raised-button color="primary" type="submit" class="log" (click)="login()" *ngIf="this.paymentType=='RenewalConsultant'">Login</button>
+
   </div>
 </div>
 

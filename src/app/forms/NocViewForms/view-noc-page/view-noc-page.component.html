@@ -18,6 +18,224 @@
         </div>
 
     </div>
+
+    <div class="m-5" *ngIf="rework && deptCall">
+        <form [formGroup]="supportForm">
+            <div class="header">
+                <h2>Reupload Documents</h2>
+            </div>
+
+            <mat-card>
+                <!-- <mat-card-header>
+                    <mat-card-title class="header mt-3">Reupload Documents</mat-card-title>
+                </mat-card-header> -->
+                <mat-card-content>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="leaseDeedCertificateName">
+                            <mat-label class="title">Lease deed</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                                    <mat-icon>attach_file</mat-icon>
+                                </button>
+                                <input type="text" readonly matInput placeholder="{{leaseDeedName}}" />
+                                <input readonly type="file" hidden #f_input
+                                    (change)="uploadDoc($event, 'leaseDeedCertificateName')"
+                                    formControlName="leaseDeedCertificateName" />
+                                <button mat-icon-button matSuffix type="button" *ngIf="educationalPreview"
+                                    (click)="toggleEducationalPreview()">
+                                    <mat-icon>visibility</mat-icon>
+                                </button>
+                                <button mat-icon-button class="delete-btn" (click)="deleteEducationalCertificate()">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+
+                                <mat-hint><strong>File type must in a .pdf or jpeg format and file size
+                                        should NOT be more than 10 MB.
+                                    </strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- Modal for Viewing the Educational Certificate in Larger Format -->
+                        <div *ngIf="isEducationalPreviewModalOpen" class="preview-modal-overlay">
+                            <div class="preview-modal-content">
+                                <!-- Preview PDF or Image (Based on the File Type) -->
+                                <iframe *ngIf="educationalFileType === 'pdf'" [src]="educationalPreview" frameborder="0"
+                                    class="modal-image"></iframe>
+                                <img *ngIf="educationalFileType !== 'pdf'" [src]="educationalPreview"
+                                    alt="Educational Certificate" class="modal-image" />
+
+                                <!-- Buttons to delete and close -->
+                                <div class="modal-btn-container">
+                                    <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificate()">
+                                <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+                            </button> -->
+                                    <button mat-icon-button class="close-btn" (click)="closeEducationalPreviewModal()">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="SaleDeedCertificatename">
+                            <mat-label class="title">Sale deed</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                                    <mat-icon>attach_file</mat-icon>
+                                </button>
+                                <input type="text" readonly matInput placeholder="{{SaleDeedName}}" />
+                                <input readonly type="file" hidden #f_input
+                                    (change)="uploadDoc($event, 'SaleDeedCertificatename')"
+                                    formControlName="SaleDeedCertificatename" />
+
+                                <!-- Eye Icon Button to Toggle Preview Modal -->
+                                <button mat-icon-button matSuffix type="button" *ngIf="saleDeedPreview"
+                                    (click)="toggleEducationalPreviews()">
+                                    <mat-icon>visibility</mat-icon>
+                                </button>
+                                <button mat-icon-button class="delete-btn" (click)="deleteEducationalCertificates()">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+
+                                <mat-hint><strong>File type must be in .pdf or .jpeg format and file size should NOT be
+                                        more
+                                        than 10 MB.</strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- Modal for Viewing the Educational Certificate in Larger Format -->
+                        <div *ngIf="isSaleDeedPreviewModalOpen" class="preview-modal-overlay">
+                            <div class="preview-modal-content">
+                                <!-- Preview PDF or Image (Based on the File Type) -->
+                                <iframe *ngIf="saleDeedFileType === 'pdf'" [src]="saleDeedPreview" frameborder="0"
+                                    class="modal-image"></iframe>
+                                <img *ngIf="saleDeedFileType !== 'pdf'" [src]="saleDeedPreview"
+                                    alt="Educational Certificate" class="modal-image" />
+
+                                <!-- Buttons to delete and close -->
+                                <div class="modal-btn-container">
+                                    <!--   <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificates()">
+                                <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+                            </button> -->
+                                    <button mat-icon-button class="close-btn" (click)="closeEducationalPreviewModals()">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="sitePhotographCertificatename">
+                            <mat-label class="title">Site photograph</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                                    <mat-icon>attach_file</mat-icon>
+                                </button>
+                                <input type="text" readonly matInput placeholder="{{sitePhotographName}}" />
+                                <input readonly type="file" hidden #f_input
+                                    (change)="uploadDoc($event, 'sitePhotographCertificatename')"
+                                    formControlName="sitePhotographCertificatename" />
+                                <button mat-icon-button matSuffix type="button" *ngIf="sitePhotographNamePreview"
+                                    (click)="toggleEducationalPreviewsite()">
+                                    <mat-icon>visibility</mat-icon>
+                                </button>
+                                <button mat-icon-button class="delete-btn" (click)="deleteEducationalCertificatesite()">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                                <mat-hint><strong>File type must in a .pdf or jpeg format and file size
+                                        should NOT be more than 10 MB.
+                                    </strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- Modal for Viewing the Educational Certificate in Larger Format -->
+                        <div *ngIf="issitePhotographNameModalOpen" class="preview-modal-overlay">
+                            <div class="preview-modal-content">
+                                <!-- Preview PDF or Image (Based on the File Type) -->
+                                <iframe *ngIf="sitePhotographNameFileType === 'pdf'" [src]="sitePhotographNamePreview"
+                                    frameborder="0" class="modal-image"></iframe>
+                                <img *ngIf="sitePhotographNameFileType !== 'pdf'" [src]="sitePhotographNamePreview"
+                                    alt="Educational Certificate" class="modal-image" />
+
+                                <!-- Buttons to delete and close -->
+                                <div class="modal-btn-container">
+                                    <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificatesite()">
+                            <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+                        </button> -->
+                                    <button mat-icon-button class="close-btn"
+                                        (click)="closeEducationalPreviewModalsite()">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="mutitionFormCertificatename">
+                            <mat-label class="title">Mutation form</mat-label>
+                            <mat-form-field appearance="fill" class="input-control">
+                                <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                                    <mat-icon>attach_file</mat-icon>
+                                </button>
+                                <input type="text" readonly matInput placeholder="{{mutitionFormName}}" />
+                                <input readonly type="file" hidden #f_input
+                                    (change)="uploadDoc($event, 'mutitionFormCertificatename')"
+                                    formControlName="mutitionFormCertificatename" />
+                                <button mat-icon-button matSuffix type="button" *ngIf="mutitionFormNamePreview"
+                                    (click)="toggleEducationalPreviewsitemutation()">
+                                    <mat-icon>visibility</mat-icon>
+                                </button>
+                                <button mat-icon-button class="delete-btn"
+                                    (click)="deleteEducationalCertificatesitemutation()">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                                <mat-hint><strong>File type must in a .pdf or jpeg format and file size
+                                        should NOT be more than 10 MB.
+                                    </strong></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- Modal for Viewing the Educational Certificate in Larger Format -->
+                        <div *ngIf="ismutitionFormNameModalOpen" class="preview-modal-overlay">
+                            <div class="preview-modal-content">
+                                <!-- Preview PDF or Image (Based on the File Type) -->
+                                <iframe *ngIf="mutitionFormNameFileType === 'pdf'" [src]="mutitionFormNamePreview"
+                                    frameborder="0" class="modal-image"></iframe>
+                                <img *ngIf="mutitionFormNameFileType !== 'pdf'" [src]="mutitionFormNamePreview"
+                                    alt="Educational Certificate" class="modal-image" />
+
+                                <!-- Buttons to delete and close -->
+                                <div class="modal-btn-container">
+                                    <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificatesitemutation()">
+                            <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+                        </button> -->
+                                    <button mat-icon-button class="close-btn"
+                                        (click)="closeEducationalPreviewModalsitemutation()">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class=""> -->
+                            <div class="col-xl-4 col-lg-6 col-12">
+                                <mat-label class="title">Other Remark</mat-label>
+                                <div class="remarktext">
+                                    <textarea name="" id="" cols="50" rows="2" placeholder="Remarks"
+                                        formControlName="otherRemark"></textarea>
+                                </div>
+                            <!-- </div> -->
+                        </div>
+
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+            <div class="d-flex justify-content-center me-2 mt-5 mb-5" *ngIf="!hideSubmit">
+                <div class="button-container col-md-12 mt-1">
+                    <button mat-raised-button color="primary" type="submit" class="log"
+                        (click)="supportFormSubmit()">Submit</button>
+                    <button mat-raised-button color="primary" type="submit" class="log" (click)="back()"
+                        style="margin-left: 2%;">Back</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 
 <!-- <div class="buttonHierachy" *ngIf="viewHistoryButton" >
@@ -171,20 +389,112 @@
         </div>
     </mat-expansion-panel>
 </div>
-<div class="text-center" *ngIf="viewLetter" style="margin-top: 5vh;">
-    <button mat-raised-button color="primary" type="submit" class="button-spacing" (click)="ViewDS()">View
+ <div class="text-center" *ngIf="viewLetter" style="margin-top: 5vh;">
+   <!-- <button mat-raised-button color="primary" type="submit" class="button-spacing" (click)="ViewDS()">View
         {{letterName}}</button>
     <button mat-raised-button color="primary" type="submit" class="button-spacing" (click)="fileRelease()">File
         Release</button>
         <button mat-raised-button color="primary" type="submit" class="text-center" (click)="back()">
     Back
-</button>
+</button>  -->
+
+    <div class="document-upload" [formGroup]="supportForm">
+        <mat-card class="display-6 mb-5">
+            <mat-card-header>
+                <mat-card-title class="mb-3">Upload DS Letter</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    <p style="color: red; font-weight: bold; font-size: medium">
+                        please upload the ds applied letter in Pdf formate
+                    </p>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <!-- <mat-label class="title">Builder Phone Number</mat-label> -->
+                        <mat-form-field appearance="fill" class="input-control">
+                            <div class="placeholder-wrapper">
+                                <span class="letterName-value">&nbsp;{{ letterName }}</span>
+                                <i class="fa fa-download text-primary" (click)="openCertificatePdf($event)"
+                                    matTooltip="Download certificate PDF"></i>
+                            </div>
+                            <input matInput name="builderPhone" readonly />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="fill" class="input-control">
+                            <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                                <mat-icon>attach_file</mat-icon>
+                            </button>
+                            <input type="text" readonly matInput placeholder="{{ pdfFileName }}" />
+                            <!-- <input readonly type="file" hidden #f_input (change)="uploadPDF()" formControlName="pdfFile" accept=".pdf" /> -->
+                            <input readonly type="file" hidden #f_input (change)="uploadPDF($event, 'pdfFile')"
+                                formControlName="pdfFile" />
+                            <button mat-icon-button matSuffix type="button" *ngIf="approverefrencePreview"
+                                (click)="togglerefrenceapprovePreview()">
+                                <mat-icon>visibility</mat-icon>
+                            </button>
+                            <button mat-icon-button class="delete-btn" (click)="deleterefrenceapproveCertificate()">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            <mat-hint><strong>File type must be .pdf and file size should NOT be more
+                                    than 10 MB.</strong></mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="isapproveisrefrencePreviewModalOpen" class="preview-modal-overlay">
+                        <div class="preview-modal-content">
+                            <!-- Preview PDF or Image (Based on the File Type) -->
+                            <iframe *ngIf="approverefrenceFileType === 'pdf'" [src]="approverefrencePreview"
+                                frameborder="0" class="modal-image"></iframe>
+                            <img *ngIf="approverefrenceFileType !== 'pdf'" [src]="approverefrencePreview"
+                                alt="Educational Certificate" class="modal-image" />
+
+                            <!-- Buttons to delete and close -->
+                            <div class="modal-btn-container">
+                                <!--  <button mat-icon-button class="delete-btns" (click)="deleteEducationalCertificatesitemutationotherid()">
+                    <i class="fa-sharp fa-solid fa-trash-arrow-up" style="color: brown;"></i>
+                </button> -->
+                                <button mat-icon-button class="close-btn" (click)="closerefrenceapprovePreviewModal()">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-6 col-sm-12 col-xs-12">
+                  <mat-label class="title">Lease Deed</mat-label>
+                  <mat-form-field appearance="fill" class="input-control">
+                      <button mat-icon-button matPrefix type="button" (click)="f_input.click()">
+                          <mat-icon>attach_file</mat-icon>
+                      </button>
+                      <input type="text" readonly matInput placeholder="{{pdfFileName}}" />
+                      <input readonly type="file" hidden #f_input (change)="uploadPDF($event, 'pdfFile')" formControlName="pdfFile" />
+                      <mat-hint><strong>File type must be .pdf and file size should NOT be more than 10 MB.</strong></mat-hint>
+                  </mat-form-field>
+              </div> -->
+                </div>
+
+                <div class="d-flex justify-content-center me-2 mt-5 mb-5 text-center">
+                    <div class="col-md-12 mt-1">
+                        <button mat-raised-button color="primary" type="submit" class="log" (click)="submit()">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <button mat-raised-button color="primary" type="submit" class="text-center" (click)="back()">
+        Back
+    </button>
 </div>
 
 
 
 <div class="text-center" *ngIf="viewPaymentButton" style="display: flex; justify-content: center; gap: 10px;">
-   <button mat-raised-button color="primary" type="submit" (click)="payment()" style="margin: 1px;">Pay Now</button>
-   <button mat-raised-button color="primary" type="button" *ngIf="ownerCall !== 'true'" (click)="BacktoNocdeptdasbhoard()" style="margin: 1px;">Back</button>
-   <button mat-raised-button color="primary" type="button" *ngIf="ownerCall == 'true'" (click)="BacktoOwnerDasbhoard() " style="margin: 1px;">Back</button>
+    <button mat-raised-button color="primary" *ngIf="!disalePayNow" type="submit" (click)="payment()" style="margin: 1px;">Pay Now</button>
+    <button mat-raised-button color="primary" type="button" *ngIf="ownerCall !== 'true'"
+        (click)="BacktoNocdeptdasbhoard()" style="margin: 1px;">Back</button>
+    <button mat-raised-button color="primary" type="button" *ngIf="ownerCall == 'true'"
+        (click)="BacktoOwnerDasbhoard() " style="margin: 1px;">Back</button>
 </div>

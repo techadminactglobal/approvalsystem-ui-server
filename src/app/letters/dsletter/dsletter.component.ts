@@ -28,6 +28,7 @@ export class DsletterComponent {
   FileNo: any;
   FrId: any;
   initiatedDate: any;
+  planType:any;
 
   licenseNum: any;
   FileCreatedDate: any;
@@ -134,17 +135,27 @@ export class DsletterComponent {
           } else if (this.paymentType == "OC") {
             this.letterType = "OCAccept";
             this.paymentType = this.paymentType;
-          } else {
+          } else if(this.paymentType == "fileNew" && !data.data.HierarchyDetails){
+            this.letterType = "Accepted && Closed";
+          }else{
             this.letterType = data.data.HierarchyDetails.hierachyFlowProcess;
           }
 
           this.FileNo = data.data.fileDetails.fileNo;
+          this.planType=data.data.fileDetails.planType;
           this.FrId = data.data.fileDetails.frId;
           this.fileCreatedBy = data.data.fileDetails.fileCreatedBy;
           this.FileCreatedDate = data.data.fileDetails.fcreatedTime;
+
+          if(!data.data.HierarchyDetails){
+            this.approveName = data.data.fileDetails.assignedArchitect,
+            this.workDate = new Date();
+            this.HierachyRemark = "";
+          }else{
           this.approveName = data.data.HierarchyDetails.hierachyUserName;
           this.workDate = data.data.HierarchyDetails.workDate;
           this.HierachyRemark = data.data.HierarchyDetails.hierachyRemark;
+          }
 
 
           this.siteAddress = data.data.SiteAddress.address + " " + data.data.SiteAddress.district + " " + data.data.SiteAddress.state + " " + data.data.SiteAddress.pinCode;

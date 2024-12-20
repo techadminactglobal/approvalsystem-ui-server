@@ -20,6 +20,9 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: x-large;
   }
+  .observation{
+    font-weight: bold;
+  }
   #changingText{
     font-size: x-large;
     font-family: 'Courier New', Courier, monospace;
@@ -75,3 +78,61 @@
 .button-spacing {
   margin-right: 10px; /* Adjust the space between buttons as needed */
 }
+
+////
+/// 
+/// 
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Black transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it is above other elements */
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 80%; /* Maximum width for the modal */
+  max-height: 80%; /* Maximum height for the modal */
+  overflow: auto; /* Enable scrolling if content exceeds */
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for a floating effect */
+}
+
+.modal img {
+  max-width: 100%; /* Ensure the image fits within the modal */
+  height: auto;
+  margin-bottom: 15px; /* Add some spacing below the image */
+}
+
+.observation-text {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Space between images */
+}
+
+.flex-item {
+  display: flex;
+  flex-direction: column; /* Column layout for images and download link */
+  align-items: center;
+  justify-content: center;
+}
+
+

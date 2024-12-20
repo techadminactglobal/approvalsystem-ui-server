@@ -1,7 +1,9 @@
 import { Component, Inject, LOCALE_ID } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { COMMONCONSTANTS } from 'src/app/CONSTANTS/constants';
 import { TestPDF } from 'src/app/registration/data/test-pdf';
 import { SendData } from 'src/app/SendData';
 import { commonService } from 'src/app/services/common.service';
@@ -44,12 +46,35 @@ export class PlinthComponentViewComponent {
   paybutton: boolean = false;
   reference:any;
 
+
+  leaseDeedCertificateNameRework: Boolean = false;
+  SaleDeedCertificatenameRework: Boolean = false;
+  sitePhotographCertificatenameRework: Boolean = false;
+  mutitionFormCertificatenameRework: Boolean = false;
+  leaseDeedName: any = 'File name will come here';
+  SaleDeedName: any = 'File name will come here';
+  sitePhotographName: any = 'File name will come here';
+  mutitionFormName: any = 'File name will come here';
+  educationalPreview: SafeResourceUrl | null = null; // Using SafeResourceUrl for PDF
+  isEducationalPreviewModalOpen: boolean = false;
+  educationalFileType: string | null = null;
+  saleDeedPreview: SafeResourceUrl | null = null;
+  isSaleDeedPreviewModalOpen: boolean = false;
+  saleDeedFileType: string | null = null;
+  sitePhotographNamePreview: SafeResourceUrl | null = null;
+  issitePhotographNameModalOpen: boolean = false;
+  sitePhotographNameFileType: string | null = null;
+  mutitionFormNamePreview: SafeResourceUrl | null = null;
+  ismutitionFormNameModalOpen: boolean = false;
+  mutitionFormNameFileType: string | null = null;
+
   constructor(
     private fb: FormBuilder,
     private service: commonService,
     private dialog: MatDialog,
     private senddata: SendData,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer
   ) {
     if (this.callFrom == "Dept") {
       this.dept = true;
@@ -62,13 +87,17 @@ export class PlinthComponentViewComponent {
   callFrom:any;
   requestid:any;
   frid:any;
+  rework: Boolean = false;
   paymentType:any;
+  supportForm!: FormGroup;
+  deptCall:boolean = false;
   ngOnInit() {
     this.callFrom = localStorage.getItem('callFrom');
     this.requestid = localStorage.getItem('requestid');
     this.frid = localStorage.getItem('frid');
     this.paymentType = localStorage.getItem('paymentType');
     this.reference = this.requestid;
+    this.deptCall = localStorage.getItem("architectView") === "true";
     // setTimeout(() => {
     let request = {
       "fileNo": this.requestid,
@@ -93,6 +122,32 @@ export class PlinthComponentViewComponent {
       } else if (this.plinthDetails.rejectLetter != null) {
         this.letterUniqueId = this.plinthDetails.rejectLetterDs
         this.letterName = "Reject Letter";
+      }
+
+      console.log(res.data.PlinthDetails[0].currentStatus,"current status plinth");
+      if (res.data.PlinthDetails[0].currentStatus == "117") {
+
+        this.service.getButtonDetails(this.apiConstant.supportFile_View, this.requestid).subscribe((data: any) => {
+          console.log(data, "ppp...");
+          this.buildForm();
+          data.forEach((doc: any) => {
+            if (doc.docName === "leaseDeedCertificateName" && doc.modificationRequired === "yes") {
+              this.leaseDeedCertificateNameRework = true;
+            } else if (doc.docName === "SaleDeedCertificatename" && doc.modificationRequired === "yes") {
+              this.SaleDeedCertificatenameRework = true;
+            } else if (doc.docName === "sitePhotographCertificatename" && doc.modificationRequired === "yes") {
+              this.sitePhotographCertificatenameRework = true;
+            } else if (doc.docName === "mutitionFormCertificatename" && doc.modificationRequired === "yes") {
+              this.mutitionFormCertificatenameRework = true;
+            } else {
+
+            }
+          });
+          console.log(this.leaseDeedCertificateName, this.SaleDeedCertificatename, this.sitePhotographCertificatename, this.mutitionFormCertificatename, "data need to modified");
+
+        });
+        
+          this.rework = true;
       }
 
 
@@ -164,9 +219,81 @@ export class PlinthComponentViewComponent {
     this.viewPaymentHistory();
   }
 
+  buildForm() {
+    this.supportForm = new FormGroup({
+      leaseDeedCertificateName: this.fb.array(
+        [this.fileTypeForm()],
+        [Validators.required]
+      ),
+      SaleDeedCertificatename: this.fb.array(
+        [this.fileTypeForm()],
+        [Validators.required]
+      ),
+      sitePhotographCertificatename: this.fb.array(
+        [this.fileTypeForm()],
+        [Validators.required]
+      ),
+      mutitionFormCertificatename: this.fb.array(
+        [this.fileTypeForm()],
+        [Validators.required]
+      ),
+      // leaseRemarks: new FormControl(''),
+      // saleRemark: new FormControl(''),
+      // siteRemark: new FormControl(''),
+      // mutitionRemark: new FormControl(''),
+      otherRemark: new FormControl(''),
+
+    });
+
+    this.subscribeToRemarkChanges('leaseRemarks', 'leaseDeedCertificateName');
+    this.subscribeToRemarkChanges('saleRemark', 'SaleDeedCertificatename');
+    this.subscribeToRemarkChanges(
+      'siteRemark',
+      'sitePhotographCertificatename'
+    );
+    this.subscribeToRemarkChanges(
+      'mutitionRemark',
+      'mutitionFormCertificatename'
+    );
+    // this.subscribeToRemarkChanges('photographRemark', 'photograpFormCertificatename');
+    // this.subscribeToRemarkChanges('photoIdRemark', 'photoIdCertificatename');
+    // this.subscribeToRemarkChanges('companyIdRemark', 'companyIdCertificatename');
+    // this.subscribeToRemarkChanges('otherRemark', 'docDetailsModel');
+  }
   // this.docUUID = this.documents.docUUID;
 
+  private subscribeToRemarkChanges(
+    remarkControlName: string,
+    formArrayName: string
+  ): void {
+    const remarkControl: FormControl | null = this.supportForm.get(
+      remarkControlName
+    ) as FormControl;
+    const formArray: FormArray | null = this.supportForm.get(
+      formArrayName
+    ) as FormArray;
 
+    if (remarkControl && formArray) {
+      remarkControl.valueChanges.subscribe((value) => {
+        formArray.controls.forEach((control) => {
+          control.get('remark')?.setValue(value);
+        });
+      });
+    } else {
+      console.error(
+        `Remark control or FormArray not found for ${remarkControlName}`
+      );
+    }
+  }
+
+  fileTypeForm() {
+    return this.fb.group({
+      docType: [''],
+      docName: [''],
+      docUniqueId: [''],
+      remark: [''],
+    });
+  }
 
   openPdf(docUniqueId: string): void {
     let request: any = {
@@ -503,7 +630,368 @@ export class PlinthComponentViewComponent {
 
   }
 
+  uploadDoc(
+    event: any,
+    arrayName: string,
+    extensions = ['jpeg', 'jpg', 'pdf']
+  ) {
+    const fileData = event.target.files[0];
+    let allowedExtensions: string[];
+    let maxSize: number;
 
+    if (
+      arrayName === 'leaseDeedCertificateName' ||
+      arrayName === 'SaleDeedCertificatename' ||
+      arrayName === 'sitePhotographCertificatename' ||
+      arrayName === 'mutitionFormCertificatename' ||
+      arrayName === 'photoIdCertificatename' ||
+      arrayName === 'companyIdCertificatename' ||
+      arrayName === 'docDetailsModel'
+    ) {
+      allowedExtensions = ['pdf', 'jpeg'];
+      maxSize = 10485760;
+    } else if (arrayName === 'photograpFormCertificatename') {
+      allowedExtensions = ['jpeg', 'jpg'];
+      maxSize = 2097152;
+    } else {
+      allowedExtensions = ['jpeg', 'jpg'];
+      maxSize = 2097152;
+    }
+
+    const fileExtension = fileData.name.split('.').pop()?.toLowerCase();
+    if (!allowedExtensions.includes(fileExtension)) {
+      if (
+        arrayName === 'leaseDeedCertificateName' ||
+        arrayName === 'SaleDeedCertificatename' ||
+        arrayName === 'sitePhotographCertificatename' ||
+        arrayName === 'mutitionFormCertificatename' ||
+        arrayName === 'photograpFormCertificatename' ||
+        arrayName === 'photoIdCertificatename' ||
+        arrayName === 'companyIdCertificatename' ||
+        arrayName === 'docDetailsModel'
+      ) {
+        alert('Please upload a file with PDF or JPEG extension.');
+      } else {
+        alert('Please upload a file with JPG or JPEG extension.');
+      }
+      event.target.value = '';
+      return;
+    }
+
+    console.log('File size:', fileData.size);
+    if (fileData.size > maxSize) {
+      event.target.value = '';
+      alert('Please upload a file under ' + maxSize / (1024 * 1024) + ' MB.');
+      return;
+    }
+
+    if (arrayName == 'leaseDeedCertificateName') {
+      this.leaseDeedName =
+        fileData.name.split('.')[0] + fileData.name.split('.')[1];
+      // this.educationalPreview = "true"
+    } else if (arrayName == 'SaleDeedCertificatename') {
+      this.SaleDeedName =
+        fileData.name.split('.')[0] + fileData.name.split('.')[1];
+    } else if (arrayName == 'sitePhotographCertificatename') {
+      this.sitePhotographName =
+        fileData.name.split('.')[0] + fileData.name.split('.')[1];
+    } else if (arrayName == 'mutitionFormCertificatename') {
+      this.mutitionFormName =
+        fileData.name.split('.')[0] + fileData.name.split('.')[1];
+    }
+    if (fileData.size > 15728640) {
+      event.target.value = '';
+      alert('Please Upload under 2 MB File');
+      return;
+    }
+    this.supportForm.get(['deedDetails', arrayName])?.reset();
+    this.supportForm.get(['supportForm', arrayName])?.reset();
+    this.supportForm.get(['ownerDetails', arrayName])?.reset();
+    this.supportForm.get(['companyDetails', arrayName])?.reset();
+    // this.supportForm.get(['otherDetails', arrayName])?.reset();
+    this.supportForm.get(['docDetailsModel', arrayName])?.reset();
+
+    if (!this.checkFileType(event, extensions)) {
+      event.target.value = '';
+      this.supportForm.get(['deedDetails', arrayName])?.reset();
+      this.supportForm.get(['supportForm', arrayName])?.reset();
+
+      this.supportForm.get(['ownerDetails', arrayName])?.reset();
+      this.supportForm.get(['companyDetails', arrayName])?.reset();
+      this.supportForm.get(['docDetailsModel', arrayName])?.reset();
+      // this.supportForm.get(['otherDetails', arrayName])?.reset();
+      return;
+    }
+    if (arrayName === 'educationalCertificatename') {
+      this.leaseDeedName = fileData.name;
+    } else if (arrayName === 'SaleDeedCertificatename') {
+      this.SaleDeedName = fileData.name;
+    } else if (arrayName === 'sitePhotographCertificatename') {
+      this.sitePhotographName = fileData.name;
+    } else if (arrayName === 'mutitionFormCertificatename') {
+      this.mutitionFormName = fileData.name;
+    }
+
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = (event: any) => {
+      const inputValue = event.target.result;
+      // Handle preview for educational certificate
+      if (arrayName === 'leaseDeedCertificateName') {
+        this.educationalFileType = fileExtension; // Set the file type
+
+        // For PDFs, create a Blob URL
+        if (fileExtension === 'pdf') {
+          this.educationalPreview =
+            this.sanitizer.bypassSecurityTrustResourceUrl(
+              URL.createObjectURL(fileData)
+            ); // Safe URL for PDF
+        } else {
+          this.educationalPreview = inputValue; // Base64 for images
+        }
+      }
+      if (arrayName === 'SaleDeedCertificatename') {
+        this.saleDeedFileType = fileExtension; // Set the file type
+
+        // For PDFs, create a Blob URL
+        if (fileExtension === 'pdf') {
+          this.saleDeedPreview = this.sanitizer.bypassSecurityTrustResourceUrl(
+            URL.createObjectURL(fileData)
+          ); // Safe URL for PDF
+        } else {
+          this.saleDeedPreview = inputValue; // Base64 for images
+        }
+      }
+      if (arrayName === 'sitePhotographCertificatename') {
+        this.sitePhotographNameFileType = fileExtension; // Set the file type
+
+        // For PDFs, create a Blob URL
+        if (fileExtension === 'pdf') {
+          this.sitePhotographNamePreview =
+            this.sanitizer.bypassSecurityTrustResourceUrl(
+              URL.createObjectURL(fileData)
+            ); // Safe URL for PDF
+        } else {
+          this.sitePhotographNamePreview = inputValue; // Base64 for images
+        }
+      }
+      if (arrayName === 'mutitionFormCertificatename') {
+        this.mutitionFormNameFileType = fileExtension; // Set the file type
+
+        // For PDFs, create a Blob URL
+        if (fileExtension === 'pdf') {
+          this.mutitionFormNamePreview =
+            this.sanitizer.bypassSecurityTrustResourceUrl(
+              URL.createObjectURL(fileData)
+            ); // Safe URL for PDF
+        } else {
+          this.mutitionFormNamePreview = inputValue; // Base64 for images
+        }
+      }
+
+      const json = {
+        docFileName: fileData.name.split('.')[0],
+        docType: fileData.name.split('.')[1],
+        docByteStream: inputValue.split(',')[1],
+        docName: fileData.name.split('.')[0],
+      };
+
+      this.service
+        .postService(this.apiConstant.downloadUUID, json)
+        .subscribe((res: any) => {
+          console.log('data =================> ', res);
+          if (!res.docUUID) {
+            return;
+          }
+
+          const formArray = this.supportForm.get(arrayName) as FormArray | null;
+
+          if (formArray) {
+            formArray.at(0).patchValue({
+              docType:
+                fileData.name.split('.')[0] + '.' + fileData.name.split('.')[1],
+              docName: arrayName,
+              docUniqueId: res.docUUID,
+              docByteStream: inputValue.split(',')[1],
+            });
+          }
+
+          console.log('uuid: ' + res.docUUID);
+        });
+    };
+  }
+  checkFileType(event: any, extensions = ['jpg', 'jpeg', 'pdf']) {
+    var fileData = event.target.files[0];
+    if (!fileData) return false;
+    var ext = fileData.name.split('.').slice(-1)[0];
+    console.log(ext);
+
+    if (!extensions.includes(ext)) {
+      alert('File type is incorrect.');
+      return false;
+    }
+    if (fileData.size > 15728640) {
+      alert('File Size must be below 15MB.');
+      return false;
+    }
+    return true;
+  }
+
+  toggleEducationalPreview() {
+    this.isEducationalPreviewModalOpen = !this.isEducationalPreviewModalOpen;
+  }
+
+  // Close the educational certificate preview modal
+  closeEducationalPreviewModal() {
+    this.isEducationalPreviewModalOpen = false;
+  }
+
+  // Delete the educational certificate and reset the preview
+  deleteEducationalCertificate() {
+    this.educationalPreview = null;
+    this.leaseDeedName = 'File name will come here';
+    // Reset form control and close modal
+    this.isEducationalPreviewModalOpen = false;
+  }
+  // Toggle modal visibility for educational preview
+  toggleEducationalPreviews() {
+    this.isSaleDeedPreviewModalOpen = !this.isSaleDeedPreviewModalOpen;
+  }
+
+  ///////mution type
+
+  toggleEducationalPreviewsitemutation() {
+    this.ismutitionFormNameModalOpen = !this.ismutitionFormNameModalOpen;
+  }
+
+  // Close the educational certificate preview modal
+  closeEducationalPreviewModalsitemutation() {
+    this.ismutitionFormNameModalOpen = false;
+  }
+
+  // Close the educational certificate preview modal
+  closeEducationalPreviewModals() {
+    this.isSaleDeedPreviewModalOpen = false;
+  }
+
+  ////site photo grapg
+  toggleEducationalPreviewsite() {
+    this.issitePhotographNameModalOpen = !this.issitePhotographNameModalOpen;
+  }
+
+  // Close the educational certificate preview modal
+  closeEducationalPreviewModalsite() {
+    this.issitePhotographNameModalOpen = false;
+  }
+
+  // Delete the educational certificate and reset the preview
+  deleteEducationalCertificatesite() {
+    this.sitePhotographNamePreview = null;
+    this.sitePhotographName = 'File name will come here';
+    // Reset form control and close modal
+    this.issitePhotographNameModalOpen = false;
+  }
+  // Delete the educational certificate and reset the preview
+  deleteEducationalCertificates() {
+    this.saleDeedPreview = null;
+    this.SaleDeedName = 'File name will come here';
+    // Reset form control and close modal
+    this.isSaleDeedPreviewModalOpen = false;
+  }
+
+  // Delete the educational certificate and reset the preview
+  deleteEducationalCertificatesitemutation() {
+    this.mutitionFormNamePreview = null;
+    this.mutitionFormName = 'File name will come here';
+    // Reset form control and close modal
+    this.ismutitionFormNameModalOpen = false;
+  }
+
+  // dialog: boolean = false;
+  datasave: boolean = false;
+  hideSubmit: boolean = false;
+  supportFormSubmit() {
+    if (this.supportForm.invalid) {
+      console.log(this.supportForm.value, 'ok');
+      alert('Please fill all the details properly..');
+      return;
+    }
+    console.log('this.supportForm.value', this.supportForm.value);
+    this.setData();
+    let result = {
+      referenceId: this.requestid,
+      hierachyRemark: this.supportForm.value.otherRemark,
+      listdocument: this.formData,
+    };
+    console.log(result, 'supportive file dfoashgo................');
+
+    this.service
+      .getFileService(this.apiConstant.REWORK_API_ARCHITECT, result)
+      .subscribe((data: any) => {
+        console.log(data, 'kkkkkk');
+        if (data.httpStatus === 'OK') {
+          this.senddata.dialog = true;
+          this.senddata.datasave = true;
+          this.hideSubmit = true;
+
+          this.senddata.docDetailsReworkPlinth = true;
+          this.senddata.formOne = false;
+          this.router.navigate(['/home']);
+        } else {
+          this.senddata.dialog = true;
+          this.senddata.datasave = false;
+          this.senddata.hideSubmit = true;
+        }
+      });
+    this.formData = [];
+  }
+
+  formData: any[] = [];
+  setData() {
+    const excludedControls = [
+      'leaseRemarks',
+      'saleRemark',
+      'siteRemark',
+      'mutitionRemark',
+      // 'photographRemark',
+      // 'photoIdRemark',
+      // 'companyIdRemark',
+      'applicantInfo',
+      'otherRemark',
+    ];
+
+    const extractControlValues = (control: AbstractControl): any => {
+      if (control instanceof FormGroup) {
+        const groupData: any = {};
+        Object.keys(control.controls).forEach((key) => {
+          if (!excludedControls.includes(key)) {
+            groupData[key] = extractControlValues(control.get(key)!);
+          }
+        });
+        return groupData;
+      } else if (control instanceof FormArray) {
+        const arrayData = control.controls.map((c) => extractControlValues(c));
+        return arrayData.filter((data) => Object.keys(data).length > 0); // Remove empty objects
+      } else {
+        return control.value;
+      }
+    };
+
+    // Clear existing formData
+    this.formData = [];
+
+    Object.keys(this.supportForm.controls).forEach((controlName) => {
+      const control = this.supportForm.get(controlName)!;
+      if (!excludedControls.includes(controlName)) {
+        this.formData = this.formData.concat(extractControlValues(control));
+      }
+    });
+
+    // Output the form data array
+    console.log(this.formData);
+  }
 }
 
 

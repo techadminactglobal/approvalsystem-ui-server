@@ -79,6 +79,9 @@ export class HomeComponent {
 	}
 
 	Dashboard() {
+		this.senddata.docDetailsReworkPlinth = false;
+		this.senddata.docDetailsReworkOC = false;
+		this.senddata.docDetailsRework = false;
 		localStorage.setItem('hierarchyUserName', this.hierarchyUserName);
 		this.router.navigate(['/dashboard']);
 	}
@@ -167,6 +170,8 @@ export class HomeComponent {
 		this.name = localStorage.getItem('name');
 
 		this.hierarchyUserName = this.hierarchyUserName;
+
+		
 		if(this.senddata.OCForm == true){
 			this.senddata.plinthForm = false;
 			this.senddata.fireNocForm = false;
@@ -182,6 +187,7 @@ export class HomeComponent {
 			this.senddata.formOne = false;
 			this.senddata.regForm = false;
 			this.senddata.dwgReupload = false;
+			this.senddata.docDetailsRework = false;
 		}else if(this.senddata.fireNocForm == true){
 			this.senddata.plinthForm = false;
 			this.senddata.formTwo = false;

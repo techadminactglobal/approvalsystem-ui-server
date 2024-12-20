@@ -517,6 +517,10 @@ this.paymentType = localStorage.getItem('paymentType')
     this.requestId = this.requestId;
     this.router.navigate(['/registrationView'])
   }
+  login() {
+    // this.requestId = this.requestId;
+    this.router.navigate(['/login'])
+  }
 
   ViewDashboard() {
     this.requestId = this.requestId;

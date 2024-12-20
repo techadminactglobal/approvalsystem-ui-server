@@ -20,6 +20,9 @@ export class SendData {
   architectView: boolean = false;
   debard:boolean=false;
   expired :boolean=false;
+  docDetailsRework=false;
+  docDetailsReworkPlinth = false;
+  docDetailsReworkOC = false;
 
     constructor () { }
 

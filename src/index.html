@@ -12,5 +12,10 @@
 </head>
 <body class="mat-typography mat-app-background">
   <app-root></app-root>
+  <script>
+    if (window.location.pathname.endsWith('/')) {
+      window.location.pathname = window.location.pathname.slice(0, -1);
+    }
+  </script>
 </body>
 </html>

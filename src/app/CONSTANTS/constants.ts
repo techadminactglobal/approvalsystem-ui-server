@@ -7,6 +7,9 @@ export const COMMONCONSTANTS = {
     fileNew_ROLE_ID_JE: "201",
     fileNew_ROLE_ID_AE: "202",
 
+
+    Status_Plinth_Inspection_Completed: "Plinth Inspection Completed",
+    Status_OC_Inspection_Completed: "Occupancy Inspection Completed",
     Status_OwnerAssigned: "Assign to Architect",
     Status_Plinth_Inspection_Scheduled:"Plinth Payment Completed & Inspection Schedule",
     Status_OC_Inspection_Scheduled:"Occupancy Payment Completed & Inspection Schedule",
@@ -21,7 +24,7 @@ export const COMMONCONSTANTS = {
     Status_DSAppliedRequestApproved: "DS Applied - Request Approved",
     Status_NocFilled: "Noc Filled",
     Status_Form_Submitted_GIS_Pending: "Form Submitted GIS Pending",
-
+    Status_Refer_Back_to_Architect: "Refer Back to Architect",
     Status_FileProcess: "File In Process",
     Status_FileProcessed: "File Processed",
     Status_FileRe_Upoload: "File Re-Uploaded",
@@ -37,13 +40,8 @@ export const COMMONCONSTANTS = {
     Status_Request_Released: "Request Released",
     Status_Rule_Violation_Error: "Rule Violation Error",
     Status_State_Laws_Error: "State Laws Error",
+    Status_DS_Pending_Architect:"DS Pending Architect",
 
 
-
-
-
-
-
-
-
+    
 }

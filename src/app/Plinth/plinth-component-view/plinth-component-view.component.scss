@@ -54,100 +54,79 @@
   background-color: #E63946;
 } */
 
-.main{
-  height:15vh;
-  width:100%;  
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+.main {
+  height: 15vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
-h1{
-  text-align:center;
+
+h1 {
+  text-align: center;
   text-transform: uppercase;
   color: green;
   font-size: 1rem;
   font-weight: 800;
 }
 
-.roller{
+.roller {
   height: 4.125rem;
   line-height: 4rem;
   position: relative;
-  overflow: hidden; 
+  overflow: hidden;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  
   color: #1D3557;
 }
 
-
-#spare-time{
-  font-size: 1rem;
-  font-style: italic;
-  letter-spacing: 1rem;
-  margin-top: 0;
-  color: #A8DADC;
-  
+#rolltext {
+  display: flex;
+  gap: 30px; /* Adds space between the items */
+  animation: slide 10s linear infinite;
 }
 
-.roller #rolltext {
-  position: absolute;
-  top: 0;
-  animation: slide 5s infinite;  
+.inspection-info {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #1D3557;
 }
 
 @keyframes slide {
-  0%{
-    top:0;
+  0% {
+    transform: translateX(100%); /* Start from the right */
   }
-  25%{
-    top: -4rem;    
-  }
-  50%{
-    top: -8rem;
-  }
-  72.5%{
-    top: -12.25rem;
+  100% {
+    transform: translateX(-100%); /* Move to the left */
   }
 }
 
-@media screen and (max-width: 600px){
-  h1{
-  text-align:center;
-  text-transform: uppercase;
-  color: #F1FAEE; 
-  font-size: 2.125rem;
-}
-  
-  .roller{
-  height: 2.6rem; 
-  line-height: 2.125rem;  
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 1.5rem;
+    color: #F1FAEE;
   }
-  
-  #spare-time {
-    font-size: 1rem;
-    letter-spacing: 0.1rem;
+
+  .roller {
+    height: 3rem;
+    line-height: 2.6rem;
   }
-  
-  .roller #rolltext {  
-  animation: slide-mob 8s infinite;  
-}
-  
+
+  #rolltext {
+    gap: 20px;
+    animation: slide-mob 8s linear infinite;
+  }
+
   @keyframes slide-mob {
-  0%{
-    top:0;
-  }
-  25%{
-    top: -2.125rem;    
-  }
-  50%{
-    top: -4.25rem;
-  }
-  72.5%{
-    top: -6.375rem;
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
   }
 }
-}
+
