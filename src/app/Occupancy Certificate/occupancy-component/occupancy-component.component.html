@@ -59,6 +59,7 @@
                   type="file"
                   hidden
                   #f_input
+                  accept=".pdf, .jpeg, .jpg, application/pdf, image/jpeg"
                   (change)="uploadDoc($event, 'leaseDeedCertificateName')"
                   formControlName="leaseDeedCertificateName"
                 />
@@ -134,6 +135,7 @@
                   type="file"
                   hidden
                   #f_input1
+                  accept=".pdf, .jpeg, .jpg, application/pdf, image/jpeg"
                   (change)="uploadDoc($event, 'SaleDeedCertificatename')"
                   formControlName="SaleDeedCertificatename"
                 />
@@ -210,6 +212,7 @@
                   type="file"
                   hidden
                   #f_input2
+                  accept=".pdf, .jpeg, .jpg, application/pdf, image/jpeg"
                   (change)="uploadDoc($event, 'sitePhotographCertificatename')"
                   formControlName="sitePhotographCertificatename"
                 />
@@ -285,6 +288,7 @@
                   type="file"
                   hidden
                   #f_input3
+                  accept=".pdf, .jpeg, .jpg, application/pdf, image/jpeg"
                   (change)="uploadDoc($event, 'mutitionFormCertificatename')"
                   formControlName="mutitionFormCertificatename"
                 />
@@ -356,8 +360,70 @@
               </div>
             </div>
           </div>
+
+
+
+         
+      
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <mat-label class="title">DWG File</mat-label>
+            <mat-form-field appearance="fill" class="input-control">
+              <!-- File selection button -->
+              <button mat-icon-button matPrefix type="button" (click)="f_input_dwg.click()">
+                <mat-icon>attach_file</mat-icon>
+              </button>
+          
+              <!-- Text field to show file name -->
+              <input
+                type="text"
+                readonly
+                matInput
+
+                placeholder="{{ dwgFormName }}"
+              />
+          
+              <!-- File input field -->
+              <input
+                readonly
+                type="file"
+                hidden
+                #f_input_dwg
+                accept=".dwg , .dfx"
+                (change)="uploadDoc($event, 'dwgFile')"
+                formControlName="dwgFile"
+              />
+          
+              <!-- Preview Button -->
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                *ngIf="dwgFilePreview"
+                (click)="toggleDwgPreview()"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+          
+              <!-- Delete Button -->
+              <button mat-icon-button class="delete-btn" (click)="deleteDwgFile()">
+                <mat-icon>delete</mat-icon>
+              </button>
+          
+              <!-- Hint for file type and size -->
+              <mat-hint>
+                <strong>
+                  File type must be a .dwg format and file size should NOT exceed 10 MB.
+                </strong>
+              </mat-hint>
+            </mat-form-field>
+          </div>
+            
         </mat-card-content>
       </mat-card>
+
+
+
+      
 
       <div
         class="d-flex justify-content-center me-2 mt-5 mb-5"

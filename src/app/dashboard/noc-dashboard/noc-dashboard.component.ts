@@ -41,11 +41,15 @@ export class NocDashboardComponent implements OnInit {
   professionalTypes:any;
   requestId:any;
   frids:any;
+  zoneId:any;
   ngOnInit() {
     this.requestId = localStorage.getItem('requestId');
     this.hierarchyId = localStorage.getItem('hierarchyId');
     this.professionalTypes = localStorage.getItem('professionalType');
     this.frids = localStorage.getItem('frid')
+    this.zoneId=localStorage.getItem("zoneId");
+    this.zoneId= this.zoneId==""?null:this.zoneId;
+
     this.Approve();
     this.Reject();
 
@@ -81,7 +85,7 @@ export class NocDashboardComponent implements OnInit {
 
   allDetails(){
 
-    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_ALL_DASHBOARD + "?hierarchyRole=", this.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_ALL_DASHBOARD + "?hierarchyRole=", this.hierarchyId+"&zoneId="+this.zoneId).subscribe((res: any) => {
 
       console.log(res);
 
@@ -106,7 +110,7 @@ export class NocDashboardComponent implements OnInit {
   }
 
   viewDashboard() {
-    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_DASHBOARD + "?hierarchyRole=", this.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_DASHBOARD + "?hierarchyRole=", this.hierarchyId+"&zoneId="+this.zoneId).subscribe((res: any) => {
       console.log(res);
       this.reject = false;
       this.pending = true;
@@ -123,7 +127,7 @@ export class NocDashboardComponent implements OnInit {
   }
 
   Reject() {
-    this.service.getDeptDashboard(this.apiConstant.NocRejectDashboard + "?hierarchyRole=",  this.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.NocRejectDashboard + "?hierarchyRole=",  this.hierarchyId+"&zoneId="+this.zoneId).subscribe((res: any) => {
       console.log(res);
       this.pending = false;
       this.approve = false;
@@ -147,7 +151,7 @@ export class NocDashboardComponent implements OnInit {
   }
 
   Approve() {
-    this.service.getDeptDashboard(this.apiConstant.NocApproveDashboard + "?hierarchyRole=",  this.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.NocApproveDashboard + "?hierarchyRole=",  this.hierarchyId+"&zoneId="+this.zoneId).subscribe((res: any) => {
       console.log(res);
       this.reject = false;
       this.pending = false;

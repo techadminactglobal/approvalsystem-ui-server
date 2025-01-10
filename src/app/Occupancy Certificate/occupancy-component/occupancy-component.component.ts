@@ -21,6 +21,7 @@ export class OccupancyComponentComponent implements OnInit {
   SaleDeedName: string = 'File name will come here';
   sitePhotographName: string = 'File name will come here';
   mutitionFormName: string = 'File name will come here';
+  dwgFormName:string = 'File name will come here';
   isPreviewModalOpen: boolean = false;
   // For managing preview and file names
   educationalPreview: SafeResourceUrl | null = null; // Using SafeResourceUrl for PDF
@@ -35,7 +36,14 @@ export class OccupancyComponentComponent implements OnInit {
   mutitionFormNamePreview: SafeResourceUrl | null = null;
   ismutitionFormNameModalOpen: boolean = false;
   mutitionFormNameFileType: string | null = null;
-
+  newForm!: FormGroup;
+  isDwgPreviewModalOpen: boolean = false;
+  dwgFileType: string | null = null;
+dwgPreview: any;
+dwgFileName: any ; 
+dwgFile: File | null = null;
+  dwgFilePreview: any;
+ 
   constructor(
     private fb: FormBuilder,
     private service: commonService,
@@ -52,6 +60,7 @@ export class OccupancyComponentComponent implements OnInit {
     this.hierarchyUserName = localStorage.getItem('hierarchyUserName');
     this.buildForm();
     this.previousData();
+    
   }
 
   buildForm() {
@@ -60,6 +69,7 @@ export class OccupancyComponentComponent implements OnInit {
       SaleDeedCertificatename: this.fb.array([this.fileTypeForm()], [Validators.required]),
       sitePhotographCertificatename: this.fb.array([this.fileTypeForm()], [Validators.required]),
       mutitionFormCertificatename: this.fb.array([this.fileTypeForm()], [Validators.required]),
+      dwgFile:this.fb.array([this.fileTypeForm()], [Validators.required]),
       leaseRemarks: new FormControl(''),
       saleRemark: new FormControl(''),
       siteRemark: new FormControl(''),
@@ -70,7 +80,7 @@ export class OccupancyComponentComponent implements OnInit {
     this.subscribeToRemarkChanges('leaseRemarks', 'leaseDeedCertificateName');
     this.subscribeToRemarkChanges('saleRemark', 'SaleDeedCertificatename');
     this.subscribeToRemarkChanges('siteRemark', 'sitePhotographCertificatename');
-    this.subscribeToRemarkChanges('mutitionRemark', 'mutitionFormCertificatename');
+    this.subscribeToRemarkChanges('mutitionRemark', 'mutitionFormCertificatename')
   }
 
   private subscribeToRemarkChanges(remarkControlName: string, formArrayName: string): void {
@@ -102,7 +112,7 @@ export class OccupancyComponentComponent implements OnInit {
     const fileData = event.target.files[0];
     if (!fileData) return;
 
-    const allowedExtensions = ['pdf', 'jpeg'];
+    const allowedExtensions = ['pdf', 'jpeg','dwg'];
     const maxSize = 10485760; // 10MB
 
     const fileExtension = fileData.name.split('.').pop()?.toLowerCase();
@@ -111,6 +121,7 @@ export class OccupancyComponentComponent implements OnInit {
       event.target.value = '';
       return;
     }
+    
 
     if (fileData.size > maxSize) {
       alert('Please upload a file under 10 MB.');
@@ -135,6 +146,9 @@ export class OccupancyComponentComponent implements OnInit {
       case 'mutitionFormCertificatename':
         this.mutitionFormName = `${fileName}.${fileExt}`;
         break;
+        case 'dwgFile':
+          this.dwgFormName = `${fileName}.${fileExt}`;
+          break;
     }
     if (arrayName === 'educationalCertificatename') {
       this.leaseDeedName = fileData.name;
@@ -144,6 +158,9 @@ export class OccupancyComponentComponent implements OnInit {
       this.sitePhotographName = fileData.name;
     } else if (arrayName === 'mutitionFormCertificatename') {
       this.mutitionFormName = fileData.name;
+    }
+    else if (arrayName === 'dwgFile') {
+      this.dwgFormName = fileData.name;
     }
    
 
@@ -299,7 +316,9 @@ export class OccupancyComponentComponent implements OnInit {
     // Reset form control and close modal
     this.ismutitionFormNameModalOpen = false;
   }
-
+  get file_record(): FormArray {
+    return this.newForm.get('fileDocDetails') as FormArray;
+  }
 
 
   formData: any[] = [];
@@ -309,6 +328,7 @@ export class OccupancyComponentComponent implements OnInit {
     this.formData.push(this.OCForm.value.SaleDeedCertificatename[0]);
     this.formData.push(this.OCForm.value.sitePhotographCertificatename[0]);
     this.formData.push(this.OCForm.value.mutitionFormCertificatename[0]);
+    this.formData.push(this.OCForm.value.dwgFile[0]);
   
     console.log(this.formData);
   }
@@ -350,6 +370,7 @@ data: any;
     this.service.getDataService(this.apiConstant.OccupancySaveDetails, json).subscribe((data: any) => {
       console.log(data); 
       if (data.httpStatus == "OK") {
+
         this.requestid = this.data.basicInfo.fileNo;
         this.frid = this.data.basicInfo.frId;
         
@@ -358,7 +379,11 @@ data: any;
         this.hideSubmit = true;
         
         this.senddata.OCForm = true;
-        this.router.navigate(['/home']);
+        alert('Documents submitted successfully!');
+        // this.router.navigate(['/home']);
+           this.router.navigate(['/dashboard']);
+
+       
 
       }
     });
@@ -371,4 +396,46 @@ data: any;
     this.router.navigate(['/OccupancyDashborad']);
   }
 
+  closeDwgPreviewModal(): void {
+    this.isDwgPreviewModalOpen = false;
+  }
+  // Handle the DWG file upload
+  uploadDwgFile(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      const fileType = file.type;
+      if (fileType === 'application/acad' || file.name.endsWith('.dwg')) {
+        this.dwgFileName = file.name;
+        this.dwgFileType = 'dwg';
+        this.dwgPreview = true;
+        // If you want to store the file content in a base64 format, here is an example:
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          this.dwgPreview = reader.result as string;
+        };
+        // You can also upload the file to your server here.
+      } else {
+        alert('Please upload a valid .dwg file.');
+      }
+    }
+  }
+
+  // Toggle the DWG file preview modal
+  toggleDwgPreview(): void {
+    this.isDwgPreviewModalOpen = !this.isDwgPreviewModalOpen;
+  }
+ // Delete the uploaded DWG file
+  deleteDwgFile(): void {
+    this.dwgFileName = null;
+    this.dwgPreview = null;
+    this.dwgFileType = null;
+    this.dwgFilePreview = false;
+    // Clear the form control value
+    this.OCForm.get('dwgFile')?.setValue(null);
+  }
+
 }
+
+//oc dwg uploaded
+//oc dwg process approve 

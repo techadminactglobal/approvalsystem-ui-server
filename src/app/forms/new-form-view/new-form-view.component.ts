@@ -73,6 +73,7 @@ status:any;
   requestId:any;
   frids:any;
   heirarchyuserName:any;
+  requestType:any;
  
   ngOnInit(): void {
     this.requestId = localStorage.getItem('requestid');
@@ -86,6 +87,9 @@ status:any;
 
       this.createdBy = data.basicInfo.fileCreatedBy;
       this.status = data.basicInfo.status;
+      this.requestType=  data.basicInfo.requestType;
+      console.log(this.requestType+"mmmmmmmmmmmmmmmmmmm");
+      
 
       if (data.basicInfo.status == COMMONCONSTANTS.Status_FileProcessed) {
         this.fileReupload = false;

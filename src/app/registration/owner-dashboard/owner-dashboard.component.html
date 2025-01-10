@@ -271,7 +271,7 @@
           matInput
           (keyup)="onKeyup(architectInput.value)"
           #architectInput
-          placeholder="Type architect name or ID (min 3 characters)"
+          placeholder="Search by Architect ID or Name"
           formControlName="architectNum"
         />
         <button mat-button matSuffix (click)="resetArchitect()" style="margin-left: 10px;">
@@ -279,10 +279,11 @@
         </button>
         <mat-hint>
           <strong>
-            <span style="color: rgb(246, 5, 5)">**</span>(Please type min 3 characters like CA/***/***).
+            <span style="color: rgb(246, 5, 5)">**</span> (Type at least 4 characters).
           </strong>
         </mat-hint>
       </mat-form-field>
+      
     </div>
 
     <!-- Error message or Architect not found message -->
@@ -305,12 +306,12 @@
             [value]="architect.consultantId"
             (click)="selectArchitectId(architect.consultantId)"
           >
-            {{ architect.consultantId }}
+            {{ architect.consultantId }} {{ architect.firstName + ' ' + architect.middleName + ' ' + architect.lastName }}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-
+  
     <!-- Display Architect Name once selected -->
     <div class="col-md-4 col-sm-12 col-xs-12" *ngIf="viewName">
       <mat-label class="title">Full name of Architect</mat-label>
@@ -324,6 +325,7 @@
       </mat-form-field>
     </div>
   </div>
+  
 </div>
 
             

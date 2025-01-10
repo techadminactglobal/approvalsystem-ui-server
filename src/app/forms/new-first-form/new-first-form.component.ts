@@ -15,11 +15,12 @@ import { MatSelectChange } from '@angular/material/select';
   styleUrls: ['./new-first-form.component.scss']
 })
 export class NewFirstFormComponent {
-ngModel: any;
- 
-onCancel() {
-throw new Error('Method not implemented.');
-}
+  ngModel: any;
+  
+
+  onCancel() {
+    throw new Error('Method not implemented.');
+  }
   @ViewChild('myModal') modal!: ElementRef;
   AP = ["Anantapur", "Chittoor", "East Godavari", "Guntur", "Kadapa", "Krishna", "Kurnool", "Prakasam", "Nellore", "Srikakulam", "Visakhapatnam", "Vizianagaram", "West Godavari"];
   AR = ["Anjaw", "Changlang", "Dibang Valley", "East Kameng", "East Siang", "Kra Daadi", "Kurung Kumey", "Lohit", "Longding", "Lower Dibang Valley", "Lower Subansiri", "Namsai", "Papum Pare", "Siang", "Tawang", "Tirap", "Upper Siang", "Upper Subansiri", "West Kameng", "West Siang", "Itanagar"];
@@ -60,9 +61,9 @@ throw new Error('Method not implemented.');
   PY = ["Karaikal", "Mahe", "Puducherry", "Yanam"];
 
   optionsList: any;
-statesList: any;
+  statesList: any;
 
-  
+
   onStateChange(event: MatSelectChange): void {
     const selectedValue = event.value;
     console.log('Selected State:', selectedValue);
@@ -190,16 +191,22 @@ statesList: any;
   owners = 1
   apiConstant = API_PATH;
   // planType: any = [{ id: 1, name: 'Fresh' }];
- 
+
+  requestType: any
+
+  buildingSubType: any;
+  findBuildingSubType(buildingId: string) {
+    this.service.getButtonDetails(this.apiConstant.FindBuildingSubTpe, buildingId).subscribe((res: any) => {
+      console.log(res);
 
 
-buildingSubType: any;
-findBuildingSubType(buildingId:string){
-  this.service.getButtonDetails(this.apiConstant.FindBuildingSubTpe, buildingId).subscribe((res: any) => {
-    console.log(res);
-    this.buildingSubType = res.data;
-  });
-}
+      this.buildingSubType = res.data;
+    });
+  }
+
+
+
+
 
   natureType: any = [{
     "typeId": 1,
@@ -253,15 +260,26 @@ findBuildingSubType(buildingId:string){
   ) {
 
   }
+
+  selectedRequestType: any = null;
+  hierarchyUserName: any;
+  frId: any;
+
+  planType: any;
+  buildingType: any
+  pAreaMaxValue: number = 0;
+
   
-  
-  hierarchyUserName:any;
-frId:any;
-  
-planType: any;
-buildingType: any 
-pAreaMaxValue: number = 0;
+
   ngOnInit(): void {
+
+    // Listen to form control value changes
+    // this.newForm.get('bSubCategory')?.valueChanges.subscribe((value) => {
+    //   this.selectedRequestType = this.requestType.find(
+    //     (bt:) => bt.reqType === value
+    //   );
+    //   console.log('Selected Request Type:', this.selectedRequestType);
+    // });
 
     // if (this.senddata.hierarchyUserName?.toLowerCase().startsWith('ca')) {
     //   this.planType= [{
@@ -287,17 +305,17 @@ pAreaMaxValue: number = 0;
     // ];
     // }
 
-    
+
     if (localStorage.getItem("hierarchyUserName")?.toLowerCase().startsWith('ca')) {
       this.planType = [
-        { "planTypeName": "SARAL"},
-        { "planTypeName": "UPTO500"},
+        { "planTypeName": "SARAL" },
+        { "planTypeName": "UPTO500" },
         { "planTypeName": "SANCTION" }
       ];
       // this.pAreaMaxValue = 9999999;  // No limit on plot area for 'ca'
     } else if (localStorage.getItem("hierarchyUserName")?.toLowerCase().startsWith('e')) {
       this.planType = [
-        { "planTypeName": "SARAL"},
+        { "planTypeName": "SARAL" },
         { "planTypeName": "UPTO500" }
       ];
       // this.pAreaMaxValue = 500;  // Maximum plot area of 500 for 'e'
@@ -307,17 +325,17 @@ pAreaMaxValue: number = 0;
       ];
       // this.pAreaMaxValue = 250;  // Maximum plot area of 250 for 's'
     }
-  
+
     // Rebuild form to apply dynamic validation
     this.buildForm();
-  
-  
- 
+
+
+
 
 
     this.getZones();
     this.getColonies(this.wards);
-    this.getWards(this.zones);    
+    this.getWards(this.zones);
     this.hierarchyUserName = localStorage.getItem('hierarchyUserName');
     this.frId = localStorage.getItem('frid');
     this.FORM_NAME = this.getFormName();
@@ -399,10 +417,10 @@ pAreaMaxValue: number = 0;
         pinCode: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]],
         address: ['', [Validators.required]],
         blockNumber: ['', [Validators.required]],
-        zone:['', [Validators.required]],
-        ward:['', [Validators.required]],
-        colony:['', [Validators.required]],
-        
+        zone: ['', [Validators.required]],
+        ward: ['', [Validators.required]],
+        colony: ['', [Validators.required]],
+
       }),
       // applicantInfo: this.fb.group({
       //   oType: ['', [Validators.required]],
@@ -412,11 +430,11 @@ pAreaMaxValue: number = 0;
       plotDetails: this.fb.group({
         cPlot: [false, [Validators.required]],
         pArea: ['', [
-          Validators.required, 
+          Validators.required,
           Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/), // Validate number with decimal places
           Validators.max(this.pAreaMaxValue) // Dynamic max value
         ]
-      ],
+        ],
         areaAffectedInRoadWidening: ['', Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/)],
         npArea: ['', [Validators.required, Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/)]],
         lcSetback: [false],
@@ -494,16 +512,16 @@ pAreaMaxValue: number = 0;
     this.service.getFileService(this.apiConstant.form_Data, this.newForm.value).subscribe((data: any) => {
       console.log(data);
 
-        localStorage.removeItem('frid');
-        localStorage.removeItem('requestid');
-        // localStorage.removeItem('hierarchyUserName');
-        localStorage.setItem('frid', data.data.frId);
-        localStorage.setItem('requestid', data.data.fileNo);
-        // localStorage.setItem('hierarchyUserName', this.hierarchyUserName);
-        // this.senddata.frid = data.data.frId;
-        // this.senddata.requestid = data.data.fileNo;
-        // this.senddata.hierarchyUserName = data.data.createdBy;
-        if (data.httpStatus === 'OK') {
+      localStorage.removeItem('frid');
+      localStorage.removeItem('requestid');
+      // localStorage.removeItem('hierarchyUserName');
+      localStorage.setItem('frid', data.data.frId);
+      localStorage.setItem('requestid', data.data.fileNo);
+      // localStorage.setItem('hierarchyUserName', this.hierarchyUserName);
+      // this.senddata.frid = data.data.frId;
+      // this.senddata.requestid = data.data.fileNo;
+      // this.senddata.hierarchyUserName = data.data.createdBy;
+      if (data.httpStatus === 'OK') {
         this.senddata.dialog = true;
         this.senddata.datasave = true;
         this.hideSubmit = true;
@@ -666,10 +684,10 @@ pAreaMaxValue: number = 0;
 
   // }
 
-  back(){
+  back() {
     this.router.navigate(['/dashboard']);
   }
- 
+
 
 
   // zones: any;
@@ -699,173 +717,175 @@ pAreaMaxValue: number = 0;
   //   console.log('Selected Zone:', selectedZone);
   // }
 
- zones: any = [];
-wards: any = [];
-colonies: any = [];
-selectedZone: string = ''; 
-selectedWard: string = ''; 
-selectedColony: string = ''; 
-getZones(): void {
-  this.service.getButtonDetails(this.apiConstant.zoneDetails, "").subscribe(
-    (response: any) => {
-      console.log('API Response for Zones:', response);
+  zones: any = [];
+  wards: any = [];
+  colonies: any = [];
+  selectedZone: string = '';
+  selectedWard: string = '';
+  selectedColony: string = '';
+  getZones(): void {
+    this.service.getButtonDetails(this.apiConstant.zoneDetails, "").subscribe(
+      (response: any) => {
+        console.log('API Response for Zones:', response);
 
-      // Check the response structure and extract zones
-      if (response.httpStatus === 'OK' && Array.isArray(response.data)) {
-        this.zones = response.data;
-        console.log('Zones data:', this.zones); // Log zones to check
-      } else {
-        console.error('Invalid data structure or response for Zones');
+        // Check the response structure and extract zones
+        if (response.httpStatus === 'OK' && Array.isArray(response.data)) {
+          this.zones = response.data;
+          console.log('Zones data:', this.zones); // Log zones to check
+        } else {
+          console.error('Invalid data structure or response for Zones');
+        }
+      },
+      (error) => {
+        console.error('Error fetching zones:', error);
       }
-    },
-    (error) => {
-      console.error('Error fetching zones:', error);
-    }
-  );
-}
+    );
+  }
 
-// Fetch Wards based on the selected Zone
-getWards(zoneId: string): void {
-  this.service.getButtonDetails(this.apiConstant.wardDetails, zoneId).subscribe(
-    (response: any) => {
-      console.log('API Response for Wards:', response);
+  // Fetch Wards based on the selected Zone
+  getWards(zoneId: string): void {
+    this.service.getButtonDetails(this.apiConstant.wardDetails, zoneId).subscribe(
+      (response: any) => {
+        console.log('API Response for Wards:', response);
 
-      if (response.httpStatus === 'OK') {
-        this.wards = response.data;
-        console.log('Wards data:', this.wards);
-      } else {
-        console.error('Invalid data structure or response for Wards');
+        if (response.httpStatus === 'OK') {
+          this.wards = response.data;
+          console.log('Wards data:', this.wards);
+        } else {
+          console.error('Invalid data structure or response for Wards');
+        }
+      },
+      (error) => {
+        console.error('Error fetching wards:', error);
       }
-    },
-    (error) => {
-      console.error('Error fetching wards:', error);
-    }
-  );
-}
+    );
+  }
 
-// Fetch Colonies based on the selected Ward
-getColonies(wardId: string): void {
-  this.service.getButtonDetails(this.apiConstant.colonyDetails, wardId).subscribe(
-    (response: any) => {
-      console.log('API Response for Colonies:', response);
+  // Fetch Colonies based on the selected Ward
+  getColonies(wardId: string): void {
+    this.service.getButtonDetails(this.apiConstant.colonyDetails, wardId).subscribe(
+      (response: any) => {
+        console.log('API Response for Colonies:', response);
 
-      if (response.httpStatus === 'OK' && Array.isArray(response.data)) {
-        this.colonies = response.data;
-        console.log('Colonies data:', this.colonies);
-      } else {
-        console.error('Invalid data structure or response for Colonies');
+        if (response.httpStatus === 'OK' && Array.isArray(response.data)) {
+          this.colonies = response.data;
+          console.log('Colonies data:', this.colonies);
+        } else {
+          console.error('Invalid data structure or response for Colonies');
+        }
+      },
+      (error) => {
+        console.error('Error fetching colonies:', error);
       }
-    },
-    (error) => {
-      console.error('Error fetching colonies:', error);
+    );
+  }
+  onZoneChange(event: any): void {
+    const selectedZoneId = event.value;
+    console.log('Selected Zone ID:', selectedZoneId);
+    const selectedZone = this.zones.find((zone: { zoneName: any; }) => zone.zoneName === selectedZoneId);
+
+    if (selectedZone) {
+      this.selectedZone = selectedZone.zoneGenerateId;
+      console.log('Selected Zone Name:', selectedZone);
+      this.newForm.get('siteLocationDetails')?.get('zone')?.setValue(selectedZone.zoneName);
     }
-  );
-}
-onZoneChange(event: any): void {
-  const selectedZoneId = event.value;
-  console.log('Selected Zone ID:', selectedZoneId);
-  const selectedZone = this.zones.find((zone: { zoneName: any; }) => zone.zoneName === selectedZoneId);
-  
-  if (selectedZone) {
-    this.selectedZone = selectedZone.zoneGenerateId;
-    console.log('Selected Zone Name:', selectedZone);
-    this.newForm.get('siteLocationDetails')?.get('zone')?.setValue(selectedZone.zoneName);
-  }
-  if(this.selectedZone){
-    this.getWards(this.selectedZone);
-  }
-  console.log("Form Value After Ward Change:", this.newForm.value);
-
-}
-
-onWardChange(event: any): void {
-  const selectedWardId = event.value;
-  console.log("Selected Ward ID:", selectedWardId);
-  
-  // Check the selectedWard object
-  const selectedWard = this.wards.find((ward: { wardName: any }) => ward.wardName === selectedWardId);
-  if (selectedWard) {
-    this.selectedWard=selectedWard.wardId;
-    console.log("Selected Ward: ", selectedWard);
-    this.newForm.get('siteLocationDetails')?.get('ward')?.setValue(selectedWard.wardName);
-  }
-
-  if (this.selectedWard) {
-    this.getColonies(this.selectedWard);
-  }
-  
-  console.log("Form Value After Ward Change:", this.newForm.value);
-}
-
-// findPlanType(event: any): void {
-//   const plan = event.value;
-//   // const planType = this.newForm?.get(['basicInfo', 'planType'])?.value;
-// console.log(plan,"plangyutfugu")
-//   if (plan==="SARAL"){
-//     this.pAreaMaxValue = 250; 
-//   }else if (plan==="UPTO500"){
-//     this.pAreaMaxValue = 500; 
-//   }else if (plan==="SANCTION") {
-//     this.pAreaMaxValue = 9999999; 
-//   }
-// }
-updatePlotAreaValidator(): void {
-  const plotAreaControl = this.newForm.get('plotDetails.pArea');
-
-  // Remove existing validators and set the new ones
-  plotAreaControl?.clearValidators();
-
-  plotAreaControl?.setValidators([
-    Validators.required,
-    Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/), // Validate number with decimal places
-    Validators.max(this.pAreaMaxValue) // Apply dynamic max value
-  ]);
-
-  // Manually trigger validation after updating the validators
-  plotAreaControl?.updateValueAndValidity();
-}
-
-
-findPlanType(event: any): void {
-  const plan = event.value;
-  console.log(plan, "plan");
-
-  if (plan === "SARAL") {
-    this.pAreaMaxValue = 250; 
-    
-    this.buildingType= [{
-      "buildingTypeId": 1,
-      "buildingTypeName": "Residential",
+    if (this.selectedZone) {
+      this.getWards(this.selectedZone);
     }
-    ];
-  } else if (plan === "UPTO500") {
-    this.pAreaMaxValue = 500; 
-    
-    this.buildingType= [{
-      "buildingTypeId": 1,
-      "buildingTypeName": "Residential",
-    }
-    ];
-  } else if (plan === "SANCTION") {
-    this.pAreaMaxValue = 9999999; 
-    this.buildingType= [{
-      "buildingTypeId": 1,
-      "buildingTypeName": "Residential",
-    },{
-      "buildingTypeId": 2,
-      "buildingTypeName": "Commercial",
-    },{
-      "buildingTypeId": 3,
-      "buildingTypeName": "Industrial",
-    },{
-      "buildingTypeId": 40,
-      "buildingTypeName": "Other",
-    },
-    ];
+    console.log("Form Value After Ward Change:", this.newForm.value);
+
   }
 
-  // Update the validator for the pArea control
-  this.updatePlotAreaValidator();
-}
+  onWardChange(event: any): void {
+    const selectedWardId = event.value;
+    console.log("Selected Ward ID:", selectedWardId);
+
+    // Check the selectedWard object
+    const selectedWard = this.wards.find((ward: { wardName: any }) => ward.wardName === selectedWardId);
+    if (selectedWard) {
+      this.selectedWard = selectedWard.wardId;
+      console.log("Selected Ward: ", selectedWard);
+      this.newForm.get('siteLocationDetails')?.get('ward')?.setValue(selectedWard.wardName);
+    }
+
+    if (this.selectedWard) {
+      this.getColonies(this.selectedWard);
+    }
+
+    console.log("Form Value After Ward Change:", this.newForm.value);
+  }
+
+  // findPlanType(event: any): void {
+  //   const plan = event.value;
+  //   // const planType = this.newForm?.get(['basicInfo', 'planType'])?.value;
+  // console.log(plan,"plangyutfugu")
+  //   if (plan==="SARAL"){
+  //     this.pAreaMaxValue = 250; 
+  //   }else if (plan==="UPTO500"){
+  //     this.pAreaMaxValue = 500; 
+  //   }else if (plan==="SANCTION") {
+  //     this.pAreaMaxValue = 9999999; 
+  //   }
+  // }
+  updatePlotAreaValidator(): void {
+    const plotAreaControl = this.newForm.get('plotDetails.pArea');
+
+    // Remove existing validators and set the new ones
+    plotAreaControl?.clearValidators();
+
+    plotAreaControl?.setValidators([
+      Validators.required,
+      Validators.pattern(/^(?:\d*[0-9](?:\.[0-9]{1,3})?|\.[0-9]{1,3})$/), // Validate number with decimal places
+      Validators.max(this.pAreaMaxValue) // Apply dynamic max value
+    ]);
+
+    // Manually trigger validation after updating the validators
+    plotAreaControl?.updateValueAndValidity();
+  }
+
+
+  findPlanType(event: any): void {
+    const plan = event.value;
+    console.log(plan, "plan");
+
+    if (plan === "SARAL") {
+      this.pAreaMaxValue = 250;
+
+      this.buildingType = [{
+        "buildingTypeId": 1,
+        "buildingTypeName": "Residential",
+      }
+      ];
+    } else if (plan === "UPTO500") {
+      this.pAreaMaxValue = 500;
+
+      this.buildingType = [{
+        "buildingTypeId": 1,
+        "buildingTypeName": "Residential",
+      }
+      ];
+    } else if (plan === "SANCTION") {
+      this.pAreaMaxValue = 9999999;
+      this.buildingType = [{
+        "buildingTypeId": 1,
+        "buildingTypeName": "Residential",
+      }, {
+        "buildingTypeId": 2,
+        "buildingTypeName": "Commercial",
+      }, {
+        "buildingTypeId": 3,
+        "buildingTypeName": "Industrial",
+      }, {
+        "buildingTypeId": 40,
+        "buildingTypeName": "Other",
+      },
+      ];
+    }
+
+    // Update the validator for the pArea control
+    this.updatePlotAreaValidator();
+  }
+
+
 
 }

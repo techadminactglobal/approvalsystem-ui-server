@@ -433,7 +433,7 @@
                     <tbody>
                         <tr *ngFor="let paymentHistoryItem of paymentHistoryData">
                             <td>{{ paymentHistoryItem.transactionRefNo }}</td>
-                            <td>{{ paymentHistoryItem.paymentSuccessDate }}</td>
+                            <td>{{ paymentHistoryItem.paymentSuccessDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
                             <td>{{paymentHistoryItem.amount}}</td>
                             <td *ngIf="paymentHistoryItem.docUniqueId" (click)="openPaymentPdf(paymentHistoryItem.docUniqueId)" class="viewDoc" >{{ paymentHistoryItem.docName }} </td>
                             <td *ngIf="!paymentHistoryItem.docUniqueId"></td>

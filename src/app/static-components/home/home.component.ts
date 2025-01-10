@@ -144,7 +144,6 @@ export class HomeComponent {
 	  this.router.navigate(['/nocPage']);
 	}
 
-
 	DashboardReuplad(){
 		localStorage.setItem('hierarchyUserName',this.hierarchyUserName);
 		this.router.navigate(['/dashboard']);

@@ -257,72 +257,74 @@ export class LoginComponent {
             res.roleId == COMMONCONSTANTS.RegNew_ROLE_ID_AA ||
             res.roleId == COMMONCONSTANTS.RegNew_ROLE_ID_SE ||
             res.roleId == COMMONCONSTANTS.fileNew_ROLE_ID_JE ||
-            res.roleId == COMMONCONSTANTS.fileNew_ROLE_ID_AE
-          ) 
-          
-          {
-             localStorage.setItem('hierarchyId', res.roleId);   //set in local storage for heirarchy id
-           /*  this.senddata.hierarchyId = res.roleId;
-            this.senddata.hierarchyUserName = res.userName; */
-           localStorage.setItem('hierarchyUserName', res.userName);   //set in local storage for heirarchy username
-           //new implements
-           localStorage.setItem('professionalType', res.professionalType);
-           localStorage.setItem('name', res.name);
-           localStorage.setItem('photoDocId', res.photoDocId); 
-           localStorage.setItem('email', res.email);
+            res.roleId == COMMONCONSTANTS.fileNew_ROLE_ID_AE || (res.roleId >= "400111" && res.roleId <= "400445")
+          ) {
+            localStorage.setItem('hierarchyId', res.roleId);   //set in local storage for heirarchy id
+            /*  this.senddata.hierarchyId = res.roleId;
+             this.senddata.hierarchyUserName = res.userName; */
+            localStorage.setItem('hierarchyUserName', res.userName);   //set in local storage for heirarchy username
+            //new implements
+            localStorage.setItem('professionalType', res.professionalType);
+            localStorage.setItem('name', res.name);
+            localStorage.setItem('photoDocId', res.photoDocId);
+            localStorage.setItem('email', res.email);
+            localStorage.setItem("zoneId", res.assignedZone);
 
-              this.router.navigate(['/departmentDashboard']);
-           
+            this.router.navigate(['/departmentDashboard']);
+
           } else if (res.roleId == '002') {
             // this.senddata.hierarchyId = 0;
+            localStorage.setItem("zoneId", res.assignedZone);
             localStorage.setItem('requestid', res.userName);   //set in local storage for user name
-           /*  this.senddata.requestid = res.userName; */
+            /*  this.senddata.requestid = res.userName; */
             this.router.navigate(['/registrationView']);
-          } else if (res.roleId == 'f-101') {
+          } else if (res.roleId.includes('f-')) {
             localStorage.setItem('hierarchyId', res.roleId);   //set in local storage for heirarchy id
             // this.senddata.hierarchyId = res.roleId;
             localStorage.setItem('hierarchyUserName', res.userName);   //set in local storage for heirarchy username
             // this.senddata.hierarchyUserName = res.userName;
-            localStorage.setItem('professionalType',res.professionalType);
+            localStorage.setItem('professionalType', res.professionalType);
             localStorage.setItem('email', res.email);
             localStorage.setItem('name', res.name);
-            localStorage.setItem('photoDocId', res.photoDocId); 
-          /*   this.senddata.professionalType = res.professionalType; */
+            localStorage.setItem('photoDocId', res.photoDocId);
+
+            localStorage.setItem("zoneId", res.assignedZone);
+            /*   this.senddata.professionalType = res.professionalType; */
             this.router.navigate(['/nocDashboard']);
           } else if (res.roleId == '1001') {
-            if(res.expired==true){
+            if (res.expired == true) {
 
               this.senddata.expired = true;
+              localStorage.setItem("zoneId", res.assignedZone);
+              localStorage.setItem('requestid', res.userName);
 
-              localStorage.setItem('requestid', res.userName); 
-
-        localStorage.setItem('professionalType', res.professionalType);
-           localStorage.setItem('name', res.name);
-           localStorage.setItem('photoDocId', res.photoDocId); 
-           localStorage.setItem('email', res.email);
+              localStorage.setItem('professionalType', res.professionalType);
+              localStorage.setItem('name', res.name);
+              localStorage.setItem('photoDocId', res.photoDocId);
+              localStorage.setItem('email', res.email);
 
               this.router.navigate(['/registrationView']);
 
             }
 
-            else{
-            // this.senddata.hierarchyId = res.roleId;
-            localStorage.setItem('hierarchyId', res.roleId);   //set in local storage for heirarchy id
-           /*  this.senddata.architectView = true; */
-           localStorage.setItem('architectView', true.toString());  // Storing boolean as string
-            // this.senddata.hierarchyUserName = res.userName;
-            localStorage.setItem('professionalType', res.professionalType);
-            localStorage.setItem('name', res.name);
+            else {
+              // this.senddata.hierarchyId = res.roleId;
+              localStorage.setItem('hierarchyId', res.roleId);   //set in local storage for heirarchy id
+              /*  this.senddata.architectView = true; */
+              localStorage.setItem('architectView', true.toString());  // Storing boolean as string
+              // this.senddata.hierarchyUserName = res.userName;
+              localStorage.setItem('professionalType', res.professionalType);
+              localStorage.setItem('name', res.name);
 
-            localStorage.setItem('hierarchyUserName', res.userName);   //set in local storage for heirarchy username
-            localStorage.setItem('photoDocId', res.photoDocId); 
-            localStorage.setItem('email', res.email);
+              localStorage.setItem('hierarchyUserName', res.userName);   //set in local storage for heirarchy username
+              localStorage.setItem('photoDocId', res.photoDocId);
+              localStorage.setItem('email', res.email);
+              localStorage.setItem("zoneId",res.assignedZone);
 
 
 
-            
-            
-            this.router.navigate(['/dashboard']);
+
+              this.router.navigate(['/dashboard']);
             }
           } else if (res.roleId == '301' || res.roleId == '302') {
             // this.senddata.callFrom = 'plinth';
@@ -330,13 +332,14 @@ export class LoginComponent {
             localStorage.setItem('callFrom', 'plinth');
 
             // this.senddata.hierarchyId = res.roleId;
-            localStorage.setItem('hierarchyId', res.roleId); 
+            localStorage.setItem('hierarchyId', res.roleId);
             // this.senddata.hierarchyUserName = res.userName;
-            localStorage.setItem('hierarchyUserName', res.userName); 
+            localStorage.setItem('hierarchyUserName', res.userName);
             localStorage.setItem('professionalType', res.professionalType);
-           localStorage.setItem('name', res.name);
-           localStorage.setItem('photoDocId', res.photoDocId); 
-           localStorage.setItem('email', res.email);
+            localStorage.setItem('name', res.name);
+            localStorage.setItem('photoDocId', res.photoDocId);
+            localStorage.setItem('email', res.email);
+            localStorage.setItem("zoneId",res.assignedZone);
 
             this.router.navigate(['/departmentDashboard']);
           } else if (
@@ -346,21 +349,22 @@ export class LoginComponent {
           ) {
             localStorage.setItem('callFrom', 'OC');
             // this.senddata.callFrom = 'OC';
-            localStorage.setItem('hierarchyId', res.roleId); 
+            localStorage.setItem('hierarchyId', res.roleId);
             // this.senddata.hierarchyId = res.roleId;
             // this.senddata.hierarchyUserName = res.userName;
-            localStorage.setItem('hierarchyUserName', res.userName); 
+            localStorage.setItem('hierarchyUserName', res.userName);
             localStorage.setItem('professionalType', res.professionalType);
-           localStorage.setItem('name', res.name);
-           localStorage.setItem('photoDocId', res.photoDocId); 
-           localStorage.setItem('email', res.email);
+            localStorage.setItem('name', res.name);
+            localStorage.setItem('photoDocId', res.photoDocId);
+            localStorage.setItem('email', res.email);
+            localStorage.setItem("zoneId",res.assignedZone);
             this.router.navigate(['/departmentDashboard']);
           } else if (res.roleId == '001') {       /////////////////////////////owner
             localStorage.setItem('professionalType', "Owner");
-            localStorage.setItem('photoDocId', res.photoDocId); 
+            localStorage.setItem('photoDocId', res.photoDocId);
             localStorage.setItem('name', res.name);
-                 localStorage.setItem('email', res.email);
-
+            localStorage.setItem('email', res.email);
+            localStorage.setItem("zoneId",res.assignedZone);
 
 
             // this.senddata.architectView = false;
@@ -368,10 +372,10 @@ export class LoginComponent {
             localStorage.setItem('architectView', false.toString());
 
             // this.senddata.hierarchyId = res.roleId;
-            localStorage.setItem('hierarchyId', res.roleId); 
+            localStorage.setItem('hierarchyId', res.roleId);
 
             // this.senddata.hierarchyUserName = res.userName;
-            localStorage.setItem('hierarchyUserName', res.userName); 
+            localStorage.setItem('hierarchyUserName', res.userName);
             this.router.navigate(['/OwnerDashboard']);
           }
         } else {
@@ -413,9 +417,9 @@ export class LoginComponent {
     window.open(filePath, '_blank');
   }
 
- 
- 
-  
+
+
+
 
   OwnerRegister() {
     this.router.navigate(['/OwnerRegistration']);
@@ -476,7 +480,7 @@ export class LoginComponent {
       next: (response) => {
         // Split the response into steps based on newline character and remove empty steps
         const steps = response.answer.split('\n').filter(step => step.trim() !== '');
-        
+
         // Add a header message
         // this.messages.push({ 
         //   user: '', 
@@ -485,14 +489,14 @@ export class LoginComponent {
 
         // Add each step to the messages array with a delay
         this.addStepsWithDelay(steps);
-        
+
         // Hide typing indicator after receiving response
         this.isBotTyping = false;
       },
       error: (error) => {
         console.error('Error:', error); // Log the error
         this.messages[this.messages.length - 1].bot = 'Sorry, something went wrong.';
-        
+
         // Hide typing indicator in case of error
         this.isBotTyping = false;
       },
@@ -503,37 +507,37 @@ export class LoginComponent {
   }
 
   addStepsWithDelay(steps: string[]) {
-  // Define the max length of a single message
-  const MAX_LINE_LENGTH = 205; // You can adjust this based on the desired line length
+    // Define the max length of a single message
+    const MAX_LINE_LENGTH = 205; // You can adjust this based on the desired line length
 
-  steps.forEach((step, index) => {
-    // If the step is too long, split it into multiple parts
-    if (step.length > MAX_LINE_LENGTH) {
-      const splitSteps = this.splitLongMessage(step, MAX_LINE_LENGTH);
-      splitSteps.forEach((splitStep, splitIndex) => {
+    steps.forEach((step, index) => {
+      // If the step is too long, split it into multiple parts
+      if (step.length > MAX_LINE_LENGTH) {
+        const splitSteps = this.splitLongMessage(step, MAX_LINE_LENGTH);
+        splitSteps.forEach((splitStep, splitIndex) => {
+          setTimeout(() => {
+            this.messages.push({ user: '', bot: splitStep, type: 'bot' });
+          }, (index + splitIndex) * 1500); // Adjust delay for each step
+        });
+      } else {
+        // For short messages, just add them directly
         setTimeout(() => {
-          this.messages.push({ user: '', bot: splitStep, type: 'bot' });
-        }, (index + splitIndex) * 1500); // Adjust delay for each step
-      });
-    } else {
-      // For short messages, just add them directly
-      setTimeout(() => {
-        this.messages.push({ user: '', bot: step, type: 'bot' });
-      }, index * 1500);
-    }
-  });
-}
+          this.messages.push({ user: '', bot: step, type: 'bot' });
+        }, index * 1500);
+      }
+    });
+  }
 
-// Helper method to split long messages into smaller chunks
-splitLongMessage(message: string, maxLength: number): string[] {
-  const result: string[] = [];
-  while (message.length > maxLength) {
-    result.push(message.substring(0, maxLength));
-    message = message.substring(maxLength);
+  // Helper method to split long messages into smaller chunks
+  splitLongMessage(message: string, maxLength: number): string[] {
+    const result: string[] = [];
+    while (message.length > maxLength) {
+      result.push(message.substring(0, maxLength));
+      message = message.substring(maxLength);
+    }
+    if (message.length > 0) {
+      result.push(message); // Add remaining part if any
+    }
+    return result;
   }
-  if (message.length > 0) {
-    result.push(message); // Add remaining part if any
-  }
-  return result;
-}
 }

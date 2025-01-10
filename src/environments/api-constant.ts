@@ -1,5 +1,5 @@
-const api = 'obpas.actglobalindia.com:9006'; // Local API path
-// const api: `obpas.actglobalindia.com:9006`, //server
+// const api = '192.168.1.18:9006'; // Local API path
+const api = `obpas.actglobalindia.com:9006`; //server
 
 export const API_PATH = {
   api,
@@ -118,4 +118,5 @@ export const API_PATH = {
   wardDetails: `http://${api}/save/getWardList?param=`,
   colonyDetails: `http://${api}/save/getColonyList?param=`,
   updateObservation: `http://${api}/workDashboard/uploadInspection`,
+  doc_Re_Upload_Error_DWG: `http://${api}/OC/findLatestEntryForDwg`,
 };

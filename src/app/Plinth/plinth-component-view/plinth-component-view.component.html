@@ -54,7 +54,7 @@
                     <div class="placeholder-wrapper" style="display: flex; align-items: center; justify-content: flex-start; width: 100%; overflow: hidden; box-sizing: border-box;">
                       <span class="placeholder-text" style="flex-shrink: 0; margin-right: 5px;">Plinth applied Date: </span>
                       <span class="bHeight-value" style="display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 150px); cursor: pointer;" title="{{ plinthDetails.fcreatedTime }}">
-                        {{ plinthDetails.fcreatedTime }}
+                        {{ plinthDetails.fcreatedTime  | date: 'yyyy-MM-dd HH:mm:ss'}}
                       </span>
                     </div>
                     <input matInput name="bHeight" readonly style="width: 100%;" />
@@ -596,7 +596,7 @@
                 <tbody>
                   <tr *ngFor="let paymentHistoryItem of paymentHistoryData">
                     <td>{{ paymentHistoryItem.transactionRefNo }}</td>
-                    <td>{{ paymentHistoryItem.paymentSuccessDate }}</td>
+                    <td>{{ paymentHistoryItem.paymentSuccessDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
                     <td>{{ paymentHistoryItem.amount }}</td>
                     <td
                       *ngIf="paymentHistoryItem.docUniqueId"
@@ -662,6 +662,10 @@
             Back
           </button>
           </div>
+          <button mat-raised-button color="primary" type="submit" class="log spaced-button" (click)="back()">
+            Back
+          </button>
+
         </div>
       </div>
     </div>

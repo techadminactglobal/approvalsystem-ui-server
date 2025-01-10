@@ -72,7 +72,7 @@ export class NewSecondformViewComponent {
           this.geoDetails = data.data.geoCoordinate;
           this.inspectionDocs = data.data.inspectionImages || [];
           this.ocObservationDocs = data.data.inspectionImagesForOc || [];
-          console.log(this.ocObservationDocs, "muiyyuitfy8gyufykugfuguyg");
+          console.log(this.inspectionDocs, "muiyyuitfy8gyufykugfuguyg");
           
         
           if (this.inspectionDocs.length === 0) {

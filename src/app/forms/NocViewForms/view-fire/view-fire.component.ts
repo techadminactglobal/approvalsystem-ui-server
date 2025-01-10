@@ -57,7 +57,10 @@ export class ViewFireComponent {
     this.service.getButtonDetails(this.apiConstant.ViewNocFire, request).subscribe((data: any) => {
       console.log(data, "response from api...");
       this.fireNocs = data.data.fireNocs[0];
-
+      
+      if(data.data.fireNocs[0].approvelDate != null || data.data.fireNocs[0].rejectionDate != null){
+        this.NocDept = false;
+      }
       if(data.data.fireNocs[0].fileType == ""){
         this.viewDoc = false;
       }else{
@@ -112,9 +115,30 @@ export class ViewFireComponent {
     }
   }
 
-  BacktoNocdeptdasbhoard(){
-    this.router.navigate(['/viewNocPage']);
+  BacktoNocdeptdasbhoard() {
+    if (this.hierarchyId === 'f-101') {
+      // Redirect to Noc Dashboard if role is 'f-101'
+      this.router.navigate(['/nocDashboard']);  // Update the route as needed
+    } else {
+      // Handle other cases if necessary
+      this.router.navigate(['/viewNocPage']);  // Or some other page
+    }
   }
+
+  backtoNocdeptdasbhoard() {
+    // Define the list of valid hierarchyIds
+    const validHierarchyIds = ['201', '202', '301', '302', '401', '402', '403'];
+  
+    // Check if hierarchyId matches any in the valid list
+    if (validHierarchyIds.includes(this.hierarchyId)) {
+      // Navigate to deptRequestView if hierarchyId matches
+      this.router.navigate(['/deptRequestView']);
+    } else if (this.hierarchyId !== 'f-101') {
+      // Navigate to viewNocPage if hierarchyId is not 'f-101'
+      this.router.navigate(['/viewNocPage']);
+    }
+  }
+  
 
   deptForm = new FormGroup({
     hierachyRemark: new FormControl('', [Validators.required]),
@@ -237,7 +261,8 @@ export class ViewFireComponent {
         "hierachyRoleId": this.hierarchyId,
         "docName": this.docName,
         "docUUID": this.docUUID,
-        "docType": this.docType
+        "docType": this.docType,
+        "zoneId":localStorage.getItem("zoneId")
       }
 
       console.log(request);

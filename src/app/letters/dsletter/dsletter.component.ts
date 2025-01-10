@@ -59,6 +59,7 @@ export class DsletterComponent {
   requestid:any;
   frids:any;
   comment:any;
+  zoneId:any;
 
   ngOnInit(): void {
     this.paymentType = localStorage.getItem('paymentType')
@@ -125,6 +126,10 @@ export class DsletterComponent {
           this.RegistrationWorkDate = data.data.HierarchyDetails.workDate;
           this.RegistrationHierachyRemark = data.data.HierarchyDetails.hierachyRemark;
 
+          //FOR Zone
+          this.zoneId=data.data.HierarchyDetails.assignedZone;
+          console.log("zzzzzzzzz"+this.zoneId);
+          
 
 
         } else if (this.paymentType == "fileNew" || this.paymentType == "plinthNew" || this.paymentType == "OC") {
@@ -322,6 +327,7 @@ export class DsletterComponent {
         json1 = {
           "userName": this.requestid,
           "letterType": "Letter Accepted",
+          "assignedZone":this.zoneId,
           "letterUinqueId": res.docUUID
         };
       } else if (this.paymentType == "fileNew") {

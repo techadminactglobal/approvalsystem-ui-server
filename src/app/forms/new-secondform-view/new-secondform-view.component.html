@@ -253,97 +253,136 @@
                     </div>
                 </mat-card-content>
             </mat-card>
+            <!-- PLINTH -->
             <mat-card class="mb-5" *ngIf="!isEmptyObervation">
                 <mat-card-header>
-                    <mat-card-title class="mb-3">Plinth Inspection Observation</mat-card-title>
+                    <mat-card-title class="mb-3 text-center">
+                        <strong>Plinth Inspection Observation</strong>
+                    </mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <div class="row">
-                        <div class="container-fluid">
-                            <div class="row mb-2 mt-2">
-                                <div class="col-md-2 col">SNO</div>
-                                <div class="col-md-3 col">Inspection Document Name</div>
-                                <div class="col-md-3 col">Download Links</div>
-                            </div>
-                        </div>
-                        <div class="container-fluid" *ngFor="let doc of inspectionDocs; let i = index">
-                            <div class="row mb-2 mt-2">
-                                <div class="col-md-2 col">{{ i + 1 }}</div>
-                                <div class="col-md-3 col">
-                                    <p *ngIf="doc.url">
-                                       {{doc.docName}}
-                                        <span *ngIf="doc.format === 'application/pdf'">Download PDF</span>
-                                    </p>
-                                    <p *ngIf="!doc.url">Loading image...</p>
-                                </div>
-
-                                <div class="col-md-4 col">
-                                    <button class="border-0 bg-transparent mt-2 "> <a *ngIf="doc.url" [href]="doc.url"
-                                            [download]="getDownloadName(doc)" mat-raised-button color="primary">Download Site
-                                            Image {{i+1}}</a></button>
-                                </div>
-                            </div>
+                    <div class="container-fluid">
+                        <!-- Header Row -->
+                        <div class="row text-center font-weight-bold mb-3">
+                            <div class="col-md-1"><strong>SNO</strong></div>
+                            <div class="col-md-2"><strong>Latitude</strong></div>
+                            <div class="col-md-2"><strong>Longitude</strong></div>
+                            <div class="col-md-3"><strong>Inspection Document Name</strong></div>
+                            <div class="col-md-2 ms-5"><strong>Download Links</strong></div>
                         </div>
 
-                        <div class="update">
-                            <mat-label class="title observation">Plinth Observation</mat-label>
-                            <div class="remarktext mt-2">
-                                <textarea name="" id="" cols="160" rows="10" [value]="observation"
+                        <!-- Data Rows -->
+                        <div class="row align-items-center text-center mb-3"
+                            *ngFor="let doc of inspectionDocs; let i = index">
+                            <div class="col-md-1"><strong>{{ i + 1 }}</strong></div>
+                            <div class="col-md-2">
+                                <p *ngIf="doc.url"><strong>{{ doc.latitude }}</strong></p>
+                                <p *ngIf="!doc.url"><strong>Loading Cords...</strong></p>
+                            </div>
+                            <div class="col-md-2">
+                                <p *ngIf="doc.url"><strong>{{ doc.longitude }}</strong></p>
+                                <p *ngIf="!doc.url"><strong>Loading Cords...</strong></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p>
+                                    <strong>{{ doc.docName }}</strong>
+                                    <span *ngIf="doc.format === 'application/pdf'"><strong>Download
+                                            PDF</strong></span>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="border-0 bg-transparent mt-2">
+                                    <a *ngIf="doc.url" [href]="doc.url" [download]="getDownloadName(doc)"
+                                        mat-raised-button color="primary">
+                                        <strong>Download Site Image {{ i + 1 }}</strong>
+                                    </a>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Update Section -->
+                        <div class="update mt-4">
+                            <mat-label class="title observation mb-2">
+                                <strong>Plinth Observation</strong>
+                            </mat-label>
+                            <div class="remarktext mt-3">
+                                <textarea name="" id="" class="form-control" rows="10" [value]="observation"
                                     (input)="onObservationChange($event)">{{ this.observation }}</textarea>
                             </div>
-
                         </div>
-
                     </div>
-                    <button (click)="updateObservation()" mat-raised-button color="primary"> Update Observation</button>
+                    <button (click)="updateObservation()" mat-raised-button color="primary" class="mt-4 ">
+                        <strong>Update Observation</strong>
+                    </button>
                 </mat-card-content>
-                <!-- OC -->
             </mat-card>
+              
+
+            <!-- OC -->
             <mat-card class="mb-5" *ngIf="!isEmptyOCObervation">
                 <mat-card-header>
-                    <mat-card-title class="mb-3">Occupancy Inspection Observation</mat-card-title>
+                    <mat-card-title class="mb-3 text-center">
+                        <strong>Occupancy Inspection Observation</strong>
+                    </mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <div class="row">
-                        <div class="container-fluid">
-                            <div class="row mb-2 mt-2">
-                                <div class="col-md-2 col">SNO</div>
-                                <div class="col-md-3 col">Inspection Document Name</div>
-                                <div class="col-md-3 col">Download Links</div>
-                            </div>
-                        </div>
-                        <div class="container-fluid" *ngFor="let document of ocObservationDocs; let i = index">
-                            <div class="row mb-2 mt-2">
-                                <div class="col-md-2 col">{{ i + 1 }}</div>
-                                <div class="col-md-3 col">
-                                    <p *ngIf="document.url">
-                                       {{document.docName}}
-                                        <span *ngIf="document.format === 'application/pdf'">Download PDF</span>
-                                    </p>
-                                    <p *ngIf="!document.url">Loading image...</p>
-                                </div>
-
-                                <div class="col-md-4 col">
-                                    <button class="border-0 bg-transparent mt-2 "> <a *ngIf="document.url" [href]="document.url"
-                                            [download]="getDownloadName(document)" mat-raised-button color="primary">Download Site
-                                            Image {{i+1}}</a></button>
-                                </div>
-                            </div>
+                    <div class="container-fluid">
+                        <!-- Header Row -->
+                        <div class="row text-center font-weight-bold mb-3">
+                            <div class="col-md-1"><strong>SNO</strong></div>
+                            <div class="col-md-2"><strong>Latitude</strong></div>
+                            <div class="col-md-2"><strong>Longitude</strong></div>
+                            <div class="col-md-3"><strong>Inspection Document Name</strong></div>
+                            <div class="col-md-2 ms-5"><strong>Download Links</strong></div>
                         </div>
 
-                        <div class="update">
-                            <mat-label class="title observation">OC Observation</mat-label>
-                            <div class="remarktext mt-2">
-                                <textarea name="" id="" cols="160" rows="10" [value]="ocObsertion"
-                                    (input)="onOcObservationChange($event)">{{this.ocObsertion}}</textarea>
+                        <!-- Data Rows -->
+                        <div class="row align-items-center text-center mb-3"
+                            *ngFor="let document of ocObservationDocs; let i = index">
+                            <div class="col-md-1"><strong>{{ i + 1 }}</strong></div>
+                            <div class="col-md-2">
+                                <p *ngIf="document.url"><strong>{{ document.latitude }}</strong></p>
+                                <p *ngIf="!document.url"><strong>Loading Cords...</strong></p>
                             </div>
-
+                            <div class="col-md-2">
+                                <p *ngIf="document.url"><strong>{{ document.longitude }}</strong></p>
+                                <p *ngIf="!document.url"><strong>Loading Cords...</strong></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p>
+                                    <strong>{{ document.docName }}</strong>
+                                    <span *ngIf="document.format === 'application/pdf'"><strong>Download
+                                            PDF</strong></span>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="border-0 bg-transparent mt-2">
+                                    <a *ngIf="document.url" [href]="document.url" [download]="getDownloadName(document)"
+                                        mat-raised-button color="primary">
+                                        <strong>Download Site Image {{ i + 1 }}</strong>
+                                    </a>
+                                </button>
+                            </div>
                         </div>
 
+                        <!-- Update Section -->
+                        <div class="update mt-4">
+                            <mat-label class="title observation mb-2">
+                                <strong>OC Observation</strong>
+                            </mat-label>
+                            <div class="remarktext mt-3">
+                                <textarea name="" id="" class="form-control" rows="10" [value]="ocObsertion"
+                                    (input)="onOcObservationChange($event)">{{ this.ocObsertion }}</textarea>
+                            </div>
+                        </div>
                     </div>
-                    <button (click)="updateObservationForOc()" mat-raised-button color="primary"> Update Observation</button>
+                    <button (click)="updateObservationForOc()" mat-raised-button color="primary" class="mt-4 ">
+                        <strong>Update Observation</strong>
+                    </button>
                 </mat-card-content>
             </mat-card>
+
+
 
 
 

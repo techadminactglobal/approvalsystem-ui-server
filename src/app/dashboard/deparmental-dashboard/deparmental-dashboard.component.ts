@@ -26,19 +26,21 @@ hierarchyId:any;
 requestId:any;
 paymentFor:any;
 frId:any;
+zoneId:any;
 
   ngOnInit() {
     this.hierarchyId = localStorage.getItem('hierarchyId');
     this.requestId = localStorage.getItem('requestId');
     this.paymentFor = localStorage.getItem('paymentFor');
     this.frId = localStorage.getItem('frId');
-
+    this.zoneId=localStorage.getItem("zoneId");
+    this.zoneId= this.zoneId==""?null:this.zoneId;
     
 
     this.viewDashboard();
 
 
-    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_APPROVE_DASHBOARD + "?hierarchyRole=", this.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_APPROVE_DASHBOARD + "?hierarchyRole=", this.hierarchyId+"&zoneId="+this.zoneId).subscribe((res: any) => {
       console.log(res);
       if (res.data != null) {
         this.approvedSize = res.data.length;
@@ -50,7 +52,7 @@ frId:any;
       }
     })
 
-    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_REJECT_DASHBOARD + "?hierarchyRole=", this.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_REJECT_DASHBOARD + "?hierarchyRole=", this.hierarchyId+"&zoneId="+this.zoneId).subscribe((res: any) => {
       console.log(res);
       if (res.data != null) {
         this.rejectedSize = res.data.length;
@@ -62,7 +64,7 @@ frId:any;
       }
     })
 
-    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_ALL_DASHBOARD + "?hierarchyRole=", this.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_ALL_DASHBOARD + "?hierarchyRole=", this.hierarchyId+"&zoneId="+this.zoneId).subscribe((res: any) => {
 
       console.log(res);
 
@@ -132,7 +134,7 @@ frId:any;
   // }
 
   viewDashboard() {
-    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_DASHBOARD + "?hierarchyRole=", this.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_DASHBOARD + "?hierarchyRole=", this.hierarchyId+"&zoneId="+this.zoneId).subscribe((res: any) => {
       console.log(res);
       if (res.data != null) {
         // this.dataArray = res.data;
@@ -247,7 +249,7 @@ frId:any;
   approvedSize: any = 0;
   rejectedSize: any = 0;
   totalPending() {
-    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_DASHBOARD + "?hierarchyRole=", this.hierarchyId).subscribe((res: any) => {
+    this.service.getDeptDashboard(this.apiConstant.GET_DEPT_DASHBOARD + "?hierarchyRole=", this.hierarchyId+"&zoneId="+this.zoneId).subscribe((res: any) => {
       console.log(res);
       if (res.data != null) {
         // this.pendingSize = res.data.length;

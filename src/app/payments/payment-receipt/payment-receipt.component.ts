@@ -42,7 +42,8 @@ export class PaymentReceiptComponent {
   charge3: any;
   charge4: any;
   charge5: any;
-
+  
+  basicInfo: any;
   comment: any;
   apiConstant = API_PATH;
   viewCharge1: boolean = false;
@@ -355,9 +356,16 @@ this.paymentType = localStorage.getItem('paymentType')
         setTimeout(() => {
           if (this.comment == "Final Payment" || this.comment == "File Processing Fee" || this.comment == "OC Final Payment") {
             console.log("redirect to dsletter");
+            // if (this.basicInfo.nocFilled === true && this.basicInfo.planType === "UPTO500"){
+            //   this.dsLetter = false;
+
+            // } else {
+              
+            
             this.dsLetter = true;
-            // this.router.navigate(['/dsLetter']);
           }
+            // this.router.navigate(['/dsLetter']);
+          // }
         }, 2000);
 
       }, 1000);

@@ -241,7 +241,7 @@ localStorage.removeItem('paymentType');
     } else if (status == "Plinth Released") {
       this.router.navigate(['/OccupancyComponent']);
     } else if (status == 'Occupancy Applied' || status == 'Occupancy Noc Submit' || status == 'Occupancy Payment Completed & Assigned to Noc Dept' || status == 'Occupany Initial Deposite' || status == 'Occupancy Payment Completed & Inspection Schedule' || status == 'Occupancy Approval Hierachy - 2nd' || status == 'Occupancy Approval Hierachy - 3nd' || status == 'Occupancy Rejection Hierachy - 2nd' || status == 'Occupancy Rejection Hierachy - 3nd' || 
-      status == 'Occupancy Pending For payment' || status == 'Occupancy Payment Completed' || status == 'Occupancy Ds Pending' || status == 'Occupancy Ds Applied - Occupancy Approved' || status == 'Occupancy Released' || status == 'Occupancy Rejected' || status == 'Occupancy Refer Back to Architect' || status == 'Occupancy Inspection Completed') {
+      status == 'Occupancy Pending For payment' || status == 'Occupancy Payment Completed' || status == 'Occupancy Ds Pending' || status == 'Occupancy Ds Applied - Occupancy Approved' || status == 'Occupancy Released' || status == 'Occupancy Rejected' || status == 'Occupancy Refer Back to Architect' || status == 'Occupancy Inspection Completed' ||status == 'Occupancy DWG Approved') {
       this.router.navigate(['/OccupancyComponentView']);
     } else{
       this.router.navigate(['/NewFormView']);

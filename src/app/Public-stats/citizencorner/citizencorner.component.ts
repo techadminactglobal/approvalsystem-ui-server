@@ -64,7 +64,7 @@ export class CitizencornerComponent implements OnInit {
         // Log the message from the API response
         console.log('API Message:', res.message);
   
-        alert('✅ Thank you for contacting us! Our team will connect with you shortly.'); // Show success message
+        alert('Thankyou for your Feedback'); // Show success message
         if (res.httpStatus === 'OK') {
           this.complaintForm.reset(); // Clear the form fields
         }

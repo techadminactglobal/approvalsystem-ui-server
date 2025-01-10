@@ -32,6 +32,7 @@ export class OccupancyComponentViewComponent {
   mutitionFormCertificatename: any;
   mutitionRemark: any;
   mutitionDoctype: any;
+  dwgDoctype: any;
   docUUID: any;
   plinthDetails: any;
   viewHistoryButton: boolean = false;
@@ -65,7 +66,13 @@ export class OccupancyComponentViewComponent {
   mutitionFormNamePreview: SafeResourceUrl | null = null;
   ismutitionFormNameModalOpen: boolean = false;
   mutitionFormNameFileType: string | null = null;
-
+  fileReupload: boolean = false;
+  requestId: any;
+  frids: any;
+  heirarchyuserName: any;
+  createdBy: any;
+  dwgCertificatename: any;
+  
   constructor(
     private fb: FormBuilder,
     private service: commonService,
@@ -103,6 +110,7 @@ export class OccupancyComponentViewComponent {
       if (res.data == null) {
         return
       }
+      
 
       this.documents = res.data.supportivefile;
       this.plinthDetails = res.data.OccupanyCertificate[0];
@@ -141,15 +149,20 @@ export class OccupancyComponentViewComponent {
         
           this.rework = true;
       }
-
+// setTimeout(() => {
       this.status = res.data.OccupanyCertificate[0].status;
-      if (this.status=="Occupancy Applied" || this.status=="Occupancy Pending For payment") {
+      console.log(this.status,"status for oc");
+      
+      if (this.status=="Occupancy Applied" || this.status=="Occupancy Pending For payment" || this.status=="Occupancy DWG Approved") {
         this.pay = true;
-        this.noc = false;
+        this.noc = true;
       } else if(this.status=="Occupancy Noc Submit" || this.status=="Occupancy Pending For payment"){
         this.pay = true;
         this.noc = false;
       }
+      // else if (this.status=="Occupancy DWG Approved" || this.status=="Occupancy Pending For payment") {
+      //   this.pay = true;
+      //   this.noc = false;}
       if (this.status == "Occupancy Applied" || this.status == "Occupancy Noc Submit" || 
         this.status == "Occupany Initial Deposite") {
         this.viewHistoryButton = false;
@@ -172,7 +185,7 @@ export class OccupancyComponentViewComponent {
       // }, 1000);
       // Filter out and log any documents not in the predefined list
       this.documents = this.documents.filter((doc: any) =>
-        ['leaseDeedCertificateName', 'SaleDeedCertificatename', 'sitePhotographCertificatename', 'mutitionFormCertificatename'].includes(doc.docName)
+        ['leaseDeedCertificateName', 'SaleDeedCertificatename', 'sitePhotographCertificatename', 'mutitionFormCertificatename','dwgFile'].includes(doc.docName)
       );
 
       console.log(this.documents, "Filtered documents");
@@ -187,12 +200,14 @@ export class OccupancyComponentViewComponent {
       this.SaleDeedDoctype = this.documents.find((doc: any) => doc.docName === 'SaleDeedCertificatename')?.docType || null;
       this.siteDocttype = this.documents.find((doc: any) => doc.docName === 'sitePhotographCertificatename')?.docType || null;
       this.mutitionDoctype = this.documents.find((doc: any) => doc.docName === 'mutitionFormCertificatename')?.docType || null;
+      this.dwgDoctype = this.documents.find((doc: any) => doc.docName === 'dwgFile')?.docType || null;
 
       // Store unique IDs
       this.leaseDeedCertificateName = this.documents.find((doc: any) => doc.docName === 'leaseDeedCertificateName')?.docUniqueId || null;
       this.SaleDeedCertificatename = this.documents.find((doc: any) => doc.docName === 'SaleDeedCertificatename')?.docUniqueId || null;
       this.sitePhotographCertificatename = this.documents.find((doc: any) => doc.docName === 'sitePhotographCertificatename')?.docUniqueId || null;
       this.mutitionFormCertificatename = this.documents.find((doc: any) => doc.docName === 'mutitionFormCertificatename')?.docUniqueId || null;
+      this.dwgCertificatename = this.documents.find((doc: any) => doc.docName === 'dwgFile')?.docUniqueId || null;
 
       console.log("Updated document details:", {
         leaseRemarks: this.leaseRemarks,
@@ -203,10 +218,13 @@ export class OccupancyComponentViewComponent {
         SaleDeedDoctype: this.SaleDeedDoctype,
         siteDocttype: this.siteDocttype,
         mutitionDoctype: this.mutitionDoctype,
+        dwgDoctype: this.dwgDoctype,
         leaseDeedCertificateName: this.leaseDeedCertificateName,
         SaleDeedCertificatename: this.SaleDeedCertificatename,
         sitePhotographCertificatename: this.sitePhotographCertificatename,
-        mutitionFormCertificatename: this.mutitionFormCertificatename
+        mutitionFormCertificatename: this.mutitionFormCertificatename,
+        dwgCertificatename: this.dwgCertificatename
+
       });
 
     }, error => {
@@ -255,6 +273,10 @@ export class OccupancyComponentViewComponent {
       'mutitionRemark',
       'mutitionFormCertificatename'
     );
+
+    this.supportForm = new FormGroup({
+      DrawingFileCertificateName: this.fb.array([this.fileTypeForm()]),
+    });
     // this.subscribeToRemarkChanges('photographRemark', 'photograpFormCertificatename');
     // this.subscribeToRemarkChanges('photoIdRemark', 'photoIdCertificatename');
     // this.subscribeToRemarkChanges('companyIdRemark', 'companyIdCertificatename');
@@ -665,6 +687,7 @@ export class OccupancyComponentViewComponent {
     });
 
   }
+  drawingFileName: any = 'File name will come here';
 
   uploadDoc(
     event: any,
@@ -713,7 +736,7 @@ export class OccupancyComponentViewComponent {
       event.target.value = '';
       return;
     }
-
+    this.drawingFileName = fileData.name;
     console.log('File size:', fileData.size);
     if (fileData.size > maxSize) {
       event.target.value = '';
@@ -1029,6 +1052,43 @@ export class OccupancyComponentViewComponent {
     console.log(this.formData);
   }
 
+  proff: boolean = true;
+  submit() {
+    if (this.supportForm.invalid) {
+      alert("please upload drawing file")
+    }
+    else {
+
+      const request = {
+        "fileNo": this.requestId,
+        "frId": this.frids,
+        "frName": this.supportForm.value.DrawingFileCertificateName[0].docName,
+        "frUniqueNo": this.supportForm.value.DrawingFileCertificateName[0].docUniqueId,
+        "frType": this.supportForm.value.DrawingFileCertificateName[0].docType
+      };
+
+      this.service.postService(this.apiConstant.doc_Re_Upload_Error_DWG, request).subscribe((res: any) => {
+        console.log("data =================> ", res);
+
+        if (res.httpStatus === "OK") {
+          this.senddata.dialog = true;
+          this.datasave = true;
+          this.hideSubmit = true;
+
+          this.heirarchyuserName = this.createdBy;
+          this.senddata.dwgReupload = true;
+          this.router.navigate(['/home']);
+
+        } else {
+          this.senddata.dialog = false;
+          this.datasave = false;
+          this.hideSubmit = false;
+        }
+
+      });
+
+    }
+  }
 }
 
 

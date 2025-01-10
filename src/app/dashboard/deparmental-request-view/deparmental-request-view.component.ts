@@ -327,7 +327,8 @@ export class DeparmentalRequestViewComponent {
         "hierachyRoleId": this.hierarchyId,
         "docName": this.docName,
         "docUUID": this.docUUID,
-        "docType": this.docType
+        "docType": this.docType,
+        "zoneId":localStorage.getItem("zoneId")
       }
 
       console.log(request);
@@ -442,7 +443,16 @@ export class DeparmentalRequestViewComponent {
     }
   }
 
-
+  backtodeptdashboarddasbhoard() {
+    // Define the list of valid hierarchyIds
+    const validHierarchyIds = ['201', '202', '301', '302', '401', '402', '403','101'];
+  
+    // Check if hierarchyId matches any in the valid list
+    if (validHierarchyIds.includes(this.hierarchyId)) {
+      // Navigate to deptRequestView if hierarchyId matches
+      this.router.navigate(['/departmentDashboard']);
+    } 
+  }
 
   referenceDocuments: any = 'File name will come here';
   refrencePreview: SafeResourceUrl | null = null; // Using SafeResourceUrl for PDF

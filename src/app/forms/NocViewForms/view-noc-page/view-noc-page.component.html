@@ -1,8 +1,8 @@
 <app-new-secondform-view></app-new-secondform-view>
-<div class="SecondForm-container mt-0 parentbackgroundcolor">
+<div class="SecondForm-container mt-1">
 
     <div class="column right">
-        <div class="m-4">
+        <!-- <div class="m-4"> -->
 
             <mat-card class="mb-5">
                 <mat-card-header>
@@ -15,7 +15,7 @@
 
             </mat-card>
 
-        </div>
+        <!-- </div> -->
 
     </div>
 
@@ -281,8 +281,8 @@
                         <tr *ngFor="let historyItem of hierarchyHistoryData">
                             <td>{{ historyItem.assignTo}}</td>
                             <td>{{ historyItem.assignTo}}</td>
-                            <td>{{ historyItem.workDate }}</td>
-                            <td>{{ historyItem.assignDate }}</td>
+                            <td>{{ historyItem.workDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                            <td>{{ historyItem.assignDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
                             <td>{{ calculateTimeDifference(historyItem.workDate, historyItem.assignDate) }}</td>
                             <td>{{ historyItem.hierachyFlowProcess }}</td>
                             <td>{{ historyItem.hierachyRemark }}</td>
@@ -326,8 +326,8 @@
                         <tr *ngFor="let historyItem of nocHistoryData">
                             <td>{{ historyItem.nocDeptRole }}</td>
                             <td>{{ historyItem.nocDeptType}}</td>
-                            <td>{{ historyItem.workDate }}</td>
-                            <td>{{ historyItem.assignDate }}</td>
+                            <td>{{ historyItem.workDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                            <td>{{ historyItem.assignDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
                             <td>{{ calculateTimeDifference(historyItem.workDate, historyItem.assignDate) }}</td>
                             <td>{{ historyItem.nocRemark }}</td>
                             <td>{{ historyItem.nocWorkStatus }}</td>
@@ -371,7 +371,7 @@
                     <tbody>
                         <tr *ngFor="let paymentHistoryItem of paymentHistoryData">
                             <td>{{ paymentHistoryItem.transactionRefNo }}</td>
-                            <td>{{ paymentHistoryItem.paymentSuccessDate }}</td>
+                            <td>{{ paymentHistoryItem.paymentSuccessDate | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
                             <td>{{paymentHistoryItem.amount}}</td>
                             <td *ngIf="paymentHistoryItem.docUniqueId"
                                 (click)="openPaymentPdf(paymentHistoryItem.docUniqueId)" class="viewDoc">{{
